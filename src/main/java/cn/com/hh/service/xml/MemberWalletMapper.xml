@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberWalletMapper">
+
+    <resultMap id="MemberWalletResult" type="MemberWallet" >
+            <result property="id" column="id" />
+            <result property="address" column="address" />
+            <result property="balance" column="balance" />
+            <result property="frozenBalance" column="frozen_balance" />
+            <result property="releaseBalance" column="release_balance" />
+            <result property="blockBalance" column="block_balance" />
+            <result property="isLock" column="is_lock" />
+            <result property="memberId" column="member_id" />
+            <result property="version" column="version" />
+            <result property="coinId" column="coin_id" />
+    </resultMap>
+
+    <sql id="selectMemberWalletVo">
+        select   id,  address,  balance,  frozen_balance,  release_balance,  block_balance,  is_lock,  member_id,  version,  coin_id 
+        from member_wallet
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberWalletList" parameterType="MemberWallet" resultMap="MemberWalletResult">
+        <include refid="selectMemberWalletVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "frozenBalance != null">
+                        and frozen_balance  = #{frozenBalance}
+                    </if>
+                    <if test = "releaseBalance != null">
+                        and release_balance  = #{releaseBalance}
+                    </if>
+                    <if test = "blockBalance != null">
+                        and block_balance  = #{blockBalance}
+                    </if>
+                    <if test = "isLock != null">
+                        and is_lock  = #{isLock}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberWalletById" parameterType="Long" resultMap="MemberWalletResult">
+        <include refid="selectMemberWalletVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberWallet" parameterType="MemberWallet" useGeneratedKeys="true" >
+        insert into member_wallet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "frozenBalance != null">
+                frozen_balance,
+            </if>
+            <if test = "releaseBalance != null">
+                release_balance,
+            </if>
+            <if test = "blockBalance != null">
+                block_balance,
+            </if>
+            <if test = "isLock != null">
+                is_lock,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "frozenBalance != null">
+                #{frozenBalance},
+            </if>
+            <if test = "releaseBalance != null">
+                #{releaseBalance},
+            </if>
+            <if test = "blockBalance != null">
+                #{blockBalance},
+            </if>
+            <if test = "isLock != null">
+                #{isLock},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberWallet" parameterType="MemberWallet">
+        update member_wallet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "frozenBalance != null">
+            frozen_balance  = #{frozenBalance},
+            </if>
+            <if test = "releaseBalance != null">
+            release_balance  = #{releaseBalance},
+            </if>
+            <if test = "blockBalance != null">
+            block_balance  = #{blockBalance},
+            </if>
+            <if test = "isLock != null">
+            is_lock  = #{isLock},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberWalletById" parameterType="Long">
+        delete from member_wallet where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberWalletByIds" parameterType="Long">
+        delete from member_wallet where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

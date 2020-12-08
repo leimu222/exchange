@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DepositTypeInfoMapper">
+
+    <resultMap id="DepositTypeInfoResult" type="DepositTypeInfo" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="cycle" column="cycle" />
+            <result property="dayProfitRate" column="day_profit_rate" />
+            <result property="investmentMin" column="investment_min" />
+            <result property="investmentMax" column="investment_max" />
+            <result property="remark" column="remark" />
+            <result property="status" column="status" />
+            <result property="investCoin" column="invest_coin" />
+            <result property="profitCoin" column="profit_coin" />
+            <result property="breakRate" column="break_rate" />
+    </resultMap>
+
+    <sql id="selectDepositTypeInfoVo">
+        select   id,  name,  cycle,  day_profit_rate,  investment_min,  investment_max,  remark,  status,  invest_coin,  profit_coin,  break_rate 
+        from deposit_type_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDepositTypeInfoList" parameterType="DepositTypeInfo" resultMap="DepositTypeInfoResult">
+        <include refid="selectDepositTypeInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "cycle != null">
+                        and cycle  = #{cycle}
+                    </if>
+                    <if test = "dayProfitRate != null">
+                        and day_profit_rate  = #{dayProfitRate}
+                    </if>
+                    <if test = "investmentMin != null">
+                        and investment_min  = #{investmentMin}
+                    </if>
+                    <if test = "investmentMax != null">
+                        and investment_max  = #{investmentMax}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "investCoin != null and investCoin != ''">
+                        and invest_coin  = #{investCoin}
+                    </if>
+                    <if test = "profitCoin != null and profitCoin != ''">
+                        and profit_coin  = #{profitCoin}
+                    </if>
+                    <if test = "breakRate != null">
+                        and break_rate  = #{breakRate}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDepositTypeInfoById" parameterType="Integer" resultMap="DepositTypeInfoResult">
+        <include refid="selectDepositTypeInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDepositTypeInfo" parameterType="DepositTypeInfo" useGeneratedKeys="true" >
+        insert into deposit_type_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "cycle != null">
+                cycle,
+            </if>
+            <if test = "dayProfitRate != null">
+                day_profit_rate,
+            </if>
+            <if test = "investmentMin != null">
+                investment_min,
+            </if>
+            <if test = "investmentMax != null">
+                investment_max,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "investCoin != null">
+                invest_coin,
+            </if>
+            <if test = "profitCoin != null">
+                profit_coin,
+            </if>
+            <if test = "breakRate != null">
+                break_rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "cycle != null">
+                #{cycle},
+            </if>
+            <if test = "dayProfitRate != null">
+                #{dayProfitRate},
+            </if>
+            <if test = "investmentMin != null">
+                #{investmentMin},
+            </if>
+            <if test = "investmentMax != null">
+                #{investmentMax},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "investCoin != null">
+                #{investCoin},
+            </if>
+            <if test = "profitCoin != null">
+                #{profitCoin},
+            </if>
+            <if test = "breakRate != null">
+                #{breakRate},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDepositTypeInfo" parameterType="DepositTypeInfo">
+        update deposit_type_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "cycle != null">
+            cycle  = #{cycle},
+            </if>
+            <if test = "dayProfitRate != null">
+            day_profit_rate  = #{dayProfitRate},
+            </if>
+            <if test = "investmentMin != null">
+            investment_min  = #{investmentMin},
+            </if>
+            <if test = "investmentMax != null">
+            investment_max  = #{investmentMax},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "investCoin != null">
+            invest_coin  = #{investCoin},
+            </if>
+            <if test = "profitCoin != null">
+            profit_coin  = #{profitCoin},
+            </if>
+            <if test = "breakRate != null">
+            break_rate  = #{breakRate},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDepositTypeInfoById" parameterType="Integer">
+        delete from deposit_type_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDepositTypeInfoByIds" parameterType="Integer">
+        delete from deposit_type_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

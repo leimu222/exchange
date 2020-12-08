@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberReturnRecordMapper">
+
+    <resultMap id="MemberReturnRecordResult" type="MemberReturnRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="profitLossAmount" column="profit_loss_amount" />
+            <result property="profitLossReturnRate" column="profit_loss_return_rate" />
+            <result property="profitLossReturnAmount" column="profit_loss_return_amount" />
+            <result property="feeAmount" column="fee_amount" />
+            <result property="feeReturnRate" column="fee_return_rate" />
+            <result property="feeReturnAmount" column="fee_return_amount" />
+            <result property="calStartSeq" column="cal_start_seq" />
+            <result property="calEndSeq" column="cal_end_seq" />
+            <result property="teamMemberId" column="team_member_id" />
+            <result property="teamMemberStatus" column="team_member_status" />
+            <result property="createSeq" column="create_seq" />
+    </resultMap>
+
+    <sql id="selectMemberReturnRecordVo">
+        select   id,  member_id,  profit_loss_amount,  profit_loss_return_rate,  profit_loss_return_amount,  fee_amount,  fee_return_rate,  fee_return_amount,  cal_start_seq,  cal_end_seq,  team_member_id,  team_member_status,  create_seq 
+        from member_return_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberReturnRecordList" parameterType="MemberReturnRecord" resultMap="MemberReturnRecordResult">
+        <include refid="selectMemberReturnRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "profitLossAmount != null">
+                        and profit_loss_amount  = #{profitLossAmount}
+                    </if>
+                    <if test = "profitLossReturnRate != null">
+                        and profit_loss_return_rate  = #{profitLossReturnRate}
+                    </if>
+                    <if test = "profitLossReturnAmount != null">
+                        and profit_loss_return_amount  = #{profitLossReturnAmount}
+                    </if>
+                    <if test = "feeAmount != null">
+                        and fee_amount  = #{feeAmount}
+                    </if>
+                    <if test = "feeReturnRate != null">
+                        and fee_return_rate  = #{feeReturnRate}
+                    </if>
+                    <if test = "feeReturnAmount != null">
+                        and fee_return_amount  = #{feeReturnAmount}
+                    </if>
+                    <if test = "calStartSeq != null">
+                        and cal_start_seq  = #{calStartSeq}
+                    </if>
+                    <if test = "calEndSeq != null">
+                        and cal_end_seq  = #{calEndSeq}
+                    </if>
+                    <if test = "teamMemberId != null">
+                        and team_member_id  = #{teamMemberId}
+                    </if>
+                    <if test = "teamMemberStatus != null">
+                        and team_member_status  = #{teamMemberStatus}
+                    </if>
+                    <if test = "createSeq != null">
+                        and create_seq  = #{createSeq}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberReturnRecordById" parameterType="Long" resultMap="MemberReturnRecordResult">
+        <include refid="selectMemberReturnRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberReturnRecord" parameterType="MemberReturnRecord" useGeneratedKeys="true" >
+        insert into member_return_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "profitLossAmount != null">
+                profit_loss_amount,
+            </if>
+            <if test = "profitLossReturnRate != null">
+                profit_loss_return_rate,
+            </if>
+            <if test = "profitLossReturnAmount != null">
+                profit_loss_return_amount,
+            </if>
+            <if test = "feeAmount != null">
+                fee_amount,
+            </if>
+            <if test = "feeReturnRate != null">
+                fee_return_rate,
+            </if>
+            <if test = "feeReturnAmount != null">
+                fee_return_amount,
+            </if>
+            <if test = "calStartSeq != null">
+                cal_start_seq,
+            </if>
+            <if test = "calEndSeq != null">
+                cal_end_seq,
+            </if>
+            <if test = "teamMemberId != null">
+                team_member_id,
+            </if>
+            <if test = "teamMemberStatus != null">
+                team_member_status,
+            </if>
+            <if test = "createSeq != null">
+                create_seq,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "profitLossAmount != null">
+                #{profitLossAmount},
+            </if>
+            <if test = "profitLossReturnRate != null">
+                #{profitLossReturnRate},
+            </if>
+            <if test = "profitLossReturnAmount != null">
+                #{profitLossReturnAmount},
+            </if>
+            <if test = "feeAmount != null">
+                #{feeAmount},
+            </if>
+            <if test = "feeReturnRate != null">
+                #{feeReturnRate},
+            </if>
+            <if test = "feeReturnAmount != null">
+                #{feeReturnAmount},
+            </if>
+            <if test = "calStartSeq != null">
+                #{calStartSeq},
+            </if>
+            <if test = "calEndSeq != null">
+                #{calEndSeq},
+            </if>
+            <if test = "teamMemberId != null">
+                #{teamMemberId},
+            </if>
+            <if test = "teamMemberStatus != null">
+                #{teamMemberStatus},
+            </if>
+            <if test = "createSeq != null">
+                #{createSeq},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberReturnRecord" parameterType="MemberReturnRecord">
+        update member_return_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "profitLossAmount != null">
+            profit_loss_amount  = #{profitLossAmount},
+            </if>
+            <if test = "profitLossReturnRate != null">
+            profit_loss_return_rate  = #{profitLossReturnRate},
+            </if>
+            <if test = "profitLossReturnAmount != null">
+            profit_loss_return_amount  = #{profitLossReturnAmount},
+            </if>
+            <if test = "feeAmount != null">
+            fee_amount  = #{feeAmount},
+            </if>
+            <if test = "feeReturnRate != null">
+            fee_return_rate  = #{feeReturnRate},
+            </if>
+            <if test = "feeReturnAmount != null">
+            fee_return_amount  = #{feeReturnAmount},
+            </if>
+            <if test = "calStartSeq != null">
+            cal_start_seq  = #{calStartSeq},
+            </if>
+            <if test = "calEndSeq != null">
+            cal_end_seq  = #{calEndSeq},
+            </if>
+            <if test = "teamMemberId != null">
+            team_member_id  = #{teamMemberId},
+            </if>
+            <if test = "teamMemberStatus != null">
+            team_member_status  = #{teamMemberStatus},
+            </if>
+            <if test = "createSeq != null">
+            create_seq  = #{createSeq},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberReturnRecordById" parameterType="Long">
+        delete from member_return_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberReturnRecordByIds" parameterType="Long">
+        delete from member_return_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

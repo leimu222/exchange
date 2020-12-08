@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberNodeAssetsStatisticsRecordsMapper">
+
+    <resultMap id="MemberNodeAssetsStatisticsRecordsResult" type="MemberNodeAssetsStatisticsRecords" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="username" column="username" />
+            <result property="totalDeposit" column="total_deposit" />
+            <result property="totalWithdraw" column="total_withdraw" />
+            <result property="netDeposit" column="net_deposit" />
+            <result property="nodeAccountEquity" column="node_account_equity" />
+            <result property="accountEquity" column="account_equity" />
+            <result property="nodeMargin" column="node_margin" />
+            <result property="netProfit" column="net_profit" />
+    </resultMap>
+
+    <sql id="selectMemberNodeAssetsStatisticsRecordsVo">
+        select   id,  member_id,  username,  total_deposit,  total_withdraw,  net_deposit,  node_account_equity,  account_equity,  node_margin,  net_profit 
+        from member_node_assets_statistics_records
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberNodeAssetsStatisticsRecordsList" parameterType="MemberNodeAssetsStatisticsRecords" resultMap="MemberNodeAssetsStatisticsRecordsResult">
+        <include refid="selectMemberNodeAssetsStatisticsRecordsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "username != null and username != ''">
+                        and username  = #{username}
+                    </if>
+                    <if test = "totalDeposit != null">
+                        and total_deposit  = #{totalDeposit}
+                    </if>
+                    <if test = "totalWithdraw != null">
+                        and total_withdraw  = #{totalWithdraw}
+                    </if>
+                    <if test = "netDeposit != null">
+                        and net_deposit  = #{netDeposit}
+                    </if>
+                    <if test = "nodeAccountEquity != null">
+                        and node_account_equity  = #{nodeAccountEquity}
+                    </if>
+                    <if test = "accountEquity != null">
+                        and account_equity  = #{accountEquity}
+                    </if>
+                    <if test = "nodeMargin != null">
+                        and node_margin  = #{nodeMargin}
+                    </if>
+                    <if test = "netProfit != null">
+                        and net_profit  = #{netProfit}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberNodeAssetsStatisticsRecordsById" parameterType="Long" resultMap="MemberNodeAssetsStatisticsRecordsResult">
+        <include refid="selectMemberNodeAssetsStatisticsRecordsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberNodeAssetsStatisticsRecords" parameterType="MemberNodeAssetsStatisticsRecords" useGeneratedKeys="true" >
+        insert into member_node_assets_statistics_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "username != null">
+                username,
+            </if>
+            <if test = "totalDeposit != null">
+                total_deposit,
+            </if>
+            <if test = "totalWithdraw != null">
+                total_withdraw,
+            </if>
+            <if test = "netDeposit != null">
+                net_deposit,
+            </if>
+            <if test = "nodeAccountEquity != null">
+                node_account_equity,
+            </if>
+            <if test = "accountEquity != null">
+                account_equity,
+            </if>
+            <if test = "nodeMargin != null">
+                node_margin,
+            </if>
+            <if test = "netProfit != null">
+                net_profit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "username != null">
+                #{username},
+            </if>
+            <if test = "totalDeposit != null">
+                #{totalDeposit},
+            </if>
+            <if test = "totalWithdraw != null">
+                #{totalWithdraw},
+            </if>
+            <if test = "netDeposit != null">
+                #{netDeposit},
+            </if>
+            <if test = "nodeAccountEquity != null">
+                #{nodeAccountEquity},
+            </if>
+            <if test = "accountEquity != null">
+                #{accountEquity},
+            </if>
+            <if test = "nodeMargin != null">
+                #{nodeMargin},
+            </if>
+            <if test = "netProfit != null">
+                #{netProfit},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberNodeAssetsStatisticsRecords" parameterType="MemberNodeAssetsStatisticsRecords">
+        update member_node_assets_statistics_records
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "username != null">
+            username  = #{username},
+            </if>
+            <if test = "totalDeposit != null">
+            total_deposit  = #{totalDeposit},
+            </if>
+            <if test = "totalWithdraw != null">
+            total_withdraw  = #{totalWithdraw},
+            </if>
+            <if test = "netDeposit != null">
+            net_deposit  = #{netDeposit},
+            </if>
+            <if test = "nodeAccountEquity != null">
+            node_account_equity  = #{nodeAccountEquity},
+            </if>
+            <if test = "accountEquity != null">
+            account_equity  = #{accountEquity},
+            </if>
+            <if test = "nodeMargin != null">
+            node_margin  = #{nodeMargin},
+            </if>
+            <if test = "netProfit != null">
+            net_profit  = #{netProfit},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberNodeAssetsStatisticsRecordsById" parameterType="Long">
+        delete from member_node_assets_statistics_records where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberNodeAssetsStatisticsRecordsByIds" parameterType="Long">
+        delete from member_node_assets_statistics_records where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

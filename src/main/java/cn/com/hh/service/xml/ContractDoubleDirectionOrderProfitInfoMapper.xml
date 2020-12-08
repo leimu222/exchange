@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractDoubleDirectionOrderProfitInfoMapper">
+
+    <resultMap id="ContractDoubleDirectionOrderProfitInfoResult" type="ContractDoubleDirectionOrderProfitInfo" >
+            <result property="id" column="id" />
+            <result property="orderId" column="order_id" />
+            <result property="profit" column="profit" />
+            <result property="days" column="days" />
+            <result property="memberId" column="member_id" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="remainDays" column="remain_days" />
+    </resultMap>
+
+    <sql id="selectContractDoubleDirectionOrderProfitInfoVo">
+        select   id,  order_id,  profit,  days,  member_id,  status,  create_time,  sequence,  remain_days 
+        from contract_double_direction_order_profit_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractDoubleDirectionOrderProfitInfoList" parameterType="ContractDoubleDirectionOrderProfitInfo" resultMap="ContractDoubleDirectionOrderProfitInfoResult">
+        <include refid="selectContractDoubleDirectionOrderProfitInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "profit != null">
+                        and profit  = #{profit}
+                    </if>
+                    <if test = "days != null">
+                        and days  = #{days}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "remainDays != null">
+                        and remain_days  = #{remainDays}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractDoubleDirectionOrderProfitInfoById" parameterType="Long" resultMap="ContractDoubleDirectionOrderProfitInfoResult">
+        <include refid="selectContractDoubleDirectionOrderProfitInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractDoubleDirectionOrderProfitInfo" parameterType="ContractDoubleDirectionOrderProfitInfo" useGeneratedKeys="true" >
+        insert into contract_double_direction_order_profit_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "profit != null">
+                profit,
+            </if>
+            <if test = "days != null">
+                days,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "remainDays != null">
+                remain_days,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "profit != null">
+                #{profit},
+            </if>
+            <if test = "days != null">
+                #{days},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "remainDays != null">
+                #{remainDays},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractDoubleDirectionOrderProfitInfo" parameterType="ContractDoubleDirectionOrderProfitInfo">
+        update contract_double_direction_order_profit_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+            <if test = "profit != null">
+            profit  = #{profit},
+            </if>
+            <if test = "days != null">
+            days  = #{days},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "remainDays != null">
+            remain_days  = #{remainDays},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractDoubleDirectionOrderProfitInfoById" parameterType="Long">
+        delete from contract_double_direction_order_profit_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractDoubleDirectionOrderProfitInfoByIds" parameterType="Long">
+        delete from contract_double_direction_order_profit_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

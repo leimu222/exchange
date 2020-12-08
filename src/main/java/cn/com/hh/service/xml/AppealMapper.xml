@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AppealMapper">
+
+    <resultMap id="AppealResult" type="Appeal" >
+            <result property="id" column="id" />
+            <result property="associateId" column="associate_id" />
+            <result property="createTime" column="create_time" />
+            <result property="dealWithTime" column="deal_with_time" />
+            <result property="imgUrls" column="img_urls" />
+            <result property="initiatorId" column="initiator_id" />
+            <result property="isSuccess" column="is_success" />
+            <result property="remark" column="remark" />
+            <result property="status" column="status" />
+            <result property="adminId" column="admin_id" />
+            <result property="orderId" column="order_id" />
+    </resultMap>
+
+    <sql id="selectAppealVo">
+        select   id,  associate_id,  create_time,  deal_with_time,  img_urls,  initiator_id,  is_success,  remark,  status,  admin_id,  order_id 
+        from appeal
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAppealList" parameterType="Appeal" resultMap="AppealResult">
+        <include refid="selectAppealVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "associateId != null">
+                        and associate_id  = #{associateId}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "dealWithTime != null">
+                        and deal_with_time  = #{dealWithTime}
+                    </if>
+                    <if test = "imgUrls != null and imgUrls != ''">
+                        and img_urls  = #{imgUrls}
+                    </if>
+                    <if test = "initiatorId != null">
+                        and initiator_id  = #{initiatorId}
+                    </if>
+                    <if test = "isSuccess != null">
+                        and is_success  = #{isSuccess}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAppealById" parameterType="Long" resultMap="AppealResult">
+        <include refid="selectAppealVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAppeal" parameterType="Appeal" useGeneratedKeys="true" >
+        insert into appeal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "associateId != null">
+                associate_id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "dealWithTime != null">
+                deal_with_time,
+            </if>
+            <if test = "imgUrls != null">
+                img_urls,
+            </if>
+            <if test = "initiatorId != null">
+                initiator_id,
+            </if>
+            <if test = "isSuccess != null">
+                is_success,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "associateId != null">
+                #{associateId},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "dealWithTime != null">
+                #{dealWithTime},
+            </if>
+            <if test = "imgUrls != null">
+                #{imgUrls},
+            </if>
+            <if test = "initiatorId != null">
+                #{initiatorId},
+            </if>
+            <if test = "isSuccess != null">
+                #{isSuccess},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAppeal" parameterType="Appeal">
+        update appeal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "associateId != null">
+            associate_id  = #{associateId},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "dealWithTime != null">
+            deal_with_time  = #{dealWithTime},
+            </if>
+            <if test = "imgUrls != null">
+            img_urls  = #{imgUrls},
+            </if>
+            <if test = "initiatorId != null">
+            initiator_id  = #{initiatorId},
+            </if>
+            <if test = "isSuccess != null">
+            is_success  = #{isSuccess},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteAppealById" parameterType="Long">
+        delete from appeal where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteAppealByIds" parameterType="Long">
+        delete from appeal where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AppRevisionMapper">
+
+    <resultMap id="AppRevisionResult" type="AppRevision" >
+            <result property="id" column="id" />
+            <result property="downloadUrl" column="download_url" />
+            <result property="platform" column="platform" />
+            <result property="publishTime" column="publish_time" />
+            <result property="remark" column="remark" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectAppRevisionVo">
+        select   id,  download_url,  platform,  publish_time,  remark,  version 
+        from app_revision
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAppRevisionList" parameterType="AppRevision" resultMap="AppRevisionResult">
+        <include refid="selectAppRevisionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "downloadUrl != null and downloadUrl != ''">
+                        and download_url  = #{downloadUrl}
+                    </if>
+                    <if test = "platform != null">
+                        and platform  = #{platform}
+                    </if>
+                    <if test = "publishTime != null">
+                        and publish_time  = #{publishTime}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "version != null and version != ''">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAppRevisionById" parameterType="Long" resultMap="AppRevisionResult">
+        <include refid="selectAppRevisionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAppRevision" parameterType="AppRevision" useGeneratedKeys="true" >
+        insert into app_revision
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "downloadUrl != null">
+                download_url,
+            </if>
+            <if test = "platform != null">
+                platform,
+            </if>
+            <if test = "publishTime != null">
+                publish_time,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "downloadUrl != null">
+                #{downloadUrl},
+            </if>
+            <if test = "platform != null">
+                #{platform},
+            </if>
+            <if test = "publishTime != null">
+                #{publishTime},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAppRevision" parameterType="AppRevision">
+        update app_revision
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "downloadUrl != null">
+            download_url  = #{downloadUrl},
+            </if>
+            <if test = "platform != null">
+            platform  = #{platform},
+            </if>
+            <if test = "publishTime != null">
+            publish_time  = #{publishTime},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteAppRevisionById" parameterType="Long">
+        delete from app_revision where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteAppRevisionByIds" parameterType="Long">
+        delete from app_revision where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

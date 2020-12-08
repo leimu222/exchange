@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionExchangeOrderMapper">
+
+    <resultMap id="OptionExchangeOrderResult" type="OptionExchangeOrder" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="symbol" column="symbol" />
+            <result property="side" column="side" />
+            <result property="type" column="type" />
+            <result property="openPrice" column="open_price" />
+            <result property="price" column="price" />
+            <result property="limitTriggerPrice" column="limit_trigger_price" />
+            <result property="limitPrice" column="limit_price" />
+            <result property="amount" column="amount" />
+            <result property="capitalAmount" column="capital_amount" />
+            <result property="coinId" column="coin_id" />
+            <result property="leverMultiple" column="lever_multiple" />
+            <result property="ifStopLoss" column="if_stop_loss" />
+            <result property="stopLossPrice" column="stop_loss_price" />
+            <result property="ifStopProfit" column="if_stop_profit" />
+            <result property="stopProfitPrice" column="stop_profit_price" />
+            <result property="status" column="status" />
+            <result property="originIp" column="origin_ip" />
+            <result property="origin" column="origin" />
+            <result property="leaderMemberId" column="leader_member_id" />
+            <result property="version" column="version" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="stopLossRate" column="stop_loss_rate" />
+            <result property="stopProfitRate" column="stop_profit_rate" />
+            <result property="endTime" column="end_time" />
+            <result property="totalBondAmount" column="total_bond_amount" />
+            <result property="feeAmount" column="fee_amount" />
+            <result property="totalAmount" column="total_amount" />
+            <result property="optionPoint" column="option_point" />
+    </resultMap>
+
+    <sql id="selectOptionExchangeOrderVo">
+        select   id,  member_id,  symbol,  side,  type,  open_price,  price,  limit_trigger_price,  limit_price,  amount,  capital_amount,  coin_id,  lever_multiple,  if_stop_loss,  stop_loss_price,  if_stop_profit,  stop_profit_price,  status,  origin_ip,  origin,  leader_member_id,  version,  create_time,  sequence,  stop_loss_rate,  stop_profit_rate,  end_time,  total_bond_amount,  fee_amount,  total_amount,  option_point 
+        from option_exchange_order
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionExchangeOrderList" parameterType="OptionExchangeOrder" resultMap="OptionExchangeOrderResult">
+        <include refid="selectOptionExchangeOrderVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "side != null">
+                        and side  = #{side}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "openPrice != null">
+                        and open_price  = #{openPrice}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "limitTriggerPrice != null">
+                        and limit_trigger_price  = #{limitTriggerPrice}
+                    </if>
+                    <if test = "limitPrice != null">
+                        and limit_price  = #{limitPrice}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "capitalAmount != null">
+                        and capital_amount  = #{capitalAmount}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "leverMultiple != null">
+                        and lever_multiple  = #{leverMultiple}
+                    </if>
+                    <if test = "ifStopLoss != null">
+                        and if_stop_loss  = #{ifStopLoss}
+                    </if>
+                    <if test = "stopLossPrice != null">
+                        and stop_loss_price  = #{stopLossPrice}
+                    </if>
+                    <if test = "ifStopProfit != null">
+                        and if_stop_profit  = #{ifStopProfit}
+                    </if>
+                    <if test = "stopProfitPrice != null">
+                        and stop_profit_price  = #{stopProfitPrice}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "originIp != null and originIp != ''">
+                        and origin_ip  = #{originIp}
+                    </if>
+                    <if test = "origin != null">
+                        and origin  = #{origin}
+                    </if>
+                    <if test = "leaderMemberId != null">
+                        and leader_member_id  = #{leaderMemberId}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "stopLossRate != null">
+                        and stop_loss_rate  = #{stopLossRate}
+                    </if>
+                    <if test = "stopProfitRate != null">
+                        and stop_profit_rate  = #{stopProfitRate}
+                    </if>
+                    <if test = "endTime != null">
+                        and end_time  = #{endTime}
+                    </if>
+                    <if test = "totalBondAmount != null">
+                        and total_bond_amount  = #{totalBondAmount}
+                    </if>
+                    <if test = "feeAmount != null">
+                        and fee_amount  = #{feeAmount}
+                    </if>
+                    <if test = "totalAmount != null">
+                        and total_amount  = #{totalAmount}
+                    </if>
+                    <if test = "optionPoint != null">
+                        and option_point  = #{optionPoint}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionExchangeOrderById" parameterType="Long" resultMap="OptionExchangeOrderResult">
+        <include refid="selectOptionExchangeOrderVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionExchangeOrder" parameterType="OptionExchangeOrder" useGeneratedKeys="true" >
+        insert into option_exchange_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "side != null">
+                side,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "openPrice != null">
+                open_price,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "limitTriggerPrice != null">
+                limit_trigger_price,
+            </if>
+            <if test = "limitPrice != null">
+                limit_price,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "capitalAmount != null">
+                capital_amount,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "leverMultiple != null">
+                lever_multiple,
+            </if>
+            <if test = "ifStopLoss != null">
+                if_stop_loss,
+            </if>
+            <if test = "stopLossPrice != null">
+                stop_loss_price,
+            </if>
+            <if test = "ifStopProfit != null">
+                if_stop_profit,
+            </if>
+            <if test = "stopProfitPrice != null">
+                stop_profit_price,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "originIp != null">
+                origin_ip,
+            </if>
+            <if test = "origin != null">
+                origin,
+            </if>
+            <if test = "leaderMemberId != null">
+                leader_member_id,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "stopLossRate != null">
+                stop_loss_rate,
+            </if>
+            <if test = "stopProfitRate != null">
+                stop_profit_rate,
+            </if>
+            <if test = "endTime != null">
+                end_time,
+            </if>
+            <if test = "totalBondAmount != null">
+                total_bond_amount,
+            </if>
+            <if test = "feeAmount != null">
+                fee_amount,
+            </if>
+            <if test = "totalAmount != null">
+                total_amount,
+            </if>
+            <if test = "optionPoint != null">
+                option_point,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "side != null">
+                #{side},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "openPrice != null">
+                #{openPrice},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "limitTriggerPrice != null">
+                #{limitTriggerPrice},
+            </if>
+            <if test = "limitPrice != null">
+                #{limitPrice},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "capitalAmount != null">
+                #{capitalAmount},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "leverMultiple != null">
+                #{leverMultiple},
+            </if>
+            <if test = "ifStopLoss != null">
+                #{ifStopLoss},
+            </if>
+            <if test = "stopLossPrice != null">
+                #{stopLossPrice},
+            </if>
+            <if test = "ifStopProfit != null">
+                #{ifStopProfit},
+            </if>
+            <if test = "stopProfitPrice != null">
+                #{stopProfitPrice},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "originIp != null">
+                #{originIp},
+            </if>
+            <if test = "origin != null">
+                #{origin},
+            </if>
+            <if test = "leaderMemberId != null">
+                #{leaderMemberId},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "stopLossRate != null">
+                #{stopLossRate},
+            </if>
+            <if test = "stopProfitRate != null">
+                #{stopProfitRate},
+            </if>
+            <if test = "endTime != null">
+                #{endTime},
+            </if>
+            <if test = "totalBondAmount != null">
+                #{totalBondAmount},
+            </if>
+            <if test = "feeAmount != null">
+                #{feeAmount},
+            </if>
+            <if test = "totalAmount != null">
+                #{totalAmount},
+            </if>
+            <if test = "optionPoint != null">
+                #{optionPoint},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionExchangeOrder" parameterType="OptionExchangeOrder">
+        update option_exchange_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "side != null">
+            side  = #{side},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "openPrice != null">
+            open_price  = #{openPrice},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "limitTriggerPrice != null">
+            limit_trigger_price  = #{limitTriggerPrice},
+            </if>
+            <if test = "limitPrice != null">
+            limit_price  = #{limitPrice},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "capitalAmount != null">
+            capital_amount  = #{capitalAmount},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "leverMultiple != null">
+            lever_multiple  = #{leverMultiple},
+            </if>
+            <if test = "ifStopLoss != null">
+            if_stop_loss  = #{ifStopLoss},
+            </if>
+            <if test = "stopLossPrice != null">
+            stop_loss_price  = #{stopLossPrice},
+            </if>
+            <if test = "ifStopProfit != null">
+            if_stop_profit  = #{ifStopProfit},
+            </if>
+            <if test = "stopProfitPrice != null">
+            stop_profit_price  = #{stopProfitPrice},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "originIp != null">
+            origin_ip  = #{originIp},
+            </if>
+            <if test = "origin != null">
+            origin  = #{origin},
+            </if>
+            <if test = "leaderMemberId != null">
+            leader_member_id  = #{leaderMemberId},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "stopLossRate != null">
+            stop_loss_rate  = #{stopLossRate},
+            </if>
+            <if test = "stopProfitRate != null">
+            stop_profit_rate  = #{stopProfitRate},
+            </if>
+            <if test = "endTime != null">
+            end_time  = #{endTime},
+            </if>
+            <if test = "totalBondAmount != null">
+            total_bond_amount  = #{totalBondAmount},
+            </if>
+            <if test = "feeAmount != null">
+            fee_amount  = #{feeAmount},
+            </if>
+            <if test = "totalAmount != null">
+            total_amount  = #{totalAmount},
+            </if>
+            <if test = "optionPoint != null">
+            option_point  = #{optionPoint},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionExchangeOrderById" parameterType="Long">
+        delete from option_exchange_order where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionExchangeOrderByIds" parameterType="Long">
+        delete from option_exchange_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

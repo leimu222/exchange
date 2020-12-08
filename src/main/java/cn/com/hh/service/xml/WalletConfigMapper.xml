@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.WalletConfigMapper">
+
+    <resultMap id="WalletConfigResult" type="WalletConfig" >
+            <result property="id" column="id" />
+            <result property="type" column="type" />
+            <result property="coinName" column="coin_name" />
+            <result property="address" column="address" />
+            <result property="balance" column="balance" />
+            <result property="collectRate" column="collect_rate" />
+    </resultMap>
+
+    <sql id="selectWalletConfigVo">
+        select   id,  type,  coin_name,  address,  balance,  collect_rate 
+        from wallet_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectWalletConfigList" parameterType="WalletConfig" resultMap="WalletConfigResult">
+        <include refid="selectWalletConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "collectRate != null">
+                        and collect_rate  = #{collectRate}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectWalletConfigById" parameterType="Integer" resultMap="WalletConfigResult">
+        <include refid="selectWalletConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertWalletConfig" parameterType="WalletConfig" useGeneratedKeys="true" >
+        insert into wallet_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "collectRate != null">
+                collect_rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "collectRate != null">
+                #{collectRate},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateWalletConfig" parameterType="WalletConfig">
+        update wallet_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "collectRate != null">
+            collect_rate  = #{collectRate},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteWalletConfigById" parameterType="Integer">
+        delete from wallet_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteWalletConfigByIds" parameterType="Integer">
+        delete from wallet_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

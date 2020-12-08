@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ChainLastBlockMapper">
+
+    <resultMap id="ChainLastBlockResult" type="ChainLastBlock" >
+            <result property="id" column="id" />
+            <result property="lastBlockNum" column="last_block_num" />
+            <result property="assetsName" column="assets_name" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectChainLastBlockVo">
+        select   id,  last_block_num,  assets_name,  update_time 
+        from chain_last_block
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectChainLastBlockList" parameterType="ChainLastBlock" resultMap="ChainLastBlockResult">
+        <include refid="selectChainLastBlockVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "lastBlockNum != null">
+                        and last_block_num  = #{lastBlockNum}
+                    </if>
+                    <if test = "assetsName != null and assetsName != ''">
+                        and assets_name  = #{assetsName}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectChainLastBlockById" parameterType="Integer" resultMap="ChainLastBlockResult">
+        <include refid="selectChainLastBlockVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertChainLastBlock" parameterType="ChainLastBlock" useGeneratedKeys="true" >
+        insert into chain_last_block
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "lastBlockNum != null">
+                last_block_num,
+            </if>
+            <if test = "assetsName != null">
+                assets_name,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "lastBlockNum != null">
+                #{lastBlockNum},
+            </if>
+            <if test = "assetsName != null">
+                #{assetsName},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateChainLastBlock" parameterType="ChainLastBlock">
+        update chain_last_block
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "lastBlockNum != null">
+            last_block_num  = #{lastBlockNum},
+            </if>
+            <if test = "assetsName != null">
+            assets_name  = #{assetsName},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteChainLastBlockById" parameterType="Integer">
+        delete from chain_last_block where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteChainLastBlockByIds" parameterType="Integer">
+        delete from chain_last_block where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

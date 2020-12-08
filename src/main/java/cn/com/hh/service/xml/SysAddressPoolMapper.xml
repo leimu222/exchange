@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.SysAddressPoolMapper">
+
+    <resultMap id="SysAddressPoolResult" type="SysAddressPool" >
+            <result property="address" column="address" />
+            <result property="type" column="type" />
+            <result property="status" column="status" />
+    </resultMap>
+
+    <sql id="selectSysAddressPoolVo">
+        select   address,  type,  status 
+        from sys_address_pool
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectSysAddressPoolList" parameterType="SysAddressPool" resultMap="SysAddressPoolResult">
+        <include refid="selectSysAddressPoolVo"/>
+        <where>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectSysAddressPoolById" parameterType="String" resultMap="SysAddressPoolResult">
+        <include refid="selectSysAddressPoolVo"/>
+        where  address  = #{address} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertSysAddressPool" parameterType="SysAddressPool" useGeneratedKeys="true" >
+        insert into sys_address_pool
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateSysAddressPool" parameterType="SysAddressPool">
+        update sys_address_pool
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+        </trim>
+        where  address  = #{address} 
+    </update>
+    <delete id="deleteSysAddressPoolById" parameterType="String">
+        delete from sys_address_pool where  address  = #{address} 
+    </delete>
+
+    <delete id="deleteSysAddressPoolByIds" parameterType="String">
+        delete from sys_address_pool where address in
+        <foreach item="address" collection="array" open="(" separator="," close=")">
+            #{address}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.FeeStasticMapper">
+
+    <resultMap id="FeeStasticResult" type="FeeStastic" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="unit" column="unit" />
+            <result property="symbol" column="symbol" />
+            <result property="date" column="date" />
+            <result property="sequence" column="sequence" />
+            <result property="bonusAmount" column="bonus_amount" />
+    </resultMap>
+
+    <sql id="selectFeeStasticVo">
+        select   id,  amount,  unit,  symbol,  date,  sequence,  bonus_amount 
+        from fee_stastic
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectFeeStasticList" parameterType="FeeStastic" resultMap="FeeStasticResult">
+        <include refid="selectFeeStasticVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "date != null">
+                        and date  = #{date}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "bonusAmount != null">
+                        and bonus_amount  = #{bonusAmount}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectFeeStasticById" parameterType="Long" resultMap="FeeStasticResult">
+        <include refid="selectFeeStasticVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertFeeStastic" parameterType="FeeStastic" useGeneratedKeys="true" >
+        insert into fee_stastic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "date != null">
+                date,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "bonusAmount != null">
+                bonus_amount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "date != null">
+                #{date},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "bonusAmount != null">
+                #{bonusAmount},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateFeeStastic" parameterType="FeeStastic">
+        update fee_stastic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "date != null">
+            date  = #{date},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "bonusAmount != null">
+            bonus_amount  = #{bonusAmount},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteFeeStasticById" parameterType="Long">
+        delete from fee_stastic where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteFeeStasticByIds" parameterType="Long">
+        delete from fee_stastic where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberServiceInfoMapper">
+
+    <resultMap id="MemberServiceInfoResult" type="MemberServiceInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="type" column="type" />
+            <result property="adminId" column="admin_id" />
+            <result property="content" column="content" />
+            <result property="contentImg" column="content_img" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="replyId" column="reply_id" />
+    </resultMap>
+
+    <sql id="selectMemberServiceInfoVo">
+        select   id,  member_id,  type,  admin_id,  content,  content_img,  status,  create_time,  sequence,  reply_id 
+        from member_service_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberServiceInfoList" parameterType="MemberServiceInfo" resultMap="MemberServiceInfoResult">
+        <include refid="selectMemberServiceInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+                    <if test = "content != null and content != ''">
+                        and content  = #{content}
+                    </if>
+                    <if test = "contentImg != null and contentImg != ''">
+                        and content_img  = #{contentImg}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "replyId != null">
+                        and reply_id  = #{replyId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberServiceInfoById" parameterType="Integer" resultMap="MemberServiceInfoResult">
+        <include refid="selectMemberServiceInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberServiceInfo" parameterType="MemberServiceInfo" useGeneratedKeys="true" >
+        insert into member_service_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+            <if test = "content != null">
+                content,
+            </if>
+            <if test = "contentImg != null">
+                content_img,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "replyId != null">
+                reply_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+            <if test = "content != null">
+                #{content},
+            </if>
+            <if test = "contentImg != null">
+                #{contentImg},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "replyId != null">
+                #{replyId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberServiceInfo" parameterType="MemberServiceInfo">
+        update member_service_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+            <if test = "content != null">
+            content  = #{content},
+            </if>
+            <if test = "contentImg != null">
+            content_img  = #{contentImg},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "replyId != null">
+            reply_id  = #{replyId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberServiceInfoById" parameterType="Integer">
+        delete from member_service_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberServiceInfoByIds" parameterType="Integer">
+        delete from member_service_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

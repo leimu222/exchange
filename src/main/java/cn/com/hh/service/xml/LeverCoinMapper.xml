@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.LeverCoinMapper">
+
+    <resultMap id="LeverCoinResult" type="LeverCoin" >
+            <result property="id" column="id" />
+            <result property="baseSymbol" column="base_symbol" />
+            <result property="coinSymbol" column="coin_symbol" />
+            <result property="enable" column="enable" />
+            <result property="interestRate" column="interest_rate" />
+            <result property="minTurnIntoAmount" column="min_turn_into_amount" />
+            <result property="minTurnOutAmount" column="min_turn_out_amount" />
+            <result property="proportion" column="proportion" />
+            <result property="sort" column="sort" />
+            <result property="symbol" column="symbol" />
+    </resultMap>
+
+    <sql id="selectLeverCoinVo">
+        select   id,  base_symbol,  coin_symbol,  enable,  interest_rate,  min_turn_into_amount,  min_turn_out_amount,  proportion,  sort,  symbol 
+        from lever_coin
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectLeverCoinList" parameterType="LeverCoin" resultMap="LeverCoinResult">
+        <include refid="selectLeverCoinVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "baseSymbol != null and baseSymbol != ''">
+                        and base_symbol  = #{baseSymbol}
+                    </if>
+                    <if test = "coinSymbol != null and coinSymbol != ''">
+                        and coin_symbol  = #{coinSymbol}
+                    </if>
+                    <if test = "enable != null">
+                        and enable  = #{enable}
+                    </if>
+                    <if test = "interestRate != null">
+                        and interest_rate  = #{interestRate}
+                    </if>
+                    <if test = "minTurnIntoAmount != null">
+                        and min_turn_into_amount  = #{minTurnIntoAmount}
+                    </if>
+                    <if test = "minTurnOutAmount != null">
+                        and min_turn_out_amount  = #{minTurnOutAmount}
+                    </if>
+                    <if test = "proportion != null">
+                        and proportion  = #{proportion}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectLeverCoinById" parameterType="Long" resultMap="LeverCoinResult">
+        <include refid="selectLeverCoinVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertLeverCoin" parameterType="LeverCoin" useGeneratedKeys="true" >
+        insert into lever_coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "baseSymbol != null">
+                base_symbol,
+            </if>
+            <if test = "coinSymbol != null">
+                coin_symbol,
+            </if>
+            <if test = "enable != null">
+                enable,
+            </if>
+            <if test = "interestRate != null">
+                interest_rate,
+            </if>
+            <if test = "minTurnIntoAmount != null">
+                min_turn_into_amount,
+            </if>
+            <if test = "minTurnOutAmount != null">
+                min_turn_out_amount,
+            </if>
+            <if test = "proportion != null">
+                proportion,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "baseSymbol != null">
+                #{baseSymbol},
+            </if>
+            <if test = "coinSymbol != null">
+                #{coinSymbol},
+            </if>
+            <if test = "enable != null">
+                #{enable},
+            </if>
+            <if test = "interestRate != null">
+                #{interestRate},
+            </if>
+            <if test = "minTurnIntoAmount != null">
+                #{minTurnIntoAmount},
+            </if>
+            <if test = "minTurnOutAmount != null">
+                #{minTurnOutAmount},
+            </if>
+            <if test = "proportion != null">
+                #{proportion},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateLeverCoin" parameterType="LeverCoin">
+        update lever_coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "baseSymbol != null">
+            base_symbol  = #{baseSymbol},
+            </if>
+            <if test = "coinSymbol != null">
+            coin_symbol  = #{coinSymbol},
+            </if>
+            <if test = "enable != null">
+            enable  = #{enable},
+            </if>
+            <if test = "interestRate != null">
+            interest_rate  = #{interestRate},
+            </if>
+            <if test = "minTurnIntoAmount != null">
+            min_turn_into_amount  = #{minTurnIntoAmount},
+            </if>
+            <if test = "minTurnOutAmount != null">
+            min_turn_out_amount  = #{minTurnOutAmount},
+            </if>
+            <if test = "proportion != null">
+            proportion  = #{proportion},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteLeverCoinById" parameterType="Long">
+        delete from lever_coin where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteLeverCoinByIds" parameterType="Long">
+        delete from lever_coin where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

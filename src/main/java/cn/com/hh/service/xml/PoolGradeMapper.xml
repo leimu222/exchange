@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PoolGradeMapper">
+
+    <resultMap id="PoolGradeResult" type="PoolGrade" >
+            <result property="id" column="id" />
+            <result property="gradeCode" column="grade_code" />
+            <result property="gradeName" column="grade_name" />
+            <result property="lowerLimit" column="lower_limit" />
+            <result property="upperLimit" column="upper_limit" />
+            <result property="basePower" column="base_power" />
+            <result property="directPushRate" column="direct_push_rate" />
+            <result property="indirectPushRate" column="indirect_push_rate" />
+            <result property="sameLevelRate" column="same_level_rate" />
+    </resultMap>
+
+    <sql id="selectPoolGradeVo">
+        select   id,  grade_code,  grade_name,  lower_limit,  upper_limit,  base_power,  direct_push_rate,  indirect_push_rate,  same_level_rate 
+        from pool_grade
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPoolGradeList" parameterType="PoolGrade" resultMap="PoolGradeResult">
+        <include refid="selectPoolGradeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "gradeCode != null">
+                        and grade_code  = #{gradeCode}
+                    </if>
+                    <if test = "gradeName != null and gradeName != ''">
+                        and grade_name  = #{gradeName}
+                    </if>
+                    <if test = "lowerLimit != null">
+                        and lower_limit  = #{lowerLimit}
+                    </if>
+                    <if test = "upperLimit != null">
+                        and upper_limit  = #{upperLimit}
+                    </if>
+                    <if test = "basePower != null">
+                        and base_power  = #{basePower}
+                    </if>
+                    <if test = "directPushRate != null">
+                        and direct_push_rate  = #{directPushRate}
+                    </if>
+                    <if test = "indirectPushRate != null">
+                        and indirect_push_rate  = #{indirectPushRate}
+                    </if>
+                    <if test = "sameLevelRate != null">
+                        and same_level_rate  = #{sameLevelRate}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPoolGradeById" parameterType="Long" resultMap="PoolGradeResult">
+        <include refid="selectPoolGradeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPoolGrade" parameterType="PoolGrade" useGeneratedKeys="true" >
+        insert into pool_grade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "gradeCode != null">
+                grade_code,
+            </if>
+            <if test = "gradeName != null">
+                grade_name,
+            </if>
+            <if test = "lowerLimit != null">
+                lower_limit,
+            </if>
+            <if test = "upperLimit != null">
+                upper_limit,
+            </if>
+            <if test = "basePower != null">
+                base_power,
+            </if>
+            <if test = "directPushRate != null">
+                direct_push_rate,
+            </if>
+            <if test = "indirectPushRate != null">
+                indirect_push_rate,
+            </if>
+            <if test = "sameLevelRate != null">
+                same_level_rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "gradeCode != null">
+                #{gradeCode},
+            </if>
+            <if test = "gradeName != null">
+                #{gradeName},
+            </if>
+            <if test = "lowerLimit != null">
+                #{lowerLimit},
+            </if>
+            <if test = "upperLimit != null">
+                #{upperLimit},
+            </if>
+            <if test = "basePower != null">
+                #{basePower},
+            </if>
+            <if test = "directPushRate != null">
+                #{directPushRate},
+            </if>
+            <if test = "indirectPushRate != null">
+                #{indirectPushRate},
+            </if>
+            <if test = "sameLevelRate != null">
+                #{sameLevelRate},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePoolGrade" parameterType="PoolGrade">
+        update pool_grade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "gradeCode != null">
+            grade_code  = #{gradeCode},
+            </if>
+            <if test = "gradeName != null">
+            grade_name  = #{gradeName},
+            </if>
+            <if test = "lowerLimit != null">
+            lower_limit  = #{lowerLimit},
+            </if>
+            <if test = "upperLimit != null">
+            upper_limit  = #{upperLimit},
+            </if>
+            <if test = "basePower != null">
+            base_power  = #{basePower},
+            </if>
+            <if test = "directPushRate != null">
+            direct_push_rate  = #{directPushRate},
+            </if>
+            <if test = "indirectPushRate != null">
+            indirect_push_rate  = #{indirectPushRate},
+            </if>
+            <if test = "sameLevelRate != null">
+            same_level_rate  = #{sameLevelRate},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePoolGradeById" parameterType="Long">
+        delete from pool_grade where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePoolGradeByIds" parameterType="Long">
+        delete from pool_grade where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

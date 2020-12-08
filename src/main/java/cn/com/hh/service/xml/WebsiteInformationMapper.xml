@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.WebsiteInformationMapper">
+
+    <resultMap id="WebsiteInformationResult" type="WebsiteInformation" >
+            <result property="id" column="id" />
+            <result property="addressIcon" column="address_icon" />
+            <result property="contact" column="contact" />
+            <result property="copyright" column="copyright" />
+            <result property="description" column="description" />
+            <result property="keywords" column="keywords" />
+            <result property="logo" column="logo" />
+            <result property="name" column="name" />
+            <result property="otherInformation" column="other_information" />
+            <result property="postcode" column="postcode" />
+            <result property="url" column="url" />
+    </resultMap>
+
+    <sql id="selectWebsiteInformationVo">
+        select   id,  address_icon,  contact,  copyright,  description,  keywords,  logo,  name,  other_information,  postcode,  url 
+        from website_information
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectWebsiteInformationList" parameterType="WebsiteInformation" resultMap="WebsiteInformationResult">
+        <include refid="selectWebsiteInformationVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "addressIcon != null and addressIcon != ''">
+                        and address_icon  = #{addressIcon}
+                    </if>
+                    <if test = "contact != null and contact != ''">
+                        and contact  = #{contact}
+                    </if>
+                    <if test = "copyright != null and copyright != ''">
+                        and copyright  = #{copyright}
+                    </if>
+                    <if test = "description != null and description != ''">
+                        and description  = #{description}
+                    </if>
+                    <if test = "keywords != null and keywords != ''">
+                        and keywords  = #{keywords}
+                    </if>
+                    <if test = "logo != null and logo != ''">
+                        and logo  = #{logo}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "otherInformation != null and otherInformation != ''">
+                        and other_information  = #{otherInformation}
+                    </if>
+                    <if test = "postcode != null and postcode != ''">
+                        and postcode  = #{postcode}
+                    </if>
+                    <if test = "url != null and url != ''">
+                        and url  = #{url}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectWebsiteInformationById" parameterType="Long" resultMap="WebsiteInformationResult">
+        <include refid="selectWebsiteInformationVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertWebsiteInformation" parameterType="WebsiteInformation" useGeneratedKeys="true" >
+        insert into website_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "addressIcon != null">
+                address_icon,
+            </if>
+            <if test = "contact != null">
+                contact,
+            </if>
+            <if test = "copyright != null">
+                copyright,
+            </if>
+            <if test = "description != null">
+                description,
+            </if>
+            <if test = "keywords != null">
+                keywords,
+            </if>
+            <if test = "logo != null">
+                logo,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "otherInformation != null">
+                other_information,
+            </if>
+            <if test = "postcode != null">
+                postcode,
+            </if>
+            <if test = "url != null">
+                url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "addressIcon != null">
+                #{addressIcon},
+            </if>
+            <if test = "contact != null">
+                #{contact},
+            </if>
+            <if test = "copyright != null">
+                #{copyright},
+            </if>
+            <if test = "description != null">
+                #{description},
+            </if>
+            <if test = "keywords != null">
+                #{keywords},
+            </if>
+            <if test = "logo != null">
+                #{logo},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "otherInformation != null">
+                #{otherInformation},
+            </if>
+            <if test = "postcode != null">
+                #{postcode},
+            </if>
+            <if test = "url != null">
+                #{url},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateWebsiteInformation" parameterType="WebsiteInformation">
+        update website_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "addressIcon != null">
+            address_icon  = #{addressIcon},
+            </if>
+            <if test = "contact != null">
+            contact  = #{contact},
+            </if>
+            <if test = "copyright != null">
+            copyright  = #{copyright},
+            </if>
+            <if test = "description != null">
+            description  = #{description},
+            </if>
+            <if test = "keywords != null">
+            keywords  = #{keywords},
+            </if>
+            <if test = "logo != null">
+            logo  = #{logo},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "otherInformation != null">
+            other_information  = #{otherInformation},
+            </if>
+            <if test = "postcode != null">
+            postcode  = #{postcode},
+            </if>
+            <if test = "url != null">
+            url  = #{url},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteWebsiteInformationById" parameterType="Long">
+        delete from website_information where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteWebsiteInformationByIds" parameterType="Long">
+        delete from website_information where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

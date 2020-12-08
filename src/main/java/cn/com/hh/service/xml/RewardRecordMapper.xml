@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.RewardRecordMapper">
+
+    <resultMap id="RewardRecordResult" type="RewardRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="remark" column="remark" />
+            <result property="type" column="type" />
+            <result property="coinId" column="coin_id" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectRewardRecordVo">
+        select   id,  amount,  create_time,  remark,  type,  coin_id,  member_id 
+        from reward_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectRewardRecordList" parameterType="RewardRecord" resultMap="RewardRecordResult">
+        <include refid="selectRewardRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectRewardRecordById" parameterType="Long" resultMap="RewardRecordResult">
+        <include refid="selectRewardRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertRewardRecord" parameterType="RewardRecord" useGeneratedKeys="true" >
+        insert into reward_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateRewardRecord" parameterType="RewardRecord">
+        update reward_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteRewardRecordById" parameterType="Long">
+        delete from reward_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteRewardRecordByIds" parameterType="Long">
+        delete from reward_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockLotteryRecordMapper">
+
+    <resultMap id="UnblockLotteryRecordResult" type="UnblockLotteryRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="lotteryId" column="lottery_id" />
+            <result property="lotteryLevel" column="lottery_level" />
+            <result property="lotteryInstruction" column="lottery_instruction" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="isWinne" column="is_winne" />
+            <result property="coin" column="coin" />
+            <result property="amount" column="amount" />
+    </resultMap>
+
+    <sql id="selectUnblockLotteryRecordVo">
+        select   id,  member_id,  lottery_id,  lottery_level,  lottery_instruction,  create_time,  sequence,  is_winne,  coin,  amount 
+        from unblock_lottery_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockLotteryRecordList" parameterType="UnblockLotteryRecord" resultMap="UnblockLotteryRecordResult">
+        <include refid="selectUnblockLotteryRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "lotteryId != null">
+                        and lottery_id  = #{lotteryId}
+                    </if>
+                    <if test = "lotteryLevel != null and lotteryLevel != ''">
+                        and lottery_level  = #{lotteryLevel}
+                    </if>
+                    <if test = "lotteryInstruction != null and lotteryInstruction != ''">
+                        and lottery_instruction  = #{lotteryInstruction}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "isWinne != null">
+                        and is_winne  = #{isWinne}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockLotteryRecordById" parameterType="Long" resultMap="UnblockLotteryRecordResult">
+        <include refid="selectUnblockLotteryRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockLotteryRecord" parameterType="UnblockLotteryRecord" useGeneratedKeys="true" >
+        insert into unblock_lottery_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "lotteryId != null">
+                lottery_id,
+            </if>
+            <if test = "lotteryLevel != null">
+                lottery_level,
+            </if>
+            <if test = "lotteryInstruction != null">
+                lottery_instruction,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "isWinne != null">
+                is_winne,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "lotteryId != null">
+                #{lotteryId},
+            </if>
+            <if test = "lotteryLevel != null">
+                #{lotteryLevel},
+            </if>
+            <if test = "lotteryInstruction != null">
+                #{lotteryInstruction},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "isWinne != null">
+                #{isWinne},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockLotteryRecord" parameterType="UnblockLotteryRecord">
+        update unblock_lottery_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "lotteryId != null">
+            lottery_id  = #{lotteryId},
+            </if>
+            <if test = "lotteryLevel != null">
+            lottery_level  = #{lotteryLevel},
+            </if>
+            <if test = "lotteryInstruction != null">
+            lottery_instruction  = #{lotteryInstruction},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "isWinne != null">
+            is_winne  = #{isWinne},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockLotteryRecordById" parameterType="Long">
+        delete from unblock_lottery_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockLotteryRecordByIds" parameterType="Long">
+        delete from unblock_lottery_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

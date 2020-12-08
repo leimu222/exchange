@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OtcOrderMapper">
+
+    <resultMap id="OtcOrderResult" type="OtcOrder" >
+            <result property="id" column="id" />
+            <result property="advertiseId" column="advertise_id" />
+            <result property="advertiseType" column="advertise_type" />
+            <result property="aliNo" column="ali_no" />
+            <result property="qrCodeUrl" column="qr_code_url" />
+            <result property="bank" column="bank" />
+            <result property="branch" column="branch" />
+            <result property="cardNo" column="card_no" />
+            <result property="cancelTime" column="cancel_time" />
+            <result property="commission" column="commission" />
+            <result property="country" column="country" />
+            <result property="createTime" column="create_time" />
+            <result property="customerId" column="customer_id" />
+            <result property="customerName" column="customer_name" />
+            <result property="customerRealName" column="customer_real_name" />
+            <result property="maxLimit" column="max_limit" />
+            <result property="memberId" column="member_id" />
+            <result property="memberName" column="member_name" />
+            <result property="memberRealName" column="member_real_name" />
+            <result property="minLimit" column="min_limit" />
+            <result property="money" column="money" />
+            <result property="number" column="number" />
+            <result property="orderSn" column="order_sn" />
+            <result property="payMode" column="pay_mode" />
+            <result property="payTime" column="pay_time" />
+            <result property="price" column="price" />
+            <result property="referenceNumber" column="reference_number" />
+            <result property="releaseTime" column="release_time" />
+            <result property="remark" column="remark" />
+            <result property="status" column="status" />
+            <result property="timeLimit" column="time_limit" />
+            <result property="version" column="version" />
+            <result property="qrWeCodeUrl" column="qr_we_code_url" />
+            <result property="wechat" column="wechat" />
+            <result property="coinId" column="coin_id" />
+            <result property="platType" column="plat_type" />
+            <result property="payUrl" column="pay_url" />
+            <result property="bankCountry" column="bank_country" />
+            <result property="bankCountryEn" column="bank_country_en" />
+            <result property="bankCode" column="bank_code" />
+            <result property="bankProxyCode" column="bank_proxy_code" />
+            <result property="bankAddress" column="bank_address" />
+            <result property="payeeMobile" column="payee_mobile" />
+            <result property="payeeAddress" column="payee_address" />
+            <result property="payRemark" column="pay_remark" />
+            <result property="payeeName" column="payee_name" />
+    </resultMap>
+
+    <sql id="selectOtcOrderVo">
+        select   id,  advertise_id,  advertise_type,  ali_no,  qr_code_url,  bank,  branch,  card_no,  cancel_time,  commission,  country,  create_time,  customer_id,  customer_name,  customer_real_name,  max_limit,  member_id,  member_name,  member_real_name,  min_limit,  money,  number,  order_sn,  pay_mode,  pay_time,  price,  reference_number,  release_time,  remark,  status,  time_limit,  version,  qr_we_code_url,  wechat,  coin_id,  plat_type,  pay_url,  bank_country,  bank_country_en,  bank_code,  bank_proxy_code,  bank_address,  payee_mobile,  payee_address,  pay_remark,  payee_name 
+        from otc_order
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOtcOrderList" parameterType="OtcOrder" resultMap="OtcOrderResult">
+        <include refid="selectOtcOrderVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "advertiseId != null">
+                        and advertise_id  = #{advertiseId}
+                    </if>
+                    <if test = "advertiseType != null">
+                        and advertise_type  = #{advertiseType}
+                    </if>
+                    <if test = "aliNo != null and aliNo != ''">
+                        and ali_no  = #{aliNo}
+                    </if>
+                    <if test = "qrCodeUrl != null and qrCodeUrl != ''">
+                        and qr_code_url  = #{qrCodeUrl}
+                    </if>
+                    <if test = "bank != null and bank != ''">
+                        and bank  = #{bank}
+                    </if>
+                    <if test = "branch != null and branch != ''">
+                        and branch  = #{branch}
+                    </if>
+                    <if test = "cardNo != null and cardNo != ''">
+                        and card_no  = #{cardNo}
+                    </if>
+                    <if test = "cancelTime != null">
+                        and cancel_time  = #{cancelTime}
+                    </if>
+                    <if test = "commission != null">
+                        and commission  = #{commission}
+                    </if>
+                    <if test = "country != null and country != ''">
+                        and country  = #{country}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "customerId != null">
+                        and customer_id  = #{customerId}
+                    </if>
+                    <if test = "customerName != null and customerName != ''">
+                        and customer_name  = #{customerName}
+                    </if>
+                    <if test = "customerRealName != null and customerRealName != ''">
+                        and customer_real_name  = #{customerRealName}
+                    </if>
+                    <if test = "maxLimit != null">
+                        and max_limit  = #{maxLimit}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "memberName != null and memberName != ''">
+                        and member_name  = #{memberName}
+                    </if>
+                    <if test = "memberRealName != null and memberRealName != ''">
+                        and member_real_name  = #{memberRealName}
+                    </if>
+                    <if test = "minLimit != null">
+                        and min_limit  = #{minLimit}
+                    </if>
+                    <if test = "money != null">
+                        and money  = #{money}
+                    </if>
+                    <if test = "number != null">
+                        and number  = #{number}
+                    </if>
+                    <if test = "orderSn != null and orderSn != ''">
+                        and order_sn  = #{orderSn}
+                    </if>
+                    <if test = "payMode != null and payMode != ''">
+                        and pay_mode  = #{payMode}
+                    </if>
+                    <if test = "payTime != null">
+                        and pay_time  = #{payTime}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "referenceNumber != null and referenceNumber != ''">
+                        and reference_number  = #{referenceNumber}
+                    </if>
+                    <if test = "releaseTime != null">
+                        and release_time  = #{releaseTime}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "timeLimit != null">
+                        and time_limit  = #{timeLimit}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "qrWeCodeUrl != null and qrWeCodeUrl != ''">
+                        and qr_we_code_url  = #{qrWeCodeUrl}
+                    </if>
+                    <if test = "wechat != null and wechat != ''">
+                        and wechat  = #{wechat}
+                    </if>
+                    <if test = "coinId != null">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "platType != null">
+                        and plat_type  = #{platType}
+                    </if>
+                    <if test = "payUrl != null and payUrl != ''">
+                        and pay_url  = #{payUrl}
+                    </if>
+                    <if test = "bankCountry != null and bankCountry != ''">
+                        and bank_country  = #{bankCountry}
+                    </if>
+                    <if test = "bankCountryEn != null and bankCountryEn != ''">
+                        and bank_country_en  = #{bankCountryEn}
+                    </if>
+                    <if test = "bankCode != null and bankCode != ''">
+                        and bank_code  = #{bankCode}
+                    </if>
+                    <if test = "bankProxyCode != null and bankProxyCode != ''">
+                        and bank_proxy_code  = #{bankProxyCode}
+                    </if>
+                    <if test = "bankAddress != null and bankAddress != ''">
+                        and bank_address  = #{bankAddress}
+                    </if>
+                    <if test = "payeeMobile != null and payeeMobile != ''">
+                        and payee_mobile  = #{payeeMobile}
+                    </if>
+                    <if test = "payeeAddress != null and payeeAddress != ''">
+                        and payee_address  = #{payeeAddress}
+                    </if>
+                    <if test = "payRemark != null and payRemark != ''">
+                        and pay_remark  = #{payRemark}
+                    </if>
+                    <if test = "payeeName != null and payeeName != ''">
+                        and payee_name  = #{payeeName}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOtcOrderById" parameterType="Long" resultMap="OtcOrderResult">
+        <include refid="selectOtcOrderVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOtcOrder" parameterType="OtcOrder" useGeneratedKeys="true" >
+        insert into otc_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "advertiseId != null">
+                advertise_id,
+            </if>
+            <if test = "advertiseType != null">
+                advertise_type,
+            </if>
+            <if test = "aliNo != null">
+                ali_no,
+            </if>
+            <if test = "qrCodeUrl != null">
+                qr_code_url,
+            </if>
+            <if test = "bank != null">
+                bank,
+            </if>
+            <if test = "branch != null">
+                branch,
+            </if>
+            <if test = "cardNo != null">
+                card_no,
+            </if>
+            <if test = "cancelTime != null">
+                cancel_time,
+            </if>
+            <if test = "commission != null">
+                commission,
+            </if>
+            <if test = "country != null">
+                country,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "customerId != null">
+                customer_id,
+            </if>
+            <if test = "customerName != null">
+                customer_name,
+            </if>
+            <if test = "customerRealName != null">
+                customer_real_name,
+            </if>
+            <if test = "maxLimit != null">
+                max_limit,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "memberName != null">
+                member_name,
+            </if>
+            <if test = "memberRealName != null">
+                member_real_name,
+            </if>
+            <if test = "minLimit != null">
+                min_limit,
+            </if>
+            <if test = "money != null">
+                money,
+            </if>
+            <if test = "number != null">
+                number,
+            </if>
+            <if test = "orderSn != null">
+                order_sn,
+            </if>
+            <if test = "payMode != null">
+                pay_mode,
+            </if>
+            <if test = "payTime != null">
+                pay_time,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "referenceNumber != null">
+                reference_number,
+            </if>
+            <if test = "releaseTime != null">
+                release_time,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "timeLimit != null">
+                time_limit,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "qrWeCodeUrl != null">
+                qr_we_code_url,
+            </if>
+            <if test = "wechat != null">
+                wechat,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "platType != null">
+                plat_type,
+            </if>
+            <if test = "payUrl != null">
+                pay_url,
+            </if>
+            <if test = "bankCountry != null">
+                bank_country,
+            </if>
+            <if test = "bankCountryEn != null">
+                bank_country_en,
+            </if>
+            <if test = "bankCode != null">
+                bank_code,
+            </if>
+            <if test = "bankProxyCode != null">
+                bank_proxy_code,
+            </if>
+            <if test = "bankAddress != null">
+                bank_address,
+            </if>
+            <if test = "payeeMobile != null">
+                payee_mobile,
+            </if>
+            <if test = "payeeAddress != null">
+                payee_address,
+            </if>
+            <if test = "payRemark != null">
+                pay_remark,
+            </if>
+            <if test = "payeeName != null">
+                payee_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "advertiseId != null">
+                #{advertiseId},
+            </if>
+            <if test = "advertiseType != null">
+                #{advertiseType},
+            </if>
+            <if test = "aliNo != null">
+                #{aliNo},
+            </if>
+            <if test = "qrCodeUrl != null">
+                #{qrCodeUrl},
+            </if>
+            <if test = "bank != null">
+                #{bank},
+            </if>
+            <if test = "branch != null">
+                #{branch},
+            </if>
+            <if test = "cardNo != null">
+                #{cardNo},
+            </if>
+            <if test = "cancelTime != null">
+                #{cancelTime},
+            </if>
+            <if test = "commission != null">
+                #{commission},
+            </if>
+            <if test = "country != null">
+                #{country},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "customerId != null">
+                #{customerId},
+            </if>
+            <if test = "customerName != null">
+                #{customerName},
+            </if>
+            <if test = "customerRealName != null">
+                #{customerRealName},
+            </if>
+            <if test = "maxLimit != null">
+                #{maxLimit},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "memberName != null">
+                #{memberName},
+            </if>
+            <if test = "memberRealName != null">
+                #{memberRealName},
+            </if>
+            <if test = "minLimit != null">
+                #{minLimit},
+            </if>
+            <if test = "money != null">
+                #{money},
+            </if>
+            <if test = "number != null">
+                #{number},
+            </if>
+            <if test = "orderSn != null">
+                #{orderSn},
+            </if>
+            <if test = "payMode != null">
+                #{payMode},
+            </if>
+            <if test = "payTime != null">
+                #{payTime},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "referenceNumber != null">
+                #{referenceNumber},
+            </if>
+            <if test = "releaseTime != null">
+                #{releaseTime},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "timeLimit != null">
+                #{timeLimit},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "qrWeCodeUrl != null">
+                #{qrWeCodeUrl},
+            </if>
+            <if test = "wechat != null">
+                #{wechat},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "platType != null">
+                #{platType},
+            </if>
+            <if test = "payUrl != null">
+                #{payUrl},
+            </if>
+            <if test = "bankCountry != null">
+                #{bankCountry},
+            </if>
+            <if test = "bankCountryEn != null">
+                #{bankCountryEn},
+            </if>
+            <if test = "bankCode != null">
+                #{bankCode},
+            </if>
+            <if test = "bankProxyCode != null">
+                #{bankProxyCode},
+            </if>
+            <if test = "bankAddress != null">
+                #{bankAddress},
+            </if>
+            <if test = "payeeMobile != null">
+                #{payeeMobile},
+            </if>
+            <if test = "payeeAddress != null">
+                #{payeeAddress},
+            </if>
+            <if test = "payRemark != null">
+                #{payRemark},
+            </if>
+            <if test = "payeeName != null">
+                #{payeeName},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOtcOrder" parameterType="OtcOrder">
+        update otc_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "advertiseId != null">
+            advertise_id  = #{advertiseId},
+            </if>
+            <if test = "advertiseType != null">
+            advertise_type  = #{advertiseType},
+            </if>
+            <if test = "aliNo != null">
+            ali_no  = #{aliNo},
+            </if>
+            <if test = "qrCodeUrl != null">
+            qr_code_url  = #{qrCodeUrl},
+            </if>
+            <if test = "bank != null">
+            bank  = #{bank},
+            </if>
+            <if test = "branch != null">
+            branch  = #{branch},
+            </if>
+            <if test = "cardNo != null">
+            card_no  = #{cardNo},
+            </if>
+            <if test = "cancelTime != null">
+            cancel_time  = #{cancelTime},
+            </if>
+            <if test = "commission != null">
+            commission  = #{commission},
+            </if>
+            <if test = "country != null">
+            country  = #{country},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "customerId != null">
+            customer_id  = #{customerId},
+            </if>
+            <if test = "customerName != null">
+            customer_name  = #{customerName},
+            </if>
+            <if test = "customerRealName != null">
+            customer_real_name  = #{customerRealName},
+            </if>
+            <if test = "maxLimit != null">
+            max_limit  = #{maxLimit},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "memberName != null">
+            member_name  = #{memberName},
+            </if>
+            <if test = "memberRealName != null">
+            member_real_name  = #{memberRealName},
+            </if>
+            <if test = "minLimit != null">
+            min_limit  = #{minLimit},
+            </if>
+            <if test = "money != null">
+            money  = #{money},
+            </if>
+            <if test = "number != null">
+            number  = #{number},
+            </if>
+            <if test = "orderSn != null">
+            order_sn  = #{orderSn},
+            </if>
+            <if test = "payMode != null">
+            pay_mode  = #{payMode},
+            </if>
+            <if test = "payTime != null">
+            pay_time  = #{payTime},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "referenceNumber != null">
+            reference_number  = #{referenceNumber},
+            </if>
+            <if test = "releaseTime != null">
+            release_time  = #{releaseTime},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "timeLimit != null">
+            time_limit  = #{timeLimit},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "qrWeCodeUrl != null">
+            qr_we_code_url  = #{qrWeCodeUrl},
+            </if>
+            <if test = "wechat != null">
+            wechat  = #{wechat},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "platType != null">
+            plat_type  = #{platType},
+            </if>
+            <if test = "payUrl != null">
+            pay_url  = #{payUrl},
+            </if>
+            <if test = "bankCountry != null">
+            bank_country  = #{bankCountry},
+            </if>
+            <if test = "bankCountryEn != null">
+            bank_country_en  = #{bankCountryEn},
+            </if>
+            <if test = "bankCode != null">
+            bank_code  = #{bankCode},
+            </if>
+            <if test = "bankProxyCode != null">
+            bank_proxy_code  = #{bankProxyCode},
+            </if>
+            <if test = "bankAddress != null">
+            bank_address  = #{bankAddress},
+            </if>
+            <if test = "payeeMobile != null">
+            payee_mobile  = #{payeeMobile},
+            </if>
+            <if test = "payeeAddress != null">
+            payee_address  = #{payeeAddress},
+            </if>
+            <if test = "payRemark != null">
+            pay_remark  = #{payRemark},
+            </if>
+            <if test = "payeeName != null">
+            payee_name  = #{payeeName},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOtcOrderById" parameterType="Long">
+        delete from otc_order where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOtcOrderByIds" parameterType="Long">
+        delete from otc_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

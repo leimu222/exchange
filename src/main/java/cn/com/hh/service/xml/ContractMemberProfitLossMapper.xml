@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractMemberProfitLossMapper">
+
+    <resultMap id="ContractMemberProfitLossResult" type="ContractMemberProfitLoss" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="profitLossAmount" column="profit_loss_amount" />
+            <result property="type" column="type" />
+            <result property="weekStartTime" column="week_start_time" />
+            <result property="weekEndTime" column="week_end_time" />
+    </resultMap>
+
+    <sql id="selectContractMemberProfitLossVo">
+        select   id,  member_id,  profit_loss_amount,  type,  week_start_time,  week_end_time 
+        from contract_member_profit_loss
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractMemberProfitLossList" parameterType="ContractMemberProfitLoss" resultMap="ContractMemberProfitLossResult">
+        <include refid="selectContractMemberProfitLossVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "profitLossAmount != null">
+                        and profit_loss_amount  = #{profitLossAmount}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "weekStartTime != null and weekStartTime != ''">
+                        and week_start_time  = #{weekStartTime}
+                    </if>
+                    <if test = "weekEndTime != null and weekEndTime != ''">
+                        and week_end_time  = #{weekEndTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractMemberProfitLossById" parameterType="Long" resultMap="ContractMemberProfitLossResult">
+        <include refid="selectContractMemberProfitLossVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractMemberProfitLoss" parameterType="ContractMemberProfitLoss" useGeneratedKeys="true" >
+        insert into contract_member_profit_loss
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "profitLossAmount != null">
+                profit_loss_amount,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "weekStartTime != null">
+                week_start_time,
+            </if>
+            <if test = "weekEndTime != null">
+                week_end_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "profitLossAmount != null">
+                #{profitLossAmount},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "weekStartTime != null">
+                #{weekStartTime},
+            </if>
+            <if test = "weekEndTime != null">
+                #{weekEndTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractMemberProfitLoss" parameterType="ContractMemberProfitLoss">
+        update contract_member_profit_loss
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "profitLossAmount != null">
+            profit_loss_amount  = #{profitLossAmount},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "weekStartTime != null">
+            week_start_time  = #{weekStartTime},
+            </if>
+            <if test = "weekEndTime != null">
+            week_end_time  = #{weekEndTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractMemberProfitLossById" parameterType="Long">
+        delete from contract_member_profit_loss where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractMemberProfitLossByIds" parameterType="Long">
+        delete from contract_member_profit_loss where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

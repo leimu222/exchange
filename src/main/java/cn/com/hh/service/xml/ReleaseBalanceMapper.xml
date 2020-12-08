@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ReleaseBalanceMapper">
+
+    <resultMap id="ReleaseBalanceResult" type="ReleaseBalance" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinName" column="coin_name" />
+            <result property="coinUnit" column="coin_unit" />
+            <result property="registerTime" column="register_time" />
+            <result property="userName" column="user_name" />
+            <result property="phone" column="phone" />
+            <result property="email" column="email" />
+            <result property="releaseBalance" column="release_balance" />
+            <result property="releaseState" column="release_state" />
+            <result property="releaseTime" column="release_time" />
+    </resultMap>
+
+    <sql id="selectReleaseBalanceVo">
+        select   id,  member_id,  coin_name,  coin_unit,  register_time,  user_name,  phone,  email,  release_balance,  release_state,  release_time 
+        from release_balance
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectReleaseBalanceList" parameterType="ReleaseBalance" resultMap="ReleaseBalanceResult">
+        <include refid="selectReleaseBalanceVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "coinUnit != null and coinUnit != ''">
+                        and coin_unit  = #{coinUnit}
+                    </if>
+                    <if test = "registerTime != null">
+                        and register_time  = #{registerTime}
+                    </if>
+                    <if test = "userName != null and userName != ''">
+                        and user_name  = #{userName}
+                    </if>
+                    <if test = "phone != null and phone != ''">
+                        and phone  = #{phone}
+                    </if>
+                    <if test = "email != null and email != ''">
+                        and email  = #{email}
+                    </if>
+                    <if test = "releaseBalance != null">
+                        and release_balance  = #{releaseBalance}
+                    </if>
+                    <if test = "releaseState != null and releaseState != ''">
+                        and release_state  = #{releaseState}
+                    </if>
+                    <if test = "releaseTime != null">
+                        and release_time  = #{releaseTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectReleaseBalanceById" parameterType="Long" resultMap="ReleaseBalanceResult">
+        <include refid="selectReleaseBalanceVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertReleaseBalance" parameterType="ReleaseBalance" useGeneratedKeys="true" >
+        insert into release_balance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "coinUnit != null">
+                coin_unit,
+            </if>
+            <if test = "registerTime != null">
+                register_time,
+            </if>
+            <if test = "userName != null">
+                user_name,
+            </if>
+            <if test = "phone != null">
+                phone,
+            </if>
+            <if test = "email != null">
+                email,
+            </if>
+            <if test = "releaseBalance != null">
+                release_balance,
+            </if>
+            <if test = "releaseState != null">
+                release_state,
+            </if>
+            <if test = "releaseTime != null">
+                release_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "coinUnit != null">
+                #{coinUnit},
+            </if>
+            <if test = "registerTime != null">
+                #{registerTime},
+            </if>
+            <if test = "userName != null">
+                #{userName},
+            </if>
+            <if test = "phone != null">
+                #{phone},
+            </if>
+            <if test = "email != null">
+                #{email},
+            </if>
+            <if test = "releaseBalance != null">
+                #{releaseBalance},
+            </if>
+            <if test = "releaseState != null">
+                #{releaseState},
+            </if>
+            <if test = "releaseTime != null">
+                #{releaseTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateReleaseBalance" parameterType="ReleaseBalance">
+        update release_balance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "coinUnit != null">
+            coin_unit  = #{coinUnit},
+            </if>
+            <if test = "registerTime != null">
+            register_time  = #{registerTime},
+            </if>
+            <if test = "userName != null">
+            user_name  = #{userName},
+            </if>
+            <if test = "phone != null">
+            phone  = #{phone},
+            </if>
+            <if test = "email != null">
+            email  = #{email},
+            </if>
+            <if test = "releaseBalance != null">
+            release_balance  = #{releaseBalance},
+            </if>
+            <if test = "releaseState != null">
+            release_state  = #{releaseState},
+            </if>
+            <if test = "releaseTime != null">
+            release_time  = #{releaseTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteReleaseBalanceById" parameterType="Long">
+        delete from release_balance where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteReleaseBalanceByIds" parameterType="Long">
+        delete from release_balance where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

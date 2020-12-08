@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CountryMapper">
+
+    <resultMap id="CountryResult" type="Country" >
+            <result property="zhName" column="zh_name" />
+            <result property="areaCode" column="area_code" />
+            <result property="enName" column="en_name" />
+            <result property="language" column="language" />
+            <result property="localCurrency" column="local_currency" />
+            <result property="sort" column="sort" />
+            <result property="rate" column="rate" />
+            <result property="localCurrencyZh" column="local_currency_zh" />
+    </resultMap>
+
+    <sql id="selectCountryVo">
+        select   zh_name,  area_code,  en_name,  language,  local_currency,  sort,  rate,  local_currency_zh 
+        from country
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCountryList" parameterType="Country" resultMap="CountryResult">
+        <include refid="selectCountryVo"/>
+        <where>
+                    <if test = "zhName != null and zhName != ''">
+                        and zh_name  = #{zhName}
+                    </if>
+                    <if test = "areaCode != null and areaCode != ''">
+                        and area_code  = #{areaCode}
+                    </if>
+                    <if test = "enName != null and enName != ''">
+                        and en_name  = #{enName}
+                    </if>
+                    <if test = "language != null and language != ''">
+                        and language  = #{language}
+                    </if>
+                    <if test = "localCurrency != null and localCurrency != ''">
+                        and local_currency  = #{localCurrency}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "rate != null">
+                        and rate  = #{rate}
+                    </if>
+                    <if test = "localCurrencyZh != null and localCurrencyZh != ''">
+                        and local_currency_zh  = #{localCurrencyZh}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCountryById" parameterType="String" resultMap="CountryResult">
+        <include refid="selectCountryVo"/>
+        where  zh_name  = #{zhName} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCountry" parameterType="Country" useGeneratedKeys="true" >
+        insert into country
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "zhName != null">
+                zh_name,
+            </if>
+            <if test = "areaCode != null">
+                area_code,
+            </if>
+            <if test = "enName != null">
+                en_name,
+            </if>
+            <if test = "language != null">
+                language,
+            </if>
+            <if test = "localCurrency != null">
+                local_currency,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "rate != null">
+                rate,
+            </if>
+            <if test = "localCurrencyZh != null">
+                local_currency_zh,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "zhName != null">
+                #{zhName},
+            </if>
+            <if test = "areaCode != null">
+                #{areaCode},
+            </if>
+            <if test = "enName != null">
+                #{enName},
+            </if>
+            <if test = "language != null">
+                #{language},
+            </if>
+            <if test = "localCurrency != null">
+                #{localCurrency},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "rate != null">
+                #{rate},
+            </if>
+            <if test = "localCurrencyZh != null">
+                #{localCurrencyZh},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCountry" parameterType="Country">
+        update country
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "areaCode != null">
+            area_code  = #{areaCode},
+            </if>
+            <if test = "enName != null">
+            en_name  = #{enName},
+            </if>
+            <if test = "language != null">
+            language  = #{language},
+            </if>
+            <if test = "localCurrency != null">
+            local_currency  = #{localCurrency},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "rate != null">
+            rate  = #{rate},
+            </if>
+            <if test = "localCurrencyZh != null">
+            local_currency_zh  = #{localCurrencyZh},
+            </if>
+        </trim>
+        where  zh_name  = #{zhName} 
+    </update>
+    <delete id="deleteCountryById" parameterType="String">
+        delete from country where  zh_name  = #{zhName} 
+    </delete>
+
+    <delete id="deleteCountryByIds" parameterType="String">
+        delete from country where zh_name in
+        <foreach item="zhName" collection="array" open="(" separator="," close=")">
+            #{zhName}
+        </foreach>
+    </delete>
+</mapper>

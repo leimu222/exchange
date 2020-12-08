@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractExchangeOrderFeeMapper">
+
+    <resultMap id="ContractExchangeOrderFeeResult" type="ContractExchangeOrderFee" >
+            <result property="orderId" column="order_id" />
+            <result property="openFee" column="open_fee" />
+            <result property="closeFee" column="close_fee" />
+            <result property="version" column="version" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="contractType" column="contract_type" />
+    </resultMap>
+
+    <sql id="selectContractExchangeOrderFeeVo">
+        select   order_id,  open_fee,  close_fee,  version,  create_time,  sequence,  contract_type 
+        from contract_exchange_order_fee
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractExchangeOrderFeeList" parameterType="ContractExchangeOrderFee" resultMap="ContractExchangeOrderFeeResult">
+        <include refid="selectContractExchangeOrderFeeVo"/>
+        <where>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "openFee != null">
+                        and open_fee  = #{openFee}
+                    </if>
+                    <if test = "closeFee != null">
+                        and close_fee  = #{closeFee}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "contractType != null">
+                        and contract_type  = #{contractType}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractExchangeOrderFeeById" parameterType="Long" resultMap="ContractExchangeOrderFeeResult">
+        <include refid="selectContractExchangeOrderFeeVo"/>
+        where  order_id  = #{orderId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractExchangeOrderFee" parameterType="ContractExchangeOrderFee" useGeneratedKeys="true" >
+        insert into contract_exchange_order_fee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "openFee != null">
+                open_fee,
+            </if>
+            <if test = "closeFee != null">
+                close_fee,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "contractType != null">
+                contract_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "openFee != null">
+                #{openFee},
+            </if>
+            <if test = "closeFee != null">
+                #{closeFee},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "contractType != null">
+                #{contractType},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractExchangeOrderFee" parameterType="ContractExchangeOrderFee">
+        update contract_exchange_order_fee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "openFee != null">
+            open_fee  = #{openFee},
+            </if>
+            <if test = "closeFee != null">
+            close_fee  = #{closeFee},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "contractType != null">
+            contract_type  = #{contractType},
+            </if>
+        </trim>
+        where  order_id  = #{orderId} 
+    </update>
+    <delete id="deleteContractExchangeOrderFeeById" parameterType="Long">
+        delete from contract_exchange_order_fee where  order_id  = #{orderId} 
+    </delete>
+
+    <delete id="deleteContractExchangeOrderFeeByIds" parameterType="Long">
+        delete from contract_exchange_order_fee where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

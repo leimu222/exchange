@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.LeverWalletTransferRecordMapper">
+
+    <resultMap id="LeverWalletTransferRecordResult" type="LeverWalletTransferRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="memberId" column="member_id" />
+            <result property="memberName" column="member_name" />
+            <result property="type" column="type" />
+            <result property="version" column="version" />
+            <result property="coinId" column="coin_id" />
+            <result property="leverCoinId" column="lever_coin_id" />
+    </resultMap>
+
+    <sql id="selectLeverWalletTransferRecordVo">
+        select   id,  amount,  create_time,  member_id,  member_name,  type,  version,  coin_id,  lever_coin_id 
+        from lever_wallet_transfer_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectLeverWalletTransferRecordList" parameterType="LeverWalletTransferRecord" resultMap="LeverWalletTransferRecordResult">
+        <include refid="selectLeverWalletTransferRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "memberName != null and memberName != ''">
+                        and member_name  = #{memberName}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "leverCoinId != null">
+                        and lever_coin_id  = #{leverCoinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectLeverWalletTransferRecordById" parameterType="Long" resultMap="LeverWalletTransferRecordResult">
+        <include refid="selectLeverWalletTransferRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertLeverWalletTransferRecord" parameterType="LeverWalletTransferRecord" useGeneratedKeys="true" >
+        insert into lever_wallet_transfer_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "memberName != null">
+                member_name,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "leverCoinId != null">
+                lever_coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "memberName != null">
+                #{memberName},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "leverCoinId != null">
+                #{leverCoinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateLeverWalletTransferRecord" parameterType="LeverWalletTransferRecord">
+        update lever_wallet_transfer_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "memberName != null">
+            member_name  = #{memberName},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "leverCoinId != null">
+            lever_coin_id  = #{leverCoinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteLeverWalletTransferRecordById" parameterType="Long">
+        delete from lever_wallet_transfer_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteLeverWalletTransferRecordByIds" parameterType="Long">
+        delete from lever_wallet_transfer_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

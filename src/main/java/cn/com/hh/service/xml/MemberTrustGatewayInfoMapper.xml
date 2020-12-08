@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberTrustGatewayInfoMapper">
+
+    <resultMap id="MemberTrustGatewayInfoResult" type="MemberTrustGatewayInfo" >
+            <result property="memberId" column="member_id" />
+            <result property="coin" column="coin" />
+            <result property="status" column="status" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectMemberTrustGatewayInfoVo">
+        select   member_id,  coin,  status,  update_time 
+        from member_trust_gateway_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberTrustGatewayInfoList" parameterType="MemberTrustGatewayInfo" resultMap="MemberTrustGatewayInfoResult">
+        <include refid="selectMemberTrustGatewayInfoVo"/>
+        <where>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberTrustGatewayInfoById" parameterType="String" resultMap="MemberTrustGatewayInfoResult">
+        <include refid="selectMemberTrustGatewayInfoVo"/>
+        where  coin  = #{coin}  member_id  = #{memberId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberTrustGatewayInfo" parameterType="MemberTrustGatewayInfo" useGeneratedKeys="true" >
+        insert into member_trust_gateway_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberTrustGatewayInfo" parameterType="MemberTrustGatewayInfo">
+        update member_trust_gateway_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  coin  = #{coin}  member_id  = #{memberId} 
+    </update>
+    <delete id="deleteMemberTrustGatewayInfoById" parameterType="String">
+        delete from member_trust_gateway_info where  coin  = #{coin}  member_id  = #{memberId} 
+    </delete>
+
+    <delete id="deleteMemberTrustGatewayInfoByIds" parameterType="String">
+        delete from member_trust_gateway_info where coin in
+        <foreach item="coin" collection="array" open="(" separator="," close=")">
+            #{coin}
+        </foreach>
+    </delete>
+</mapper>

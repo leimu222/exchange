@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DepartmentMapper">
+
+    <resultMap id="DepartmentResult" type="Department" >
+            <result property="id" column="id" />
+            <result property="createTime" column="create_time" />
+            <result property="leaderId" column="leader_id" />
+            <result property="name" column="name" />
+            <result property="remark" column="remark" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectDepartmentVo">
+        select   id,  create_time,  leader_id,  name,  remark,  update_time 
+        from department
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDepartmentList" parameterType="Department" resultMap="DepartmentResult">
+        <include refid="selectDepartmentVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "leaderId != null">
+                        and leader_id  = #{leaderId}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDepartmentById" parameterType="Long" resultMap="DepartmentResult">
+        <include refid="selectDepartmentVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDepartment" parameterType="Department" useGeneratedKeys="true" >
+        insert into department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "leaderId != null">
+                leader_id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "leaderId != null">
+                #{leaderId},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDepartment" parameterType="Department">
+        update department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "leaderId != null">
+            leader_id  = #{leaderId},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDepartmentById" parameterType="Long">
+        delete from department where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDepartmentByIds" parameterType="Long">
+        delete from department where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

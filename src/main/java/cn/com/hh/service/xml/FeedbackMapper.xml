@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.FeedbackMapper">
+
+    <resultMap id="FeedbackResult" type="Feedback" >
+            <result property="id" column="id" />
+            <result property="createTime" column="create_time" />
+            <result property="remark" column="remark" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectFeedbackVo">
+        select   id,  create_time,  remark,  member_id 
+        from feedback
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectFeedbackList" parameterType="Feedback" resultMap="FeedbackResult">
+        <include refid="selectFeedbackVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectFeedbackById" parameterType="Long" resultMap="FeedbackResult">
+        <include refid="selectFeedbackVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertFeedback" parameterType="Feedback" useGeneratedKeys="true" >
+        insert into feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateFeedback" parameterType="Feedback">
+        update feedback
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteFeedbackById" parameterType="Long">
+        delete from feedback where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteFeedbackByIds" parameterType="Long">
+        delete from feedback where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

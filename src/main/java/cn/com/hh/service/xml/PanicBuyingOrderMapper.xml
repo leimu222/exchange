@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PanicBuyingOrderMapper">
+
+    <resultMap id="PanicBuyingOrderResult" type="PanicBuyingOrder" >
+            <result property="id" column="id" />
+            <result property="payAddress" column="pay_address" />
+            <result property="receiveAddress" column="receive_address" />
+            <result property="payStatus" column="pay_status" />
+            <result property="payTime" column="pay_time" />
+            <result property="timeOut" column="time_out" />
+            <result property="txHash" column="tx_hash" />
+            <result property="payAmount" column="pay_amount" />
+            <result property="actualAmount" column="actual_amount" />
+            <result property="num" column="num" />
+            <result property="coinUnit" column="coin_unit" />
+            <result property="numUnit" column="num_unit" />
+            <result property="panicBuyingId" column="panic_buying_id" />
+            <result property="no" column="no" />
+            <result property="price" column="price" />
+    </resultMap>
+
+    <sql id="selectPanicBuyingOrderVo">
+        select   id,  pay_address,  receive_address,  pay_status,  pay_time,  time_out,  tx_hash,  pay_amount,  actual_amount,  num,  coin_unit,  num_unit,  panic_buying_id,  no,  price 
+        from panic_buying_order
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPanicBuyingOrderList" parameterType="PanicBuyingOrder" resultMap="PanicBuyingOrderResult">
+        <include refid="selectPanicBuyingOrderVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "payAddress != null and payAddress != ''">
+                        and pay_address  = #{payAddress}
+                    </if>
+                    <if test = "receiveAddress != null and receiveAddress != ''">
+                        and receive_address  = #{receiveAddress}
+                    </if>
+                    <if test = "payStatus != null">
+                        and pay_status  = #{payStatus}
+                    </if>
+                    <if test = "payTime != null">
+                        and pay_time  = #{payTime}
+                    </if>
+                    <if test = "timeOut != null">
+                        and time_out  = #{timeOut}
+                    </if>
+                    <if test = "txHash != null and txHash != ''">
+                        and tx_hash  = #{txHash}
+                    </if>
+                    <if test = "payAmount != null and payAmount != ''">
+                        and pay_amount  = #{payAmount}
+                    </if>
+                    <if test = "actualAmount != null and actualAmount != ''">
+                        and actual_amount  = #{actualAmount}
+                    </if>
+                    <if test = "num != null and num != ''">
+                        and num  = #{num}
+                    </if>
+                    <if test = "coinUnit != null and coinUnit != ''">
+                        and coin_unit  = #{coinUnit}
+                    </if>
+                    <if test = "numUnit != null and numUnit != ''">
+                        and num_unit  = #{numUnit}
+                    </if>
+                    <if test = "panicBuyingId != null">
+                        and panic_buying_id  = #{panicBuyingId}
+                    </if>
+                    <if test = "no != null and no != ''">
+                        and no  = #{no}
+                    </if>
+                    <if test = "price != null and price != ''">
+                        and price  = #{price}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPanicBuyingOrderById" parameterType="Long" resultMap="PanicBuyingOrderResult">
+        <include refid="selectPanicBuyingOrderVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPanicBuyingOrder" parameterType="PanicBuyingOrder" useGeneratedKeys="true" >
+        insert into panic_buying_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "payAddress != null">
+                pay_address,
+            </if>
+            <if test = "receiveAddress != null">
+                receive_address,
+            </if>
+            <if test = "payStatus != null">
+                pay_status,
+            </if>
+            <if test = "payTime != null">
+                pay_time,
+            </if>
+            <if test = "timeOut != null">
+                time_out,
+            </if>
+            <if test = "txHash != null">
+                tx_hash,
+            </if>
+            <if test = "payAmount != null">
+                pay_amount,
+            </if>
+            <if test = "actualAmount != null">
+                actual_amount,
+            </if>
+            <if test = "num != null">
+                num,
+            </if>
+            <if test = "coinUnit != null">
+                coin_unit,
+            </if>
+            <if test = "numUnit != null">
+                num_unit,
+            </if>
+            <if test = "panicBuyingId != null">
+                panic_buying_id,
+            </if>
+            <if test = "no != null">
+                no,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "payAddress != null">
+                #{payAddress},
+            </if>
+            <if test = "receiveAddress != null">
+                #{receiveAddress},
+            </if>
+            <if test = "payStatus != null">
+                #{payStatus},
+            </if>
+            <if test = "payTime != null">
+                #{payTime},
+            </if>
+            <if test = "timeOut != null">
+                #{timeOut},
+            </if>
+            <if test = "txHash != null">
+                #{txHash},
+            </if>
+            <if test = "payAmount != null">
+                #{payAmount},
+            </if>
+            <if test = "actualAmount != null">
+                #{actualAmount},
+            </if>
+            <if test = "num != null">
+                #{num},
+            </if>
+            <if test = "coinUnit != null">
+                #{coinUnit},
+            </if>
+            <if test = "numUnit != null">
+                #{numUnit},
+            </if>
+            <if test = "panicBuyingId != null">
+                #{panicBuyingId},
+            </if>
+            <if test = "no != null">
+                #{no},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePanicBuyingOrder" parameterType="PanicBuyingOrder">
+        update panic_buying_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "payAddress != null">
+            pay_address  = #{payAddress},
+            </if>
+            <if test = "receiveAddress != null">
+            receive_address  = #{receiveAddress},
+            </if>
+            <if test = "payStatus != null">
+            pay_status  = #{payStatus},
+            </if>
+            <if test = "payTime != null">
+            pay_time  = #{payTime},
+            </if>
+            <if test = "timeOut != null">
+            time_out  = #{timeOut},
+            </if>
+            <if test = "txHash != null">
+            tx_hash  = #{txHash},
+            </if>
+            <if test = "payAmount != null">
+            pay_amount  = #{payAmount},
+            </if>
+            <if test = "actualAmount != null">
+            actual_amount  = #{actualAmount},
+            </if>
+            <if test = "num != null">
+            num  = #{num},
+            </if>
+            <if test = "coinUnit != null">
+            coin_unit  = #{coinUnit},
+            </if>
+            <if test = "numUnit != null">
+            num_unit  = #{numUnit},
+            </if>
+            <if test = "panicBuyingId != null">
+            panic_buying_id  = #{panicBuyingId},
+            </if>
+            <if test = "no != null">
+            no  = #{no},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePanicBuyingOrderById" parameterType="Long">
+        delete from panic_buying_order where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePanicBuyingOrderByIds" parameterType="Long">
+        delete from panic_buying_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockMemberRewardMapper">
+
+    <resultMap id="UnblockMemberRewardResult" type="UnblockMemberReward" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="originMemberId" column="origin_member_id" />
+            <result property="generation" column="generation" />
+            <result property="coin" column="coin" />
+            <result property="amount" column="amount" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectUnblockMemberRewardVo">
+        select   id,  member_id,  origin_member_id,  generation,  coin,  amount,  after_balance,  create_time,  sequence 
+        from unblock_member_reward
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockMemberRewardList" parameterType="UnblockMemberReward" resultMap="UnblockMemberRewardResult">
+        <include refid="selectUnblockMemberRewardVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "originMemberId != null">
+                        and origin_member_id  = #{originMemberId}
+                    </if>
+                    <if test = "generation != null">
+                        and generation  = #{generation}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockMemberRewardById" parameterType="Long" resultMap="UnblockMemberRewardResult">
+        <include refid="selectUnblockMemberRewardVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockMemberReward" parameterType="UnblockMemberReward" useGeneratedKeys="true" >
+        insert into unblock_member_reward
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "originMemberId != null">
+                origin_member_id,
+            </if>
+            <if test = "generation != null">
+                generation,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "originMemberId != null">
+                #{originMemberId},
+            </if>
+            <if test = "generation != null">
+                #{generation},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockMemberReward" parameterType="UnblockMemberReward">
+        update unblock_member_reward
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "originMemberId != null">
+            origin_member_id  = #{originMemberId},
+            </if>
+            <if test = "generation != null">
+            generation  = #{generation},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockMemberRewardById" parameterType="Long">
+        delete from unblock_member_reward where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockMemberRewardByIds" parameterType="Long">
+        delete from unblock_member_reward where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractCoinInfoMapper">
+
+    <resultMap id="ContractCoinInfoResult" type="ContractCoinInfo" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="nameCn" column="name_cn" />
+            <result property="coinScale" column="coin_scale" />
+            <result property="isPlatformCoin" column="is_platform_coin" />
+            <result property="jyRate" column="jy_rate" />
+            <result property="maxVolume" column="max_volume" />
+            <result property="status" column="status" />
+            <result property="sort" column="sort" />
+            <result property="unit" column="unit" />
+    </resultMap>
+
+    <sql id="selectContractCoinInfoVo">
+        select   id,  name,  name_cn,  coin_scale,  is_platform_coin,  jy_rate,  max_volume,  status,  sort,  unit 
+        from contract_coin_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractCoinInfoList" parameterType="ContractCoinInfo" resultMap="ContractCoinInfoResult">
+        <include refid="selectContractCoinInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "nameCn != null and nameCn != ''">
+                        and name_cn  = #{nameCn}
+                    </if>
+                    <if test = "coinScale != null">
+                        and coin_scale  = #{coinScale}
+                    </if>
+                    <if test = "isPlatformCoin != null">
+                        and is_platform_coin  = #{isPlatformCoin}
+                    </if>
+                    <if test = "jyRate != null">
+                        and jy_rate  = #{jyRate}
+                    </if>
+                    <if test = "maxVolume != null">
+                        and max_volume  = #{maxVolume}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractCoinInfoById" parameterType="Integer" resultMap="ContractCoinInfoResult">
+        <include refid="selectContractCoinInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractCoinInfo" parameterType="ContractCoinInfo" useGeneratedKeys="true" >
+        insert into contract_coin_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "nameCn != null">
+                name_cn,
+            </if>
+            <if test = "coinScale != null">
+                coin_scale,
+            </if>
+            <if test = "isPlatformCoin != null">
+                is_platform_coin,
+            </if>
+            <if test = "jyRate != null">
+                jy_rate,
+            </if>
+            <if test = "maxVolume != null">
+                max_volume,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "nameCn != null">
+                #{nameCn},
+            </if>
+            <if test = "coinScale != null">
+                #{coinScale},
+            </if>
+            <if test = "isPlatformCoin != null">
+                #{isPlatformCoin},
+            </if>
+            <if test = "jyRate != null">
+                #{jyRate},
+            </if>
+            <if test = "maxVolume != null">
+                #{maxVolume},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractCoinInfo" parameterType="ContractCoinInfo">
+        update contract_coin_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "nameCn != null">
+            name_cn  = #{nameCn},
+            </if>
+            <if test = "coinScale != null">
+            coin_scale  = #{coinScale},
+            </if>
+            <if test = "isPlatformCoin != null">
+            is_platform_coin  = #{isPlatformCoin},
+            </if>
+            <if test = "jyRate != null">
+            jy_rate  = #{jyRate},
+            </if>
+            <if test = "maxVolume != null">
+            max_volume  = #{maxVolume},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractCoinInfoById" parameterType="Integer">
+        delete from contract_coin_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractCoinInfoByIds" parameterType="Integer">
+        delete from contract_coin_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

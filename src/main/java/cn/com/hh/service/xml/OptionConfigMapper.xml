@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionConfigMapper">
+
+    <resultMap id="OptionConfigResult" type="OptionConfig" >
+            <result property="configKey" column="config_key" />
+            <result property="configValue" column="config_value" />
+            <result property="description" column="description" />
+    </resultMap>
+
+    <sql id="selectOptionConfigVo">
+        select   config_key,  config_value,  description 
+        from option_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionConfigList" parameterType="OptionConfig" resultMap="OptionConfigResult">
+        <include refid="selectOptionConfigVo"/>
+        <where>
+                    <if test = "configKey != null and configKey != ''">
+                        and config_key  = #{configKey}
+                    </if>
+                    <if test = "configValue != null and configValue != ''">
+                        and config_value  = #{configValue}
+                    </if>
+                    <if test = "description != null and description != ''">
+                        and description  = #{description}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionConfigById" parameterType="String" resultMap="OptionConfigResult">
+        <include refid="selectOptionConfigVo"/>
+        where  config_key  = #{configKey} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionConfig" parameterType="OptionConfig" useGeneratedKeys="true" >
+        insert into option_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "configKey != null">
+                config_key,
+            </if>
+            <if test = "configValue != null">
+                config_value,
+            </if>
+            <if test = "description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "configKey != null">
+                #{configKey},
+            </if>
+            <if test = "configValue != null">
+                #{configValue},
+            </if>
+            <if test = "description != null">
+                #{description},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionConfig" parameterType="OptionConfig">
+        update option_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "configValue != null">
+            config_value  = #{configValue},
+            </if>
+            <if test = "description != null">
+            description  = #{description},
+            </if>
+        </trim>
+        where  config_key  = #{configKey} 
+    </update>
+    <delete id="deleteOptionConfigById" parameterType="String">
+        delete from option_config where  config_key  = #{configKey} 
+    </delete>
+
+    <delete id="deleteOptionConfigByIds" parameterType="String">
+        delete from option_config where config_key in
+        <foreach item="configKey" collection="array" open="(" separator="," close=")">
+            #{configKey}
+        </foreach>
+    </delete>
+</mapper>

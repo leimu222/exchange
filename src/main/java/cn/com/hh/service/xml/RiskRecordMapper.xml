@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.RiskRecordMapper">
+
+    <resultMap id="RiskRecordResult" type="RiskRecord" >
+            <result property="id" column="id" />
+            <result property="createTime" column="create_time" />
+            <result property="currentThreshold" column="current_threshold" />
+            <result property="memberId" column="member_id" />
+            <result property="memberName" column="member_name" />
+            <result property="performActions" column="perform_actions" />
+            <result property="leverCoinId" column="lever_coin_id" />
+            <result property="lossThresholdId" column="loss_threshold_id" />
+    </resultMap>
+
+    <sql id="selectRiskRecordVo">
+        select   id,  create_time,  current_threshold,  member_id,  member_name,  perform_actions,  lever_coin_id,  loss_threshold_id 
+        from risk_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectRiskRecordList" parameterType="RiskRecord" resultMap="RiskRecordResult">
+        <include refid="selectRiskRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "currentThreshold != null">
+                        and current_threshold  = #{currentThreshold}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "memberName != null and memberName != ''">
+                        and member_name  = #{memberName}
+                    </if>
+                    <if test = "performActions != null">
+                        and perform_actions  = #{performActions}
+                    </if>
+                    <if test = "leverCoinId != null">
+                        and lever_coin_id  = #{leverCoinId}
+                    </if>
+                    <if test = "lossThresholdId != null">
+                        and loss_threshold_id  = #{lossThresholdId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectRiskRecordById" parameterType="Long" resultMap="RiskRecordResult">
+        <include refid="selectRiskRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertRiskRecord" parameterType="RiskRecord" useGeneratedKeys="true" >
+        insert into risk_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "currentThreshold != null">
+                current_threshold,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "memberName != null">
+                member_name,
+            </if>
+            <if test = "performActions != null">
+                perform_actions,
+            </if>
+            <if test = "leverCoinId != null">
+                lever_coin_id,
+            </if>
+            <if test = "lossThresholdId != null">
+                loss_threshold_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "currentThreshold != null">
+                #{currentThreshold},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "memberName != null">
+                #{memberName},
+            </if>
+            <if test = "performActions != null">
+                #{performActions},
+            </if>
+            <if test = "leverCoinId != null">
+                #{leverCoinId},
+            </if>
+            <if test = "lossThresholdId != null">
+                #{lossThresholdId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateRiskRecord" parameterType="RiskRecord">
+        update risk_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "currentThreshold != null">
+            current_threshold  = #{currentThreshold},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "memberName != null">
+            member_name  = #{memberName},
+            </if>
+            <if test = "performActions != null">
+            perform_actions  = #{performActions},
+            </if>
+            <if test = "leverCoinId != null">
+            lever_coin_id  = #{leverCoinId},
+            </if>
+            <if test = "lossThresholdId != null">
+            loss_threshold_id  = #{lossThresholdId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteRiskRecordById" parameterType="Long">
+        delete from risk_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteRiskRecordByIds" parameterType="Long">
+        delete from risk_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

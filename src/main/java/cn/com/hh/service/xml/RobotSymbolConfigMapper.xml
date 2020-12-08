@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.RobotSymbolConfigMapper">
+
+    <resultMap id="RobotSymbolConfigResult" type="RobotSymbolConfig" >
+            <result property="symbol" column="symbol" />
+            <result property="baseCoinBalance" column="base_coin_balance" />
+            <result property="tradeCoinBalance" column="trade_coin_balance" />
+            <result property="robotOrderMax" column="robot_order_max" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="fromExchangeSymbol" column="from_exchange_symbol" />
+            <result property="memberId" column="member_id" />
+            <result property="depthAmountDownRate" column="depth_amount_down_rate" />
+            <result property="tradeAmountUpRate" column="trade_amount_up_rate" />
+            <result property="buyPriceDownRate" column="buy_price_down_rate" />
+            <result property="sellPriceUpRate" column="sell_price_up_rate" />
+            <result property="fee" column="fee" />
+            <result property="depthIntervalMin" column="depth_interval_min" />
+            <result property="depthIntervalMax" column="depth_interval_max" />
+            <result property="status" column="status" />
+            <result property="arbitrageStatus" column="arbitrage_status" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectRobotSymbolConfigVo">
+        select   symbol,  base_coin_balance,  trade_coin_balance,  robot_order_max,  from_exchange_id,  from_exchange_symbol,  member_id,  depth_amount_down_rate,  trade_amount_up_rate,  buy_price_down_rate,  sell_price_up_rate,  fee,  depth_interval_min,  depth_interval_max,  status,  arbitrage_status,  create_time,  sequence,  version 
+        from robot_symbol_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectRobotSymbolConfigList" parameterType="RobotSymbolConfig" resultMap="RobotSymbolConfigResult">
+        <include refid="selectRobotSymbolConfigVo"/>
+        <where>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "baseCoinBalance != null">
+                        and base_coin_balance  = #{baseCoinBalance}
+                    </if>
+                    <if test = "tradeCoinBalance != null">
+                        and trade_coin_balance  = #{tradeCoinBalance}
+                    </if>
+                    <if test = "robotOrderMax != null">
+                        and robot_order_max  = #{robotOrderMax}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "fromExchangeSymbol != null and fromExchangeSymbol != ''">
+                        and from_exchange_symbol  = #{fromExchangeSymbol}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "depthAmountDownRate != null">
+                        and depth_amount_down_rate  = #{depthAmountDownRate}
+                    </if>
+                    <if test = "tradeAmountUpRate != null">
+                        and trade_amount_up_rate  = #{tradeAmountUpRate}
+                    </if>
+                    <if test = "buyPriceDownRate != null">
+                        and buy_price_down_rate  = #{buyPriceDownRate}
+                    </if>
+                    <if test = "sellPriceUpRate != null">
+                        and sell_price_up_rate  = #{sellPriceUpRate}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "depthIntervalMin != null">
+                        and depth_interval_min  = #{depthIntervalMin}
+                    </if>
+                    <if test = "depthIntervalMax != null">
+                        and depth_interval_max  = #{depthIntervalMax}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "arbitrageStatus != null">
+                        and arbitrage_status  = #{arbitrageStatus}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectRobotSymbolConfigById" parameterType="String" resultMap="RobotSymbolConfigResult">
+        <include refid="selectRobotSymbolConfigVo"/>
+        where  symbol  = #{symbol} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertRobotSymbolConfig" parameterType="RobotSymbolConfig" useGeneratedKeys="true" >
+        insert into robot_symbol_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "baseCoinBalance != null">
+                base_coin_balance,
+            </if>
+            <if test = "tradeCoinBalance != null">
+                trade_coin_balance,
+            </if>
+            <if test = "robotOrderMax != null">
+                robot_order_max,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "fromExchangeSymbol != null">
+                from_exchange_symbol,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "depthAmountDownRate != null">
+                depth_amount_down_rate,
+            </if>
+            <if test = "tradeAmountUpRate != null">
+                trade_amount_up_rate,
+            </if>
+            <if test = "buyPriceDownRate != null">
+                buy_price_down_rate,
+            </if>
+            <if test = "sellPriceUpRate != null">
+                sell_price_up_rate,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "depthIntervalMin != null">
+                depth_interval_min,
+            </if>
+            <if test = "depthIntervalMax != null">
+                depth_interval_max,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "arbitrageStatus != null">
+                arbitrage_status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "baseCoinBalance != null">
+                #{baseCoinBalance},
+            </if>
+            <if test = "tradeCoinBalance != null">
+                #{tradeCoinBalance},
+            </if>
+            <if test = "robotOrderMax != null">
+                #{robotOrderMax},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "fromExchangeSymbol != null">
+                #{fromExchangeSymbol},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "depthAmountDownRate != null">
+                #{depthAmountDownRate},
+            </if>
+            <if test = "tradeAmountUpRate != null">
+                #{tradeAmountUpRate},
+            </if>
+            <if test = "buyPriceDownRate != null">
+                #{buyPriceDownRate},
+            </if>
+            <if test = "sellPriceUpRate != null">
+                #{sellPriceUpRate},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "depthIntervalMin != null">
+                #{depthIntervalMin},
+            </if>
+            <if test = "depthIntervalMax != null">
+                #{depthIntervalMax},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "arbitrageStatus != null">
+                #{arbitrageStatus},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateRobotSymbolConfig" parameterType="RobotSymbolConfig">
+        update robot_symbol_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "baseCoinBalance != null">
+            base_coin_balance  = #{baseCoinBalance},
+            </if>
+            <if test = "tradeCoinBalance != null">
+            trade_coin_balance  = #{tradeCoinBalance},
+            </if>
+            <if test = "robotOrderMax != null">
+            robot_order_max  = #{robotOrderMax},
+            </if>
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "fromExchangeSymbol != null">
+            from_exchange_symbol  = #{fromExchangeSymbol},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "depthAmountDownRate != null">
+            depth_amount_down_rate  = #{depthAmountDownRate},
+            </if>
+            <if test = "tradeAmountUpRate != null">
+            trade_amount_up_rate  = #{tradeAmountUpRate},
+            </if>
+            <if test = "buyPriceDownRate != null">
+            buy_price_down_rate  = #{buyPriceDownRate},
+            </if>
+            <if test = "sellPriceUpRate != null">
+            sell_price_up_rate  = #{sellPriceUpRate},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "depthIntervalMin != null">
+            depth_interval_min  = #{depthIntervalMin},
+            </if>
+            <if test = "depthIntervalMax != null">
+            depth_interval_max  = #{depthIntervalMax},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "arbitrageStatus != null">
+            arbitrage_status  = #{arbitrageStatus},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  symbol  = #{symbol} 
+    </update>
+    <delete id="deleteRobotSymbolConfigById" parameterType="String">
+        delete from robot_symbol_config where  symbol  = #{symbol} 
+    </delete>
+
+    <delete id="deleteRobotSymbolConfigByIds" parameterType="String">
+        delete from robot_symbol_config where symbol in
+        <foreach item="symbol" collection="array" open="(" separator="," close=")">
+            #{symbol}
+        </foreach>
+    </delete>
+</mapper>

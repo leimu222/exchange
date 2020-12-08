@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberDepositMapper">
+
+    <resultMap id="MemberDepositResult" type="MemberDeposit" >
+            <result property="id" column="id" />
+            <result property="address" column="address" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="memberId" column="member_id" />
+            <result property="txid" column="txid" />
+            <result property="unit" column="unit" />
+            <result property="collectType" column="collect_type" />
+            <result property="transfer" column="transfer" />
+    </resultMap>
+
+    <sql id="selectMemberDepositVo">
+        select   id,  address,  amount,  create_time,  member_id,  txid,  unit,  collect_type,  transfer 
+        from member_deposit
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberDepositList" parameterType="MemberDeposit" resultMap="MemberDepositResult">
+        <include refid="selectMemberDepositVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "txid != null and txid != ''">
+                        and txid  = #{txid}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+                    <if test = "collectType != null">
+                        and collect_type  = #{collectType}
+                    </if>
+                    <if test = "transfer != null">
+                        and transfer  = #{transfer}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberDepositById" parameterType="Long" resultMap="MemberDepositResult">
+        <include refid="selectMemberDepositVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberDeposit" parameterType="MemberDeposit" useGeneratedKeys="true" >
+        insert into member_deposit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "txid != null">
+                txid,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+            <if test = "collectType != null">
+                collect_type,
+            </if>
+            <if test = "transfer != null">
+                transfer,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "txid != null">
+                #{txid},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+            <if test = "collectType != null">
+                #{collectType},
+            </if>
+            <if test = "transfer != null">
+                #{transfer},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberDeposit" parameterType="MemberDeposit">
+        update member_deposit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "txid != null">
+            txid  = #{txid},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+            <if test = "collectType != null">
+            collect_type  = #{collectType},
+            </if>
+            <if test = "transfer != null">
+            transfer  = #{transfer},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberDepositById" parameterType="Long">
+        delete from member_deposit where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberDepositByIds" parameterType="Long">
+        delete from member_deposit where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

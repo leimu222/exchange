@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CoinIssuedMapper">
+
+    <resultMap id="CoinIssuedResult" type="CoinIssued" >
+            <result property="name" column="name" />
+            <result property="address" column="address" />
+            <result property="fullName" column="full_name" />
+            <result property="issuePrice" column="issue_price" />
+            <result property="totalIssuance" column="total_issuance" />
+            <result property="issuanceCycle" column="issuance_cycle" />
+            <result property="issuer" column="issuer" />
+            <result property="officialWebsite" column="official_website" />
+            <result property="whitePaperLink" column="white_paper_link" />
+            <result property="contractInformation" column="contract_information" />
+            <result property="releaseDeclaration" column="release_declaration" />
+            <result property="minHoldBalance" column="min_hold_balance" />
+            <result property="status" column="status" />
+            <result property="auditRemark" column="audit_remark" />
+            <result property="auditTime" column="audit_time" />
+            <result property="createTime" column="create_time" />
+            <result property="genesisStatus" column="genesis_status" />
+            <result property="genesisCirculation" column="genesis_circulation" />
+            <result property="makeNewAmount" column="make_new_amount" />
+            <result property="miningPlan" column="mining_plan" />
+            <result property="creationCurrentProgress" column="creation_current_progress" />
+            <result property="creationTotalProgress" column="creation_total_progress" />
+    </resultMap>
+
+    <sql id="selectCoinIssuedVo">
+        select   name,  address,  full_name,  issue_price,  total_issuance,  issuance_cycle,  issuer,  official_website,  white_paper_link,  contract_information,  release_declaration,  min_hold_balance,  status,  audit_remark,  audit_time,  create_time,  genesis_status,  genesis_circulation,  make_new_amount,  mining_plan,  creation_current_progress,  creation_total_progress 
+        from coin_issued
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCoinIssuedList" parameterType="CoinIssued" resultMap="CoinIssuedResult">
+        <include refid="selectCoinIssuedVo"/>
+        <where>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "fullName != null and fullName != ''">
+                        and full_name  = #{fullName}
+                    </if>
+                    <if test = "issuePrice != null">
+                        and issue_price  = #{issuePrice}
+                    </if>
+                    <if test = "totalIssuance != null">
+                        and total_issuance  = #{totalIssuance}
+                    </if>
+                    <if test = "issuanceCycle != null">
+                        and issuance_cycle  = #{issuanceCycle}
+                    </if>
+                    <if test = "issuer != null and issuer != ''">
+                        and issuer  = #{issuer}
+                    </if>
+                    <if test = "officialWebsite != null and officialWebsite != ''">
+                        and official_website  = #{officialWebsite}
+                    </if>
+                    <if test = "whitePaperLink != null and whitePaperLink != ''">
+                        and white_paper_link  = #{whitePaperLink}
+                    </if>
+                    <if test = "contractInformation != null and contractInformation != ''">
+                        and contract_information  = #{contractInformation}
+                    </if>
+                    <if test = "releaseDeclaration != null and releaseDeclaration != ''">
+                        and release_declaration  = #{releaseDeclaration}
+                    </if>
+                    <if test = "minHoldBalance != null">
+                        and min_hold_balance  = #{minHoldBalance}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "auditRemark != null and auditRemark != ''">
+                        and audit_remark  = #{auditRemark}
+                    </if>
+                    <if test = "auditTime != null">
+                        and audit_time  = #{auditTime}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "genesisStatus != null">
+                        and genesis_status  = #{genesisStatus}
+                    </if>
+                    <if test = "genesisCirculation != null">
+                        and genesis_circulation  = #{genesisCirculation}
+                    </if>
+                    <if test = "makeNewAmount != null">
+                        and make_new_amount  = #{makeNewAmount}
+                    </if>
+                    <if test = "miningPlan != null and miningPlan != ''">
+                        and mining_plan  = #{miningPlan}
+                    </if>
+                    <if test = "creationCurrentProgress != null">
+                        and creation_current_progress  = #{creationCurrentProgress}
+                    </if>
+                    <if test = "creationTotalProgress != null">
+                        and creation_total_progress  = #{creationTotalProgress}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCoinIssuedById" parameterType="String" resultMap="CoinIssuedResult">
+        <include refid="selectCoinIssuedVo"/>
+        where  name  = #{name} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCoinIssued" parameterType="CoinIssued" useGeneratedKeys="true" >
+        insert into coin_issued
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "fullName != null">
+                full_name,
+            </if>
+            <if test = "issuePrice != null">
+                issue_price,
+            </if>
+            <if test = "totalIssuance != null">
+                total_issuance,
+            </if>
+            <if test = "issuanceCycle != null">
+                issuance_cycle,
+            </if>
+            <if test = "issuer != null">
+                issuer,
+            </if>
+            <if test = "officialWebsite != null">
+                official_website,
+            </if>
+            <if test = "whitePaperLink != null">
+                white_paper_link,
+            </if>
+            <if test = "contractInformation != null">
+                contract_information,
+            </if>
+            <if test = "releaseDeclaration != null">
+                release_declaration,
+            </if>
+            <if test = "minHoldBalance != null">
+                min_hold_balance,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "auditRemark != null">
+                audit_remark,
+            </if>
+            <if test = "auditTime != null">
+                audit_time,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "genesisStatus != null">
+                genesis_status,
+            </if>
+            <if test = "genesisCirculation != null">
+                genesis_circulation,
+            </if>
+            <if test = "makeNewAmount != null">
+                make_new_amount,
+            </if>
+            <if test = "miningPlan != null">
+                mining_plan,
+            </if>
+            <if test = "creationCurrentProgress != null">
+                creation_current_progress,
+            </if>
+            <if test = "creationTotalProgress != null">
+                creation_total_progress,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "fullName != null">
+                #{fullName},
+            </if>
+            <if test = "issuePrice != null">
+                #{issuePrice},
+            </if>
+            <if test = "totalIssuance != null">
+                #{totalIssuance},
+            </if>
+            <if test = "issuanceCycle != null">
+                #{issuanceCycle},
+            </if>
+            <if test = "issuer != null">
+                #{issuer},
+            </if>
+            <if test = "officialWebsite != null">
+                #{officialWebsite},
+            </if>
+            <if test = "whitePaperLink != null">
+                #{whitePaperLink},
+            </if>
+            <if test = "contractInformation != null">
+                #{contractInformation},
+            </if>
+            <if test = "releaseDeclaration != null">
+                #{releaseDeclaration},
+            </if>
+            <if test = "minHoldBalance != null">
+                #{minHoldBalance},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "auditRemark != null">
+                #{auditRemark},
+            </if>
+            <if test = "auditTime != null">
+                #{auditTime},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "genesisStatus != null">
+                #{genesisStatus},
+            </if>
+            <if test = "genesisCirculation != null">
+                #{genesisCirculation},
+            </if>
+            <if test = "makeNewAmount != null">
+                #{makeNewAmount},
+            </if>
+            <if test = "miningPlan != null">
+                #{miningPlan},
+            </if>
+            <if test = "creationCurrentProgress != null">
+                #{creationCurrentProgress},
+            </if>
+            <if test = "creationTotalProgress != null">
+                #{creationTotalProgress},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCoinIssued" parameterType="CoinIssued">
+        update coin_issued
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "fullName != null">
+            full_name  = #{fullName},
+            </if>
+            <if test = "issuePrice != null">
+            issue_price  = #{issuePrice},
+            </if>
+            <if test = "totalIssuance != null">
+            total_issuance  = #{totalIssuance},
+            </if>
+            <if test = "issuanceCycle != null">
+            issuance_cycle  = #{issuanceCycle},
+            </if>
+            <if test = "issuer != null">
+            issuer  = #{issuer},
+            </if>
+            <if test = "officialWebsite != null">
+            official_website  = #{officialWebsite},
+            </if>
+            <if test = "whitePaperLink != null">
+            white_paper_link  = #{whitePaperLink},
+            </if>
+            <if test = "contractInformation != null">
+            contract_information  = #{contractInformation},
+            </if>
+            <if test = "releaseDeclaration != null">
+            release_declaration  = #{releaseDeclaration},
+            </if>
+            <if test = "minHoldBalance != null">
+            min_hold_balance  = #{minHoldBalance},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "auditRemark != null">
+            audit_remark  = #{auditRemark},
+            </if>
+            <if test = "auditTime != null">
+            audit_time  = #{auditTime},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "genesisStatus != null">
+            genesis_status  = #{genesisStatus},
+            </if>
+            <if test = "genesisCirculation != null">
+            genesis_circulation  = #{genesisCirculation},
+            </if>
+            <if test = "makeNewAmount != null">
+            make_new_amount  = #{makeNewAmount},
+            </if>
+            <if test = "miningPlan != null">
+            mining_plan  = #{miningPlan},
+            </if>
+            <if test = "creationCurrentProgress != null">
+            creation_current_progress  = #{creationCurrentProgress},
+            </if>
+            <if test = "creationTotalProgress != null">
+            creation_total_progress  = #{creationTotalProgress},
+            </if>
+        </trim>
+        where  name  = #{name} 
+    </update>
+    <delete id="deleteCoinIssuedById" parameterType="String">
+        delete from coin_issued where  name  = #{name} 
+    </delete>
+
+    <delete id="deleteCoinIssuedByIds" parameterType="String">
+        delete from coin_issued where name in
+        <foreach item="name" collection="array" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </delete>
+</mapper>

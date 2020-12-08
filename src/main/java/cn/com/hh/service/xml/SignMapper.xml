@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.SignMapper">
+
+    <resultMap id="SignResult" type="Sign" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="creationTime" column="creation_time" />
+            <result property="endDate" column="end_date" />
+            <result property="status" column="status" />
+            <result property="coinName" column="coin_name" />
+    </resultMap>
+
+    <sql id="selectSignVo">
+        select   id,  amount,  creation_time,  end_date,  status,  coin_name 
+        from sign
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectSignList" parameterType="Sign" resultMap="SignResult">
+        <include refid="selectSignVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "creationTime != null">
+                        and creation_time  = #{creationTime}
+                    </if>
+                    <if test = "endDate != null">
+                        and end_date  = #{endDate}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectSignById" parameterType="Long" resultMap="SignResult">
+        <include refid="selectSignVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertSign" parameterType="Sign" useGeneratedKeys="true" >
+        insert into sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "creationTime != null">
+                creation_time,
+            </if>
+            <if test = "endDate != null">
+                end_date,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "creationTime != null">
+                #{creationTime},
+            </if>
+            <if test = "endDate != null">
+                #{endDate},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateSign" parameterType="Sign">
+        update sign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "creationTime != null">
+            creation_time  = #{creationTime},
+            </if>
+            <if test = "endDate != null">
+            end_date  = #{endDate},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteSignById" parameterType="Long">
+        delete from sign where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteSignByIds" parameterType="Long">
+        delete from sign where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

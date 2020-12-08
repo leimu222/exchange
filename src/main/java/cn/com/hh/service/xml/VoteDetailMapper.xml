@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.VoteDetailMapper">
+
+    <resultMap id="VoteDetailResult" type="VoteDetail" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="userId" column="user_id" />
+            <result property="voteAmount" column="vote_amount" />
+            <result property="preCoinId" column="pre_coin_id" />
+            <result property="voteId" column="vote_id" />
+    </resultMap>
+
+    <sql id="selectVoteDetailVo">
+        select   id,  amount,  create_time,  user_id,  vote_amount,  pre_coin_id,  vote_id 
+        from vote_detail
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectVoteDetailList" parameterType="VoteDetail" resultMap="VoteDetailResult">
+        <include refid="selectVoteDetailVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "userId != null">
+                        and user_id  = #{userId}
+                    </if>
+                    <if test = "voteAmount != null">
+                        and vote_amount  = #{voteAmount}
+                    </if>
+                    <if test = "preCoinId != null">
+                        and pre_coin_id  = #{preCoinId}
+                    </if>
+                    <if test = "voteId != null">
+                        and vote_id  = #{voteId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectVoteDetailById" parameterType="Long" resultMap="VoteDetailResult">
+        <include refid="selectVoteDetailVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertVoteDetail" parameterType="VoteDetail" useGeneratedKeys="true" >
+        insert into vote_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "userId != null">
+                user_id,
+            </if>
+            <if test = "voteAmount != null">
+                vote_amount,
+            </if>
+            <if test = "preCoinId != null">
+                pre_coin_id,
+            </if>
+            <if test = "voteId != null">
+                vote_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "userId != null">
+                #{userId},
+            </if>
+            <if test = "voteAmount != null">
+                #{voteAmount},
+            </if>
+            <if test = "preCoinId != null">
+                #{preCoinId},
+            </if>
+            <if test = "voteId != null">
+                #{voteId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateVoteDetail" parameterType="VoteDetail">
+        update vote_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "userId != null">
+            user_id  = #{userId},
+            </if>
+            <if test = "voteAmount != null">
+            vote_amount  = #{voteAmount},
+            </if>
+            <if test = "preCoinId != null">
+            pre_coin_id  = #{preCoinId},
+            </if>
+            <if test = "voteId != null">
+            vote_id  = #{voteId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteVoteDetailById" parameterType="Long">
+        delete from vote_detail where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteVoteDetailByIds" parameterType="Long">
+        delete from vote_detail where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

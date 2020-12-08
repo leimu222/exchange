@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionExchangeOrderCloseMapper">
+
+    <resultMap id="OptionExchangeOrderCloseResult" type="OptionExchangeOrderClose" >
+            <result property="orderId" column="order_id" />
+            <result property="closePrice" column="close_price" />
+            <result property="profitOrLoss" column="profit_or_loss" />
+            <result property="closeProfitOrLoss" column="close_profit_or_loss" />
+            <result property="type" column="type" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectOptionExchangeOrderCloseVo">
+        select   order_id,  close_price,  profit_or_loss,  close_profit_or_loss,  type,  create_time,  sequence,  version 
+        from option_exchange_order_close
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionExchangeOrderCloseList" parameterType="OptionExchangeOrderClose" resultMap="OptionExchangeOrderCloseResult">
+        <include refid="selectOptionExchangeOrderCloseVo"/>
+        <where>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "closePrice != null">
+                        and close_price  = #{closePrice}
+                    </if>
+                    <if test = "profitOrLoss != null">
+                        and profit_or_loss  = #{profitOrLoss}
+                    </if>
+                    <if test = "closeProfitOrLoss != null">
+                        and close_profit_or_loss  = #{closeProfitOrLoss}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionExchangeOrderCloseById" parameterType="Long" resultMap="OptionExchangeOrderCloseResult">
+        <include refid="selectOptionExchangeOrderCloseVo"/>
+        where  order_id  = #{orderId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionExchangeOrderClose" parameterType="OptionExchangeOrderClose" useGeneratedKeys="true" >
+        insert into option_exchange_order_close
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "closePrice != null">
+                close_price,
+            </if>
+            <if test = "profitOrLoss != null">
+                profit_or_loss,
+            </if>
+            <if test = "closeProfitOrLoss != null">
+                close_profit_or_loss,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "closePrice != null">
+                #{closePrice},
+            </if>
+            <if test = "profitOrLoss != null">
+                #{profitOrLoss},
+            </if>
+            <if test = "closeProfitOrLoss != null">
+                #{closeProfitOrLoss},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionExchangeOrderClose" parameterType="OptionExchangeOrderClose">
+        update option_exchange_order_close
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "closePrice != null">
+            close_price  = #{closePrice},
+            </if>
+            <if test = "profitOrLoss != null">
+            profit_or_loss  = #{profitOrLoss},
+            </if>
+            <if test = "closeProfitOrLoss != null">
+            close_profit_or_loss  = #{closeProfitOrLoss},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  order_id  = #{orderId} 
+    </update>
+    <delete id="deleteOptionExchangeOrderCloseById" parameterType="Long">
+        delete from option_exchange_order_close where  order_id  = #{orderId} 
+    </delete>
+
+    <delete id="deleteOptionExchangeOrderCloseByIds" parameterType="Long">
+        delete from option_exchange_order_close where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

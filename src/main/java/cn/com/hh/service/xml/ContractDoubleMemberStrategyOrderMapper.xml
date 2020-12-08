@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractDoubleMemberStrategyOrderMapper">
+
+    <resultMap id="ContractDoubleMemberStrategyOrderResult" type="ContractDoubleMemberStrategyOrder" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="contractOrderId" column="contract_order_id" />
+            <result property="apiId" column="api_id" />
+            <result property="apiKey" column="api_key" />
+            <result property="secretKey" column="secret_key" />
+            <result property="fromExchangeOrderId" column="from_exchange_order_id" />
+            <result property="symbol" column="symbol" />
+            <result property="price" column="price" />
+            <result property="amount" column="amount" />
+            <result property="contractSize" column="contract_size" />
+            <result property="direction" column="direction" />
+            <result property="offset" column="offset" />
+            <result property="leverRate" column="lever_rate" />
+            <result property="orderPriceType" column="order_price_type" />
+            <result property="createTime" column="create_time" />
+            <result property="status" column="status" />
+            <result property="remark" column="remark" />
+            <result property="matchStatus" column="match_status" />
+            <result property="updateTime" column="update_time" />
+            <result property="marginFrozen" column="margin_frozen" />
+            <result property="profit" column="profit" />
+            <result property="closeOrderId" column="close_order_id" />
+            <result property="closeMatchStatus" column="close_match_status" />
+            <result property="closeTime" column="close_time" />
+    </resultMap>
+
+    <sql id="selectContractDoubleMemberStrategyOrderVo">
+        select   id,  member_id,  from_exchange_id,  contract_order_id,  api_id,  api_key,  secret_key,  from_exchange_order_id,  symbol,  price,  amount,  contract_size,  direction,  offset,  lever_rate,  order_price_type,  create_time,  status,  remark,  match_status,  update_time,  margin_frozen,  profit,  close_order_id,  close_match_status,  close_time 
+        from contract_double_member_strategy_order
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractDoubleMemberStrategyOrderList" parameterType="ContractDoubleMemberStrategyOrder" resultMap="ContractDoubleMemberStrategyOrderResult">
+        <include refid="selectContractDoubleMemberStrategyOrderVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "contractOrderId != null">
+                        and contract_order_id  = #{contractOrderId}
+                    </if>
+                    <if test = "apiId != null">
+                        and api_id  = #{apiId}
+                    </if>
+                    <if test = "apiKey != null and apiKey != ''">
+                        and api_key  = #{apiKey}
+                    </if>
+                    <if test = "secretKey != null and secretKey != ''">
+                        and secret_key  = #{secretKey}
+                    </if>
+                    <if test = "fromExchangeOrderId != null and fromExchangeOrderId != ''">
+                        and from_exchange_order_id  = #{fromExchangeOrderId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "contractSize != null">
+                        and contract_size  = #{contractSize}
+                    </if>
+                    <if test = "direction != null and direction != ''">
+                        and direction  = #{direction}
+                    </if>
+                    <if test = "offset != null and offset != ''">
+                        and offset  = #{offset}
+                    </if>
+                    <if test = "leverRate != null">
+                        and lever_rate  = #{leverRate}
+                    </if>
+                    <if test = "orderPriceType != null and orderPriceType != ''">
+                        and order_price_type  = #{orderPriceType}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "matchStatus != null">
+                        and match_status  = #{matchStatus}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "marginFrozen != null">
+                        and margin_frozen  = #{marginFrozen}
+                    </if>
+                    <if test = "profit != null">
+                        and profit  = #{profit}
+                    </if>
+                    <if test = "closeOrderId != null and closeOrderId != ''">
+                        and close_order_id  = #{closeOrderId}
+                    </if>
+                    <if test = "closeMatchStatus != null">
+                        and close_match_status  = #{closeMatchStatus}
+                    </if>
+                    <if test = "closeTime != null">
+                        and close_time  = #{closeTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractDoubleMemberStrategyOrderById" parameterType="Long" resultMap="ContractDoubleMemberStrategyOrderResult">
+        <include refid="selectContractDoubleMemberStrategyOrderVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractDoubleMemberStrategyOrder" parameterType="ContractDoubleMemberStrategyOrder" useGeneratedKeys="true" >
+        insert into contract_double_member_strategy_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "contractOrderId != null">
+                contract_order_id,
+            </if>
+            <if test = "apiId != null">
+                api_id,
+            </if>
+            <if test = "apiKey != null">
+                api_key,
+            </if>
+            <if test = "secretKey != null">
+                secret_key,
+            </if>
+            <if test = "fromExchangeOrderId != null">
+                from_exchange_order_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "contractSize != null">
+                contract_size,
+            </if>
+            <if test = "direction != null">
+                direction,
+            </if>
+            <if test = "offset != null">
+                offset,
+            </if>
+            <if test = "leverRate != null">
+                lever_rate,
+            </if>
+            <if test = "orderPriceType != null">
+                order_price_type,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "matchStatus != null">
+                match_status,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "marginFrozen != null">
+                margin_frozen,
+            </if>
+            <if test = "profit != null">
+                profit,
+            </if>
+            <if test = "closeOrderId != null">
+                close_order_id,
+            </if>
+            <if test = "closeMatchStatus != null">
+                close_match_status,
+            </if>
+            <if test = "closeTime != null">
+                close_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "contractOrderId != null">
+                #{contractOrderId},
+            </if>
+            <if test = "apiId != null">
+                #{apiId},
+            </if>
+            <if test = "apiKey != null">
+                #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+                #{secretKey},
+            </if>
+            <if test = "fromExchangeOrderId != null">
+                #{fromExchangeOrderId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "contractSize != null">
+                #{contractSize},
+            </if>
+            <if test = "direction != null">
+                #{direction},
+            </if>
+            <if test = "offset != null">
+                #{offset},
+            </if>
+            <if test = "leverRate != null">
+                #{leverRate},
+            </if>
+            <if test = "orderPriceType != null">
+                #{orderPriceType},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "matchStatus != null">
+                #{matchStatus},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "marginFrozen != null">
+                #{marginFrozen},
+            </if>
+            <if test = "profit != null">
+                #{profit},
+            </if>
+            <if test = "closeOrderId != null">
+                #{closeOrderId},
+            </if>
+            <if test = "closeMatchStatus != null">
+                #{closeMatchStatus},
+            </if>
+            <if test = "closeTime != null">
+                #{closeTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractDoubleMemberStrategyOrder" parameterType="ContractDoubleMemberStrategyOrder">
+        update contract_double_member_strategy_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "contractOrderId != null">
+            contract_order_id  = #{contractOrderId},
+            </if>
+            <if test = "apiId != null">
+            api_id  = #{apiId},
+            </if>
+            <if test = "apiKey != null">
+            api_key  = #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+            secret_key  = #{secretKey},
+            </if>
+            <if test = "fromExchangeOrderId != null">
+            from_exchange_order_id  = #{fromExchangeOrderId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "contractSize != null">
+            contract_size  = #{contractSize},
+            </if>
+            <if test = "direction != null">
+            direction  = #{direction},
+            </if>
+            <if test = "offset != null">
+            offset  = #{offset},
+            </if>
+            <if test = "leverRate != null">
+            lever_rate  = #{leverRate},
+            </if>
+            <if test = "orderPriceType != null">
+            order_price_type  = #{orderPriceType},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "matchStatus != null">
+            match_status  = #{matchStatus},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "marginFrozen != null">
+            margin_frozen  = #{marginFrozen},
+            </if>
+            <if test = "profit != null">
+            profit  = #{profit},
+            </if>
+            <if test = "closeOrderId != null">
+            close_order_id  = #{closeOrderId},
+            </if>
+            <if test = "closeMatchStatus != null">
+            close_match_status  = #{closeMatchStatus},
+            </if>
+            <if test = "closeTime != null">
+            close_time  = #{closeTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractDoubleMemberStrategyOrderById" parameterType="Long">
+        delete from contract_double_member_strategy_order where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractDoubleMemberStrategyOrderByIds" parameterType="Long">
+        delete from contract_double_member_strategy_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

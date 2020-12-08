@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.NewsMapper">
+
+    <resultMap id="NewsResult" type="News" >
+            <result property="id" column="id" />
+            <result property="content" column="content" />
+            <result property="createTime" column="create_time" />
+            <result property="imgUrl" column="img_url" />
+            <result property="isShow" column="is_show" />
+            <result property="sort" column="sort" />
+            <result property="title" column="title" />
+            <result property="isTop" column="is_top" />
+    </resultMap>
+
+    <sql id="selectNewsVo">
+        select   id,  content,  create_time,  img_url,  is_show,  sort,  title,  is_top 
+        from news
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectNewsList" parameterType="News" resultMap="NewsResult">
+        <include refid="selectNewsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "content != null and content != ''">
+                        and content  = #{content}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "imgUrl != null and imgUrl != ''">
+                        and img_url  = #{imgUrl}
+                    </if>
+                    <if test = "isShow != null">
+                        and is_show  = #{isShow}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "title != null and title != ''">
+                        and title  = #{title}
+                    </if>
+                    <if test = "isTop != null and isTop != ''">
+                        and is_top  = #{isTop}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectNewsById" parameterType="Long" resultMap="NewsResult">
+        <include refid="selectNewsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertNews" parameterType="News" useGeneratedKeys="true" >
+        insert into news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "content != null">
+                content,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "imgUrl != null">
+                img_url,
+            </if>
+            <if test = "isShow != null">
+                is_show,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "title != null">
+                title,
+            </if>
+            <if test = "isTop != null">
+                is_top,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "content != null">
+                #{content},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "imgUrl != null">
+                #{imgUrl},
+            </if>
+            <if test = "isShow != null">
+                #{isShow},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "title != null">
+                #{title},
+            </if>
+            <if test = "isTop != null">
+                #{isTop},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateNews" parameterType="News">
+        update news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "content != null">
+            content  = #{content},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "imgUrl != null">
+            img_url  = #{imgUrl},
+            </if>
+            <if test = "isShow != null">
+            is_show  = #{isShow},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "title != null">
+            title  = #{title},
+            </if>
+            <if test = "isTop != null">
+            is_top  = #{isTop},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteNewsById" parameterType="Long">
+        delete from news where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteNewsByIds" parameterType="Long">
+        delete from news where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

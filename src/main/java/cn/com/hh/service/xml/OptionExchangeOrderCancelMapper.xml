@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionExchangeOrderCancelMapper">
+
+    <resultMap id="OptionExchangeOrderCancelResult" type="OptionExchangeOrderCancel" >
+            <result property="orderId" column="order_id" />
+            <result property="type" column="type" />
+            <result property="reasonMsg" column="reason_msg" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectOptionExchangeOrderCancelVo">
+        select   order_id,  type,  reason_msg,  create_time,  sequence 
+        from option_exchange_order_cancel
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionExchangeOrderCancelList" parameterType="OptionExchangeOrderCancel" resultMap="OptionExchangeOrderCancelResult">
+        <include refid="selectOptionExchangeOrderCancelVo"/>
+        <where>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "reasonMsg != null and reasonMsg != ''">
+                        and reason_msg  = #{reasonMsg}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionExchangeOrderCancelById" parameterType="Long" resultMap="OptionExchangeOrderCancelResult">
+        <include refid="selectOptionExchangeOrderCancelVo"/>
+        where  order_id  = #{orderId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionExchangeOrderCancel" parameterType="OptionExchangeOrderCancel" useGeneratedKeys="true" >
+        insert into option_exchange_order_cancel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "reasonMsg != null">
+                reason_msg,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "reasonMsg != null">
+                #{reasonMsg},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionExchangeOrderCancel" parameterType="OptionExchangeOrderCancel">
+        update option_exchange_order_cancel
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "reasonMsg != null">
+            reason_msg  = #{reasonMsg},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  order_id  = #{orderId} 
+    </update>
+    <delete id="deleteOptionExchangeOrderCancelById" parameterType="Long">
+        delete from option_exchange_order_cancel where  order_id  = #{orderId} 
+    </delete>
+
+    <delete id="deleteOptionExchangeOrderCancelByIds" parameterType="Long">
+        delete from option_exchange_order_cancel where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

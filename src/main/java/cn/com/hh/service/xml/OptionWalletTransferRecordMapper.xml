@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionWalletTransferRecordMapper">
+
+    <resultMap id="OptionWalletTransferRecordResult" type="OptionWalletTransferRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="amount" column="amount" />
+            <result property="type" column="type" />
+            <result property="coinId" column="coin_id" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectOptionWalletTransferRecordVo">
+        select   id,  member_id,  amount,  type,  coin_id,  create_time,  sequence,  version 
+        from option_wallet_transfer_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionWalletTransferRecordList" parameterType="OptionWalletTransferRecord" resultMap="OptionWalletTransferRecordResult">
+        <include refid="selectOptionWalletTransferRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionWalletTransferRecordById" parameterType="Long" resultMap="OptionWalletTransferRecordResult">
+        <include refid="selectOptionWalletTransferRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionWalletTransferRecord" parameterType="OptionWalletTransferRecord" useGeneratedKeys="true" >
+        insert into option_wallet_transfer_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionWalletTransferRecord" parameterType="OptionWalletTransferRecord">
+        update option_wallet_transfer_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionWalletTransferRecordById" parameterType="Long">
+        delete from option_wallet_transfer_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionWalletTransferRecordByIds" parameterType="Long">
+        delete from option_wallet_transfer_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

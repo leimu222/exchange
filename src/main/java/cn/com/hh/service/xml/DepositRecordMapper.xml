@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DepositRecordMapper">
+
+    <resultMap id="DepositRecordResult" type="DepositRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="status" column="status" />
+            <result property="coinId" column="coin_id" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectDepositRecordVo">
+        select   id,  amount,  status,  coin_id,  member_id 
+        from deposit_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDepositRecordList" parameterType="DepositRecord" resultMap="DepositRecordResult">
+        <include refid="selectDepositRecordVo"/>
+        <where>
+                    <if test = "id != null and id != ''">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDepositRecordById" parameterType="String" resultMap="DepositRecordResult">
+        <include refid="selectDepositRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDepositRecord" parameterType="DepositRecord" useGeneratedKeys="true" >
+        insert into deposit_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDepositRecord" parameterType="DepositRecord">
+        update deposit_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDepositRecordById" parameterType="String">
+        delete from deposit_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDepositRecordByIds" parameterType="String">
+        delete from deposit_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

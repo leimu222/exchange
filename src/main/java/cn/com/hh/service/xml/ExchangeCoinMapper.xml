@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ExchangeCoinMapper">
+
+    <resultMap id="ExchangeCoinResult" type="ExchangeCoin" >
+            <result property="symbol" column="symbol" />
+            <result property="baseCoinScale" column="base_coin_scale" />
+            <result property="baseFee" column="base_fee" />
+            <result property="baseSymbol" column="base_symbol" />
+            <result property="coinScale" column="coin_scale" />
+            <result property="coinSymbol" column="coin_symbol" />
+            <result property="enable" column="enable" />
+            <result property="enableMarketBuy" column="enable_market_buy" />
+            <result property="enableMarketSell" column="enable_market_sell" />
+            <result property="fee" column="fee" />
+            <result property="flag" column="flag" />
+            <result property="maxTradingOrder" column="max_trading_order" />
+            <result property="maxTradingTime" column="max_trading_time" />
+            <result property="maxVolume" column="max_volume" />
+            <result property="minSellPrice" column="min_sell_price" />
+            <result property="minTurnover" column="min_turnover" />
+            <result property="minVolume" column="min_volume" />
+            <result property="sort" column="sort" />
+            <result property="zone" column="zone" />
+            <result property="defaultSymbol" column="default_symbol" />
+            <result property="symbolArea" column="symbol_area" />
+    </resultMap>
+
+    <sql id="selectExchangeCoinVo">
+        select   symbol,  base_coin_scale,  base_fee,  base_symbol,  coin_scale,  coin_symbol,  enable,  enable_market_buy,  enable_market_sell,  fee,  flag,  max_trading_order,  max_trading_time,  max_volume,  min_sell_price,  min_turnover,  min_volume,  sort,  zone,  default_symbol,  symbol_area 
+        from exchange_coin
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectExchangeCoinList" parameterType="ExchangeCoin" resultMap="ExchangeCoinResult">
+        <include refid="selectExchangeCoinVo"/>
+        <where>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "baseCoinScale != null">
+                        and base_coin_scale  = #{baseCoinScale}
+                    </if>
+                    <if test = "baseFee != null">
+                        and base_fee  = #{baseFee}
+                    </if>
+                    <if test = "baseSymbol != null and baseSymbol != ''">
+                        and base_symbol  = #{baseSymbol}
+                    </if>
+                    <if test = "coinScale != null">
+                        and coin_scale  = #{coinScale}
+                    </if>
+                    <if test = "coinSymbol != null and coinSymbol != ''">
+                        and coin_symbol  = #{coinSymbol}
+                    </if>
+                    <if test = "enable != null">
+                        and enable  = #{enable}
+                    </if>
+                    <if test = "enableMarketBuy != null">
+                        and enable_market_buy  = #{enableMarketBuy}
+                    </if>
+                    <if test = "enableMarketSell != null">
+                        and enable_market_sell  = #{enableMarketSell}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "flag != null">
+                        and flag  = #{flag}
+                    </if>
+                    <if test = "maxTradingOrder != null">
+                        and max_trading_order  = #{maxTradingOrder}
+                    </if>
+                    <if test = "maxTradingTime != null">
+                        and max_trading_time  = #{maxTradingTime}
+                    </if>
+                    <if test = "maxVolume != null">
+                        and max_volume  = #{maxVolume}
+                    </if>
+                    <if test = "minSellPrice != null">
+                        and min_sell_price  = #{minSellPrice}
+                    </if>
+                    <if test = "minTurnover != null">
+                        and min_turnover  = #{minTurnover}
+                    </if>
+                    <if test = "minVolume != null">
+                        and min_volume  = #{minVolume}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "zone != null">
+                        and zone  = #{zone}
+                    </if>
+                    <if test = "defaultSymbol != null and defaultSymbol != ''">
+                        and default_symbol  = #{defaultSymbol}
+                    </if>
+                    <if test = "symbolArea != null">
+                        and symbol_area  = #{symbolArea}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectExchangeCoinById" parameterType="String" resultMap="ExchangeCoinResult">
+        <include refid="selectExchangeCoinVo"/>
+        where  symbol  = #{symbol} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertExchangeCoin" parameterType="ExchangeCoin" useGeneratedKeys="true" >
+        insert into exchange_coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "baseCoinScale != null">
+                base_coin_scale,
+            </if>
+            <if test = "baseFee != null">
+                base_fee,
+            </if>
+            <if test = "baseSymbol != null">
+                base_symbol,
+            </if>
+            <if test = "coinScale != null">
+                coin_scale,
+            </if>
+            <if test = "coinSymbol != null">
+                coin_symbol,
+            </if>
+            <if test = "enable != null">
+                enable,
+            </if>
+            <if test = "enableMarketBuy != null">
+                enable_market_buy,
+            </if>
+            <if test = "enableMarketSell != null">
+                enable_market_sell,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "flag != null">
+                flag,
+            </if>
+            <if test = "maxTradingOrder != null">
+                max_trading_order,
+            </if>
+            <if test = "maxTradingTime != null">
+                max_trading_time,
+            </if>
+            <if test = "maxVolume != null">
+                max_volume,
+            </if>
+            <if test = "minSellPrice != null">
+                min_sell_price,
+            </if>
+            <if test = "minTurnover != null">
+                min_turnover,
+            </if>
+            <if test = "minVolume != null">
+                min_volume,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "zone != null">
+                zone,
+            </if>
+            <if test = "defaultSymbol != null">
+                default_symbol,
+            </if>
+            <if test = "symbolArea != null">
+                symbol_area,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "baseCoinScale != null">
+                #{baseCoinScale},
+            </if>
+            <if test = "baseFee != null">
+                #{baseFee},
+            </if>
+            <if test = "baseSymbol != null">
+                #{baseSymbol},
+            </if>
+            <if test = "coinScale != null">
+                #{coinScale},
+            </if>
+            <if test = "coinSymbol != null">
+                #{coinSymbol},
+            </if>
+            <if test = "enable != null">
+                #{enable},
+            </if>
+            <if test = "enableMarketBuy != null">
+                #{enableMarketBuy},
+            </if>
+            <if test = "enableMarketSell != null">
+                #{enableMarketSell},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "flag != null">
+                #{flag},
+            </if>
+            <if test = "maxTradingOrder != null">
+                #{maxTradingOrder},
+            </if>
+            <if test = "maxTradingTime != null">
+                #{maxTradingTime},
+            </if>
+            <if test = "maxVolume != null">
+                #{maxVolume},
+            </if>
+            <if test = "minSellPrice != null">
+                #{minSellPrice},
+            </if>
+            <if test = "minTurnover != null">
+                #{minTurnover},
+            </if>
+            <if test = "minVolume != null">
+                #{minVolume},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "zone != null">
+                #{zone},
+            </if>
+            <if test = "defaultSymbol != null">
+                #{defaultSymbol},
+            </if>
+            <if test = "symbolArea != null">
+                #{symbolArea},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateExchangeCoin" parameterType="ExchangeCoin">
+        update exchange_coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "baseCoinScale != null">
+            base_coin_scale  = #{baseCoinScale},
+            </if>
+            <if test = "baseFee != null">
+            base_fee  = #{baseFee},
+            </if>
+            <if test = "baseSymbol != null">
+            base_symbol  = #{baseSymbol},
+            </if>
+            <if test = "coinScale != null">
+            coin_scale  = #{coinScale},
+            </if>
+            <if test = "coinSymbol != null">
+            coin_symbol  = #{coinSymbol},
+            </if>
+            <if test = "enable != null">
+            enable  = #{enable},
+            </if>
+            <if test = "enableMarketBuy != null">
+            enable_market_buy  = #{enableMarketBuy},
+            </if>
+            <if test = "enableMarketSell != null">
+            enable_market_sell  = #{enableMarketSell},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "flag != null">
+            flag  = #{flag},
+            </if>
+            <if test = "maxTradingOrder != null">
+            max_trading_order  = #{maxTradingOrder},
+            </if>
+            <if test = "maxTradingTime != null">
+            max_trading_time  = #{maxTradingTime},
+            </if>
+            <if test = "maxVolume != null">
+            max_volume  = #{maxVolume},
+            </if>
+            <if test = "minSellPrice != null">
+            min_sell_price  = #{minSellPrice},
+            </if>
+            <if test = "minTurnover != null">
+            min_turnover  = #{minTurnover},
+            </if>
+            <if test = "minVolume != null">
+            min_volume  = #{minVolume},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "zone != null">
+            zone  = #{zone},
+            </if>
+            <if test = "defaultSymbol != null">
+            default_symbol  = #{defaultSymbol},
+            </if>
+            <if test = "symbolArea != null">
+            symbol_area  = #{symbolArea},
+            </if>
+        </trim>
+        where  symbol  = #{symbol} 
+    </update>
+    <delete id="deleteExchangeCoinById" parameterType="String">
+        delete from exchange_coin where  symbol  = #{symbol} 
+    </delete>
+
+    <delete id="deleteExchangeCoinByIds" parameterType="String">
+        delete from exchange_coin where symbol in
+        <foreach item="symbol" collection="array" open="(" separator="," close=")">
+            #{symbol}
+        </foreach>
+    </delete>
+</mapper>

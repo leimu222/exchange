@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractWalletExplodeRecordMapper">
+
+    <resultMap id="ContractWalletExplodeRecordResult" type="ContractWalletExplodeRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coin" column="coin" />
+            <result property="beforeBalance" column="before_balance" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="frozenAmount" column="frozen_amount" />
+            <result property="riskRate" column="risk_rate" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+            <result property="remark" column="remark" />
+    </resultMap>
+
+    <sql id="selectContractWalletExplodeRecordVo">
+        select   id,  member_id,  coin,  before_balance,  after_balance,  frozen_amount,  risk_rate,  create_time,  sequence,  version,  remark 
+        from contract_wallet_explode_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractWalletExplodeRecordList" parameterType="ContractWalletExplodeRecord" resultMap="ContractWalletExplodeRecordResult">
+        <include refid="selectContractWalletExplodeRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "beforeBalance != null">
+                        and before_balance  = #{beforeBalance}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "frozenAmount != null">
+                        and frozen_amount  = #{frozenAmount}
+                    </if>
+                    <if test = "riskRate != null">
+                        and risk_rate  = #{riskRate}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractWalletExplodeRecordById" parameterType="Long" resultMap="ContractWalletExplodeRecordResult">
+        <include refid="selectContractWalletExplodeRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractWalletExplodeRecord" parameterType="ContractWalletExplodeRecord" useGeneratedKeys="true" >
+        insert into contract_wallet_explode_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "beforeBalance != null">
+                before_balance,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "frozenAmount != null">
+                frozen_amount,
+            </if>
+            <if test = "riskRate != null">
+                risk_rate,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "beforeBalance != null">
+                #{beforeBalance},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "frozenAmount != null">
+                #{frozenAmount},
+            </if>
+            <if test = "riskRate != null">
+                #{riskRate},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractWalletExplodeRecord" parameterType="ContractWalletExplodeRecord">
+        update contract_wallet_explode_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "beforeBalance != null">
+            before_balance  = #{beforeBalance},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "frozenAmount != null">
+            frozen_amount  = #{frozenAmount},
+            </if>
+            <if test = "riskRate != null">
+            risk_rate  = #{riskRate},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractWalletExplodeRecordById" parameterType="Long">
+        delete from contract_wallet_explode_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractWalletExplodeRecordByIds" parameterType="Long">
+        delete from contract_wallet_explode_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.EmptionRecordMapper">
+
+    <resultMap id="EmptionRecordResult" type="EmptionRecord" >
+            <result property="id" column="ID" />
+            <result property="userId" column="user_id" />
+            <result property="ieoId" column="ieo_id" />
+            <result property="userName" column="user_name" />
+            <result property="userMobile" column="user_mobile" />
+            <result property="ieoName" column="ieo_name" />
+            <result property="saleCoin" column="sale_coin" />
+            <result property="saleAmount" column="sale_amount" />
+            <result property="raiseCoin" column="raise_coin" />
+            <result property="ratio" column="ratio" />
+            <result property="startTime" column="start_time" />
+            <result property="endTime" column="end_time" />
+            <result property="status" column="status" />
+            <result property="receiveAmount" column="receive_amount" />
+            <result property="payAmount" column="pay_amount" />
+            <result property="expectTime" column="expect_time" />
+            <result property="createTime" column="create_time" />
+            <result property="picView" column="pic_view" />
+    </resultMap>
+
+    <sql id="selectEmptionRecordVo">
+        select   ID,  user_id,  ieo_id,  user_name,  user_mobile,  ieo_name,  sale_coin,  sale_amount,  raise_coin,  ratio,  start_time,  end_time,  status,  receive_amount,  pay_amount,  expect_time,  create_time,  pic_view 
+        from emption_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectEmptionRecordList" parameterType="EmptionRecord" resultMap="EmptionRecordResult">
+        <include refid="selectEmptionRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and ID  = #{id}
+                    </if>
+                    <if test = "userId != null">
+                        and user_id  = #{userId}
+                    </if>
+                    <if test = "ieoId != null">
+                        and ieo_id  = #{ieoId}
+                    </if>
+                    <if test = "userName != null and userName != ''">
+                        and user_name  = #{userName}
+                    </if>
+                    <if test = "userMobile != null and userMobile != ''">
+                        and user_mobile  = #{userMobile}
+                    </if>
+                    <if test = "ieoName != null and ieoName != ''">
+                        and ieo_name  = #{ieoName}
+                    </if>
+                    <if test = "saleCoin != null and saleCoin != ''">
+                        and sale_coin  = #{saleCoin}
+                    </if>
+                    <if test = "saleAmount != null">
+                        and sale_amount  = #{saleAmount}
+                    </if>
+                    <if test = "raiseCoin != null and raiseCoin != ''">
+                        and raise_coin  = #{raiseCoin}
+                    </if>
+                    <if test = "ratio != null">
+                        and ratio  = #{ratio}
+                    </if>
+                    <if test = "startTime != null">
+                        and start_time  = #{startTime}
+                    </if>
+                    <if test = "endTime != null">
+                        and end_time  = #{endTime}
+                    </if>
+                    <if test = "status != null and status != ''">
+                        and status  = #{status}
+                    </if>
+                    <if test = "receiveAmount != null">
+                        and receive_amount  = #{receiveAmount}
+                    </if>
+                    <if test = "payAmount != null">
+                        and pay_amount  = #{payAmount}
+                    </if>
+                    <if test = "expectTime != null">
+                        and expect_time  = #{expectTime}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "picView != null and picView != ''">
+                        and pic_view  = #{picView}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectEmptionRecordById" parameterType="Long" resultMap="EmptionRecordResult">
+        <include refid="selectEmptionRecordVo"/>
+        where  ID  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertEmptionRecord" parameterType="EmptionRecord" useGeneratedKeys="true" >
+        insert into emption_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                ID,
+            </if>
+            <if test = "userId != null">
+                user_id,
+            </if>
+            <if test = "ieoId != null">
+                ieo_id,
+            </if>
+            <if test = "userName != null">
+                user_name,
+            </if>
+            <if test = "userMobile != null">
+                user_mobile,
+            </if>
+            <if test = "ieoName != null">
+                ieo_name,
+            </if>
+            <if test = "saleCoin != null">
+                sale_coin,
+            </if>
+            <if test = "saleAmount != null">
+                sale_amount,
+            </if>
+            <if test = "raiseCoin != null">
+                raise_coin,
+            </if>
+            <if test = "ratio != null">
+                ratio,
+            </if>
+            <if test = "startTime != null">
+                start_time,
+            </if>
+            <if test = "endTime != null">
+                end_time,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "receiveAmount != null">
+                receive_amount,
+            </if>
+            <if test = "payAmount != null">
+                pay_amount,
+            </if>
+            <if test = "expectTime != null">
+                expect_time,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "picView != null">
+                pic_view,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "userId != null">
+                #{userId},
+            </if>
+            <if test = "ieoId != null">
+                #{ieoId},
+            </if>
+            <if test = "userName != null">
+                #{userName},
+            </if>
+            <if test = "userMobile != null">
+                #{userMobile},
+            </if>
+            <if test = "ieoName != null">
+                #{ieoName},
+            </if>
+            <if test = "saleCoin != null">
+                #{saleCoin},
+            </if>
+            <if test = "saleAmount != null">
+                #{saleAmount},
+            </if>
+            <if test = "raiseCoin != null">
+                #{raiseCoin},
+            </if>
+            <if test = "ratio != null">
+                #{ratio},
+            </if>
+            <if test = "startTime != null">
+                #{startTime},
+            </if>
+            <if test = "endTime != null">
+                #{endTime},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "receiveAmount != null">
+                #{receiveAmount},
+            </if>
+            <if test = "payAmount != null">
+                #{payAmount},
+            </if>
+            <if test = "expectTime != null">
+                #{expectTime},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "picView != null">
+                #{picView},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateEmptionRecord" parameterType="EmptionRecord">
+        update emption_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "userId != null">
+            user_id  = #{userId},
+            </if>
+            <if test = "ieoId != null">
+            ieo_id  = #{ieoId},
+            </if>
+            <if test = "userName != null">
+            user_name  = #{userName},
+            </if>
+            <if test = "userMobile != null">
+            user_mobile  = #{userMobile},
+            </if>
+            <if test = "ieoName != null">
+            ieo_name  = #{ieoName},
+            </if>
+            <if test = "saleCoin != null">
+            sale_coin  = #{saleCoin},
+            </if>
+            <if test = "saleAmount != null">
+            sale_amount  = #{saleAmount},
+            </if>
+            <if test = "raiseCoin != null">
+            raise_coin  = #{raiseCoin},
+            </if>
+            <if test = "ratio != null">
+            ratio  = #{ratio},
+            </if>
+            <if test = "startTime != null">
+            start_time  = #{startTime},
+            </if>
+            <if test = "endTime != null">
+            end_time  = #{endTime},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "receiveAmount != null">
+            receive_amount  = #{receiveAmount},
+            </if>
+            <if test = "payAmount != null">
+            pay_amount  = #{payAmount},
+            </if>
+            <if test = "expectTime != null">
+            expect_time  = #{expectTime},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "picView != null">
+            pic_view  = #{picView},
+            </if>
+        </trim>
+        where  ID  = #{id} 
+    </update>
+    <delete id="deleteEmptionRecordById" parameterType="Long">
+        delete from emption_record where  ID  = #{id} 
+    </delete>
+
+    <delete id="deleteEmptionRecordByIds" parameterType="Long">
+        delete from emption_record where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

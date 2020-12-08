@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionExchangeOrderConditionRecordMapper">
+
+    <resultMap id="OptionExchangeOrderConditionRecordResult" type="OptionExchangeOrderConditionRecord" >
+            <result property="id" column="id" />
+            <result property="orderId" column="order_id" />
+            <result property="ifStopLoss" column="if_stop_loss" />
+            <result property="stopLossPrice" column="stop_loss_price" />
+            <result property="ifStopProfit" column="if_stop_profit" />
+            <result property="stopProfitPrice" column="stop_profit_price" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="stopLossRate" column="stop_loss_rate" />
+            <result property="stopProfitRate" column="stop_profit_rate" />
+    </resultMap>
+
+    <sql id="selectOptionExchangeOrderConditionRecordVo">
+        select   id,  order_id,  if_stop_loss,  stop_loss_price,  if_stop_profit,  stop_profit_price,  create_time,  sequence,  stop_loss_rate,  stop_profit_rate 
+        from option_exchange_order_condition_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionExchangeOrderConditionRecordList" parameterType="OptionExchangeOrderConditionRecord" resultMap="OptionExchangeOrderConditionRecordResult">
+        <include refid="selectOptionExchangeOrderConditionRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "ifStopLoss != null">
+                        and if_stop_loss  = #{ifStopLoss}
+                    </if>
+                    <if test = "stopLossPrice != null">
+                        and stop_loss_price  = #{stopLossPrice}
+                    </if>
+                    <if test = "ifStopProfit != null">
+                        and if_stop_profit  = #{ifStopProfit}
+                    </if>
+                    <if test = "stopProfitPrice != null">
+                        and stop_profit_price  = #{stopProfitPrice}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "stopLossRate != null">
+                        and stop_loss_rate  = #{stopLossRate}
+                    </if>
+                    <if test = "stopProfitRate != null">
+                        and stop_profit_rate  = #{stopProfitRate}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionExchangeOrderConditionRecordById" parameterType="Long" resultMap="OptionExchangeOrderConditionRecordResult">
+        <include refid="selectOptionExchangeOrderConditionRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionExchangeOrderConditionRecord" parameterType="OptionExchangeOrderConditionRecord" useGeneratedKeys="true" >
+        insert into option_exchange_order_condition_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "ifStopLoss != null">
+                if_stop_loss,
+            </if>
+            <if test = "stopLossPrice != null">
+                stop_loss_price,
+            </if>
+            <if test = "ifStopProfit != null">
+                if_stop_profit,
+            </if>
+            <if test = "stopProfitPrice != null">
+                stop_profit_price,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "stopLossRate != null">
+                stop_loss_rate,
+            </if>
+            <if test = "stopProfitRate != null">
+                stop_profit_rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "ifStopLoss != null">
+                #{ifStopLoss},
+            </if>
+            <if test = "stopLossPrice != null">
+                #{stopLossPrice},
+            </if>
+            <if test = "ifStopProfit != null">
+                #{ifStopProfit},
+            </if>
+            <if test = "stopProfitPrice != null">
+                #{stopProfitPrice},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "stopLossRate != null">
+                #{stopLossRate},
+            </if>
+            <if test = "stopProfitRate != null">
+                #{stopProfitRate},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionExchangeOrderConditionRecord" parameterType="OptionExchangeOrderConditionRecord">
+        update option_exchange_order_condition_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+            <if test = "ifStopLoss != null">
+            if_stop_loss  = #{ifStopLoss},
+            </if>
+            <if test = "stopLossPrice != null">
+            stop_loss_price  = #{stopLossPrice},
+            </if>
+            <if test = "ifStopProfit != null">
+            if_stop_profit  = #{ifStopProfit},
+            </if>
+            <if test = "stopProfitPrice != null">
+            stop_profit_price  = #{stopProfitPrice},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "stopLossRate != null">
+            stop_loss_rate  = #{stopLossRate},
+            </if>
+            <if test = "stopProfitRate != null">
+            stop_profit_rate  = #{stopProfitRate},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionExchangeOrderConditionRecordById" parameterType="Long">
+        delete from option_exchange_order_condition_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionExchangeOrderConditionRecordByIds" parameterType="Long">
+        delete from option_exchange_order_condition_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

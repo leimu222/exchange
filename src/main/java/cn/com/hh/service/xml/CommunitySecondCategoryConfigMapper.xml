@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunitySecondCategoryConfigMapper">
+
+    <resultMap id="CommunitySecondCategoryConfigResult" type="CommunitySecondCategoryConfig" >
+            <result property="id" column="id" />
+            <result property="enName" column="en_name" />
+            <result property="name" column="name" />
+            <result property="topId" column="top_id" />
+            <result property="min" column="min" />
+            <result property="max" column="max" />
+            <result property="orderId" column="order_id" />
+    </resultMap>
+
+    <sql id="selectCommunitySecondCategoryConfigVo">
+        select   id,  en_name,  name,  top_id,  min,  max,  order_id 
+        from community_second_category_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunitySecondCategoryConfigList" parameterType="CommunitySecondCategoryConfig" resultMap="CommunitySecondCategoryConfigResult">
+        <include refid="selectCommunitySecondCategoryConfigVo"/>
+        <where>
+                    <if test = "id != null and id != ''">
+                        and id  = #{id}
+                    </if>
+                    <if test = "enName != null and enName != ''">
+                        and en_name  = #{enName}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "topId != null and topId != ''">
+                        and top_id  = #{topId}
+                    </if>
+                    <if test = "min != null">
+                        and min  = #{min}
+                    </if>
+                    <if test = "max != null">
+                        and max  = #{max}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunitySecondCategoryConfigById" parameterType="String" resultMap="CommunitySecondCategoryConfigResult">
+        <include refid="selectCommunitySecondCategoryConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunitySecondCategoryConfig" parameterType="CommunitySecondCategoryConfig" useGeneratedKeys="true" >
+        insert into community_second_category_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "enName != null">
+                en_name,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "topId != null">
+                top_id,
+            </if>
+            <if test = "min != null">
+                min,
+            </if>
+            <if test = "max != null">
+                max,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "enName != null">
+                #{enName},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "topId != null">
+                #{topId},
+            </if>
+            <if test = "min != null">
+                #{min},
+            </if>
+            <if test = "max != null">
+                #{max},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunitySecondCategoryConfig" parameterType="CommunitySecondCategoryConfig">
+        update community_second_category_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "enName != null">
+            en_name  = #{enName},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "topId != null">
+            top_id  = #{topId},
+            </if>
+            <if test = "min != null">
+            min  = #{min},
+            </if>
+            <if test = "max != null">
+            max  = #{max},
+            </if>
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCommunitySecondCategoryConfigById" parameterType="String">
+        delete from community_second_category_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCommunitySecondCategoryConfigByIds" parameterType="String">
+        delete from community_second_category_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

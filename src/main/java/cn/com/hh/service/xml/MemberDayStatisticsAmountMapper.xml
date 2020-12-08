@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberDayStatisticsAmountMapper">
+
+    <resultMap id="MemberDayStatisticsAmountResult" type="MemberDayStatisticsAmount" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="transAmount" column="trans_amount" />
+            <result property="profitLossAmount" column="profit_loss_amount" />
+            <result property="holdInterestAmount" column="hold_interest_amount" />
+            <result property="feeAmount" column="fee_amount" />
+            <result property="upAmount" column="up_amount" />
+            <result property="downAmount" column="down_amount" />
+            <result property="calTime" column="cal_time" />
+            <result property="calSequence" column="cal_sequence" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectMemberDayStatisticsAmountVo">
+        select   id,  member_id,  trans_amount,  profit_loss_amount,  hold_interest_amount,  fee_amount,  up_amount,  down_amount,  cal_time,  cal_sequence,  sequence 
+        from member_day_statistics_amount
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberDayStatisticsAmountList" parameterType="MemberDayStatisticsAmount" resultMap="MemberDayStatisticsAmountResult">
+        <include refid="selectMemberDayStatisticsAmountVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "transAmount != null">
+                        and trans_amount  = #{transAmount}
+                    </if>
+                    <if test = "profitLossAmount != null">
+                        and profit_loss_amount  = #{profitLossAmount}
+                    </if>
+                    <if test = "holdInterestAmount != null">
+                        and hold_interest_amount  = #{holdInterestAmount}
+                    </if>
+                    <if test = "feeAmount != null">
+                        and fee_amount  = #{feeAmount}
+                    </if>
+                    <if test = "upAmount != null">
+                        and up_amount  = #{upAmount}
+                    </if>
+                    <if test = "downAmount != null">
+                        and down_amount  = #{downAmount}
+                    </if>
+                    <if test = "calTime != null and calTime != ''">
+                        and cal_time  = #{calTime}
+                    </if>
+                    <if test = "calSequence != null">
+                        and cal_sequence  = #{calSequence}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberDayStatisticsAmountById" parameterType="Long" resultMap="MemberDayStatisticsAmountResult">
+        <include refid="selectMemberDayStatisticsAmountVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberDayStatisticsAmount" parameterType="MemberDayStatisticsAmount" useGeneratedKeys="true" >
+        insert into member_day_statistics_amount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "transAmount != null">
+                trans_amount,
+            </if>
+            <if test = "profitLossAmount != null">
+                profit_loss_amount,
+            </if>
+            <if test = "holdInterestAmount != null">
+                hold_interest_amount,
+            </if>
+            <if test = "feeAmount != null">
+                fee_amount,
+            </if>
+            <if test = "upAmount != null">
+                up_amount,
+            </if>
+            <if test = "downAmount != null">
+                down_amount,
+            </if>
+            <if test = "calTime != null">
+                cal_time,
+            </if>
+            <if test = "calSequence != null">
+                cal_sequence,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "transAmount != null">
+                #{transAmount},
+            </if>
+            <if test = "profitLossAmount != null">
+                #{profitLossAmount},
+            </if>
+            <if test = "holdInterestAmount != null">
+                #{holdInterestAmount},
+            </if>
+            <if test = "feeAmount != null">
+                #{feeAmount},
+            </if>
+            <if test = "upAmount != null">
+                #{upAmount},
+            </if>
+            <if test = "downAmount != null">
+                #{downAmount},
+            </if>
+            <if test = "calTime != null">
+                #{calTime},
+            </if>
+            <if test = "calSequence != null">
+                #{calSequence},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberDayStatisticsAmount" parameterType="MemberDayStatisticsAmount">
+        update member_day_statistics_amount
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "transAmount != null">
+            trans_amount  = #{transAmount},
+            </if>
+            <if test = "profitLossAmount != null">
+            profit_loss_amount  = #{profitLossAmount},
+            </if>
+            <if test = "holdInterestAmount != null">
+            hold_interest_amount  = #{holdInterestAmount},
+            </if>
+            <if test = "feeAmount != null">
+            fee_amount  = #{feeAmount},
+            </if>
+            <if test = "upAmount != null">
+            up_amount  = #{upAmount},
+            </if>
+            <if test = "downAmount != null">
+            down_amount  = #{downAmount},
+            </if>
+            <if test = "calTime != null">
+            cal_time  = #{calTime},
+            </if>
+            <if test = "calSequence != null">
+            cal_sequence  = #{calSequence},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberDayStatisticsAmountById" parameterType="Long">
+        delete from member_day_statistics_amount where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberDayStatisticsAmountByIds" parameterType="Long">
+        delete from member_day_statistics_amount where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

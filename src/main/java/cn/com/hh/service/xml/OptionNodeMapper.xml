@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionNodeMapper">
+
+    <resultMap id="OptionNodeResult" type="OptionNode" >
+            <result property="id" column="id" />
+            <result property="nodeName" column="node_name" />
+            <result property="feeReturnRate" column="fee_return_rate" />
+            <result property="profitLossReturnRate" column="profit_loss_return_rate" />
+            <result property="holdFeeReturnRate" column="hold_fee_return_rate" />
+            <result property="warningRate" column="warning_rate" />
+            <result property="transferRate" column="transfer_rate" />
+            <result property="closeRate" column="close_rate" />
+            <result property="virtualRechargeAmount" column="virtual_recharge_amount" />
+            <result property="depositAmount" column="deposit_amount" />
+            <result property="memberStatus" column="member_status" />
+            <result property="memberId" column="member_id" />
+            <result property="enable" column="enable" />
+            <result property="depositLimitRate" column="deposit_limit_rate" />
+            <result property="lastNodeId" column="last_node_id" />
+            <result property="superNodeId" column="super_node_id" />
+            <result property="nodeLevel" column="node_level" />
+            <result property="nodeType" column="node_type" />
+    </resultMap>
+
+    <sql id="selectOptionNodeVo">
+        select   id,  node_name,  fee_return_rate,  profit_loss_return_rate,  hold_fee_return_rate,  warning_rate,  transfer_rate,  close_rate,  virtual_recharge_amount,  deposit_amount,  member_status,  member_id,  enable,  deposit_limit_rate,  last_node_id,  super_node_id,  node_level,  node_type 
+        from option_node
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionNodeList" parameterType="OptionNode" resultMap="OptionNodeResult">
+        <include refid="selectOptionNodeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "nodeName != null and nodeName != ''">
+                        and node_name  = #{nodeName}
+                    </if>
+                    <if test = "feeReturnRate != null">
+                        and fee_return_rate  = #{feeReturnRate}
+                    </if>
+                    <if test = "profitLossReturnRate != null">
+                        and profit_loss_return_rate  = #{profitLossReturnRate}
+                    </if>
+                    <if test = "holdFeeReturnRate != null">
+                        and hold_fee_return_rate  = #{holdFeeReturnRate}
+                    </if>
+                    <if test = "warningRate != null">
+                        and warning_rate  = #{warningRate}
+                    </if>
+                    <if test = "transferRate != null">
+                        and transfer_rate  = #{transferRate}
+                    </if>
+                    <if test = "closeRate != null">
+                        and close_rate  = #{closeRate}
+                    </if>
+                    <if test = "virtualRechargeAmount != null">
+                        and virtual_recharge_amount  = #{virtualRechargeAmount}
+                    </if>
+                    <if test = "depositAmount != null">
+                        and deposit_amount  = #{depositAmount}
+                    </if>
+                    <if test = "memberStatus != null">
+                        and member_status  = #{memberStatus}
+                    </if>
+                    <if test = "memberId != null and memberId != ''">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "enable != null">
+                        and enable  = #{enable}
+                    </if>
+                    <if test = "depositLimitRate != null">
+                        and deposit_limit_rate  = #{depositLimitRate}
+                    </if>
+                    <if test = "lastNodeId != null and lastNodeId != ''">
+                        and last_node_id  = #{lastNodeId}
+                    </if>
+                    <if test = "superNodeId != null and superNodeId != ''">
+                        and super_node_id  = #{superNodeId}
+                    </if>
+                    <if test = "nodeLevel != null">
+                        and node_level  = #{nodeLevel}
+                    </if>
+                    <if test = "nodeType != null and nodeType != ''">
+                        and node_type  = #{nodeType}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionNodeById" parameterType="Long" resultMap="OptionNodeResult">
+        <include refid="selectOptionNodeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionNode" parameterType="OptionNode" useGeneratedKeys="true" >
+        insert into option_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "nodeName != null">
+                node_name,
+            </if>
+            <if test = "feeReturnRate != null">
+                fee_return_rate,
+            </if>
+            <if test = "profitLossReturnRate != null">
+                profit_loss_return_rate,
+            </if>
+            <if test = "holdFeeReturnRate != null">
+                hold_fee_return_rate,
+            </if>
+            <if test = "warningRate != null">
+                warning_rate,
+            </if>
+            <if test = "transferRate != null">
+                transfer_rate,
+            </if>
+            <if test = "closeRate != null">
+                close_rate,
+            </if>
+            <if test = "virtualRechargeAmount != null">
+                virtual_recharge_amount,
+            </if>
+            <if test = "depositAmount != null">
+                deposit_amount,
+            </if>
+            <if test = "memberStatus != null">
+                member_status,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "enable != null">
+                enable,
+            </if>
+            <if test = "depositLimitRate != null">
+                deposit_limit_rate,
+            </if>
+            <if test = "lastNodeId != null">
+                last_node_id,
+            </if>
+            <if test = "superNodeId != null">
+                super_node_id,
+            </if>
+            <if test = "nodeLevel != null">
+                node_level,
+            </if>
+            <if test = "nodeType != null">
+                node_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "nodeName != null">
+                #{nodeName},
+            </if>
+            <if test = "feeReturnRate != null">
+                #{feeReturnRate},
+            </if>
+            <if test = "profitLossReturnRate != null">
+                #{profitLossReturnRate},
+            </if>
+            <if test = "holdFeeReturnRate != null">
+                #{holdFeeReturnRate},
+            </if>
+            <if test = "warningRate != null">
+                #{warningRate},
+            </if>
+            <if test = "transferRate != null">
+                #{transferRate},
+            </if>
+            <if test = "closeRate != null">
+                #{closeRate},
+            </if>
+            <if test = "virtualRechargeAmount != null">
+                #{virtualRechargeAmount},
+            </if>
+            <if test = "depositAmount != null">
+                #{depositAmount},
+            </if>
+            <if test = "memberStatus != null">
+                #{memberStatus},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "enable != null">
+                #{enable},
+            </if>
+            <if test = "depositLimitRate != null">
+                #{depositLimitRate},
+            </if>
+            <if test = "lastNodeId != null">
+                #{lastNodeId},
+            </if>
+            <if test = "superNodeId != null">
+                #{superNodeId},
+            </if>
+            <if test = "nodeLevel != null">
+                #{nodeLevel},
+            </if>
+            <if test = "nodeType != null">
+                #{nodeType},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionNode" parameterType="OptionNode">
+        update option_node
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "nodeName != null">
+            node_name  = #{nodeName},
+            </if>
+            <if test = "feeReturnRate != null">
+            fee_return_rate  = #{feeReturnRate},
+            </if>
+            <if test = "profitLossReturnRate != null">
+            profit_loss_return_rate  = #{profitLossReturnRate},
+            </if>
+            <if test = "holdFeeReturnRate != null">
+            hold_fee_return_rate  = #{holdFeeReturnRate},
+            </if>
+            <if test = "warningRate != null">
+            warning_rate  = #{warningRate},
+            </if>
+            <if test = "transferRate != null">
+            transfer_rate  = #{transferRate},
+            </if>
+            <if test = "closeRate != null">
+            close_rate  = #{closeRate},
+            </if>
+            <if test = "virtualRechargeAmount != null">
+            virtual_recharge_amount  = #{virtualRechargeAmount},
+            </if>
+            <if test = "depositAmount != null">
+            deposit_amount  = #{depositAmount},
+            </if>
+            <if test = "memberStatus != null">
+            member_status  = #{memberStatus},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "enable != null">
+            enable  = #{enable},
+            </if>
+            <if test = "depositLimitRate != null">
+            deposit_limit_rate  = #{depositLimitRate},
+            </if>
+            <if test = "lastNodeId != null">
+            last_node_id  = #{lastNodeId},
+            </if>
+            <if test = "superNodeId != null">
+            super_node_id  = #{superNodeId},
+            </if>
+            <if test = "nodeLevel != null">
+            node_level  = #{nodeLevel},
+            </if>
+            <if test = "nodeType != null">
+            node_type  = #{nodeType},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionNodeById" parameterType="Long">
+        delete from option_node where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionNodeByIds" parameterType="Long">
+        delete from option_node where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

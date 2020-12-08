@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractExchangeOrderInterestMapper">
+
+    <resultMap id="ContractExchangeOrderInterestResult" type="ContractExchangeOrderInterest" >
+            <result property="id" column="id" />
+            <result property="orderId" column="order_id" />
+            <result property="balance" column="balance" />
+            <result property="version" column="version" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectContractExchangeOrderInterestVo">
+        select   id,  order_id,  balance,  version,  create_time,  sequence 
+        from contract_exchange_order_interest
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractExchangeOrderInterestList" parameterType="ContractExchangeOrderInterest" resultMap="ContractExchangeOrderInterestResult">
+        <include refid="selectContractExchangeOrderInterestVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractExchangeOrderInterestById" parameterType="Long" resultMap="ContractExchangeOrderInterestResult">
+        <include refid="selectContractExchangeOrderInterestVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractExchangeOrderInterest" parameterType="ContractExchangeOrderInterest" useGeneratedKeys="true" >
+        insert into contract_exchange_order_interest
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractExchangeOrderInterest" parameterType="ContractExchangeOrderInterest">
+        update contract_exchange_order_interest
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractExchangeOrderInterestById" parameterType="Long">
+        delete from contract_exchange_order_interest where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractExchangeOrderInterestByIds" parameterType="Long">
+        delete from contract_exchange_order_interest where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

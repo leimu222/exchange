@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.IeoEmptionMapper">
+
+    <resultMap id="IeoEmptionResult" type="IeoEmption" >
+            <result property="id" column="ID" />
+            <result property="ieoName" column="ieo_name" />
+            <result property="picView" column="pic_view" />
+            <result property="pic" column="pic" />
+            <result property="saleCoin" column="sale_coin" />
+            <result property="saleAmount" column="sale_amount" />
+            <result property="surplusAmount" column="surplus_amount" />
+            <result property="raiseCoin" column="raise_coin" />
+            <result property="ratio" column="ratio" />
+            <result property="startTime" column="start_time" />
+            <result property="endTime" column="end_time" />
+            <result property="fee" column="fee" />
+            <result property="expectTime" column="expect_time" />
+            <result property="successRatio" column="success_ratio" />
+            <result property="limitAmount" column="limit_amount" />
+            <result property="haveAmount" column="have_amount" />
+            <result property="haveCoin" column="have_coin" />
+            <result property="sellMode" column="sell_mode" />
+            <result property="sellDetail" column="sell_detail" />
+            <result property="createTime" column="create_time" />
+            <result property="createUser" column="create_user" />
+            <result property="updateTime" column="update_time" />
+            <result property="updateUser" column="update_user" />
+    </resultMap>
+
+    <sql id="selectIeoEmptionVo">
+        select   ID,  ieo_name,  pic_view,  pic,  sale_coin,  sale_amount,  surplus_amount,  raise_coin,  ratio,  start_time,  end_time,  fee,  expect_time,  success_ratio,  limit_amount,  have_amount,  have_coin,  sell_mode,  sell_detail,  create_time,  create_user,  update_time,  update_user 
+        from ieo_emption
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectIeoEmptionList" parameterType="IeoEmption" resultMap="IeoEmptionResult">
+        <include refid="selectIeoEmptionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and ID  = #{id}
+                    </if>
+                    <if test = "ieoName != null and ieoName != ''">
+                        and ieo_name  = #{ieoName}
+                    </if>
+                    <if test = "picView != null and picView != ''">
+                        and pic_view  = #{picView}
+                    </if>
+                    <if test = "pic != null and pic != ''">
+                        and pic  = #{pic}
+                    </if>
+                    <if test = "saleCoin != null and saleCoin != ''">
+                        and sale_coin  = #{saleCoin}
+                    </if>
+                    <if test = "saleAmount != null">
+                        and sale_amount  = #{saleAmount}
+                    </if>
+                    <if test = "surplusAmount != null">
+                        and surplus_amount  = #{surplusAmount}
+                    </if>
+                    <if test = "raiseCoin != null and raiseCoin != ''">
+                        and raise_coin  = #{raiseCoin}
+                    </if>
+                    <if test = "ratio != null">
+                        and ratio  = #{ratio}
+                    </if>
+                    <if test = "startTime != null">
+                        and start_time  = #{startTime}
+                    </if>
+                    <if test = "endTime != null">
+                        and end_time  = #{endTime}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "expectTime != null">
+                        and expect_time  = #{expectTime}
+                    </if>
+                    <if test = "successRatio != null">
+                        and success_ratio  = #{successRatio}
+                    </if>
+                    <if test = "limitAmount != null">
+                        and limit_amount  = #{limitAmount}
+                    </if>
+                    <if test = "haveAmount != null">
+                        and have_amount  = #{haveAmount}
+                    </if>
+                    <if test = "haveCoin != null and haveCoin != ''">
+                        and have_coin  = #{haveCoin}
+                    </if>
+                    <if test = "sellMode != null and sellMode != ''">
+                        and sell_mode  = #{sellMode}
+                    </if>
+                    <if test = "sellDetail != null and sellDetail != ''">
+                        and sell_detail  = #{sellDetail}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "createUser != null and createUser != ''">
+                        and create_user  = #{createUser}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "updateUser != null and updateUser != ''">
+                        and update_user  = #{updateUser}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectIeoEmptionById" parameterType="Long" resultMap="IeoEmptionResult">
+        <include refid="selectIeoEmptionVo"/>
+        where  ID  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertIeoEmption" parameterType="IeoEmption" useGeneratedKeys="true" >
+        insert into ieo_emption
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                ID,
+            </if>
+            <if test = "ieoName != null">
+                ieo_name,
+            </if>
+            <if test = "picView != null">
+                pic_view,
+            </if>
+            <if test = "pic != null">
+                pic,
+            </if>
+            <if test = "saleCoin != null">
+                sale_coin,
+            </if>
+            <if test = "saleAmount != null">
+                sale_amount,
+            </if>
+            <if test = "surplusAmount != null">
+                surplus_amount,
+            </if>
+            <if test = "raiseCoin != null">
+                raise_coin,
+            </if>
+            <if test = "ratio != null">
+                ratio,
+            </if>
+            <if test = "startTime != null">
+                start_time,
+            </if>
+            <if test = "endTime != null">
+                end_time,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "expectTime != null">
+                expect_time,
+            </if>
+            <if test = "successRatio != null">
+                success_ratio,
+            </if>
+            <if test = "limitAmount != null">
+                limit_amount,
+            </if>
+            <if test = "haveAmount != null">
+                have_amount,
+            </if>
+            <if test = "haveCoin != null">
+                have_coin,
+            </if>
+            <if test = "sellMode != null">
+                sell_mode,
+            </if>
+            <if test = "sellDetail != null">
+                sell_detail,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "createUser != null">
+                create_user,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "updateUser != null">
+                update_user,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "ieoName != null">
+                #{ieoName},
+            </if>
+            <if test = "picView != null">
+                #{picView},
+            </if>
+            <if test = "pic != null">
+                #{pic},
+            </if>
+            <if test = "saleCoin != null">
+                #{saleCoin},
+            </if>
+            <if test = "saleAmount != null">
+                #{saleAmount},
+            </if>
+            <if test = "surplusAmount != null">
+                #{surplusAmount},
+            </if>
+            <if test = "raiseCoin != null">
+                #{raiseCoin},
+            </if>
+            <if test = "ratio != null">
+                #{ratio},
+            </if>
+            <if test = "startTime != null">
+                #{startTime},
+            </if>
+            <if test = "endTime != null">
+                #{endTime},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "expectTime != null">
+                #{expectTime},
+            </if>
+            <if test = "successRatio != null">
+                #{successRatio},
+            </if>
+            <if test = "limitAmount != null">
+                #{limitAmount},
+            </if>
+            <if test = "haveAmount != null">
+                #{haveAmount},
+            </if>
+            <if test = "haveCoin != null">
+                #{haveCoin},
+            </if>
+            <if test = "sellMode != null">
+                #{sellMode},
+            </if>
+            <if test = "sellDetail != null">
+                #{sellDetail},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "createUser != null">
+                #{createUser},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "updateUser != null">
+                #{updateUser},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateIeoEmption" parameterType="IeoEmption">
+        update ieo_emption
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "ieoName != null">
+            ieo_name  = #{ieoName},
+            </if>
+            <if test = "picView != null">
+            pic_view  = #{picView},
+            </if>
+            <if test = "pic != null">
+            pic  = #{pic},
+            </if>
+            <if test = "saleCoin != null">
+            sale_coin  = #{saleCoin},
+            </if>
+            <if test = "saleAmount != null">
+            sale_amount  = #{saleAmount},
+            </if>
+            <if test = "surplusAmount != null">
+            surplus_amount  = #{surplusAmount},
+            </if>
+            <if test = "raiseCoin != null">
+            raise_coin  = #{raiseCoin},
+            </if>
+            <if test = "ratio != null">
+            ratio  = #{ratio},
+            </if>
+            <if test = "startTime != null">
+            start_time  = #{startTime},
+            </if>
+            <if test = "endTime != null">
+            end_time  = #{endTime},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "expectTime != null">
+            expect_time  = #{expectTime},
+            </if>
+            <if test = "successRatio != null">
+            success_ratio  = #{successRatio},
+            </if>
+            <if test = "limitAmount != null">
+            limit_amount  = #{limitAmount},
+            </if>
+            <if test = "haveAmount != null">
+            have_amount  = #{haveAmount},
+            </if>
+            <if test = "haveCoin != null">
+            have_coin  = #{haveCoin},
+            </if>
+            <if test = "sellMode != null">
+            sell_mode  = #{sellMode},
+            </if>
+            <if test = "sellDetail != null">
+            sell_detail  = #{sellDetail},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "createUser != null">
+            create_user  = #{createUser},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "updateUser != null">
+            update_user  = #{updateUser},
+            </if>
+        </trim>
+        where  ID  = #{id} 
+    </update>
+    <delete id="deleteIeoEmptionById" parameterType="Long">
+        delete from ieo_emption where  ID  = #{id} 
+    </delete>
+
+    <delete id="deleteIeoEmptionByIds" parameterType="Long">
+        delete from ieo_emption where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

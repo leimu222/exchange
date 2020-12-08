@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionWalletFlowRecordMapper">
+
+    <resultMap id="OptionWalletFlowRecordResult" type="OptionWalletFlowRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinId" column="coin_id" />
+            <result property="amount" column="amount" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="operationType" column="operation_type" />
+            <result property="relationDetailId" column="relation_detail_id" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+            <result property="remark" column="remark" />
+    </resultMap>
+
+    <sql id="selectOptionWalletFlowRecordVo">
+        select   id,  member_id,  coin_id,  amount,  after_balance,  operation_type,  relation_detail_id,  create_time,  sequence,  version,  remark 
+        from option_wallet_flow_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionWalletFlowRecordList" parameterType="OptionWalletFlowRecord" resultMap="OptionWalletFlowRecordResult">
+        <include refid="selectOptionWalletFlowRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "operationType != null">
+                        and operation_type  = #{operationType}
+                    </if>
+                    <if test = "relationDetailId != null">
+                        and relation_detail_id  = #{relationDetailId}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionWalletFlowRecordById" parameterType="Long" resultMap="OptionWalletFlowRecordResult">
+        <include refid="selectOptionWalletFlowRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionWalletFlowRecord" parameterType="OptionWalletFlowRecord" useGeneratedKeys="true" >
+        insert into option_wallet_flow_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "operationType != null">
+                operation_type,
+            </if>
+            <if test = "relationDetailId != null">
+                relation_detail_id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "operationType != null">
+                #{operationType},
+            </if>
+            <if test = "relationDetailId != null">
+                #{relationDetailId},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionWalletFlowRecord" parameterType="OptionWalletFlowRecord">
+        update option_wallet_flow_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "operationType != null">
+            operation_type  = #{operationType},
+            </if>
+            <if test = "relationDetailId != null">
+            relation_detail_id  = #{relationDetailId},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionWalletFlowRecordById" parameterType="Long">
+        delete from option_wallet_flow_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionWalletFlowRecordByIds" parameterType="Long">
+        delete from option_wallet_flow_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

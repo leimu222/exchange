@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PoolNodeMapper">
+
+    <resultMap id="PoolNodeResult" type="PoolNode" >
+            <result property="id" column="id" />
+            <result property="gradeCode" column="grade_code" />
+            <result property="gradeName" column="grade_name" />
+            <result property="conditionOne" column="condition_one" />
+            <result property="conditionTwo" column="condition_two" />
+            <result property="conditionThree" column="condition_three" />
+            <result property="nodeReward" column="node_reward" />
+            <result property="basePower" column="base_power" />
+    </resultMap>
+
+    <sql id="selectPoolNodeVo">
+        select   id,  grade_code,  grade_name,  condition_one,  condition_two,  condition_three,  node_reward,  base_power 
+        from pool_node
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPoolNodeList" parameterType="PoolNode" resultMap="PoolNodeResult">
+        <include refid="selectPoolNodeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "gradeCode != null">
+                        and grade_code  = #{gradeCode}
+                    </if>
+                    <if test = "gradeName != null and gradeName != ''">
+                        and grade_name  = #{gradeName}
+                    </if>
+                    <if test = "conditionOne != null">
+                        and condition_one  = #{conditionOne}
+                    </if>
+                    <if test = "conditionTwo != null">
+                        and condition_two  = #{conditionTwo}
+                    </if>
+                    <if test = "conditionThree != null">
+                        and condition_three  = #{conditionThree}
+                    </if>
+                    <if test = "nodeReward != null">
+                        and node_reward  = #{nodeReward}
+                    </if>
+                    <if test = "basePower != null">
+                        and base_power  = #{basePower}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPoolNodeById" parameterType="Long" resultMap="PoolNodeResult">
+        <include refid="selectPoolNodeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPoolNode" parameterType="PoolNode" useGeneratedKeys="true" >
+        insert into pool_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "gradeCode != null">
+                grade_code,
+            </if>
+            <if test = "gradeName != null">
+                grade_name,
+            </if>
+            <if test = "conditionOne != null">
+                condition_one,
+            </if>
+            <if test = "conditionTwo != null">
+                condition_two,
+            </if>
+            <if test = "conditionThree != null">
+                condition_three,
+            </if>
+            <if test = "nodeReward != null">
+                node_reward,
+            </if>
+            <if test = "basePower != null">
+                base_power,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "gradeCode != null">
+                #{gradeCode},
+            </if>
+            <if test = "gradeName != null">
+                #{gradeName},
+            </if>
+            <if test = "conditionOne != null">
+                #{conditionOne},
+            </if>
+            <if test = "conditionTwo != null">
+                #{conditionTwo},
+            </if>
+            <if test = "conditionThree != null">
+                #{conditionThree},
+            </if>
+            <if test = "nodeReward != null">
+                #{nodeReward},
+            </if>
+            <if test = "basePower != null">
+                #{basePower},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePoolNode" parameterType="PoolNode">
+        update pool_node
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "gradeCode != null">
+            grade_code  = #{gradeCode},
+            </if>
+            <if test = "gradeName != null">
+            grade_name  = #{gradeName},
+            </if>
+            <if test = "conditionOne != null">
+            condition_one  = #{conditionOne},
+            </if>
+            <if test = "conditionTwo != null">
+            condition_two  = #{conditionTwo},
+            </if>
+            <if test = "conditionThree != null">
+            condition_three  = #{conditionThree},
+            </if>
+            <if test = "nodeReward != null">
+            node_reward  = #{nodeReward},
+            </if>
+            <if test = "basePower != null">
+            base_power  = #{basePower},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePoolNodeById" parameterType="Long">
+        delete from pool_node where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePoolNodeByIds" parameterType="Long">
+        delete from pool_node where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

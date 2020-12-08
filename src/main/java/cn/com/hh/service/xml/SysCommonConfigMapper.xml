@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.SysCommonConfigMapper">
+
+    <resultMap id="SysCommonConfigResult" type="SysCommonConfig" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="value" column="value" />
+            <result property="remark" column="remark" />
+            <result property="orderId" column="order_id" />
+            <result property="updateTime" column="update_time" />
+            <result property="ifShow" column="if_show" />
+            <result property="ifCanEdit" column="if_can_edit" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectSysCommonConfigVo">
+        select   id,  name,  value,  remark,  order_id,  update_time,  if_show,  if_can_edit,  version 
+        from sys_common_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectSysCommonConfigList" parameterType="SysCommonConfig" resultMap="SysCommonConfigResult">
+        <include refid="selectSysCommonConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "value != null and value != ''">
+                        and value  = #{value}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "ifShow != null">
+                        and if_show  = #{ifShow}
+                    </if>
+                    <if test = "ifCanEdit != null">
+                        and if_can_edit  = #{ifCanEdit}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectSysCommonConfigById" parameterType="Long" resultMap="SysCommonConfigResult">
+        <include refid="selectSysCommonConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertSysCommonConfig" parameterType="SysCommonConfig" useGeneratedKeys="true" >
+        insert into sys_common_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "value != null">
+                value,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "ifShow != null">
+                if_show,
+            </if>
+            <if test = "ifCanEdit != null">
+                if_can_edit,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "value != null">
+                #{value},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "ifShow != null">
+                #{ifShow},
+            </if>
+            <if test = "ifCanEdit != null">
+                #{ifCanEdit},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateSysCommonConfig" parameterType="SysCommonConfig">
+        update sys_common_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "value != null">
+            value  = #{value},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "ifShow != null">
+            if_show  = #{ifShow},
+            </if>
+            <if test = "ifCanEdit != null">
+            if_can_edit  = #{ifCanEdit},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteSysCommonConfigById" parameterType="Long">
+        delete from sys_common_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteSysCommonConfigByIds" parameterType="Long">
+        delete from sys_common_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractDoubleExchangeConfigMapper">
+
+    <resultMap id="ContractDoubleExchangeConfigResult" type="ContractDoubleExchangeConfig" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="cnName" column="cn_name" />
+            <result property="apiUrl" column="api_url" />
+            <result property="createTime" column="create_time" />
+            <result property="content" column="content" />
+    </resultMap>
+
+    <sql id="selectContractDoubleExchangeConfigVo">
+        select   id,  name,  cn_name,  api_url,  create_time,  content 
+        from contract_double_exchange_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractDoubleExchangeConfigList" parameterType="ContractDoubleExchangeConfig" resultMap="ContractDoubleExchangeConfigResult">
+        <include refid="selectContractDoubleExchangeConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "cnName != null and cnName != ''">
+                        and cn_name  = #{cnName}
+                    </if>
+                    <if test = "apiUrl != null and apiUrl != ''">
+                        and api_url  = #{apiUrl}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "content != null and content != ''">
+                        and content  = #{content}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractDoubleExchangeConfigById" parameterType="Long" resultMap="ContractDoubleExchangeConfigResult">
+        <include refid="selectContractDoubleExchangeConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractDoubleExchangeConfig" parameterType="ContractDoubleExchangeConfig" useGeneratedKeys="true" >
+        insert into contract_double_exchange_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "cnName != null">
+                cn_name,
+            </if>
+            <if test = "apiUrl != null">
+                api_url,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "cnName != null">
+                #{cnName},
+            </if>
+            <if test = "apiUrl != null">
+                #{apiUrl},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "content != null">
+                #{content},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractDoubleExchangeConfig" parameterType="ContractDoubleExchangeConfig">
+        update contract_double_exchange_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "cnName != null">
+            cn_name  = #{cnName},
+            </if>
+            <if test = "apiUrl != null">
+            api_url  = #{apiUrl},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "content != null">
+            content  = #{content},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractDoubleExchangeConfigById" parameterType="Long">
+        delete from contract_double_exchange_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractDoubleExchangeConfigByIds" parameterType="Long">
+        delete from contract_double_exchange_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

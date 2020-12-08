@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractCoinNodeMapper">
+
+    <resultMap id="ContractCoinNodeResult" type="ContractCoinNode" >
+            <result property="id" column="id" />
+            <result property="coinId" column="coin_id" />
+            <result property="nodeId" column="node_id" />
+            <result property="enable" column="enable" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectContractCoinNodeVo">
+        select   id,  coin_id,  node_id,  enable,  sequence 
+        from contract_coin_node
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractCoinNodeList" parameterType="ContractCoinNode" resultMap="ContractCoinNodeResult">
+        <include refid="selectContractCoinNodeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "nodeId != null and nodeId != ''">
+                        and node_id  = #{nodeId}
+                    </if>
+                    <if test = "enable != null">
+                        and enable  = #{enable}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractCoinNodeById" parameterType="Integer" resultMap="ContractCoinNodeResult">
+        <include refid="selectContractCoinNodeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractCoinNode" parameterType="ContractCoinNode" useGeneratedKeys="true" >
+        insert into contract_coin_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "nodeId != null">
+                node_id,
+            </if>
+            <if test = "enable != null">
+                enable,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "nodeId != null">
+                #{nodeId},
+            </if>
+            <if test = "enable != null">
+                #{enable},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractCoinNode" parameterType="ContractCoinNode">
+        update contract_coin_node
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "nodeId != null">
+            node_id  = #{nodeId},
+            </if>
+            <if test = "enable != null">
+            enable  = #{enable},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractCoinNodeById" parameterType="Integer">
+        delete from contract_coin_node where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractCoinNodeByIds" parameterType="Integer">
+        delete from contract_coin_node where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

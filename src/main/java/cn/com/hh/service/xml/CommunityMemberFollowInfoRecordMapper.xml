@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunityMemberFollowInfoRecordMapper">
+
+    <resultMap id="CommunityMemberFollowInfoRecordResult" type="CommunityMemberFollowInfoRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="followId" column="follow_id" />
+            <result property="type" column="type" />
+            <result property="oldInfo" column="old_info" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectCommunityMemberFollowInfoRecordVo">
+        select   id,  member_id,  follow_id,  type,  old_info,  create_time,  sequence 
+        from community_member_follow_info_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunityMemberFollowInfoRecordList" parameterType="CommunityMemberFollowInfoRecord" resultMap="CommunityMemberFollowInfoRecordResult">
+        <include refid="selectCommunityMemberFollowInfoRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "followId != null">
+                        and follow_id  = #{followId}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "oldInfo != null and oldInfo != ''">
+                        and old_info  = #{oldInfo}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunityMemberFollowInfoRecordById" parameterType="Long" resultMap="CommunityMemberFollowInfoRecordResult">
+        <include refid="selectCommunityMemberFollowInfoRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunityMemberFollowInfoRecord" parameterType="CommunityMemberFollowInfoRecord" useGeneratedKeys="true" >
+        insert into community_member_follow_info_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "followId != null">
+                follow_id,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "oldInfo != null">
+                old_info,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "followId != null">
+                #{followId},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "oldInfo != null">
+                #{oldInfo},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunityMemberFollowInfoRecord" parameterType="CommunityMemberFollowInfoRecord">
+        update community_member_follow_info_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "followId != null">
+            follow_id  = #{followId},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "oldInfo != null">
+            old_info  = #{oldInfo},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCommunityMemberFollowInfoRecordById" parameterType="Long">
+        delete from community_member_follow_info_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCommunityMemberFollowInfoRecordByIds" parameterType="Long">
+        delete from community_member_follow_info_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

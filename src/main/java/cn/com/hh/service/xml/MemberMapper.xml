@@ -1,0 +1,1100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberMapper">
+
+    <resultMap id="MemberResult" type="Member" >
+            <result property="id" column="id" />
+            <result property="aliNo" column="ali_no" />
+            <result property="qrCodeUrl" column="qr_code_url" />
+            <result property="appealSuccessTimes" column="appeal_success_times" />
+            <result property="appealTimes" column="appeal_times" />
+            <result property="applicationTime" column="application_time" />
+            <result property="avatar" column="avatar" />
+            <result property="bank" column="bank" />
+            <result property="branch" column="branch" />
+            <result property="cardNo" column="card_no" />
+            <result property="certifiedBusinessApplyTime" column="certified_business_apply_time" />
+            <result property="certifiedBusinessCheckTime" column="certified_business_check_time" />
+            <result property="certifiedBusinessStatus" column="certified_business_status" />
+            <result property="channelId" column="channel_id" />
+            <result property="email" column="email" />
+            <result property="firstLevel" column="first_level" />
+            <result property="googleDate" column="google_date" />
+            <result property="googleKey" column="google_key" />
+            <result property="googleState" column="google_state" />
+            <result property="idNumber" column="id_number" />
+            <result property="inviterId" column="inviter_id" />
+            <result property="isChannel" column="is_channel" />
+            <result property="jyPassword" column="jy_password" />
+            <result property="lastLoginTime" column="last_login_time" />
+            <result property="city" column="city" />
+            <result property="country" column="country" />
+            <result property="district" column="district" />
+            <result property="province" column="province" />
+            <result property="loginCount" column="login_count" />
+            <result property="loginLock" column="login_lock" />
+            <result property="margin" column="margin" />
+            <result property="memberLevel" column="member_level" />
+            <result property="mobilePhone" column="mobile_phone" />
+            <result property="password" column="password" />
+            <result property="promotionCode" column="promotion_code" />
+            <result property="publishAdvertise" column="publish_advertise" />
+            <result property="realName" column="real_name" />
+            <result property="realNameStatus" column="real_name_status" />
+            <result property="registrationTime" column="registration_time" />
+            <result property="salt" column="salt" />
+            <result property="secondLevel" column="second_level" />
+            <result property="signInAbility" column="sign_in_ability" />
+            <result property="status" column="status" />
+            <result property="thirdLevel" column="third_level" />
+            <result property="token" column="token" />
+            <result property="tokenExpireSecond" column="token_expire_second" />
+            <result property="tokenExpireTime" column="token_expire_time" />
+            <result property="transactionStatus" column="transaction_status" />
+            <result property="transactionTime" column="transaction_time" />
+            <result property="transactions" column="transactions" />
+            <result property="username" column="username" />
+            <result property="qrWeCodeUrl" column="qr_we_code_url" />
+            <result property="wechat" column="wechat" />
+            <result property="local" column="local" />
+            <result property="integration" column="integration" />
+            <result property="memberGradeId" column="member_grade_id" />
+            <result property="kycStatus" column="kyc_status" />
+            <result property="generalizeTotal" column="generalize_total" />
+            <result property="inviterParentId" column="inviter_parent_id" />
+            <result property="ifNode" column="if_node" />
+            <result property="userType" column="user_type" />
+            <result property="platType" column="plat_type" />
+            <result property="nodeId" column="node_id" />
+            <result property="bankCountry" column="bank_country" />
+            <result property="bankCountryEn" column="bank_country_en" />
+            <result property="epayNo" column="epay_no" />
+            <result property="epayQrCodeUrl" column="epay_qr_code_url" />
+            <result property="bankCode" column="bank_code" />
+            <result property="bankProxyCode" column="bank_proxy_code" />
+            <result property="bankAddress" column="bank_address" />
+            <result property="payeeMobile" column="payee_mobile" />
+            <result property="payeeAddress" column="payee_address" />
+            <result property="payRemark" column="pay_remark" />
+            <result property="payeeName" column="payee_name" />
+            <result property="ifFixMemberGrade" column="if_fix_member_grade" />
+            <result property="bindPromotionCode" column="bind_promotion_code" />
+            <result property="activeState" column="active_state" />
+            <result property="deviceId" column="device_id" />
+            <result property="poolGradeId" column="pool_grade_id" />
+            <result property="nodeGradeId" column="node_grade_id" />
+            <result property="nodeType" column="node_type" />
+    </resultMap>
+
+    <sql id="selectMemberVo">
+        select   id,  ali_no,  qr_code_url,  appeal_success_times,  appeal_times,  application_time,  avatar,  bank,  branch,  card_no,  certified_business_apply_time,  certified_business_check_time,  certified_business_status,  channel_id,  email,  first_level,  google_date,  google_key,  google_state,  id_number,  inviter_id,  is_channel,  jy_password,  last_login_time,  city,  country,  district,  province,  login_count,  login_lock,  margin,  member_level,  mobile_phone,  password,  promotion_code,  publish_advertise,  real_name,  real_name_status,  registration_time,  salt,  second_level,  sign_in_ability,  status,  third_level,  token,  token_expire_second,  token_expire_time,  transaction_status,  transaction_time,  transactions,  username,  qr_we_code_url,  wechat,  local,  integration,  member_grade_id,  kyc_status,  generalize_total,  inviter_parent_id,  if_node,  user_type,  plat_type,  node_id,  bank_country,  bank_country_en,  epay_no,  epay_qr_code_url,  bank_code,  bank_proxy_code,  bank_address,  payee_mobile,  payee_address,  pay_remark,  payee_name,  if_fix_member_grade,  bind_promotion_code,  active_state,  device_id,  pool_grade_id,  node_grade_id,  node_type 
+        from member
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberList" parameterType="Member" resultMap="MemberResult">
+        <include refid="selectMemberVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "aliNo != null and aliNo != ''">
+                        and ali_no  = #{aliNo}
+                    </if>
+                    <if test = "qrCodeUrl != null and qrCodeUrl != ''">
+                        and qr_code_url  = #{qrCodeUrl}
+                    </if>
+                    <if test = "appealSuccessTimes != null">
+                        and appeal_success_times  = #{appealSuccessTimes}
+                    </if>
+                    <if test = "appealTimes != null">
+                        and appeal_times  = #{appealTimes}
+                    </if>
+                    <if test = "applicationTime != null">
+                        and application_time  = #{applicationTime}
+                    </if>
+                    <if test = "avatar != null and avatar != ''">
+                        and avatar  = #{avatar}
+                    </if>
+                    <if test = "bank != null and bank != ''">
+                        and bank  = #{bank}
+                    </if>
+                    <if test = "branch != null and branch != ''">
+                        and branch  = #{branch}
+                    </if>
+                    <if test = "cardNo != null and cardNo != ''">
+                        and card_no  = #{cardNo}
+                    </if>
+                    <if test = "certifiedBusinessApplyTime != null">
+                        and certified_business_apply_time  = #{certifiedBusinessApplyTime}
+                    </if>
+                    <if test = "certifiedBusinessCheckTime != null">
+                        and certified_business_check_time  = #{certifiedBusinessCheckTime}
+                    </if>
+                    <if test = "certifiedBusinessStatus != null">
+                        and certified_business_status  = #{certifiedBusinessStatus}
+                    </if>
+                    <if test = "channelId != null">
+                        and channel_id  = #{channelId}
+                    </if>
+                    <if test = "email != null and email != ''">
+                        and email  = #{email}
+                    </if>
+                    <if test = "firstLevel != null">
+                        and first_level  = #{firstLevel}
+                    </if>
+                    <if test = "googleDate != null">
+                        and google_date  = #{googleDate}
+                    </if>
+                    <if test = "googleKey != null and googleKey != ''">
+                        and google_key  = #{googleKey}
+                    </if>
+                    <if test = "googleState != null">
+                        and google_state  = #{googleState}
+                    </if>
+                    <if test = "idNumber != null and idNumber != ''">
+                        and id_number  = #{idNumber}
+                    </if>
+                    <if test = "inviterId != null">
+                        and inviter_id  = #{inviterId}
+                    </if>
+                    <if test = "isChannel != null">
+                        and is_channel  = #{isChannel}
+                    </if>
+                    <if test = "jyPassword != null and jyPassword != ''">
+                        and jy_password  = #{jyPassword}
+                    </if>
+                    <if test = "lastLoginTime != null">
+                        and last_login_time  = #{lastLoginTime}
+                    </if>
+                    <if test = "city != null and city != ''">
+                        and city  = #{city}
+                    </if>
+                    <if test = "country != null and country != ''">
+                        and country  = #{country}
+                    </if>
+                    <if test = "district != null and district != ''">
+                        and district  = #{district}
+                    </if>
+                    <if test = "province != null and province != ''">
+                        and province  = #{province}
+                    </if>
+                    <if test = "loginCount != null">
+                        and login_count  = #{loginCount}
+                    </if>
+                    <if test = "loginLock != null">
+                        and login_lock  = #{loginLock}
+                    </if>
+                    <if test = "margin != null and margin != ''">
+                        and margin  = #{margin}
+                    </if>
+                    <if test = "memberLevel != null">
+                        and member_level  = #{memberLevel}
+                    </if>
+                    <if test = "mobilePhone != null and mobilePhone != ''">
+                        and mobile_phone  = #{mobilePhone}
+                    </if>
+                    <if test = "password != null and password != ''">
+                        and password  = #{password}
+                    </if>
+                    <if test = "promotionCode != null and promotionCode != ''">
+                        and promotion_code  = #{promotionCode}
+                    </if>
+                    <if test = "publishAdvertise != null">
+                        and publish_advertise  = #{publishAdvertise}
+                    </if>
+                    <if test = "realName != null and realName != ''">
+                        and real_name  = #{realName}
+                    </if>
+                    <if test = "realNameStatus != null">
+                        and real_name_status  = #{realNameStatus}
+                    </if>
+                    <if test = "registrationTime != null">
+                        and registration_time  = #{registrationTime}
+                    </if>
+                    <if test = "salt != null and salt != ''">
+                        and salt  = #{salt}
+                    </if>
+                    <if test = "secondLevel != null">
+                        and second_level  = #{secondLevel}
+                    </if>
+                    <if test = "signInAbility != null">
+                        and sign_in_ability  = #{signInAbility}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "thirdLevel != null">
+                        and third_level  = #{thirdLevel}
+                    </if>
+                    <if test = "token != null and token != ''">
+                        and token  = #{token}
+                    </if>
+                    <if test = "tokenExpireSecond != null">
+                        and token_expire_second  = #{tokenExpireSecond}
+                    </if>
+                    <if test = "tokenExpireTime != null">
+                        and token_expire_time  = #{tokenExpireTime}
+                    </if>
+                    <if test = "transactionStatus != null">
+                        and transaction_status  = #{transactionStatus}
+                    </if>
+                    <if test = "transactionTime != null">
+                        and transaction_time  = #{transactionTime}
+                    </if>
+                    <if test = "transactions != null">
+                        and transactions  = #{transactions}
+                    </if>
+                    <if test = "username != null and username != ''">
+                        and username  = #{username}
+                    </if>
+                    <if test = "qrWeCodeUrl != null and qrWeCodeUrl != ''">
+                        and qr_we_code_url  = #{qrWeCodeUrl}
+                    </if>
+                    <if test = "wechat != null and wechat != ''">
+                        and wechat  = #{wechat}
+                    </if>
+                    <if test = "local != null and local != ''">
+                        and local  = #{local}
+                    </if>
+                    <if test = "integration != null">
+                        and integration  = #{integration}
+                    </if>
+                    <if test = "memberGradeId != null">
+                        and member_grade_id  = #{memberGradeId}
+                    </if>
+                    <if test = "kycStatus != null">
+                        and kyc_status  = #{kycStatus}
+                    </if>
+                    <if test = "generalizeTotal != null">
+                        and generalize_total  = #{generalizeTotal}
+                    </if>
+                    <if test = "inviterParentId != null">
+                        and inviter_parent_id  = #{inviterParentId}
+                    </if>
+                    <if test = "ifNode != null">
+                        and if_node  = #{ifNode}
+                    </if>
+                    <if test = "userType != null">
+                        and user_type  = #{userType}
+                    </if>
+                    <if test = "platType != null">
+                        and plat_type  = #{platType}
+                    </if>
+                    <if test = "nodeId != null">
+                        and node_id  = #{nodeId}
+                    </if>
+                    <if test = "bankCountry != null and bankCountry != ''">
+                        and bank_country  = #{bankCountry}
+                    </if>
+                    <if test = "bankCountryEn != null and bankCountryEn != ''">
+                        and bank_country_en  = #{bankCountryEn}
+                    </if>
+                    <if test = "epayNo != null and epayNo != ''">
+                        and epay_no  = #{epayNo}
+                    </if>
+                    <if test = "epayQrCodeUrl != null and epayQrCodeUrl != ''">
+                        and epay_qr_code_url  = #{epayQrCodeUrl}
+                    </if>
+                    <if test = "bankCode != null and bankCode != ''">
+                        and bank_code  = #{bankCode}
+                    </if>
+                    <if test = "bankProxyCode != null and bankProxyCode != ''">
+                        and bank_proxy_code  = #{bankProxyCode}
+                    </if>
+                    <if test = "bankAddress != null and bankAddress != ''">
+                        and bank_address  = #{bankAddress}
+                    </if>
+                    <if test = "payeeMobile != null and payeeMobile != ''">
+                        and payee_mobile  = #{payeeMobile}
+                    </if>
+                    <if test = "payeeAddress != null and payeeAddress != ''">
+                        and payee_address  = #{payeeAddress}
+                    </if>
+                    <if test = "payRemark != null and payRemark != ''">
+                        and pay_remark  = #{payRemark}
+                    </if>
+                    <if test = "payeeName != null and payeeName != ''">
+                        and payee_name  = #{payeeName}
+                    </if>
+                    <if test = "ifFixMemberGrade != null">
+                        and if_fix_member_grade  = #{ifFixMemberGrade}
+                    </if>
+                    <if test = "bindPromotionCode != null and bindPromotionCode != ''">
+                        and bind_promotion_code  = #{bindPromotionCode}
+                    </if>
+                    <if test = "activeState != null">
+                        and active_state  = #{activeState}
+                    </if>
+                    <if test = "deviceId != null and deviceId != ''">
+                        and device_id  = #{deviceId}
+                    </if>
+                    <if test = "poolGradeId != null">
+                        and pool_grade_id  = #{poolGradeId}
+                    </if>
+                    <if test = "nodeGradeId != null">
+                        and node_grade_id  = #{nodeGradeId}
+                    </if>
+                    <if test = "nodeType != null">
+                        and node_type  = #{nodeType}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberById" parameterType="Long" resultMap="MemberResult">
+        <include refid="selectMemberVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMember" parameterType="Member" useGeneratedKeys="true" >
+        insert into member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "aliNo != null">
+                ali_no,
+            </if>
+            <if test = "qrCodeUrl != null">
+                qr_code_url,
+            </if>
+            <if test = "appealSuccessTimes != null">
+                appeal_success_times,
+            </if>
+            <if test = "appealTimes != null">
+                appeal_times,
+            </if>
+            <if test = "applicationTime != null">
+                application_time,
+            </if>
+            <if test = "avatar != null">
+                avatar,
+            </if>
+            <if test = "bank != null">
+                bank,
+            </if>
+            <if test = "branch != null">
+                branch,
+            </if>
+            <if test = "cardNo != null">
+                card_no,
+            </if>
+            <if test = "certifiedBusinessApplyTime != null">
+                certified_business_apply_time,
+            </if>
+            <if test = "certifiedBusinessCheckTime != null">
+                certified_business_check_time,
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+                certified_business_status,
+            </if>
+            <if test = "channelId != null">
+                channel_id,
+            </if>
+            <if test = "email != null">
+                email,
+            </if>
+            <if test = "firstLevel != null">
+                first_level,
+            </if>
+            <if test = "googleDate != null">
+                google_date,
+            </if>
+            <if test = "googleKey != null">
+                google_key,
+            </if>
+            <if test = "googleState != null">
+                google_state,
+            </if>
+            <if test = "idNumber != null">
+                id_number,
+            </if>
+            <if test = "inviterId != null">
+                inviter_id,
+            </if>
+            <if test = "isChannel != null">
+                is_channel,
+            </if>
+            <if test = "jyPassword != null">
+                jy_password,
+            </if>
+            <if test = "lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test = "city != null">
+                city,
+            </if>
+            <if test = "country != null">
+                country,
+            </if>
+            <if test = "district != null">
+                district,
+            </if>
+            <if test = "province != null">
+                province,
+            </if>
+            <if test = "loginCount != null">
+                login_count,
+            </if>
+            <if test = "loginLock != null">
+                login_lock,
+            </if>
+            <if test = "margin != null">
+                margin,
+            </if>
+            <if test = "memberLevel != null">
+                member_level,
+            </if>
+            <if test = "mobilePhone != null">
+                mobile_phone,
+            </if>
+            <if test = "password != null">
+                password,
+            </if>
+            <if test = "promotionCode != null">
+                promotion_code,
+            </if>
+            <if test = "publishAdvertise != null">
+                publish_advertise,
+            </if>
+            <if test = "realName != null">
+                real_name,
+            </if>
+            <if test = "realNameStatus != null">
+                real_name_status,
+            </if>
+            <if test = "registrationTime != null">
+                registration_time,
+            </if>
+            <if test = "salt != null">
+                salt,
+            </if>
+            <if test = "secondLevel != null">
+                second_level,
+            </if>
+            <if test = "signInAbility != null">
+                sign_in_ability,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "thirdLevel != null">
+                third_level,
+            </if>
+            <if test = "token != null">
+                token,
+            </if>
+            <if test = "tokenExpireSecond != null">
+                token_expire_second,
+            </if>
+            <if test = "tokenExpireTime != null">
+                token_expire_time,
+            </if>
+            <if test = "transactionStatus != null">
+                transaction_status,
+            </if>
+            <if test = "transactionTime != null">
+                transaction_time,
+            </if>
+            <if test = "transactions != null">
+                transactions,
+            </if>
+            <if test = "username != null">
+                username,
+            </if>
+            <if test = "qrWeCodeUrl != null">
+                qr_we_code_url,
+            </if>
+            <if test = "wechat != null">
+                wechat,
+            </if>
+            <if test = "local != null">
+                local,
+            </if>
+            <if test = "integration != null">
+                integration,
+            </if>
+            <if test = "memberGradeId != null">
+                member_grade_id,
+            </if>
+            <if test = "kycStatus != null">
+                kyc_status,
+            </if>
+            <if test = "generalizeTotal != null">
+                generalize_total,
+            </if>
+            <if test = "inviterParentId != null">
+                inviter_parent_id,
+            </if>
+            <if test = "ifNode != null">
+                if_node,
+            </if>
+            <if test = "userType != null">
+                user_type,
+            </if>
+            <if test = "platType != null">
+                plat_type,
+            </if>
+            <if test = "nodeId != null">
+                node_id,
+            </if>
+            <if test = "bankCountry != null">
+                bank_country,
+            </if>
+            <if test = "bankCountryEn != null">
+                bank_country_en,
+            </if>
+            <if test = "epayNo != null">
+                epay_no,
+            </if>
+            <if test = "epayQrCodeUrl != null">
+                epay_qr_code_url,
+            </if>
+            <if test = "bankCode != null">
+                bank_code,
+            </if>
+            <if test = "bankProxyCode != null">
+                bank_proxy_code,
+            </if>
+            <if test = "bankAddress != null">
+                bank_address,
+            </if>
+            <if test = "payeeMobile != null">
+                payee_mobile,
+            </if>
+            <if test = "payeeAddress != null">
+                payee_address,
+            </if>
+            <if test = "payRemark != null">
+                pay_remark,
+            </if>
+            <if test = "payeeName != null">
+                payee_name,
+            </if>
+            <if test = "ifFixMemberGrade != null">
+                if_fix_member_grade,
+            </if>
+            <if test = "bindPromotionCode != null">
+                bind_promotion_code,
+            </if>
+            <if test = "activeState != null">
+                active_state,
+            </if>
+            <if test = "deviceId != null">
+                device_id,
+            </if>
+            <if test = "poolGradeId != null">
+                pool_grade_id,
+            </if>
+            <if test = "nodeGradeId != null">
+                node_grade_id,
+            </if>
+            <if test = "nodeType != null">
+                node_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "aliNo != null">
+                #{aliNo},
+            </if>
+            <if test = "qrCodeUrl != null">
+                #{qrCodeUrl},
+            </if>
+            <if test = "appealSuccessTimes != null">
+                #{appealSuccessTimes},
+            </if>
+            <if test = "appealTimes != null">
+                #{appealTimes},
+            </if>
+            <if test = "applicationTime != null">
+                #{applicationTime},
+            </if>
+            <if test = "avatar != null">
+                #{avatar},
+            </if>
+            <if test = "bank != null">
+                #{bank},
+            </if>
+            <if test = "branch != null">
+                #{branch},
+            </if>
+            <if test = "cardNo != null">
+                #{cardNo},
+            </if>
+            <if test = "certifiedBusinessApplyTime != null">
+                #{certifiedBusinessApplyTime},
+            </if>
+            <if test = "certifiedBusinessCheckTime != null">
+                #{certifiedBusinessCheckTime},
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+                #{certifiedBusinessStatus},
+            </if>
+            <if test = "channelId != null">
+                #{channelId},
+            </if>
+            <if test = "email != null">
+                #{email},
+            </if>
+            <if test = "firstLevel != null">
+                #{firstLevel},
+            </if>
+            <if test = "googleDate != null">
+                #{googleDate},
+            </if>
+            <if test = "googleKey != null">
+                #{googleKey},
+            </if>
+            <if test = "googleState != null">
+                #{googleState},
+            </if>
+            <if test = "idNumber != null">
+                #{idNumber},
+            </if>
+            <if test = "inviterId != null">
+                #{inviterId},
+            </if>
+            <if test = "isChannel != null">
+                #{isChannel},
+            </if>
+            <if test = "jyPassword != null">
+                #{jyPassword},
+            </if>
+            <if test = "lastLoginTime != null">
+                #{lastLoginTime},
+            </if>
+            <if test = "city != null">
+                #{city},
+            </if>
+            <if test = "country != null">
+                #{country},
+            </if>
+            <if test = "district != null">
+                #{district},
+            </if>
+            <if test = "province != null">
+                #{province},
+            </if>
+            <if test = "loginCount != null">
+                #{loginCount},
+            </if>
+            <if test = "loginLock != null">
+                #{loginLock},
+            </if>
+            <if test = "margin != null">
+                #{margin},
+            </if>
+            <if test = "memberLevel != null">
+                #{memberLevel},
+            </if>
+            <if test = "mobilePhone != null">
+                #{mobilePhone},
+            </if>
+            <if test = "password != null">
+                #{password},
+            </if>
+            <if test = "promotionCode != null">
+                #{promotionCode},
+            </if>
+            <if test = "publishAdvertise != null">
+                #{publishAdvertise},
+            </if>
+            <if test = "realName != null">
+                #{realName},
+            </if>
+            <if test = "realNameStatus != null">
+                #{realNameStatus},
+            </if>
+            <if test = "registrationTime != null">
+                #{registrationTime},
+            </if>
+            <if test = "salt != null">
+                #{salt},
+            </if>
+            <if test = "secondLevel != null">
+                #{secondLevel},
+            </if>
+            <if test = "signInAbility != null">
+                #{signInAbility},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "thirdLevel != null">
+                #{thirdLevel},
+            </if>
+            <if test = "token != null">
+                #{token},
+            </if>
+            <if test = "tokenExpireSecond != null">
+                #{tokenExpireSecond},
+            </if>
+            <if test = "tokenExpireTime != null">
+                #{tokenExpireTime},
+            </if>
+            <if test = "transactionStatus != null">
+                #{transactionStatus},
+            </if>
+            <if test = "transactionTime != null">
+                #{transactionTime},
+            </if>
+            <if test = "transactions != null">
+                #{transactions},
+            </if>
+            <if test = "username != null">
+                #{username},
+            </if>
+            <if test = "qrWeCodeUrl != null">
+                #{qrWeCodeUrl},
+            </if>
+            <if test = "wechat != null">
+                #{wechat},
+            </if>
+            <if test = "local != null">
+                #{local},
+            </if>
+            <if test = "integration != null">
+                #{integration},
+            </if>
+            <if test = "memberGradeId != null">
+                #{memberGradeId},
+            </if>
+            <if test = "kycStatus != null">
+                #{kycStatus},
+            </if>
+            <if test = "generalizeTotal != null">
+                #{generalizeTotal},
+            </if>
+            <if test = "inviterParentId != null">
+                #{inviterParentId},
+            </if>
+            <if test = "ifNode != null">
+                #{ifNode},
+            </if>
+            <if test = "userType != null">
+                #{userType},
+            </if>
+            <if test = "platType != null">
+                #{platType},
+            </if>
+            <if test = "nodeId != null">
+                #{nodeId},
+            </if>
+            <if test = "bankCountry != null">
+                #{bankCountry},
+            </if>
+            <if test = "bankCountryEn != null">
+                #{bankCountryEn},
+            </if>
+            <if test = "epayNo != null">
+                #{epayNo},
+            </if>
+            <if test = "epayQrCodeUrl != null">
+                #{epayQrCodeUrl},
+            </if>
+            <if test = "bankCode != null">
+                #{bankCode},
+            </if>
+            <if test = "bankProxyCode != null">
+                #{bankProxyCode},
+            </if>
+            <if test = "bankAddress != null">
+                #{bankAddress},
+            </if>
+            <if test = "payeeMobile != null">
+                #{payeeMobile},
+            </if>
+            <if test = "payeeAddress != null">
+                #{payeeAddress},
+            </if>
+            <if test = "payRemark != null">
+                #{payRemark},
+            </if>
+            <if test = "payeeName != null">
+                #{payeeName},
+            </if>
+            <if test = "ifFixMemberGrade != null">
+                #{ifFixMemberGrade},
+            </if>
+            <if test = "bindPromotionCode != null">
+                #{bindPromotionCode},
+            </if>
+            <if test = "activeState != null">
+                #{activeState},
+            </if>
+            <if test = "deviceId != null">
+                #{deviceId},
+            </if>
+            <if test = "poolGradeId != null">
+                #{poolGradeId},
+            </if>
+            <if test = "nodeGradeId != null">
+                #{nodeGradeId},
+            </if>
+            <if test = "nodeType != null">
+                #{nodeType},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMember" parameterType="Member">
+        update member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "aliNo != null">
+            ali_no  = #{aliNo},
+            </if>
+            <if test = "qrCodeUrl != null">
+            qr_code_url  = #{qrCodeUrl},
+            </if>
+            <if test = "appealSuccessTimes != null">
+            appeal_success_times  = #{appealSuccessTimes},
+            </if>
+            <if test = "appealTimes != null">
+            appeal_times  = #{appealTimes},
+            </if>
+            <if test = "applicationTime != null">
+            application_time  = #{applicationTime},
+            </if>
+            <if test = "avatar != null">
+            avatar  = #{avatar},
+            </if>
+            <if test = "bank != null">
+            bank  = #{bank},
+            </if>
+            <if test = "branch != null">
+            branch  = #{branch},
+            </if>
+            <if test = "cardNo != null">
+            card_no  = #{cardNo},
+            </if>
+            <if test = "certifiedBusinessApplyTime != null">
+            certified_business_apply_time  = #{certifiedBusinessApplyTime},
+            </if>
+            <if test = "certifiedBusinessCheckTime != null">
+            certified_business_check_time  = #{certifiedBusinessCheckTime},
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+            certified_business_status  = #{certifiedBusinessStatus},
+            </if>
+            <if test = "channelId != null">
+            channel_id  = #{channelId},
+            </if>
+            <if test = "email != null">
+            email  = #{email},
+            </if>
+            <if test = "firstLevel != null">
+            first_level  = #{firstLevel},
+            </if>
+            <if test = "googleDate != null">
+            google_date  = #{googleDate},
+            </if>
+            <if test = "googleKey != null">
+            google_key  = #{googleKey},
+            </if>
+            <if test = "googleState != null">
+            google_state  = #{googleState},
+            </if>
+            <if test = "idNumber != null">
+            id_number  = #{idNumber},
+            </if>
+            <if test = "inviterId != null">
+            inviter_id  = #{inviterId},
+            </if>
+            <if test = "isChannel != null">
+            is_channel  = #{isChannel},
+            </if>
+            <if test = "jyPassword != null">
+            jy_password  = #{jyPassword},
+            </if>
+            <if test = "lastLoginTime != null">
+            last_login_time  = #{lastLoginTime},
+            </if>
+            <if test = "city != null">
+            city  = #{city},
+            </if>
+            <if test = "country != null">
+            country  = #{country},
+            </if>
+            <if test = "district != null">
+            district  = #{district},
+            </if>
+            <if test = "province != null">
+            province  = #{province},
+            </if>
+            <if test = "loginCount != null">
+            login_count  = #{loginCount},
+            </if>
+            <if test = "loginLock != null">
+            login_lock  = #{loginLock},
+            </if>
+            <if test = "margin != null">
+            margin  = #{margin},
+            </if>
+            <if test = "memberLevel != null">
+            member_level  = #{memberLevel},
+            </if>
+            <if test = "mobilePhone != null">
+            mobile_phone  = #{mobilePhone},
+            </if>
+            <if test = "password != null">
+            password  = #{password},
+            </if>
+            <if test = "promotionCode != null">
+            promotion_code  = #{promotionCode},
+            </if>
+            <if test = "publishAdvertise != null">
+            publish_advertise  = #{publishAdvertise},
+            </if>
+            <if test = "realName != null">
+            real_name  = #{realName},
+            </if>
+            <if test = "realNameStatus != null">
+            real_name_status  = #{realNameStatus},
+            </if>
+            <if test = "registrationTime != null">
+            registration_time  = #{registrationTime},
+            </if>
+            <if test = "salt != null">
+            salt  = #{salt},
+            </if>
+            <if test = "secondLevel != null">
+            second_level  = #{secondLevel},
+            </if>
+            <if test = "signInAbility != null">
+            sign_in_ability  = #{signInAbility},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "thirdLevel != null">
+            third_level  = #{thirdLevel},
+            </if>
+            <if test = "token != null">
+            token  = #{token},
+            </if>
+            <if test = "tokenExpireSecond != null">
+            token_expire_second  = #{tokenExpireSecond},
+            </if>
+            <if test = "tokenExpireTime != null">
+            token_expire_time  = #{tokenExpireTime},
+            </if>
+            <if test = "transactionStatus != null">
+            transaction_status  = #{transactionStatus},
+            </if>
+            <if test = "transactionTime != null">
+            transaction_time  = #{transactionTime},
+            </if>
+            <if test = "transactions != null">
+            transactions  = #{transactions},
+            </if>
+            <if test = "username != null">
+            username  = #{username},
+            </if>
+            <if test = "qrWeCodeUrl != null">
+            qr_we_code_url  = #{qrWeCodeUrl},
+            </if>
+            <if test = "wechat != null">
+            wechat  = #{wechat},
+            </if>
+            <if test = "local != null">
+            local  = #{local},
+            </if>
+            <if test = "integration != null">
+            integration  = #{integration},
+            </if>
+            <if test = "memberGradeId != null">
+            member_grade_id  = #{memberGradeId},
+            </if>
+            <if test = "kycStatus != null">
+            kyc_status  = #{kycStatus},
+            </if>
+            <if test = "generalizeTotal != null">
+            generalize_total  = #{generalizeTotal},
+            </if>
+            <if test = "inviterParentId != null">
+            inviter_parent_id  = #{inviterParentId},
+            </if>
+            <if test = "ifNode != null">
+            if_node  = #{ifNode},
+            </if>
+            <if test = "userType != null">
+            user_type  = #{userType},
+            </if>
+            <if test = "platType != null">
+            plat_type  = #{platType},
+            </if>
+            <if test = "nodeId != null">
+            node_id  = #{nodeId},
+            </if>
+            <if test = "bankCountry != null">
+            bank_country  = #{bankCountry},
+            </if>
+            <if test = "bankCountryEn != null">
+            bank_country_en  = #{bankCountryEn},
+            </if>
+            <if test = "epayNo != null">
+            epay_no  = #{epayNo},
+            </if>
+            <if test = "epayQrCodeUrl != null">
+            epay_qr_code_url  = #{epayQrCodeUrl},
+            </if>
+            <if test = "bankCode != null">
+            bank_code  = #{bankCode},
+            </if>
+            <if test = "bankProxyCode != null">
+            bank_proxy_code  = #{bankProxyCode},
+            </if>
+            <if test = "bankAddress != null">
+            bank_address  = #{bankAddress},
+            </if>
+            <if test = "payeeMobile != null">
+            payee_mobile  = #{payeeMobile},
+            </if>
+            <if test = "payeeAddress != null">
+            payee_address  = #{payeeAddress},
+            </if>
+            <if test = "payRemark != null">
+            pay_remark  = #{payRemark},
+            </if>
+            <if test = "payeeName != null">
+            payee_name  = #{payeeName},
+            </if>
+            <if test = "ifFixMemberGrade != null">
+            if_fix_member_grade  = #{ifFixMemberGrade},
+            </if>
+            <if test = "bindPromotionCode != null">
+            bind_promotion_code  = #{bindPromotionCode},
+            </if>
+            <if test = "activeState != null">
+            active_state  = #{activeState},
+            </if>
+            <if test = "deviceId != null">
+            device_id  = #{deviceId},
+            </if>
+            <if test = "poolGradeId != null">
+            pool_grade_id  = #{poolGradeId},
+            </if>
+            <if test = "nodeGradeId != null">
+            node_grade_id  = #{nodeGradeId},
+            </if>
+            <if test = "nodeType != null">
+            node_type  = #{nodeType},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberById" parameterType="Long">
+        delete from member where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberByIds" parameterType="Long">
+        delete from member where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

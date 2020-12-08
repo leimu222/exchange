@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.RobotTransactionMapper">
+
+    <resultMap id="RobotTransactionResult" type="RobotTransaction" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="fee" column="fee" />
+            <result property="memberId" column="member_id" />
+            <result property="symbol" column="symbol" />
+            <result property="type" column="type" />
+    </resultMap>
+
+    <sql id="selectRobotTransactionVo">
+        select   id,  amount,  create_time,  fee,  member_id,  symbol,  type 
+        from robot_transaction
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectRobotTransactionList" parameterType="RobotTransaction" resultMap="RobotTransactionResult">
+        <include refid="selectRobotTransactionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectRobotTransactionById" parameterType="Long" resultMap="RobotTransactionResult">
+        <include refid="selectRobotTransactionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertRobotTransaction" parameterType="RobotTransaction" useGeneratedKeys="true" >
+        insert into robot_transaction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateRobotTransaction" parameterType="RobotTransaction">
+        update robot_transaction
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteRobotTransactionById" parameterType="Long">
+        delete from robot_transaction where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteRobotTransactionByIds" parameterType="Long">
+        delete from robot_transaction where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionStrategyConfigMapper">
+
+    <resultMap id="OptionStrategyConfigResult" type="OptionStrategyConfig" >
+            <result property="id" column="id" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="apiKey" column="api_key" />
+            <result property="secretKey" column="secret_key" />
+            <result property="expireDate" column="expire_date" />
+            <result property="remark" column="remark" />
+            <result property="adminId" column="admin_id" />
+            <result property="memberId" column="member_id" />
+            <result property="priceRiseRate" column="price_rise_rate" />
+            <result property="priceFallRate" column="price_fall_rate" />
+            <result property="symbol" column="symbol" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectOptionStrategyConfigVo">
+        select   id,  from_exchange_id,  api_key,  secret_key,  expire_date,  remark,  admin_id,  member_id,  price_rise_rate,  price_fall_rate,  symbol,  status,  create_time,  update_time 
+        from option_strategy_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionStrategyConfigList" parameterType="OptionStrategyConfig" resultMap="OptionStrategyConfigResult">
+        <include refid="selectOptionStrategyConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "apiKey != null and apiKey != ''">
+                        and api_key  = #{apiKey}
+                    </if>
+                    <if test = "secretKey != null and secretKey != ''">
+                        and secret_key  = #{secretKey}
+                    </if>
+                    <if test = "expireDate != null">
+                        and expire_date  = #{expireDate}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "priceRiseRate != null">
+                        and price_rise_rate  = #{priceRiseRate}
+                    </if>
+                    <if test = "priceFallRate != null">
+                        and price_fall_rate  = #{priceFallRate}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionStrategyConfigById" parameterType="Long" resultMap="OptionStrategyConfigResult">
+        <include refid="selectOptionStrategyConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionStrategyConfig" parameterType="OptionStrategyConfig" useGeneratedKeys="true" >
+        insert into option_strategy_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "apiKey != null">
+                api_key,
+            </if>
+            <if test = "secretKey != null">
+                secret_key,
+            </if>
+            <if test = "expireDate != null">
+                expire_date,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "priceRiseRate != null">
+                price_rise_rate,
+            </if>
+            <if test = "priceFallRate != null">
+                price_fall_rate,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+                #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+                #{secretKey},
+            </if>
+            <if test = "expireDate != null">
+                #{expireDate},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "priceRiseRate != null">
+                #{priceRiseRate},
+            </if>
+            <if test = "priceFallRate != null">
+                #{priceFallRate},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionStrategyConfig" parameterType="OptionStrategyConfig">
+        update option_strategy_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+            api_key  = #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+            secret_key  = #{secretKey},
+            </if>
+            <if test = "expireDate != null">
+            expire_date  = #{expireDate},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "priceRiseRate != null">
+            price_rise_rate  = #{priceRiseRate},
+            </if>
+            <if test = "priceFallRate != null">
+            price_fall_rate  = #{priceFallRate},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionStrategyConfigById" parameterType="Long">
+        delete from option_strategy_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionStrategyConfigByIds" parameterType="Long">
+        delete from option_strategy_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PanicBuyingRecordMapper">
+
+    <resultMap id="PanicBuyingRecordResult" type="PanicBuyingRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="panicBuyingId" column="panic_buying_id" />
+            <result property="no" column="no" />
+            <result property="price" column="price" />
+            <result property="num" column="num" />
+            <result property="numUnit" column="num_unit" />
+            <result property="purchaseTime" column="purchase_time" />
+            <result property="coinUnit" column="coin_unit" />
+            <result property="payAddress" column="pay_address" />
+            <result property="receiveAddress" column="receive_address" />
+            <result property="payStatus" column="pay_status" />
+            <result property="payMethod" column="pay_method" />
+            <result property="txHash" column="tx_hash" />
+            <result property="updateSeq" column="update_seq" />
+            <result property="createTime" column="create_time" />
+            <result property="timeOut" column="time_out" />
+    </resultMap>
+
+    <sql id="selectPanicBuyingRecordVo">
+        select   id,  amount,  panic_buying_id,  no,  price,  num,  num_unit,  purchase_time,  coin_unit,  pay_address,  receive_address,  pay_status,  pay_method,  tx_hash,  update_seq,  create_time,  time_out 
+        from panic_buying_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPanicBuyingRecordList" parameterType="PanicBuyingRecord" resultMap="PanicBuyingRecordResult">
+        <include refid="selectPanicBuyingRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null and amount != ''">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "panicBuyingId != null">
+                        and panic_buying_id  = #{panicBuyingId}
+                    </if>
+                    <if test = "no != null and no != ''">
+                        and no  = #{no}
+                    </if>
+                    <if test = "price != null and price != ''">
+                        and price  = #{price}
+                    </if>
+                    <if test = "num != null and num != ''">
+                        and num  = #{num}
+                    </if>
+                    <if test = "numUnit != null and numUnit != ''">
+                        and num_unit  = #{numUnit}
+                    </if>
+                    <if test = "purchaseTime != null">
+                        and purchase_time  = #{purchaseTime}
+                    </if>
+                    <if test = "coinUnit != null and coinUnit != ''">
+                        and coin_unit  = #{coinUnit}
+                    </if>
+                    <if test = "payAddress != null and payAddress != ''">
+                        and pay_address  = #{payAddress}
+                    </if>
+                    <if test = "receiveAddress != null and receiveAddress != ''">
+                        and receive_address  = #{receiveAddress}
+                    </if>
+                    <if test = "payStatus != null">
+                        and pay_status  = #{payStatus}
+                    </if>
+                    <if test = "payMethod != null">
+                        and pay_method  = #{payMethod}
+                    </if>
+                    <if test = "txHash != null and txHash != ''">
+                        and tx_hash  = #{txHash}
+                    </if>
+                    <if test = "updateSeq != null">
+                        and update_seq  = #{updateSeq}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "timeOut != null">
+                        and time_out  = #{timeOut}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPanicBuyingRecordById" parameterType="Long" resultMap="PanicBuyingRecordResult">
+        <include refid="selectPanicBuyingRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPanicBuyingRecord" parameterType="PanicBuyingRecord" useGeneratedKeys="true" >
+        insert into panic_buying_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "panicBuyingId != null">
+                panic_buying_id,
+            </if>
+            <if test = "no != null">
+                no,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "num != null">
+                num,
+            </if>
+            <if test = "numUnit != null">
+                num_unit,
+            </if>
+            <if test = "purchaseTime != null">
+                purchase_time,
+            </if>
+            <if test = "coinUnit != null">
+                coin_unit,
+            </if>
+            <if test = "payAddress != null">
+                pay_address,
+            </if>
+            <if test = "receiveAddress != null">
+                receive_address,
+            </if>
+            <if test = "payStatus != null">
+                pay_status,
+            </if>
+            <if test = "payMethod != null">
+                pay_method,
+            </if>
+            <if test = "txHash != null">
+                tx_hash,
+            </if>
+            <if test = "updateSeq != null">
+                update_seq,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "timeOut != null">
+                time_out,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "panicBuyingId != null">
+                #{panicBuyingId},
+            </if>
+            <if test = "no != null">
+                #{no},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "num != null">
+                #{num},
+            </if>
+            <if test = "numUnit != null">
+                #{numUnit},
+            </if>
+            <if test = "purchaseTime != null">
+                #{purchaseTime},
+            </if>
+            <if test = "coinUnit != null">
+                #{coinUnit},
+            </if>
+            <if test = "payAddress != null">
+                #{payAddress},
+            </if>
+            <if test = "receiveAddress != null">
+                #{receiveAddress},
+            </if>
+            <if test = "payStatus != null">
+                #{payStatus},
+            </if>
+            <if test = "payMethod != null">
+                #{payMethod},
+            </if>
+            <if test = "txHash != null">
+                #{txHash},
+            </if>
+            <if test = "updateSeq != null">
+                #{updateSeq},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "timeOut != null">
+                #{timeOut},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePanicBuyingRecord" parameterType="PanicBuyingRecord">
+        update panic_buying_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "panicBuyingId != null">
+            panic_buying_id  = #{panicBuyingId},
+            </if>
+            <if test = "no != null">
+            no  = #{no},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "num != null">
+            num  = #{num},
+            </if>
+            <if test = "numUnit != null">
+            num_unit  = #{numUnit},
+            </if>
+            <if test = "purchaseTime != null">
+            purchase_time  = #{purchaseTime},
+            </if>
+            <if test = "coinUnit != null">
+            coin_unit  = #{coinUnit},
+            </if>
+            <if test = "payAddress != null">
+            pay_address  = #{payAddress},
+            </if>
+            <if test = "receiveAddress != null">
+            receive_address  = #{receiveAddress},
+            </if>
+            <if test = "payStatus != null">
+            pay_status  = #{payStatus},
+            </if>
+            <if test = "payMethod != null">
+            pay_method  = #{payMethod},
+            </if>
+            <if test = "txHash != null">
+            tx_hash  = #{txHash},
+            </if>
+            <if test = "updateSeq != null">
+            update_seq  = #{updateSeq},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "timeOut != null">
+            time_out  = #{timeOut},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePanicBuyingRecordById" parameterType="Long">
+        delete from panic_buying_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePanicBuyingRecordByIds" parameterType="Long">
+        delete from panic_buying_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

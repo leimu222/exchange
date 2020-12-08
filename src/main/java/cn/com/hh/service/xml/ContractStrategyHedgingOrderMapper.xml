@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractStrategyHedgingOrderMapper">
+
+    <resultMap id="ContractStrategyHedgingOrderResult" type="ContractStrategyHedgingOrder" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="apiKey" column="api_key" />
+            <result property="fromExchangeOrderId" column="from_exchange_order_id" />
+            <result property="symbol" column="symbol" />
+            <result property="price" column="price" />
+            <result property="amount" column="amount" />
+            <result property="contractSize" column="contract_size" />
+            <result property="direction" column="direction" />
+            <result property="offset" column="offset" />
+            <result property="leverRate" column="lever_rate" />
+            <result property="orderPriceType" column="order_price_type" />
+            <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <sql id="selectContractStrategyHedgingOrderVo">
+        select   id,  member_id,  from_exchange_id,  api_key,  from_exchange_order_id,  symbol,  price,  amount,  contract_size,  direction,  offset,  lever_rate,  order_price_type,  create_time 
+        from contract_strategy_hedging_order
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractStrategyHedgingOrderList" parameterType="ContractStrategyHedgingOrder" resultMap="ContractStrategyHedgingOrderResult">
+        <include refid="selectContractStrategyHedgingOrderVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "apiKey != null and apiKey != ''">
+                        and api_key  = #{apiKey}
+                    </if>
+                    <if test = "fromExchangeOrderId != null and fromExchangeOrderId != ''">
+                        and from_exchange_order_id  = #{fromExchangeOrderId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "contractSize != null">
+                        and contract_size  = #{contractSize}
+                    </if>
+                    <if test = "direction != null and direction != ''">
+                        and direction  = #{direction}
+                    </if>
+                    <if test = "offset != null and offset != ''">
+                        and offset  = #{offset}
+                    </if>
+                    <if test = "leverRate != null">
+                        and lever_rate  = #{leverRate}
+                    </if>
+                    <if test = "orderPriceType != null and orderPriceType != ''">
+                        and order_price_type  = #{orderPriceType}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractStrategyHedgingOrderById" parameterType="Long" resultMap="ContractStrategyHedgingOrderResult">
+        <include refid="selectContractStrategyHedgingOrderVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractStrategyHedgingOrder" parameterType="ContractStrategyHedgingOrder" useGeneratedKeys="true" >
+        insert into contract_strategy_hedging_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "apiKey != null">
+                api_key,
+            </if>
+            <if test = "fromExchangeOrderId != null">
+                from_exchange_order_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "contractSize != null">
+                contract_size,
+            </if>
+            <if test = "direction != null">
+                direction,
+            </if>
+            <if test = "offset != null">
+                offset,
+            </if>
+            <if test = "leverRate != null">
+                lever_rate,
+            </if>
+            <if test = "orderPriceType != null">
+                order_price_type,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+                #{apiKey},
+            </if>
+            <if test = "fromExchangeOrderId != null">
+                #{fromExchangeOrderId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "contractSize != null">
+                #{contractSize},
+            </if>
+            <if test = "direction != null">
+                #{direction},
+            </if>
+            <if test = "offset != null">
+                #{offset},
+            </if>
+            <if test = "leverRate != null">
+                #{leverRate},
+            </if>
+            <if test = "orderPriceType != null">
+                #{orderPriceType},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractStrategyHedgingOrder" parameterType="ContractStrategyHedgingOrder">
+        update contract_strategy_hedging_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+            api_key  = #{apiKey},
+            </if>
+            <if test = "fromExchangeOrderId != null">
+            from_exchange_order_id  = #{fromExchangeOrderId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "contractSize != null">
+            contract_size  = #{contractSize},
+            </if>
+            <if test = "direction != null">
+            direction  = #{direction},
+            </if>
+            <if test = "offset != null">
+            offset  = #{offset},
+            </if>
+            <if test = "leverRate != null">
+            lever_rate  = #{leverRate},
+            </if>
+            <if test = "orderPriceType != null">
+            order_price_type  = #{orderPriceType},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractStrategyHedgingOrderById" parameterType="Long">
+        delete from contract_strategy_hedging_order where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractStrategyHedgingOrderByIds" parameterType="Long">
+        delete from contract_strategy_hedging_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

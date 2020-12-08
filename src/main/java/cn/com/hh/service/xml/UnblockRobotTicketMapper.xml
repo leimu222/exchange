@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockRobotTicketMapper">
+
+    <resultMap id="UnblockRobotTicketResult" type="UnblockRobotTicket" >
+            <result property="id" column="id" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="effectiveDay" column="effective_day" />
+            <result property="useTime" column="use_time" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectUnblockRobotTicketVo">
+        select   id,  status,  create_time,  effective_day,  use_time,  member_id 
+        from unblock_robot_ticket
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockRobotTicketList" parameterType="UnblockRobotTicket" resultMap="UnblockRobotTicketResult">
+        <include refid="selectUnblockRobotTicketVo"/>
+        <where>
+                    <if test = "id != null and id != ''">
+                        and id  = #{id}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "effectiveDay != null">
+                        and effective_day  = #{effectiveDay}
+                    </if>
+                    <if test = "useTime != null">
+                        and use_time  = #{useTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockRobotTicketById" parameterType="String" resultMap="UnblockRobotTicketResult">
+        <include refid="selectUnblockRobotTicketVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockRobotTicket" parameterType="UnblockRobotTicket" useGeneratedKeys="true" >
+        insert into unblock_robot_ticket
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "effectiveDay != null">
+                effective_day,
+            </if>
+            <if test = "useTime != null">
+                use_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "effectiveDay != null">
+                #{effectiveDay},
+            </if>
+            <if test = "useTime != null">
+                #{useTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockRobotTicket" parameterType="UnblockRobotTicket">
+        update unblock_robot_ticket
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "effectiveDay != null">
+            effective_day  = #{effectiveDay},
+            </if>
+            <if test = "useTime != null">
+            use_time  = #{useTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockRobotTicketById" parameterType="String">
+        delete from unblock_robot_ticket where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockRobotTicketByIds" parameterType="String">
+        delete from unblock_robot_ticket where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

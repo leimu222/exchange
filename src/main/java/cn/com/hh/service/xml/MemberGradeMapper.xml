@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberGradeMapper">
+
+    <resultMap id="MemberGradeResult" type="MemberGrade" >
+            <result property="id" column="id" />
+            <result property="gradeName" column="grade_name" />
+            <result property="gradeCode" column="grade_code" />
+            <result property="withdrawCoinAmount" column="withdraw_coin_amount" />
+            <result property="dayWithdrawCount" column="day_withdraw_count" />
+            <result property="gradeBound" column="grade_bound" />
+            <result property="exchangeFeeRate" column="exchange_fee_rate" />
+            <result property="directNumber" column="direct_number" />
+            <result property="teamNumber" column="team_number" />
+            <result property="commissionRate" column="commission_rate" />
+            <result property="fixInvestAmount" column="fix_invest_amount" />
+            <result property="oneGenerationRate" column="one_generation_rate" />
+            <result property="twoGenerationRate" column="two_generation_rate" />
+            <result property="threeGenerationRate" column="three_generation_rate" />
+            <result property="fourGenerationRate" column="four_generation_rate" />
+            <result property="fiveGenerationRate" column="five_generation_rate" />
+            <result property="sixGenerationRate" column="six_generation_rate" />
+            <result property="sevenGenerationRate" column="seven_generation_rate" />
+            <result property="eightGenerationRate" column="eight_generation_rate" />
+            <result property="nineGenerationRate" column="nine_generation_rate" />
+            <result property="tenGenerationRate" column="ten_generation_rate" />
+            <result property="teamInvestAmount" column="team_invest_amount" />
+            <result property="feeCommissionRate" column="fee_commission_rate" />
+            <result property="peersNeed" column="peers_need" />
+    </resultMap>
+
+    <sql id="selectMemberGradeVo">
+        select   id,  grade_name,  grade_code,  withdraw_coin_amount,  day_withdraw_count,  grade_bound,  exchange_fee_rate,  direct_number,  team_number,  commission_rate,  fix_invest_amount,  one_generation_rate,  two_generation_rate,  three_generation_rate,  four_generation_rate,  five_generation_rate,  six_generation_rate,  seven_generation_rate,  eight_generation_rate,  nine_generation_rate,  ten_generation_rate,  team_invest_amount,  fee_commission_rate,  peers_need 
+        from member_grade
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberGradeList" parameterType="MemberGrade" resultMap="MemberGradeResult">
+        <include refid="selectMemberGradeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "gradeName != null and gradeName != ''">
+                        and grade_name  = #{gradeName}
+                    </if>
+                    <if test = "gradeCode != null and gradeCode != ''">
+                        and grade_code  = #{gradeCode}
+                    </if>
+                    <if test = "withdrawCoinAmount != null">
+                        and withdraw_coin_amount  = #{withdrawCoinAmount}
+                    </if>
+                    <if test = "dayWithdrawCount != null">
+                        and day_withdraw_count  = #{dayWithdrawCount}
+                    </if>
+                    <if test = "gradeBound != null">
+                        and grade_bound  = #{gradeBound}
+                    </if>
+                    <if test = "exchangeFeeRate != null">
+                        and exchange_fee_rate  = #{exchangeFeeRate}
+                    </if>
+                    <if test = "directNumber != null">
+                        and direct_number  = #{directNumber}
+                    </if>
+                    <if test = "teamNumber != null">
+                        and team_number  = #{teamNumber}
+                    </if>
+                    <if test = "commissionRate != null">
+                        and commission_rate  = #{commissionRate}
+                    </if>
+                    <if test = "fixInvestAmount != null">
+                        and fix_invest_amount  = #{fixInvestAmount}
+                    </if>
+                    <if test = "oneGenerationRate != null">
+                        and one_generation_rate  = #{oneGenerationRate}
+                    </if>
+                    <if test = "twoGenerationRate != null">
+                        and two_generation_rate  = #{twoGenerationRate}
+                    </if>
+                    <if test = "threeGenerationRate != null">
+                        and three_generation_rate  = #{threeGenerationRate}
+                    </if>
+                    <if test = "fourGenerationRate != null">
+                        and four_generation_rate  = #{fourGenerationRate}
+                    </if>
+                    <if test = "fiveGenerationRate != null">
+                        and five_generation_rate  = #{fiveGenerationRate}
+                    </if>
+                    <if test = "sixGenerationRate != null">
+                        and six_generation_rate  = #{sixGenerationRate}
+                    </if>
+                    <if test = "sevenGenerationRate != null">
+                        and seven_generation_rate  = #{sevenGenerationRate}
+                    </if>
+                    <if test = "eightGenerationRate != null">
+                        and eight_generation_rate  = #{eightGenerationRate}
+                    </if>
+                    <if test = "nineGenerationRate != null">
+                        and nine_generation_rate  = #{nineGenerationRate}
+                    </if>
+                    <if test = "tenGenerationRate != null">
+                        and ten_generation_rate  = #{tenGenerationRate}
+                    </if>
+                    <if test = "teamInvestAmount != null">
+                        and team_invest_amount  = #{teamInvestAmount}
+                    </if>
+                    <if test = "feeCommissionRate != null">
+                        and fee_commission_rate  = #{feeCommissionRate}
+                    </if>
+                    <if test = "peersNeed != null">
+                        and peers_need  = #{peersNeed}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberGradeById" parameterType="Long" resultMap="MemberGradeResult">
+        <include refid="selectMemberGradeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberGrade" parameterType="MemberGrade" useGeneratedKeys="true" >
+        insert into member_grade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "gradeName != null">
+                grade_name,
+            </if>
+            <if test = "gradeCode != null">
+                grade_code,
+            </if>
+            <if test = "withdrawCoinAmount != null">
+                withdraw_coin_amount,
+            </if>
+            <if test = "dayWithdrawCount != null">
+                day_withdraw_count,
+            </if>
+            <if test = "gradeBound != null">
+                grade_bound,
+            </if>
+            <if test = "exchangeFeeRate != null">
+                exchange_fee_rate,
+            </if>
+            <if test = "directNumber != null">
+                direct_number,
+            </if>
+            <if test = "teamNumber != null">
+                team_number,
+            </if>
+            <if test = "commissionRate != null">
+                commission_rate,
+            </if>
+            <if test = "fixInvestAmount != null">
+                fix_invest_amount,
+            </if>
+            <if test = "oneGenerationRate != null">
+                one_generation_rate,
+            </if>
+            <if test = "twoGenerationRate != null">
+                two_generation_rate,
+            </if>
+            <if test = "threeGenerationRate != null">
+                three_generation_rate,
+            </if>
+            <if test = "fourGenerationRate != null">
+                four_generation_rate,
+            </if>
+            <if test = "fiveGenerationRate != null">
+                five_generation_rate,
+            </if>
+            <if test = "sixGenerationRate != null">
+                six_generation_rate,
+            </if>
+            <if test = "sevenGenerationRate != null">
+                seven_generation_rate,
+            </if>
+            <if test = "eightGenerationRate != null">
+                eight_generation_rate,
+            </if>
+            <if test = "nineGenerationRate != null">
+                nine_generation_rate,
+            </if>
+            <if test = "tenGenerationRate != null">
+                ten_generation_rate,
+            </if>
+            <if test = "teamInvestAmount != null">
+                team_invest_amount,
+            </if>
+            <if test = "feeCommissionRate != null">
+                fee_commission_rate,
+            </if>
+            <if test = "peersNeed != null">
+                peers_need,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "gradeName != null">
+                #{gradeName},
+            </if>
+            <if test = "gradeCode != null">
+                #{gradeCode},
+            </if>
+            <if test = "withdrawCoinAmount != null">
+                #{withdrawCoinAmount},
+            </if>
+            <if test = "dayWithdrawCount != null">
+                #{dayWithdrawCount},
+            </if>
+            <if test = "gradeBound != null">
+                #{gradeBound},
+            </if>
+            <if test = "exchangeFeeRate != null">
+                #{exchangeFeeRate},
+            </if>
+            <if test = "directNumber != null">
+                #{directNumber},
+            </if>
+            <if test = "teamNumber != null">
+                #{teamNumber},
+            </if>
+            <if test = "commissionRate != null">
+                #{commissionRate},
+            </if>
+            <if test = "fixInvestAmount != null">
+                #{fixInvestAmount},
+            </if>
+            <if test = "oneGenerationRate != null">
+                #{oneGenerationRate},
+            </if>
+            <if test = "twoGenerationRate != null">
+                #{twoGenerationRate},
+            </if>
+            <if test = "threeGenerationRate != null">
+                #{threeGenerationRate},
+            </if>
+            <if test = "fourGenerationRate != null">
+                #{fourGenerationRate},
+            </if>
+            <if test = "fiveGenerationRate != null">
+                #{fiveGenerationRate},
+            </if>
+            <if test = "sixGenerationRate != null">
+                #{sixGenerationRate},
+            </if>
+            <if test = "sevenGenerationRate != null">
+                #{sevenGenerationRate},
+            </if>
+            <if test = "eightGenerationRate != null">
+                #{eightGenerationRate},
+            </if>
+            <if test = "nineGenerationRate != null">
+                #{nineGenerationRate},
+            </if>
+            <if test = "tenGenerationRate != null">
+                #{tenGenerationRate},
+            </if>
+            <if test = "teamInvestAmount != null">
+                #{teamInvestAmount},
+            </if>
+            <if test = "feeCommissionRate != null">
+                #{feeCommissionRate},
+            </if>
+            <if test = "peersNeed != null">
+                #{peersNeed},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberGrade" parameterType="MemberGrade">
+        update member_grade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "gradeName != null">
+            grade_name  = #{gradeName},
+            </if>
+            <if test = "gradeCode != null">
+            grade_code  = #{gradeCode},
+            </if>
+            <if test = "withdrawCoinAmount != null">
+            withdraw_coin_amount  = #{withdrawCoinAmount},
+            </if>
+            <if test = "dayWithdrawCount != null">
+            day_withdraw_count  = #{dayWithdrawCount},
+            </if>
+            <if test = "gradeBound != null">
+            grade_bound  = #{gradeBound},
+            </if>
+            <if test = "exchangeFeeRate != null">
+            exchange_fee_rate  = #{exchangeFeeRate},
+            </if>
+            <if test = "directNumber != null">
+            direct_number  = #{directNumber},
+            </if>
+            <if test = "teamNumber != null">
+            team_number  = #{teamNumber},
+            </if>
+            <if test = "commissionRate != null">
+            commission_rate  = #{commissionRate},
+            </if>
+            <if test = "fixInvestAmount != null">
+            fix_invest_amount  = #{fixInvestAmount},
+            </if>
+            <if test = "oneGenerationRate != null">
+            one_generation_rate  = #{oneGenerationRate},
+            </if>
+            <if test = "twoGenerationRate != null">
+            two_generation_rate  = #{twoGenerationRate},
+            </if>
+            <if test = "threeGenerationRate != null">
+            three_generation_rate  = #{threeGenerationRate},
+            </if>
+            <if test = "fourGenerationRate != null">
+            four_generation_rate  = #{fourGenerationRate},
+            </if>
+            <if test = "fiveGenerationRate != null">
+            five_generation_rate  = #{fiveGenerationRate},
+            </if>
+            <if test = "sixGenerationRate != null">
+            six_generation_rate  = #{sixGenerationRate},
+            </if>
+            <if test = "sevenGenerationRate != null">
+            seven_generation_rate  = #{sevenGenerationRate},
+            </if>
+            <if test = "eightGenerationRate != null">
+            eight_generation_rate  = #{eightGenerationRate},
+            </if>
+            <if test = "nineGenerationRate != null">
+            nine_generation_rate  = #{nineGenerationRate},
+            </if>
+            <if test = "tenGenerationRate != null">
+            ten_generation_rate  = #{tenGenerationRate},
+            </if>
+            <if test = "teamInvestAmount != null">
+            team_invest_amount  = #{teamInvestAmount},
+            </if>
+            <if test = "feeCommissionRate != null">
+            fee_commission_rate  = #{feeCommissionRate},
+            </if>
+            <if test = "peersNeed != null">
+            peers_need  = #{peersNeed},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberGradeById" parameterType="Long">
+        delete from member_grade where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberGradeByIds" parameterType="Long">
+        delete from member_grade where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

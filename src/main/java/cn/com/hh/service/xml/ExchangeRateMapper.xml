@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ExchangeRateMapper">
+
+    <resultMap id="ExchangeRateResult" type="ExchangeRate" >
+            <result property="id" column="id" />
+            <result property="ethUsdt" column="eth_usdt" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectExchangeRateVo">
+        select   id,  eth_usdt,  update_time 
+        from exchange_rate
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectExchangeRateList" parameterType="ExchangeRate" resultMap="ExchangeRateResult">
+        <include refid="selectExchangeRateVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "ethUsdt != null">
+                        and eth_usdt  = #{ethUsdt}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectExchangeRateById" parameterType="Long" resultMap="ExchangeRateResult">
+        <include refid="selectExchangeRateVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertExchangeRate" parameterType="ExchangeRate" useGeneratedKeys="true" >
+        insert into exchange_rate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "ethUsdt != null">
+                eth_usdt,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "ethUsdt != null">
+                #{ethUsdt},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateExchangeRate" parameterType="ExchangeRate">
+        update exchange_rate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "ethUsdt != null">
+            eth_usdt  = #{ethUsdt},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteExchangeRateById" parameterType="Long">
+        delete from exchange_rate where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteExchangeRateByIds" parameterType="Long">
+        delete from exchange_rate where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

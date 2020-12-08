@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberApplyNodeMapper">
+
+    <resultMap id="MemberApplyNodeResult" type="MemberApplyNode" >
+            <result property="id" column="id" />
+            <result property="nodeType" column="node_type" />
+            <result property="memberId" column="member_id" />
+            <result property="amount" column="amount" />
+            <result property="status" column="status" />
+            <result property="remark" column="remark" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectMemberApplyNodeVo">
+        select   id,  node_type,  member_id,  amount,  status,  remark,  create_time,  update_time 
+        from member_apply_node
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberApplyNodeList" parameterType="MemberApplyNode" resultMap="MemberApplyNodeResult">
+        <include refid="selectMemberApplyNodeVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "nodeType != null">
+                        and node_type  = #{nodeType}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberApplyNodeById" parameterType="Integer" resultMap="MemberApplyNodeResult">
+        <include refid="selectMemberApplyNodeVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberApplyNode" parameterType="MemberApplyNode" useGeneratedKeys="true" >
+        insert into member_apply_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "nodeType != null">
+                node_type,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "nodeType != null">
+                #{nodeType},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberApplyNode" parameterType="MemberApplyNode">
+        update member_apply_node
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "nodeType != null">
+            node_type  = #{nodeType},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberApplyNodeById" parameterType="Integer">
+        delete from member_apply_node where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberApplyNodeByIds" parameterType="Integer">
+        delete from member_apply_node where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

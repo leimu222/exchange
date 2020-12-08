@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AdminMapper">
+
+    <resultMap id="AdminResult" type="Admin" >
+            <result property="id" column="id" />
+            <result property="areaCode" column="area_code" />
+            <result property="avatar" column="avatar" />
+            <result property="email" column="email" />
+            <result property="enable" column="enable" />
+            <result property="googleDate" column="google_date" />
+            <result property="googleKey" column="google_key" />
+            <result property="googleState" column="google_state" />
+            <result property="lastLoginIp" column="last_login_ip" />
+            <result property="lastLoginTime" column="last_login_time" />
+            <result property="mobilePhone" column="mobile_phone" />
+            <result property="password" column="password" />
+            <result property="qq" column="qq" />
+            <result property="realName" column="real_name" />
+            <result property="roleId" column="role_id" />
+            <result property="status" column="status" />
+            <result property="username" column="username" />
+            <result property="departmentId" column="department_id" />
+            <result property="proxyId" column="proxy_id" />
+    </resultMap>
+
+    <sql id="selectAdminVo">
+        select   id,  area_code,  avatar,  email,  enable,  google_date,  google_key,  google_state,  last_login_ip,  last_login_time,  mobile_phone,  password,  qq,  real_name,  role_id,  status,  username,  department_id,  proxy_id 
+        from admin
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAdminList" parameterType="Admin" resultMap="AdminResult">
+        <include refid="selectAdminVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "areaCode != null and areaCode != ''">
+                        and area_code  = #{areaCode}
+                    </if>
+                    <if test = "avatar != null and avatar != ''">
+                        and avatar  = #{avatar}
+                    </if>
+                    <if test = "email != null and email != ''">
+                        and email  = #{email}
+                    </if>
+                    <if test = "enable != null">
+                        and enable  = #{enable}
+                    </if>
+                    <if test = "googleDate != null">
+                        and google_date  = #{googleDate}
+                    </if>
+                    <if test = "googleKey != null and googleKey != ''">
+                        and google_key  = #{googleKey}
+                    </if>
+                    <if test = "googleState != null">
+                        and google_state  = #{googleState}
+                    </if>
+                    <if test = "lastLoginIp != null and lastLoginIp != ''">
+                        and last_login_ip  = #{lastLoginIp}
+                    </if>
+                    <if test = "lastLoginTime != null">
+                        and last_login_time  = #{lastLoginTime}
+                    </if>
+                    <if test = "mobilePhone != null and mobilePhone != ''">
+                        and mobile_phone  = #{mobilePhone}
+                    </if>
+                    <if test = "password != null and password != ''">
+                        and password  = #{password}
+                    </if>
+                    <if test = "qq != null and qq != ''">
+                        and qq  = #{qq}
+                    </if>
+                    <if test = "realName != null and realName != ''">
+                        and real_name  = #{realName}
+                    </if>
+                    <if test = "roleId != null">
+                        and role_id  = #{roleId}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "username != null and username != ''">
+                        and username  = #{username}
+                    </if>
+                    <if test = "departmentId != null">
+                        and department_id  = #{departmentId}
+                    </if>
+                    <if test = "proxyId != null">
+                        and proxy_id  = #{proxyId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAdminById" parameterType="Long" resultMap="AdminResult">
+        <include refid="selectAdminVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAdmin" parameterType="Admin" useGeneratedKeys="true" >
+        insert into admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "areaCode != null">
+                area_code,
+            </if>
+            <if test = "avatar != null">
+                avatar,
+            </if>
+            <if test = "email != null">
+                email,
+            </if>
+            <if test = "enable != null">
+                enable,
+            </if>
+            <if test = "googleDate != null">
+                google_date,
+            </if>
+            <if test = "googleKey != null">
+                google_key,
+            </if>
+            <if test = "googleState != null">
+                google_state,
+            </if>
+            <if test = "lastLoginIp != null">
+                last_login_ip,
+            </if>
+            <if test = "lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test = "mobilePhone != null">
+                mobile_phone,
+            </if>
+            <if test = "password != null">
+                password,
+            </if>
+            <if test = "qq != null">
+                qq,
+            </if>
+            <if test = "realName != null">
+                real_name,
+            </if>
+            <if test = "roleId != null">
+                role_id,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "username != null">
+                username,
+            </if>
+            <if test = "departmentId != null">
+                department_id,
+            </if>
+            <if test = "proxyId != null">
+                proxy_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "areaCode != null">
+                #{areaCode},
+            </if>
+            <if test = "avatar != null">
+                #{avatar},
+            </if>
+            <if test = "email != null">
+                #{email},
+            </if>
+            <if test = "enable != null">
+                #{enable},
+            </if>
+            <if test = "googleDate != null">
+                #{googleDate},
+            </if>
+            <if test = "googleKey != null">
+                #{googleKey},
+            </if>
+            <if test = "googleState != null">
+                #{googleState},
+            </if>
+            <if test = "lastLoginIp != null">
+                #{lastLoginIp},
+            </if>
+            <if test = "lastLoginTime != null">
+                #{lastLoginTime},
+            </if>
+            <if test = "mobilePhone != null">
+                #{mobilePhone},
+            </if>
+            <if test = "password != null">
+                #{password},
+            </if>
+            <if test = "qq != null">
+                #{qq},
+            </if>
+            <if test = "realName != null">
+                #{realName},
+            </if>
+            <if test = "roleId != null">
+                #{roleId},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "username != null">
+                #{username},
+            </if>
+            <if test = "departmentId != null">
+                #{departmentId},
+            </if>
+            <if test = "proxyId != null">
+                #{proxyId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAdmin" parameterType="Admin">
+        update admin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "areaCode != null">
+            area_code  = #{areaCode},
+            </if>
+            <if test = "avatar != null">
+            avatar  = #{avatar},
+            </if>
+            <if test = "email != null">
+            email  = #{email},
+            </if>
+            <if test = "enable != null">
+            enable  = #{enable},
+            </if>
+            <if test = "googleDate != null">
+            google_date  = #{googleDate},
+            </if>
+            <if test = "googleKey != null">
+            google_key  = #{googleKey},
+            </if>
+            <if test = "googleState != null">
+            google_state  = #{googleState},
+            </if>
+            <if test = "lastLoginIp != null">
+            last_login_ip  = #{lastLoginIp},
+            </if>
+            <if test = "lastLoginTime != null">
+            last_login_time  = #{lastLoginTime},
+            </if>
+            <if test = "mobilePhone != null">
+            mobile_phone  = #{mobilePhone},
+            </if>
+            <if test = "password != null">
+            password  = #{password},
+            </if>
+            <if test = "qq != null">
+            qq  = #{qq},
+            </if>
+            <if test = "realName != null">
+            real_name  = #{realName},
+            </if>
+            <if test = "roleId != null">
+            role_id  = #{roleId},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "username != null">
+            username  = #{username},
+            </if>
+            <if test = "departmentId != null">
+            department_id  = #{departmentId},
+            </if>
+            <if test = "proxyId != null">
+            proxy_id  = #{proxyId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteAdminById" parameterType="Long">
+        delete from admin where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteAdminByIds" parameterType="Long">
+        delete from admin where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

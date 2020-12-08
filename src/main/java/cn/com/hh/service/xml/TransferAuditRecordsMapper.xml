@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.TransferAuditRecordsMapper">
+
+    <resultMap id="TransferAuditRecordsResult" type="TransferAuditRecords" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="memberWalletId" column="member_wallet_id" />
+            <result property="otcWalletId" column="otc_wallet_id" />
+            <result property="contractWalletId" column="contract_wallet_id" />
+            <result property="type" column="type" />
+            <result property="typeDesc" column="type_desc" />
+            <result property="transferType" column="transfer_type" />
+            <result property="amount" column="amount" />
+            <result property="symbol" column="symbol" />
+            <result property="status" column="status" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectTransferAuditRecordsVo">
+        select   id,  member_id,  member_wallet_id,  otc_wallet_id,  contract_wallet_id,  type,  type_desc,  transfer_type,  amount,  symbol,  status,  sequence 
+        from transfer_audit_records
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectTransferAuditRecordsList" parameterType="TransferAuditRecords" resultMap="TransferAuditRecordsResult">
+        <include refid="selectTransferAuditRecordsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "memberWalletId != null">
+                        and member_wallet_id  = #{memberWalletId}
+                    </if>
+                    <if test = "otcWalletId != null">
+                        and otc_wallet_id  = #{otcWalletId}
+                    </if>
+                    <if test = "contractWalletId != null">
+                        and contract_wallet_id  = #{contractWalletId}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "typeDesc != null and typeDesc != ''">
+                        and type_desc  = #{typeDesc}
+                    </if>
+                    <if test = "transferType != null">
+                        and transfer_type  = #{transferType}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectTransferAuditRecordsById" parameterType="Long" resultMap="TransferAuditRecordsResult">
+        <include refid="selectTransferAuditRecordsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertTransferAuditRecords" parameterType="TransferAuditRecords" useGeneratedKeys="true" >
+        insert into transfer_audit_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "memberWalletId != null">
+                member_wallet_id,
+            </if>
+            <if test = "otcWalletId != null">
+                otc_wallet_id,
+            </if>
+            <if test = "contractWalletId != null">
+                contract_wallet_id,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "typeDesc != null">
+                type_desc,
+            </if>
+            <if test = "transferType != null">
+                transfer_type,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "memberWalletId != null">
+                #{memberWalletId},
+            </if>
+            <if test = "otcWalletId != null">
+                #{otcWalletId},
+            </if>
+            <if test = "contractWalletId != null">
+                #{contractWalletId},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "typeDesc != null">
+                #{typeDesc},
+            </if>
+            <if test = "transferType != null">
+                #{transferType},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateTransferAuditRecords" parameterType="TransferAuditRecords">
+        update transfer_audit_records
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "memberWalletId != null">
+            member_wallet_id  = #{memberWalletId},
+            </if>
+            <if test = "otcWalletId != null">
+            otc_wallet_id  = #{otcWalletId},
+            </if>
+            <if test = "contractWalletId != null">
+            contract_wallet_id  = #{contractWalletId},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "typeDesc != null">
+            type_desc  = #{typeDesc},
+            </if>
+            <if test = "transferType != null">
+            transfer_type  = #{transferType},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteTransferAuditRecordsById" parameterType="Long">
+        delete from transfer_audit_records where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteTransferAuditRecordsByIds" parameterType="Long">
+        delete from transfer_audit_records where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

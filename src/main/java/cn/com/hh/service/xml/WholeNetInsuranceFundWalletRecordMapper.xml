@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.WholeNetInsuranceFundWalletRecordMapper">
+
+    <resultMap id="WholeNetInsuranceFundWalletRecordResult" type="WholeNetInsuranceFundWalletRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="coin" column="coin" />
+            <result property="type" column="type" />
+            <result property="remark" column="remark" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectWholeNetInsuranceFundWalletRecordVo">
+        select   id,  amount,  coin,  type,  remark,  create_time,  sequence 
+        from whole_net_insurance_fund_wallet_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectWholeNetInsuranceFundWalletRecordList" parameterType="WholeNetInsuranceFundWalletRecord" resultMap="WholeNetInsuranceFundWalletRecordResult">
+        <include refid="selectWholeNetInsuranceFundWalletRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectWholeNetInsuranceFundWalletRecordById" parameterType="Long" resultMap="WholeNetInsuranceFundWalletRecordResult">
+        <include refid="selectWholeNetInsuranceFundWalletRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertWholeNetInsuranceFundWalletRecord" parameterType="WholeNetInsuranceFundWalletRecord" useGeneratedKeys="true" >
+        insert into whole_net_insurance_fund_wallet_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateWholeNetInsuranceFundWalletRecord" parameterType="WholeNetInsuranceFundWalletRecord">
+        update whole_net_insurance_fund_wallet_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteWholeNetInsuranceFundWalletRecordById" parameterType="Long">
+        delete from whole_net_insurance_fund_wallet_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteWholeNetInsuranceFundWalletRecordByIds" parameterType="Long">
+        delete from whole_net_insurance_fund_wallet_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

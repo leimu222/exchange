@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.GiftConfigMapper">
+
+    <resultMap id="GiftConfigResult" type="GiftConfig" >
+            <result property="id" column="ID" />
+            <result property="giftName" column="gift_name" />
+            <result property="giftCoin" column="gift_coin" />
+            <result property="amount" column="amount" />
+            <result property="haveCoin" column="have_coin" />
+            <result property="haveAmount" column="have_amount" />
+            <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <sql id="selectGiftConfigVo">
+        select   ID,  gift_name,  gift_coin,  amount,  have_coin,  have_amount,  create_time 
+        from gift_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectGiftConfigList" parameterType="GiftConfig" resultMap="GiftConfigResult">
+        <include refid="selectGiftConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and ID  = #{id}
+                    </if>
+                    <if test = "giftName != null and giftName != ''">
+                        and gift_name  = #{giftName}
+                    </if>
+                    <if test = "giftCoin != null and giftCoin != ''">
+                        and gift_coin  = #{giftCoin}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "haveCoin != null and haveCoin != ''">
+                        and have_coin  = #{haveCoin}
+                    </if>
+                    <if test = "haveAmount != null">
+                        and have_amount  = #{haveAmount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectGiftConfigById" parameterType="Long" resultMap="GiftConfigResult">
+        <include refid="selectGiftConfigVo"/>
+        where  ID  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertGiftConfig" parameterType="GiftConfig" useGeneratedKeys="true" >
+        insert into gift_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                ID,
+            </if>
+            <if test = "giftName != null">
+                gift_name,
+            </if>
+            <if test = "giftCoin != null">
+                gift_coin,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "haveCoin != null">
+                have_coin,
+            </if>
+            <if test = "haveAmount != null">
+                have_amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "giftName != null">
+                #{giftName},
+            </if>
+            <if test = "giftCoin != null">
+                #{giftCoin},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "haveCoin != null">
+                #{haveCoin},
+            </if>
+            <if test = "haveAmount != null">
+                #{haveAmount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateGiftConfig" parameterType="GiftConfig">
+        update gift_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "giftName != null">
+            gift_name  = #{giftName},
+            </if>
+            <if test = "giftCoin != null">
+            gift_coin  = #{giftCoin},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "haveCoin != null">
+            have_coin  = #{haveCoin},
+            </if>
+            <if test = "haveAmount != null">
+            have_amount  = #{haveAmount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+        </trim>
+        where  ID  = #{id} 
+    </update>
+    <delete id="deleteGiftConfigById" parameterType="Long">
+        delete from gift_config where  ID  = #{id} 
+    </delete>
+
+    <delete id="deleteGiftConfigByIds" parameterType="Long">
+        delete from gift_config where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

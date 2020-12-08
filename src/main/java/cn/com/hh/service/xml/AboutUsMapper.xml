@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AboutUsMapper">
+
+    <resultMap id="AboutUsResult" type="AboutUs" >
+            <result property="id" column="id" />
+            <result property="content" column="content" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectAboutUsVo">
+        select   id,  content,  sequence 
+        from about_us
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAboutUsList" parameterType="AboutUs" resultMap="AboutUsResult">
+        <include refid="selectAboutUsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "content != null and content != ''">
+                        and content  = #{content}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAboutUsById" parameterType="Integer" resultMap="AboutUsResult">
+        <include refid="selectAboutUsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAboutUs" parameterType="AboutUs" useGeneratedKeys="true" >
+        insert into about_us
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "content != null">
+                content,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "content != null">
+                #{content},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAboutUs" parameterType="AboutUs">
+        update about_us
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "content != null">
+            content  = #{content},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteAboutUsById" parameterType="Integer">
+        delete from about_us where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteAboutUsByIds" parameterType="Integer">
+        delete from about_us where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractCommissionInfoMapper">
+
+    <resultMap id="ContractCommissionInfoResult" type="ContractCommissionInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="proxyId" column="proxy_id" />
+            <result property="amount" column="amount" />
+            <result property="coinName" column="coin_name" />
+            <result property="sysUser" column="sys_user" />
+            <result property="status" column="status" />
+            <result property="memberStatus" column="member_status" />
+            <result property="type" column="type" />
+            <result property="updateTime" column="update_time" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectContractCommissionInfoVo">
+        select   id,  member_id,  proxy_id,  amount,  coin_name,  sys_user,  status,  member_status,  type,  update_time,  create_time,  sequence 
+        from contract_commission_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractCommissionInfoList" parameterType="ContractCommissionInfo" resultMap="ContractCommissionInfoResult">
+        <include refid="selectContractCommissionInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "proxyId != null">
+                        and proxy_id  = #{proxyId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "sysUser != null and sysUser != ''">
+                        and sys_user  = #{sysUser}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "memberStatus != null">
+                        and member_status  = #{memberStatus}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractCommissionInfoById" parameterType="Integer" resultMap="ContractCommissionInfoResult">
+        <include refid="selectContractCommissionInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractCommissionInfo" parameterType="ContractCommissionInfo" useGeneratedKeys="true" >
+        insert into contract_commission_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "proxyId != null">
+                proxy_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "sysUser != null">
+                sys_user,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "memberStatus != null">
+                member_status,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "proxyId != null">
+                #{proxyId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "sysUser != null">
+                #{sysUser},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "memberStatus != null">
+                #{memberStatus},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractCommissionInfo" parameterType="ContractCommissionInfo">
+        update contract_commission_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "proxyId != null">
+            proxy_id  = #{proxyId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "sysUser != null">
+            sys_user  = #{sysUser},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "memberStatus != null">
+            member_status  = #{memberStatus},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractCommissionInfoById" parameterType="Integer">
+        delete from contract_commission_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractCommissionInfoByIds" parameterType="Integer">
+        delete from contract_commission_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

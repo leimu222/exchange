@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CoinConvertMapper">
+
+    <resultMap id="CoinConvertResult" type="CoinConvert" >
+            <result property="id" column="id" />
+            <result property="baseCoin" column="base_coin" />
+            <result property="convertCoin" column="convert_coin" />
+            <result property="fee" column="fee" />
+    </resultMap>
+
+    <sql id="selectCoinConvertVo">
+        select   id,  base_coin,  convert_coin,  fee 
+        from coin_convert
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCoinConvertList" parameterType="CoinConvert" resultMap="CoinConvertResult">
+        <include refid="selectCoinConvertVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "baseCoin != null and baseCoin != ''">
+                        and base_coin  = #{baseCoin}
+                    </if>
+                    <if test = "convertCoin != null and convertCoin != ''">
+                        and convert_coin  = #{convertCoin}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCoinConvertById" parameterType="Integer" resultMap="CoinConvertResult">
+        <include refid="selectCoinConvertVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCoinConvert" parameterType="CoinConvert" useGeneratedKeys="true" >
+        insert into coin_convert
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "baseCoin != null">
+                base_coin,
+            </if>
+            <if test = "convertCoin != null">
+                convert_coin,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "baseCoin != null">
+                #{baseCoin},
+            </if>
+            <if test = "convertCoin != null">
+                #{convertCoin},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCoinConvert" parameterType="CoinConvert">
+        update coin_convert
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "baseCoin != null">
+            base_coin  = #{baseCoin},
+            </if>
+            <if test = "convertCoin != null">
+            convert_coin  = #{convertCoin},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCoinConvertById" parameterType="Integer">
+        delete from coin_convert where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCoinConvertByIds" parameterType="Integer">
+        delete from coin_convert where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

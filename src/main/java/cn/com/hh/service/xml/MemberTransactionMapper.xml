@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberTransactionMapper">
+
+    <resultMap id="MemberTransactionResult" type="MemberTransaction" >
+            <result property="id" column="id" />
+            <result property="address" column="address" />
+            <result property="airdropId" column="airdrop_id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="fee" column="fee" />
+            <result property="flag" column="flag" />
+            <result property="memberId" column="member_id" />
+            <result property="symbol" column="symbol" />
+            <result property="type" column="type" />
+            <result property="sequence" column="sequence" />
+            <result property="lotteryCount" column="lottery_count" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="fromMemberId" column="from_member_id" />
+    </resultMap>
+
+    <sql id="selectMemberTransactionVo">
+        select   id,  address,  airdrop_id,  amount,  create_time,  fee,  flag,  member_id,  symbol,  type,  sequence,  lottery_count,  after_balance,  from_member_id 
+        from member_transaction
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberTransactionList" parameterType="MemberTransaction" resultMap="MemberTransactionResult">
+        <include refid="selectMemberTransactionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "airdropId != null">
+                        and airdrop_id  = #{airdropId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "flag != null">
+                        and flag  = #{flag}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "lotteryCount != null">
+                        and lottery_count  = #{lotteryCount}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "fromMemberId != null">
+                        and from_member_id  = #{fromMemberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberTransactionById" parameterType="Long" resultMap="MemberTransactionResult">
+        <include refid="selectMemberTransactionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberTransaction" parameterType="MemberTransaction" useGeneratedKeys="true" >
+        insert into member_transaction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "airdropId != null">
+                airdrop_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "flag != null">
+                flag,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "lotteryCount != null">
+                lottery_count,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "fromMemberId != null">
+                from_member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "airdropId != null">
+                #{airdropId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "flag != null">
+                #{flag},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "lotteryCount != null">
+                #{lotteryCount},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "fromMemberId != null">
+                #{fromMemberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberTransaction" parameterType="MemberTransaction">
+        update member_transaction
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "airdropId != null">
+            airdrop_id  = #{airdropId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "flag != null">
+            flag  = #{flag},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "lotteryCount != null">
+            lottery_count  = #{lotteryCount},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "fromMemberId != null">
+            from_member_id  = #{fromMemberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberTransactionById" parameterType="Long">
+        delete from member_transaction where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberTransactionByIds" parameterType="Long">
+        delete from member_transaction where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

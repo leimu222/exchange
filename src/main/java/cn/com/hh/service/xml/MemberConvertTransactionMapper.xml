@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberConvertTransactionMapper">
+
+    <resultMap id="MemberConvertTransactionResult" type="MemberConvertTransaction" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="baseCoin" column="base_coin" />
+            <result property="convertCoin" column="convert_coin" />
+            <result property="amount" column="amount" />
+            <result property="convertAmount" column="convert_amount" />
+            <result property="feeAmount" column="fee_amount" />
+            <result property="createTime" column="create_time" />
+            <result property="rate" column="rate" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectMemberConvertTransactionVo">
+        select   id,  member_id,  base_coin,  convert_coin,  amount,  convert_amount,  fee_amount,  create_time,  rate,  sequence 
+        from member_convert_transaction
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberConvertTransactionList" parameterType="MemberConvertTransaction" resultMap="MemberConvertTransactionResult">
+        <include refid="selectMemberConvertTransactionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "baseCoin != null and baseCoin != ''">
+                        and base_coin  = #{baseCoin}
+                    </if>
+                    <if test = "convertCoin != null and convertCoin != ''">
+                        and convert_coin  = #{convertCoin}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "convertAmount != null">
+                        and convert_amount  = #{convertAmount}
+                    </if>
+                    <if test = "feeAmount != null">
+                        and fee_amount  = #{feeAmount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "rate != null">
+                        and rate  = #{rate}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberConvertTransactionById" parameterType="Integer" resultMap="MemberConvertTransactionResult">
+        <include refid="selectMemberConvertTransactionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberConvertTransaction" parameterType="MemberConvertTransaction" useGeneratedKeys="true" >
+        insert into member_convert_transaction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "baseCoin != null">
+                base_coin,
+            </if>
+            <if test = "convertCoin != null">
+                convert_coin,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "convertAmount != null">
+                convert_amount,
+            </if>
+            <if test = "feeAmount != null">
+                fee_amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "rate != null">
+                rate,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "baseCoin != null">
+                #{baseCoin},
+            </if>
+            <if test = "convertCoin != null">
+                #{convertCoin},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "convertAmount != null">
+                #{convertAmount},
+            </if>
+            <if test = "feeAmount != null">
+                #{feeAmount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "rate != null">
+                #{rate},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberConvertTransaction" parameterType="MemberConvertTransaction">
+        update member_convert_transaction
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "baseCoin != null">
+            base_coin  = #{baseCoin},
+            </if>
+            <if test = "convertCoin != null">
+            convert_coin  = #{convertCoin},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "convertAmount != null">
+            convert_amount  = #{convertAmount},
+            </if>
+            <if test = "feeAmount != null">
+            fee_amount  = #{feeAmount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "rate != null">
+            rate  = #{rate},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberConvertTransactionById" parameterType="Integer">
+        delete from member_convert_transaction where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberConvertTransactionByIds" parameterType="Integer">
+        delete from member_convert_transaction where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

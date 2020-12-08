@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberApiKeyMapper">
+
+    <resultMap id="MemberApiKeyResult" type="MemberApiKey" >
+            <result property="id" column="id" />
+            <result property="apiKey" column="api_key" />
+            <result property="apiName" column="api_name" />
+            <result property="bindIp" column="bind_ip" />
+            <result property="createTime" column="create_time" />
+            <result property="expireTime" column="expire_time" />
+            <result property="memberId" column="member_id" />
+            <result property="remark" column="remark" />
+            <result property="secretKey" column="secret_key" />
+    </resultMap>
+
+    <sql id="selectMemberApiKeyVo">
+        select   id,  api_key,  api_name,  bind_ip,  create_time,  expire_time,  member_id,  remark,  secret_key 
+        from member_api_key
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberApiKeyList" parameterType="MemberApiKey" resultMap="MemberApiKeyResult">
+        <include refid="selectMemberApiKeyVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "apiKey != null and apiKey != ''">
+                        and api_key  = #{apiKey}
+                    </if>
+                    <if test = "apiName != null and apiName != ''">
+                        and api_name  = #{apiName}
+                    </if>
+                    <if test = "bindIp != null and bindIp != ''">
+                        and bind_ip  = #{bindIp}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "expireTime != null">
+                        and expire_time  = #{expireTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "secretKey != null and secretKey != ''">
+                        and secret_key  = #{secretKey}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberApiKeyById" parameterType="Long" resultMap="MemberApiKeyResult">
+        <include refid="selectMemberApiKeyVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberApiKey" parameterType="MemberApiKey" useGeneratedKeys="true" >
+        insert into member_api_key
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "apiKey != null">
+                api_key,
+            </if>
+            <if test = "apiName != null">
+                api_name,
+            </if>
+            <if test = "bindIp != null">
+                bind_ip,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "expireTime != null">
+                expire_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "secretKey != null">
+                secret_key,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "apiKey != null">
+                #{apiKey},
+            </if>
+            <if test = "apiName != null">
+                #{apiName},
+            </if>
+            <if test = "bindIp != null">
+                #{bindIp},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "expireTime != null">
+                #{expireTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "secretKey != null">
+                #{secretKey},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberApiKey" parameterType="MemberApiKey">
+        update member_api_key
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "apiKey != null">
+            api_key  = #{apiKey},
+            </if>
+            <if test = "apiName != null">
+            api_name  = #{apiName},
+            </if>
+            <if test = "bindIp != null">
+            bind_ip  = #{bindIp},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "expireTime != null">
+            expire_time  = #{expireTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "secretKey != null">
+            secret_key  = #{secretKey},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberApiKeyById" parameterType="Long">
+        delete from member_api_key where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberApiKeyByIds" parameterType="Long">
+        delete from member_api_key where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

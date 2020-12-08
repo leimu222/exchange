@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.InitPlateMapper">
+
+    <resultMap id="InitPlateResult" type="InitPlate" >
+            <result property="id" column="id" />
+            <result property="finalPrice" column="final_price" />
+            <result property="initPrice" column="init_price" />
+            <result property="interferenceFactor" column="interference_factor" />
+            <result property="relativeTime" column="relative_time" />
+            <result property="symbol" column="symbol" />
+    </resultMap>
+
+    <sql id="selectInitPlateVo">
+        select   id,  final_price,  init_price,  interference_factor,  relative_time,  symbol 
+        from init_plate
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectInitPlateList" parameterType="InitPlate" resultMap="InitPlateResult">
+        <include refid="selectInitPlateVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "finalPrice != null and finalPrice != ''">
+                        and final_price  = #{finalPrice}
+                    </if>
+                    <if test = "initPrice != null and initPrice != ''">
+                        and init_price  = #{initPrice}
+                    </if>
+                    <if test = "interferenceFactor != null and interferenceFactor != ''">
+                        and interference_factor  = #{interferenceFactor}
+                    </if>
+                    <if test = "relativeTime != null and relativeTime != ''">
+                        and relative_time  = #{relativeTime}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectInitPlateById" parameterType="Long" resultMap="InitPlateResult">
+        <include refid="selectInitPlateVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertInitPlate" parameterType="InitPlate" useGeneratedKeys="true" >
+        insert into init_plate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "finalPrice != null">
+                final_price,
+            </if>
+            <if test = "initPrice != null">
+                init_price,
+            </if>
+            <if test = "interferenceFactor != null">
+                interference_factor,
+            </if>
+            <if test = "relativeTime != null">
+                relative_time,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "finalPrice != null">
+                #{finalPrice},
+            </if>
+            <if test = "initPrice != null">
+                #{initPrice},
+            </if>
+            <if test = "interferenceFactor != null">
+                #{interferenceFactor},
+            </if>
+            <if test = "relativeTime != null">
+                #{relativeTime},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateInitPlate" parameterType="InitPlate">
+        update init_plate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "finalPrice != null">
+            final_price  = #{finalPrice},
+            </if>
+            <if test = "initPrice != null">
+            init_price  = #{initPrice},
+            </if>
+            <if test = "interferenceFactor != null">
+            interference_factor  = #{interferenceFactor},
+            </if>
+            <if test = "relativeTime != null">
+            relative_time  = #{relativeTime},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteInitPlateById" parameterType="Long">
+        delete from init_plate where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteInitPlateByIds" parameterType="Long">
+        delete from init_plate where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

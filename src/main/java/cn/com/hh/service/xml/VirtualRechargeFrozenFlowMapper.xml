@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.VirtualRechargeFrozenFlowMapper">
+
+    <resultMap id="VirtualRechargeFrozenFlowResult" type="VirtualRechargeFrozenFlow" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinId" column="coin_id" />
+            <result property="balance" column="balance" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="operationType" column="operation_type" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="remark" column="remark" />
+    </resultMap>
+
+    <sql id="selectVirtualRechargeFrozenFlowVo">
+        select   id,  member_id,  coin_id,  balance,  after_balance,  operation_type,  create_time,  sequence,  remark 
+        from virtual_recharge_frozen_flow
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectVirtualRechargeFrozenFlowList" parameterType="VirtualRechargeFrozenFlow" resultMap="VirtualRechargeFrozenFlowResult">
+        <include refid="selectVirtualRechargeFrozenFlowVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "operationType != null">
+                        and operation_type  = #{operationType}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectVirtualRechargeFrozenFlowById" parameterType="Long" resultMap="VirtualRechargeFrozenFlowResult">
+        <include refid="selectVirtualRechargeFrozenFlowVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertVirtualRechargeFrozenFlow" parameterType="VirtualRechargeFrozenFlow" useGeneratedKeys="true" >
+        insert into virtual_recharge_frozen_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "operationType != null">
+                operation_type,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "operationType != null">
+                #{operationType},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateVirtualRechargeFrozenFlow" parameterType="VirtualRechargeFrozenFlow">
+        update virtual_recharge_frozen_flow
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "operationType != null">
+            operation_type  = #{operationType},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteVirtualRechargeFrozenFlowById" parameterType="Long">
+        delete from virtual_recharge_frozen_flow where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteVirtualRechargeFrozenFlowByIds" parameterType="Long">
+        delete from virtual_recharge_frozen_flow where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

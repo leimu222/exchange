@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractExchangeOrderCalculateMapper">
+
+    <resultMap id="ContractExchangeOrderCalculateResult" type="ContractExchangeOrderCalculate" >
+            <result property="orderId" column="order_id" />
+            <result property="symbolPrice" column="symbol_price" />
+            <result property="profit" column="profit" />
+            <result property="rate" column="rate" />
+            <result property="updateTime" column="update_time" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectContractExchangeOrderCalculateVo">
+        select   order_id,  symbol_price,  profit,  rate,  update_time,  version 
+        from contract_exchange_order_calculate
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractExchangeOrderCalculateList" parameterType="ContractExchangeOrderCalculate" resultMap="ContractExchangeOrderCalculateResult">
+        <include refid="selectContractExchangeOrderCalculateVo"/>
+        <where>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "symbolPrice != null">
+                        and symbol_price  = #{symbolPrice}
+                    </if>
+                    <if test = "profit != null">
+                        and profit  = #{profit}
+                    </if>
+                    <if test = "rate != null">
+                        and rate  = #{rate}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractExchangeOrderCalculateById" parameterType="Long" resultMap="ContractExchangeOrderCalculateResult">
+        <include refid="selectContractExchangeOrderCalculateVo"/>
+        where  order_id  = #{orderId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractExchangeOrderCalculate" parameterType="ContractExchangeOrderCalculate" useGeneratedKeys="true" >
+        insert into contract_exchange_order_calculate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "symbolPrice != null">
+                symbol_price,
+            </if>
+            <if test = "profit != null">
+                profit,
+            </if>
+            <if test = "rate != null">
+                rate,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "symbolPrice != null">
+                #{symbolPrice},
+            </if>
+            <if test = "profit != null">
+                #{profit},
+            </if>
+            <if test = "rate != null">
+                #{rate},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractExchangeOrderCalculate" parameterType="ContractExchangeOrderCalculate">
+        update contract_exchange_order_calculate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "symbolPrice != null">
+            symbol_price  = #{symbolPrice},
+            </if>
+            <if test = "profit != null">
+            profit  = #{profit},
+            </if>
+            <if test = "rate != null">
+            rate  = #{rate},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  order_id  = #{orderId} 
+    </update>
+    <delete id="deleteContractExchangeOrderCalculateById" parameterType="Long">
+        delete from contract_exchange_order_calculate where  order_id  = #{orderId} 
+    </delete>
+
+    <delete id="deleteContractExchangeOrderCalculateByIds" parameterType="Long">
+        delete from contract_exchange_order_calculate where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

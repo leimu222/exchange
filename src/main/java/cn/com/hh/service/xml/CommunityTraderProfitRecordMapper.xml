@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunityTraderProfitRecordMapper">
+
+    <resultMap id="CommunityTraderProfitRecordResult" type="CommunityTraderProfitRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinId" column="coin_id" />
+            <result property="rate" column="rate" />
+            <result property="amount" column="amount" />
+            <result property="fromContractOrderId" column="from_contract_order_id" />
+            <result property="fromMemberId" column="from_member_id" />
+            <result property="belongDay" column="belong_day" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectCommunityTraderProfitRecordVo">
+        select   id,  member_id,  coin_id,  rate,  amount,  from_contract_order_id,  from_member_id,  belong_day,  create_time,  sequence 
+        from community_trader_profit_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunityTraderProfitRecordList" parameterType="CommunityTraderProfitRecord" resultMap="CommunityTraderProfitRecordResult">
+        <include refid="selectCommunityTraderProfitRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "rate != null">
+                        and rate  = #{rate}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "fromContractOrderId != null">
+                        and from_contract_order_id  = #{fromContractOrderId}
+                    </if>
+                    <if test = "fromMemberId != null">
+                        and from_member_id  = #{fromMemberId}
+                    </if>
+                    <if test = "belongDay != null and belongDay != ''">
+                        and belong_day  = #{belongDay}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunityTraderProfitRecordById" parameterType="Long" resultMap="CommunityTraderProfitRecordResult">
+        <include refid="selectCommunityTraderProfitRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunityTraderProfitRecord" parameterType="CommunityTraderProfitRecord" useGeneratedKeys="true" >
+        insert into community_trader_profit_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "rate != null">
+                rate,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "fromContractOrderId != null">
+                from_contract_order_id,
+            </if>
+            <if test = "fromMemberId != null">
+                from_member_id,
+            </if>
+            <if test = "belongDay != null">
+                belong_day,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "rate != null">
+                #{rate},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "fromContractOrderId != null">
+                #{fromContractOrderId},
+            </if>
+            <if test = "fromMemberId != null">
+                #{fromMemberId},
+            </if>
+            <if test = "belongDay != null">
+                #{belongDay},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunityTraderProfitRecord" parameterType="CommunityTraderProfitRecord">
+        update community_trader_profit_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "rate != null">
+            rate  = #{rate},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "fromContractOrderId != null">
+            from_contract_order_id  = #{fromContractOrderId},
+            </if>
+            <if test = "fromMemberId != null">
+            from_member_id  = #{fromMemberId},
+            </if>
+            <if test = "belongDay != null">
+            belong_day  = #{belongDay},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCommunityTraderProfitRecordById" parameterType="Long">
+        delete from community_trader_profit_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCommunityTraderProfitRecordByIds" parameterType="Long">
+        delete from community_trader_profit_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

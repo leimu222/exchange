@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberBuyCoinInfoMapper">
+
+    <resultMap id="MemberBuyCoinInfoResult" type="MemberBuyCoinInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinName" column="coin_name" />
+            <result property="price" column="price" />
+            <result property="num" column="num" />
+            <result property="amount" column="amount" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectMemberBuyCoinInfoVo">
+        select   id,  member_id,  coin_name,  price,  num,  amount,  status,  create_time,  update_time 
+        from member_buy_coin_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberBuyCoinInfoList" parameterType="MemberBuyCoinInfo" resultMap="MemberBuyCoinInfoResult">
+        <include refid="selectMemberBuyCoinInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "num != null">
+                        and num  = #{num}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberBuyCoinInfoById" parameterType="Integer" resultMap="MemberBuyCoinInfoResult">
+        <include refid="selectMemberBuyCoinInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberBuyCoinInfo" parameterType="MemberBuyCoinInfo" useGeneratedKeys="true" >
+        insert into member_buy_coin_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "num != null">
+                num,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "num != null">
+                #{num},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberBuyCoinInfo" parameterType="MemberBuyCoinInfo">
+        update member_buy_coin_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "num != null">
+            num  = #{num},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberBuyCoinInfoById" parameterType="Integer">
+        delete from member_buy_coin_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberBuyCoinInfoByIds" parameterType="Integer">
+        delete from member_buy_coin_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

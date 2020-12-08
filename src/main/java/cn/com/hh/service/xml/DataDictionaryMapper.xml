@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DataDictionaryMapper">
+
+    <resultMap id="DataDictionaryResult" type="DataDictionary" >
+            <result property="id" column="id" />
+            <result property="bond" column="bond" />
+            <result property="comment" column="comment" />
+            <result property="creationTime" column="creation_time" />
+            <result property="imgUrl" column="img_url" />
+            <result property="updateTime" column="update_time" />
+            <result property="value" column="value" />
+    </resultMap>
+
+    <sql id="selectDataDictionaryVo">
+        select   id,  bond,  comment,  creation_time,  img_url,  update_time,  value 
+        from data_dictionary
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDataDictionaryList" parameterType="DataDictionary" resultMap="DataDictionaryResult">
+        <include refid="selectDataDictionaryVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "bond != null and bond != ''">
+                        and bond  = #{bond}
+                    </if>
+                    <if test = "comment != null and comment != ''">
+                        and comment  = #{comment}
+                    </if>
+                    <if test = "creationTime != null">
+                        and creation_time  = #{creationTime}
+                    </if>
+                    <if test = "imgUrl != null and imgUrl != ''">
+                        and img_url  = #{imgUrl}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "value != null and value != ''">
+                        and value  = #{value}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDataDictionaryById" parameterType="Long" resultMap="DataDictionaryResult">
+        <include refid="selectDataDictionaryVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDataDictionary" parameterType="DataDictionary" useGeneratedKeys="true" >
+        insert into data_dictionary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "bond != null">
+                bond,
+            </if>
+            <if test = "comment != null">
+                comment,
+            </if>
+            <if test = "creationTime != null">
+                creation_time,
+            </if>
+            <if test = "imgUrl != null">
+                img_url,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "value != null">
+                value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "bond != null">
+                #{bond},
+            </if>
+            <if test = "comment != null">
+                #{comment},
+            </if>
+            <if test = "creationTime != null">
+                #{creationTime},
+            </if>
+            <if test = "imgUrl != null">
+                #{imgUrl},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "value != null">
+                #{value},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDataDictionary" parameterType="DataDictionary">
+        update data_dictionary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "bond != null">
+            bond  = #{bond},
+            </if>
+            <if test = "comment != null">
+            comment  = #{comment},
+            </if>
+            <if test = "creationTime != null">
+            creation_time  = #{creationTime},
+            </if>
+            <if test = "imgUrl != null">
+            img_url  = #{imgUrl},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "value != null">
+            value  = #{value},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDataDictionaryById" parameterType="Long">
+        delete from data_dictionary where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDataDictionaryByIds" parameterType="Long">
+        delete from data_dictionary where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

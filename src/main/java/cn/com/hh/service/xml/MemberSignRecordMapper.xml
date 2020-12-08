@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberSignRecordMapper">
+
+    <resultMap id="MemberSignRecordResult" type="MemberSignRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="creationTime" column="creation_time" />
+            <result property="coinName" column="coin_name" />
+            <result property="memberId" column="member_id" />
+            <result property="signId" column="sign_id" />
+    </resultMap>
+
+    <sql id="selectMemberSignRecordVo">
+        select   id,  amount,  creation_time,  coin_name,  member_id,  sign_id 
+        from member_sign_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberSignRecordList" parameterType="MemberSignRecord" resultMap="MemberSignRecordResult">
+        <include refid="selectMemberSignRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "creationTime != null">
+                        and creation_time  = #{creationTime}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "signId != null">
+                        and sign_id  = #{signId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberSignRecordById" parameterType="Long" resultMap="MemberSignRecordResult">
+        <include refid="selectMemberSignRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberSignRecord" parameterType="MemberSignRecord" useGeneratedKeys="true" >
+        insert into member_sign_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "creationTime != null">
+                creation_time,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "signId != null">
+                sign_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "creationTime != null">
+                #{creationTime},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "signId != null">
+                #{signId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberSignRecord" parameterType="MemberSignRecord">
+        update member_sign_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "creationTime != null">
+            creation_time  = #{creationTime},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "signId != null">
+            sign_id  = #{signId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberSignRecordById" parameterType="Long">
+        delete from member_sign_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberSignRecordByIds" parameterType="Long">
+        delete from member_sign_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

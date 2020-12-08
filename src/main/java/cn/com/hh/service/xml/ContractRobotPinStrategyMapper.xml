@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractRobotPinStrategyMapper">
+
+    <resultMap id="ContractRobotPinStrategyResult" type="ContractRobotPinStrategy" >
+            <result property="id" column="id" />
+            <result property="symbol" column="symbol" />
+            <result property="status" column="status" />
+            <result property="side" column="side" />
+            <result property="priceRangeMin" column="price_range_min" />
+            <result property="priceRangeMax" column="price_range_max" />
+            <result property="amountRangeMin" column="amount_range_min" />
+            <result property="amountRangeMax" column="amount_range_max" />
+            <result property="targetPrice" column="target_price" />
+            <result property="antiDirectionMultiple" column="anti_direction_multiple" />
+            <result property="frequency" column="frequency" />
+            <result property="startEffectTime" column="start_effect_time" />
+            <result property="remark" column="remark" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectContractRobotPinStrategyVo">
+        select   id,  symbol,  status,  side,  price_range_min,  price_range_max,  amount_range_min,  amount_range_max,  target_price,  anti_direction_multiple,  frequency,  start_effect_time,  remark,  create_time,  update_time 
+        from contract_robot_pin_strategy
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractRobotPinStrategyList" parameterType="ContractRobotPinStrategy" resultMap="ContractRobotPinStrategyResult">
+        <include refid="selectContractRobotPinStrategyVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "side != null">
+                        and side  = #{side}
+                    </if>
+                    <if test = "priceRangeMin != null">
+                        and price_range_min  = #{priceRangeMin}
+                    </if>
+                    <if test = "priceRangeMax != null">
+                        and price_range_max  = #{priceRangeMax}
+                    </if>
+                    <if test = "amountRangeMin != null">
+                        and amount_range_min  = #{amountRangeMin}
+                    </if>
+                    <if test = "amountRangeMax != null">
+                        and amount_range_max  = #{amountRangeMax}
+                    </if>
+                    <if test = "targetPrice != null">
+                        and target_price  = #{targetPrice}
+                    </if>
+                    <if test = "antiDirectionMultiple != null">
+                        and anti_direction_multiple  = #{antiDirectionMultiple}
+                    </if>
+                    <if test = "frequency != null">
+                        and frequency  = #{frequency}
+                    </if>
+                    <if test = "startEffectTime != null">
+                        and start_effect_time  = #{startEffectTime}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractRobotPinStrategyById" parameterType="Long" resultMap="ContractRobotPinStrategyResult">
+        <include refid="selectContractRobotPinStrategyVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractRobotPinStrategy" parameterType="ContractRobotPinStrategy" useGeneratedKeys="true" >
+        insert into contract_robot_pin_strategy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "side != null">
+                side,
+            </if>
+            <if test = "priceRangeMin != null">
+                price_range_min,
+            </if>
+            <if test = "priceRangeMax != null">
+                price_range_max,
+            </if>
+            <if test = "amountRangeMin != null">
+                amount_range_min,
+            </if>
+            <if test = "amountRangeMax != null">
+                amount_range_max,
+            </if>
+            <if test = "targetPrice != null">
+                target_price,
+            </if>
+            <if test = "antiDirectionMultiple != null">
+                anti_direction_multiple,
+            </if>
+            <if test = "frequency != null">
+                frequency,
+            </if>
+            <if test = "startEffectTime != null">
+                start_effect_time,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "side != null">
+                #{side},
+            </if>
+            <if test = "priceRangeMin != null">
+                #{priceRangeMin},
+            </if>
+            <if test = "priceRangeMax != null">
+                #{priceRangeMax},
+            </if>
+            <if test = "amountRangeMin != null">
+                #{amountRangeMin},
+            </if>
+            <if test = "amountRangeMax != null">
+                #{amountRangeMax},
+            </if>
+            <if test = "targetPrice != null">
+                #{targetPrice},
+            </if>
+            <if test = "antiDirectionMultiple != null">
+                #{antiDirectionMultiple},
+            </if>
+            <if test = "frequency != null">
+                #{frequency},
+            </if>
+            <if test = "startEffectTime != null">
+                #{startEffectTime},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractRobotPinStrategy" parameterType="ContractRobotPinStrategy">
+        update contract_robot_pin_strategy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "side != null">
+            side  = #{side},
+            </if>
+            <if test = "priceRangeMin != null">
+            price_range_min  = #{priceRangeMin},
+            </if>
+            <if test = "priceRangeMax != null">
+            price_range_max  = #{priceRangeMax},
+            </if>
+            <if test = "amountRangeMin != null">
+            amount_range_min  = #{amountRangeMin},
+            </if>
+            <if test = "amountRangeMax != null">
+            amount_range_max  = #{amountRangeMax},
+            </if>
+            <if test = "targetPrice != null">
+            target_price  = #{targetPrice},
+            </if>
+            <if test = "antiDirectionMultiple != null">
+            anti_direction_multiple  = #{antiDirectionMultiple},
+            </if>
+            <if test = "frequency != null">
+            frequency  = #{frequency},
+            </if>
+            <if test = "startEffectTime != null">
+            start_effect_time  = #{startEffectTime},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractRobotPinStrategyById" parameterType="Long">
+        delete from contract_robot_pin_strategy where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractRobotPinStrategyByIds" parameterType="Long">
+        delete from contract_robot_pin_strategy where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

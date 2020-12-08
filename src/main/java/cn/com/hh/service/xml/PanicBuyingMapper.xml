@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PanicBuyingMapper">
+
+    <resultMap id="PanicBuyingResult" type="PanicBuying" >
+            <result property="id" column="id" />
+            <result property="no" column="no" />
+            <result property="price" column="price" />
+            <result property="coinUnit" column="coin_unit" />
+            <result property="totalNum" column="total_num" />
+            <result property="remainNum" column="remain_num" />
+            <result property="frozenNum" column="frozen_num" />
+            <result property="numUnit" column="num_unit" />
+            <result property="state" column="state" />
+            <result property="startTime" column="start_time" />
+            <result property="endTime" column="end_time" />
+            <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <sql id="selectPanicBuyingVo">
+        select   id,  no,  price,  coin_unit,  total_num,  remain_num,  frozen_num,  num_unit,  state,  start_time,  end_time,  create_time 
+        from panic_buying
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPanicBuyingList" parameterType="PanicBuying" resultMap="PanicBuyingResult">
+        <include refid="selectPanicBuyingVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "no != null and no != ''">
+                        and no  = #{no}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "coinUnit != null and coinUnit != ''">
+                        and coin_unit  = #{coinUnit}
+                    </if>
+                    <if test = "totalNum != null">
+                        and total_num  = #{totalNum}
+                    </if>
+                    <if test = "remainNum != null">
+                        and remain_num  = #{remainNum}
+                    </if>
+                    <if test = "frozenNum != null">
+                        and frozen_num  = #{frozenNum}
+                    </if>
+                    <if test = "numUnit != null and numUnit != ''">
+                        and num_unit  = #{numUnit}
+                    </if>
+                    <if test = "state != null">
+                        and state  = #{state}
+                    </if>
+                    <if test = "startTime != null">
+                        and start_time  = #{startTime}
+                    </if>
+                    <if test = "endTime != null">
+                        and end_time  = #{endTime}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPanicBuyingById" parameterType="Long" resultMap="PanicBuyingResult">
+        <include refid="selectPanicBuyingVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPanicBuying" parameterType="PanicBuying" useGeneratedKeys="true" >
+        insert into panic_buying
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "no != null">
+                no,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "coinUnit != null">
+                coin_unit,
+            </if>
+            <if test = "totalNum != null">
+                total_num,
+            </if>
+            <if test = "remainNum != null">
+                remain_num,
+            </if>
+            <if test = "frozenNum != null">
+                frozen_num,
+            </if>
+            <if test = "numUnit != null">
+                num_unit,
+            </if>
+            <if test = "state != null">
+                state,
+            </if>
+            <if test = "startTime != null">
+                start_time,
+            </if>
+            <if test = "endTime != null">
+                end_time,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "no != null">
+                #{no},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "coinUnit != null">
+                #{coinUnit},
+            </if>
+            <if test = "totalNum != null">
+                #{totalNum},
+            </if>
+            <if test = "remainNum != null">
+                #{remainNum},
+            </if>
+            <if test = "frozenNum != null">
+                #{frozenNum},
+            </if>
+            <if test = "numUnit != null">
+                #{numUnit},
+            </if>
+            <if test = "state != null">
+                #{state},
+            </if>
+            <if test = "startTime != null">
+                #{startTime},
+            </if>
+            <if test = "endTime != null">
+                #{endTime},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePanicBuying" parameterType="PanicBuying">
+        update panic_buying
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "no != null">
+            no  = #{no},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "coinUnit != null">
+            coin_unit  = #{coinUnit},
+            </if>
+            <if test = "totalNum != null">
+            total_num  = #{totalNum},
+            </if>
+            <if test = "remainNum != null">
+            remain_num  = #{remainNum},
+            </if>
+            <if test = "frozenNum != null">
+            frozen_num  = #{frozenNum},
+            </if>
+            <if test = "numUnit != null">
+            num_unit  = #{numUnit},
+            </if>
+            <if test = "state != null">
+            state  = #{state},
+            </if>
+            <if test = "startTime != null">
+            start_time  = #{startTime},
+            </if>
+            <if test = "endTime != null">
+            end_time  = #{endTime},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePanicBuyingById" parameterType="Long">
+        delete from panic_buying where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePanicBuyingByIds" parameterType="Long">
+        delete from panic_buying where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

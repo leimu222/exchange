@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.TbSmsMapper">
+
+    <resultMap id="TbSmsResult" type="TbSms" >
+            <result property="id" column="id" />
+            <result property="keyId" column="key_id" />
+            <result property="keySecret" column="key_secret" />
+            <result property="signId" column="sign_id" />
+            <result property="smsName" column="sms_name" />
+            <result property="smsStatus" column="sms_status" />
+            <result property="templateId" column="template_id" />
+    </resultMap>
+
+    <sql id="selectTbSmsVo">
+        select   id,  key_id,  key_secret,  sign_id,  sms_name,  sms_status,  template_id 
+        from tb_sms
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectTbSmsList" parameterType="TbSms" resultMap="TbSmsResult">
+        <include refid="selectTbSmsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "keyId != null and keyId != ''">
+                        and key_id  = #{keyId}
+                    </if>
+                    <if test = "keySecret != null and keySecret != ''">
+                        and key_secret  = #{keySecret}
+                    </if>
+                    <if test = "signId != null and signId != ''">
+                        and sign_id  = #{signId}
+                    </if>
+                    <if test = "smsName != null and smsName != ''">
+                        and sms_name  = #{smsName}
+                    </if>
+                    <if test = "smsStatus != null and smsStatus != ''">
+                        and sms_status  = #{smsStatus}
+                    </if>
+                    <if test = "templateId != null and templateId != ''">
+                        and template_id  = #{templateId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectTbSmsById" parameterType="Long" resultMap="TbSmsResult">
+        <include refid="selectTbSmsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertTbSms" parameterType="TbSms" useGeneratedKeys="true" >
+        insert into tb_sms
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "keyId != null">
+                key_id,
+            </if>
+            <if test = "keySecret != null">
+                key_secret,
+            </if>
+            <if test = "signId != null">
+                sign_id,
+            </if>
+            <if test = "smsName != null">
+                sms_name,
+            </if>
+            <if test = "smsStatus != null">
+                sms_status,
+            </if>
+            <if test = "templateId != null">
+                template_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "keyId != null">
+                #{keyId},
+            </if>
+            <if test = "keySecret != null">
+                #{keySecret},
+            </if>
+            <if test = "signId != null">
+                #{signId},
+            </if>
+            <if test = "smsName != null">
+                #{smsName},
+            </if>
+            <if test = "smsStatus != null">
+                #{smsStatus},
+            </if>
+            <if test = "templateId != null">
+                #{templateId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateTbSms" parameterType="TbSms">
+        update tb_sms
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "keyId != null">
+            key_id  = #{keyId},
+            </if>
+            <if test = "keySecret != null">
+            key_secret  = #{keySecret},
+            </if>
+            <if test = "signId != null">
+            sign_id  = #{signId},
+            </if>
+            <if test = "smsName != null">
+            sms_name  = #{smsName},
+            </if>
+            <if test = "smsStatus != null">
+            sms_status  = #{smsStatus},
+            </if>
+            <if test = "templateId != null">
+            template_id  = #{templateId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteTbSmsById" parameterType="Long">
+        delete from tb_sms where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteTbSmsByIds" parameterType="Long">
+        delete from tb_sms where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

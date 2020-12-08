@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractMemberStatusRecordMapper">
+
+    <resultMap id="ContractMemberStatusRecordResult" type="ContractMemberStatusRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="nodeMemberId" column="node_member_id" />
+            <result property="memberIds" column="member_ids" />
+            <result property="status" column="status" />
+            <result property="time" column="time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectContractMemberStatusRecordVo">
+        select   id,  member_id,  node_member_id,  member_ids,  status,  time,  sequence 
+        from contract_member_status_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractMemberStatusRecordList" parameterType="ContractMemberStatusRecord" resultMap="ContractMemberStatusRecordResult">
+        <include refid="selectContractMemberStatusRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "nodeMemberId != null">
+                        and node_member_id  = #{nodeMemberId}
+                    </if>
+                    <if test = "memberIds != null and memberIds != ''">
+                        and member_ids  = #{memberIds}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "time != null">
+                        and time  = #{time}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractMemberStatusRecordById" parameterType="Long" resultMap="ContractMemberStatusRecordResult">
+        <include refid="selectContractMemberStatusRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractMemberStatusRecord" parameterType="ContractMemberStatusRecord" useGeneratedKeys="true" >
+        insert into contract_member_status_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "nodeMemberId != null">
+                node_member_id,
+            </if>
+            <if test = "memberIds != null">
+                member_ids,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "time != null">
+                time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "nodeMemberId != null">
+                #{nodeMemberId},
+            </if>
+            <if test = "memberIds != null">
+                #{memberIds},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "time != null">
+                #{time},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractMemberStatusRecord" parameterType="ContractMemberStatusRecord">
+        update contract_member_status_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "nodeMemberId != null">
+            node_member_id  = #{nodeMemberId},
+            </if>
+            <if test = "memberIds != null">
+            member_ids  = #{memberIds},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "time != null">
+            time  = #{time},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractMemberStatusRecordById" parameterType="Long">
+        delete from contract_member_status_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractMemberStatusRecordByIds" parameterType="Long">
+        delete from contract_member_status_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

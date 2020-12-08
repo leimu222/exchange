@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CoinCollectLogMapper">
+
+    <resultMap id="CoinCollectLogResult" type="CoinCollectLog" >
+            <result property="id" column="id" />
+            <result property="coinName" column="coin_name" />
+            <result property="memberId" column="member_id" />
+            <result property="address" column="address" />
+            <result property="toAddress" column="to_address" />
+            <result property="amount" column="amount" />
+            <result property="txHash" column="tx_hash" />
+            <result property="time" column="time" />
+    </resultMap>
+
+    <sql id="selectCoinCollectLogVo">
+        select   id,  coin_name,  member_id,  address,  to_address,  amount,  tx_hash,  time 
+        from coin_collect_log
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCoinCollectLogList" parameterType="CoinCollectLog" resultMap="CoinCollectLogResult">
+        <include refid="selectCoinCollectLogVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "toAddress != null and toAddress != ''">
+                        and to_address  = #{toAddress}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "txHash != null and txHash != ''">
+                        and tx_hash  = #{txHash}
+                    </if>
+                    <if test = "time != null">
+                        and time  = #{time}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCoinCollectLogById" parameterType="Integer" resultMap="CoinCollectLogResult">
+        <include refid="selectCoinCollectLogVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCoinCollectLog" parameterType="CoinCollectLog" useGeneratedKeys="true" >
+        insert into coin_collect_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "toAddress != null">
+                to_address,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "txHash != null">
+                tx_hash,
+            </if>
+            <if test = "time != null">
+                time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "toAddress != null">
+                #{toAddress},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "txHash != null">
+                #{txHash},
+            </if>
+            <if test = "time != null">
+                #{time},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCoinCollectLog" parameterType="CoinCollectLog">
+        update coin_collect_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "toAddress != null">
+            to_address  = #{toAddress},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "txHash != null">
+            tx_hash  = #{txHash},
+            </if>
+            <if test = "time != null">
+            time  = #{time},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCoinCollectLogById" parameterType="Integer">
+        delete from coin_collect_log where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCoinCollectLogByIds" parameterType="Integer">
+        delete from coin_collect_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

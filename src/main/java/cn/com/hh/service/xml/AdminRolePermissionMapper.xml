@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AdminRolePermissionMapper">
+
+    <resultMap id="AdminRolePermissionResult" type="AdminRolePermission" >
+            <result property="roleId" column="role_id" />
+            <result property="ruleId" column="rule_id" />
+    </resultMap>
+
+    <sql id="selectAdminRolePermissionVo">
+        select   role_id,  rule_id 
+        from admin_role_permission
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAdminRolePermissionList" parameterType="AdminRolePermission" resultMap="AdminRolePermissionResult">
+        <include refid="selectAdminRolePermissionVo"/>
+        <where>
+                    <if test = "roleId != null">
+                        and role_id  = #{roleId}
+                    </if>
+                    <if test = "ruleId != null">
+                        and rule_id  = #{ruleId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAdminRolePermissionById" parameterType="Long" resultMap="AdminRolePermissionResult">
+        <include refid="selectAdminRolePermissionVo"/>
+        where  role_id  = #{roleId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAdminRolePermission" parameterType="AdminRolePermission" useGeneratedKeys="true" >
+        insert into admin_role_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "roleId != null">
+                role_id,
+            </if>
+            <if test = "ruleId != null">
+                rule_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "roleId != null">
+                #{roleId},
+            </if>
+            <if test = "ruleId != null">
+                #{ruleId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAdminRolePermission" parameterType="AdminRolePermission">
+        update admin_role_permission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "ruleId != null">
+            rule_id  = #{ruleId},
+            </if>
+        </trim>
+        where  role_id  = #{roleId} 
+    </update>
+    <delete id="deleteAdminRolePermissionById" parameterType="Long">
+        delete from admin_role_permission where  role_id  = #{roleId} 
+    </delete>
+
+    <delete id="deleteAdminRolePermissionByIds" parameterType="Long">
+        delete from admin_role_permission where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+</mapper>

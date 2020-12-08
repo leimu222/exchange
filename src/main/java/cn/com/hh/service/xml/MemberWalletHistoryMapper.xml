@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberWalletHistoryMapper">
+
+    <resultMap id="MemberWalletHistoryResult" type="MemberWalletHistory" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coinId" column="coin_id" />
+            <result property="beforeBalance" column="before_balance" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="beforeFrozenBalance" column="before_frozen_balance" />
+            <result property="afterFrozenBalance" column="after_frozen_balance" />
+            <result property="opTime" column="op_time" />
+    </resultMap>
+
+    <sql id="selectMemberWalletHistoryVo">
+        select   id,  member_id,  coin_id,  before_balance,  after_balance,  before_frozen_balance,  after_frozen_balance,  op_time 
+        from member_wallet_history
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberWalletHistoryList" parameterType="MemberWalletHistory" resultMap="MemberWalletHistoryResult">
+        <include refid="selectMemberWalletHistoryVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "beforeBalance != null">
+                        and before_balance  = #{beforeBalance}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "beforeFrozenBalance != null">
+                        and before_frozen_balance  = #{beforeFrozenBalance}
+                    </if>
+                    <if test = "afterFrozenBalance != null">
+                        and after_frozen_balance  = #{afterFrozenBalance}
+                    </if>
+                    <if test = "opTime != null">
+                        and op_time  = #{opTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberWalletHistoryById" parameterType="Long" resultMap="MemberWalletHistoryResult">
+        <include refid="selectMemberWalletHistoryVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberWalletHistory" parameterType="MemberWalletHistory" useGeneratedKeys="true" >
+        insert into member_wallet_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "beforeBalance != null">
+                before_balance,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "beforeFrozenBalance != null">
+                before_frozen_balance,
+            </if>
+            <if test = "afterFrozenBalance != null">
+                after_frozen_balance,
+            </if>
+            <if test = "opTime != null">
+                op_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "beforeBalance != null">
+                #{beforeBalance},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "beforeFrozenBalance != null">
+                #{beforeFrozenBalance},
+            </if>
+            <if test = "afterFrozenBalance != null">
+                #{afterFrozenBalance},
+            </if>
+            <if test = "opTime != null">
+                #{opTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberWalletHistory" parameterType="MemberWalletHistory">
+        update member_wallet_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "beforeBalance != null">
+            before_balance  = #{beforeBalance},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "beforeFrozenBalance != null">
+            before_frozen_balance  = #{beforeFrozenBalance},
+            </if>
+            <if test = "afterFrozenBalance != null">
+            after_frozen_balance  = #{afterFrozenBalance},
+            </if>
+            <if test = "opTime != null">
+            op_time  = #{opTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberWalletHistoryById" parameterType="Long">
+        delete from member_wallet_history where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberWalletHistoryByIds" parameterType="Long">
+        delete from member_wallet_history where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

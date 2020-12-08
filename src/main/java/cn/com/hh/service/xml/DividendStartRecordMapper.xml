@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DividendStartRecordMapper">
+
+    <resultMap id="DividendStartRecordResult" type="DividendStartRecord" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="date" column="date" />
+            <result property="end" column="end" />
+            <result property="endDate" column="end_date" />
+            <result property="rate" column="rate" />
+            <result property="start" column="start" />
+            <result property="startDate" column="start_date" />
+            <result property="unit" column="unit" />
+            <result property="adminId" column="admin_id" />
+    </resultMap>
+
+    <sql id="selectDividendStartRecordVo">
+        select   id,  amount,  date,  end,  end_date,  rate,  start,  start_date,  unit,  admin_id 
+        from dividend_start_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDividendStartRecordList" parameterType="DividendStartRecord" resultMap="DividendStartRecordResult">
+        <include refid="selectDividendStartRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "date != null">
+                        and date  = #{date}
+                    </if>
+                    <if test = "end != null">
+                        and end  = #{end}
+                    </if>
+                    <if test = "endDate != null">
+                        and end_date  = #{endDate}
+                    </if>
+                    <if test = "rate != null">
+                        and rate  = #{rate}
+                    </if>
+                    <if test = "start != null">
+                        and start  = #{start}
+                    </if>
+                    <if test = "startDate != null">
+                        and start_date  = #{startDate}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDividendStartRecordById" parameterType="Long" resultMap="DividendStartRecordResult">
+        <include refid="selectDividendStartRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDividendStartRecord" parameterType="DividendStartRecord" useGeneratedKeys="true" >
+        insert into dividend_start_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "date != null">
+                date,
+            </if>
+            <if test = "end != null">
+                end,
+            </if>
+            <if test = "endDate != null">
+                end_date,
+            </if>
+            <if test = "rate != null">
+                rate,
+            </if>
+            <if test = "start != null">
+                start,
+            </if>
+            <if test = "startDate != null">
+                start_date,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "date != null">
+                #{date},
+            </if>
+            <if test = "end != null">
+                #{end},
+            </if>
+            <if test = "endDate != null">
+                #{endDate},
+            </if>
+            <if test = "rate != null">
+                #{rate},
+            </if>
+            <if test = "start != null">
+                #{start},
+            </if>
+            <if test = "startDate != null">
+                #{startDate},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDividendStartRecord" parameterType="DividendStartRecord">
+        update dividend_start_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "date != null">
+            date  = #{date},
+            </if>
+            <if test = "end != null">
+            end  = #{end},
+            </if>
+            <if test = "endDate != null">
+            end_date  = #{endDate},
+            </if>
+            <if test = "rate != null">
+            rate  = #{rate},
+            </if>
+            <if test = "start != null">
+            start  = #{start},
+            </if>
+            <if test = "startDate != null">
+            start_date  = #{startDate},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDividendStartRecordById" parameterType="Long">
+        delete from dividend_start_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDividendStartRecordByIds" parameterType="Long">
+        delete from dividend_start_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

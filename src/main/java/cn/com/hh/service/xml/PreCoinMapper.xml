@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PreCoinMapper">
+
+    <resultMap id="PreCoinResult" type="PreCoin" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="link" column="link" />
+            <result property="name" column="name" />
+            <result property="remark" column="remark" />
+            <result property="unit" column="unit" />
+            <result property="version" column="version" />
+            <result property="voteId" column="vote_id" />
+    </resultMap>
+
+    <sql id="selectPreCoinVo">
+        select   id,  amount,  link,  name,  remark,  unit,  version,  vote_id 
+        from pre_coin
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPreCoinList" parameterType="PreCoin" resultMap="PreCoinResult">
+        <include refid="selectPreCoinVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "link != null and link != ''">
+                        and link  = #{link}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "voteId != null">
+                        and vote_id  = #{voteId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPreCoinById" parameterType="Long" resultMap="PreCoinResult">
+        <include refid="selectPreCoinVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPreCoin" parameterType="PreCoin" useGeneratedKeys="true" >
+        insert into pre_coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "link != null">
+                link,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "voteId != null">
+                vote_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "link != null">
+                #{link},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "voteId != null">
+                #{voteId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePreCoin" parameterType="PreCoin">
+        update pre_coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "link != null">
+            link  = #{link},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "voteId != null">
+            vote_id  = #{voteId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePreCoinById" parameterType="Long">
+        delete from pre_coin where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePreCoinByIds" parameterType="Long">
+        delete from pre_coin where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunityMemberTraderConfigMapper">
+
+    <resultMap id="CommunityMemberTraderConfigResult" type="CommunityMemberTraderConfig" >
+            <result property="id" column="id" />
+            <result property="totalAmountLimit" column="total_amount_limit" />
+            <result property="transactionCountLimit" column="transaction_count_limit" />
+            <result property="winRateLimit" column="win_rate_limit" />
+            <result property="totalWinRateLimit" column="total_win_rate_limit" />
+            <result property="rechargeLimit" column="recharge_limit" />
+            <result property="orderAmountMin" column="order_amount_min" />
+    </resultMap>
+
+    <sql id="selectCommunityMemberTraderConfigVo">
+        select   id,  total_amount_limit,  transaction_count_limit,  win_rate_limit,  total_win_rate_limit,  recharge_limit,  order_amount_min 
+        from community_member_trader_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunityMemberTraderConfigList" parameterType="CommunityMemberTraderConfig" resultMap="CommunityMemberTraderConfigResult">
+        <include refid="selectCommunityMemberTraderConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "totalAmountLimit != null">
+                        and total_amount_limit  = #{totalAmountLimit}
+                    </if>
+                    <if test = "transactionCountLimit != null">
+                        and transaction_count_limit  = #{transactionCountLimit}
+                    </if>
+                    <if test = "winRateLimit != null">
+                        and win_rate_limit  = #{winRateLimit}
+                    </if>
+                    <if test = "totalWinRateLimit != null">
+                        and total_win_rate_limit  = #{totalWinRateLimit}
+                    </if>
+                    <if test = "rechargeLimit != null">
+                        and recharge_limit  = #{rechargeLimit}
+                    </if>
+                    <if test = "orderAmountMin != null">
+                        and order_amount_min  = #{orderAmountMin}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunityMemberTraderConfigById" parameterType="Long" resultMap="CommunityMemberTraderConfigResult">
+        <include refid="selectCommunityMemberTraderConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunityMemberTraderConfig" parameterType="CommunityMemberTraderConfig" useGeneratedKeys="true" >
+        insert into community_member_trader_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "totalAmountLimit != null">
+                total_amount_limit,
+            </if>
+            <if test = "transactionCountLimit != null">
+                transaction_count_limit,
+            </if>
+            <if test = "winRateLimit != null">
+                win_rate_limit,
+            </if>
+            <if test = "totalWinRateLimit != null">
+                total_win_rate_limit,
+            </if>
+            <if test = "rechargeLimit != null">
+                recharge_limit,
+            </if>
+            <if test = "orderAmountMin != null">
+                order_amount_min,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "totalAmountLimit != null">
+                #{totalAmountLimit},
+            </if>
+            <if test = "transactionCountLimit != null">
+                #{transactionCountLimit},
+            </if>
+            <if test = "winRateLimit != null">
+                #{winRateLimit},
+            </if>
+            <if test = "totalWinRateLimit != null">
+                #{totalWinRateLimit},
+            </if>
+            <if test = "rechargeLimit != null">
+                #{rechargeLimit},
+            </if>
+            <if test = "orderAmountMin != null">
+                #{orderAmountMin},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunityMemberTraderConfig" parameterType="CommunityMemberTraderConfig">
+        update community_member_trader_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "totalAmountLimit != null">
+            total_amount_limit  = #{totalAmountLimit},
+            </if>
+            <if test = "transactionCountLimit != null">
+            transaction_count_limit  = #{transactionCountLimit},
+            </if>
+            <if test = "winRateLimit != null">
+            win_rate_limit  = #{winRateLimit},
+            </if>
+            <if test = "totalWinRateLimit != null">
+            total_win_rate_limit  = #{totalWinRateLimit},
+            </if>
+            <if test = "rechargeLimit != null">
+            recharge_limit  = #{rechargeLimit},
+            </if>
+            <if test = "orderAmountMin != null">
+            order_amount_min  = #{orderAmountMin},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCommunityMemberTraderConfigById" parameterType="Long">
+        delete from community_member_trader_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCommunityMemberTraderConfigByIds" parameterType="Long">
+        delete from community_member_trader_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

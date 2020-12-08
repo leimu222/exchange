@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionCommissionInfoMapper">
+
+    <resultMap id="OptionCommissionInfoResult" type="OptionCommissionInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="proxyId" column="proxy_id" />
+            <result property="amount" column="amount" />
+            <result property="coinName" column="coin_name" />
+            <result property="sysUser" column="sys_user" />
+            <result property="status" column="status" />
+            <result property="memberStatus" column="member_status" />
+            <result property="updateTime" column="update_time" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectOptionCommissionInfoVo">
+        select   id,  member_id,  proxy_id,  amount,  coin_name,  sys_user,  status,  member_status,  update_time,  create_time,  sequence 
+        from option_commission_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionCommissionInfoList" parameterType="OptionCommissionInfo" resultMap="OptionCommissionInfoResult">
+        <include refid="selectOptionCommissionInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "proxyId != null">
+                        and proxy_id  = #{proxyId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "sysUser != null and sysUser != ''">
+                        and sys_user  = #{sysUser}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "memberStatus != null">
+                        and member_status  = #{memberStatus}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionCommissionInfoById" parameterType="Integer" resultMap="OptionCommissionInfoResult">
+        <include refid="selectOptionCommissionInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionCommissionInfo" parameterType="OptionCommissionInfo" useGeneratedKeys="true" >
+        insert into option_commission_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "proxyId != null">
+                proxy_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "sysUser != null">
+                sys_user,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "memberStatus != null">
+                member_status,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "proxyId != null">
+                #{proxyId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "sysUser != null">
+                #{sysUser},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "memberStatus != null">
+                #{memberStatus},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionCommissionInfo" parameterType="OptionCommissionInfo">
+        update option_commission_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "proxyId != null">
+            proxy_id  = #{proxyId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "sysUser != null">
+            sys_user  = #{sysUser},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "memberStatus != null">
+            member_status  = #{memberStatus},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionCommissionInfoById" parameterType="Integer">
+        delete from option_commission_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionCommissionInfoByIds" parameterType="Integer">
+        delete from option_commission_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

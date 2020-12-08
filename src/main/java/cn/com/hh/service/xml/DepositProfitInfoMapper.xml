@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.DepositProfitInfoMapper">
+
+    <resultMap id="DepositProfitInfoResult" type="DepositProfitInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="depositId" column="deposit_id" />
+            <result property="amount" column="amount" />
+            <result property="fundAmount" column="fund_amount" />
+            <result property="depositAmount" column="deposit_amount" />
+            <result property="coinName" column="coin_name" />
+            <result property="sequence" column="sequence" />
+            <result property="time" column="time" />
+    </resultMap>
+
+    <sql id="selectDepositProfitInfoVo">
+        select   id,  member_id,  deposit_id,  amount,  fund_amount,  deposit_amount,  coin_name,  sequence,  time 
+        from deposit_profit_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectDepositProfitInfoList" parameterType="DepositProfitInfo" resultMap="DepositProfitInfoResult">
+        <include refid="selectDepositProfitInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "depositId != null">
+                        and deposit_id  = #{depositId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "fundAmount != null">
+                        and fund_amount  = #{fundAmount}
+                    </if>
+                    <if test = "depositAmount != null">
+                        and deposit_amount  = #{depositAmount}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "time != null">
+                        and time  = #{time}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectDepositProfitInfoById" parameterType="Long" resultMap="DepositProfitInfoResult">
+        <include refid="selectDepositProfitInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertDepositProfitInfo" parameterType="DepositProfitInfo" useGeneratedKeys="true" >
+        insert into deposit_profit_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "depositId != null">
+                deposit_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "fundAmount != null">
+                fund_amount,
+            </if>
+            <if test = "depositAmount != null">
+                deposit_amount,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "time != null">
+                time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "depositId != null">
+                #{depositId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "fundAmount != null">
+                #{fundAmount},
+            </if>
+            <if test = "depositAmount != null">
+                #{depositAmount},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "time != null">
+                #{time},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateDepositProfitInfo" parameterType="DepositProfitInfo">
+        update deposit_profit_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "depositId != null">
+            deposit_id  = #{depositId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "fundAmount != null">
+            fund_amount  = #{fundAmount},
+            </if>
+            <if test = "depositAmount != null">
+            deposit_amount  = #{depositAmount},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "time != null">
+            time  = #{time},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteDepositProfitInfoById" parameterType="Long">
+        delete from deposit_profit_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteDepositProfitInfoByIds" parameterType="Long">
+        delete from deposit_profit_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

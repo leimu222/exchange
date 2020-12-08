@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.HotTransferRecordMapper">
+
+    <resultMap id="HotTransferRecordResult" type="HotTransferRecord" >
+            <result property="id" column="id" />
+            <result property="adminId" column="admin_id" />
+            <result property="amount" column="amount" />
+            <result property="balance" column="balance" />
+            <result property="coldAddress" column="cold_address" />
+            <result property="minerFee" column="miner_fee" />
+            <result property="transactionNumber" column="transaction_number" />
+            <result property="transferTime" column="transfer_time" />
+            <result property="unit" column="unit" />
+    </resultMap>
+
+    <sql id="selectHotTransferRecordVo">
+        select   id,  admin_id,  amount,  balance,  cold_address,  miner_fee,  transaction_number,  transfer_time,  unit 
+        from hot_transfer_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectHotTransferRecordList" parameterType="HotTransferRecord" resultMap="HotTransferRecordResult">
+        <include refid="selectHotTransferRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "coldAddress != null and coldAddress != ''">
+                        and cold_address  = #{coldAddress}
+                    </if>
+                    <if test = "minerFee != null">
+                        and miner_fee  = #{minerFee}
+                    </if>
+                    <if test = "transactionNumber != null and transactionNumber != ''">
+                        and transaction_number  = #{transactionNumber}
+                    </if>
+                    <if test = "transferTime != null">
+                        and transfer_time  = #{transferTime}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectHotTransferRecordById" parameterType="Long" resultMap="HotTransferRecordResult">
+        <include refid="selectHotTransferRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertHotTransferRecord" parameterType="HotTransferRecord" useGeneratedKeys="true" >
+        insert into hot_transfer_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "coldAddress != null">
+                cold_address,
+            </if>
+            <if test = "minerFee != null">
+                miner_fee,
+            </if>
+            <if test = "transactionNumber != null">
+                transaction_number,
+            </if>
+            <if test = "transferTime != null">
+                transfer_time,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "coldAddress != null">
+                #{coldAddress},
+            </if>
+            <if test = "minerFee != null">
+                #{minerFee},
+            </if>
+            <if test = "transactionNumber != null">
+                #{transactionNumber},
+            </if>
+            <if test = "transferTime != null">
+                #{transferTime},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateHotTransferRecord" parameterType="HotTransferRecord">
+        update hot_transfer_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "coldAddress != null">
+            cold_address  = #{coldAddress},
+            </if>
+            <if test = "minerFee != null">
+            miner_fee  = #{minerFee},
+            </if>
+            <if test = "transactionNumber != null">
+            transaction_number  = #{transactionNumber},
+            </if>
+            <if test = "transferTime != null">
+            transfer_time  = #{transferTime},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteHotTransferRecordById" parameterType="Long">
+        delete from hot_transfer_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteHotTransferRecordByIds" parameterType="Long">
+        delete from hot_transfer_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

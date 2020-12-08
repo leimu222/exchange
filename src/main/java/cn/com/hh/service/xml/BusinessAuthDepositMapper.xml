@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.BusinessAuthDepositMapper">
+
+    <resultMap id="BusinessAuthDepositResult" type="BusinessAuthDeposit" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="status" column="status" />
+            <result property="adminId" column="admin_id" />
+            <result property="coinId" column="coin_id" />
+    </resultMap>
+
+    <sql id="selectBusinessAuthDepositVo">
+        select   id,  amount,  create_time,  status,  admin_id,  coin_id 
+        from business_auth_deposit
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectBusinessAuthDepositList" parameterType="BusinessAuthDeposit" resultMap="BusinessAuthDepositResult">
+        <include refid="selectBusinessAuthDepositVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "adminId != null">
+                        and admin_id  = #{adminId}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectBusinessAuthDepositById" parameterType="Long" resultMap="BusinessAuthDepositResult">
+        <include refid="selectBusinessAuthDepositVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertBusinessAuthDeposit" parameterType="BusinessAuthDeposit" useGeneratedKeys="true" >
+        insert into business_auth_deposit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "adminId != null">
+                admin_id,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "adminId != null">
+                #{adminId},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateBusinessAuthDeposit" parameterType="BusinessAuthDeposit">
+        update business_auth_deposit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "adminId != null">
+            admin_id  = #{adminId},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteBusinessAuthDepositById" parameterType="Long">
+        delete from business_auth_deposit where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteBusinessAuthDepositByIds" parameterType="Long">
+        delete from business_auth_deposit where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

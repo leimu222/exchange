@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.AdminPermissionMapper">
+
+    <resultMap id="AdminPermissionResult" type="AdminPermission" >
+            <result property="id" column="id" />
+            <result property="title" column="title" />
+            <result property="name" column="name" />
+            <result property="parentId" column="parent_id" />
+            <result property="sort" column="sort" />
+            <result property="description" column="description" />
+    </resultMap>
+
+    <sql id="selectAdminPermissionVo">
+        select   id,  title,  name,  parent_id,  sort,  description 
+        from admin_permission
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectAdminPermissionList" parameterType="AdminPermission" resultMap="AdminPermissionResult">
+        <include refid="selectAdminPermissionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "title != null and title != ''">
+                        and title  = #{title}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "parentId != null">
+                        and parent_id  = #{parentId}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "description != null and description != ''">
+                        and description  = #{description}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectAdminPermissionById" parameterType="Long" resultMap="AdminPermissionResult">
+        <include refid="selectAdminPermissionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertAdminPermission" parameterType="AdminPermission" useGeneratedKeys="true" >
+        insert into admin_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "title != null">
+                title,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "parentId != null">
+                parent_id,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "title != null">
+                #{title},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "parentId != null">
+                #{parentId},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "description != null">
+                #{description},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateAdminPermission" parameterType="AdminPermission">
+        update admin_permission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "title != null">
+            title  = #{title},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "parentId != null">
+            parent_id  = #{parentId},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "description != null">
+            description  = #{description},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteAdminPermissionById" parameterType="Long">
+        delete from admin_permission where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteAdminPermissionByIds" parameterType="Long">
+        delete from admin_permission where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

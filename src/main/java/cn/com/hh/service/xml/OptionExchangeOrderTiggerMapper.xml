@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionExchangeOrderTiggerMapper">
+
+    <resultMap id="OptionExchangeOrderTiggerResult" type="OptionExchangeOrderTigger" >
+            <result property="orderId" column="order_id" />
+            <result property="openPrice" column="open_price" />
+            <result property="version" column="version" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectOptionExchangeOrderTiggerVo">
+        select   order_id,  open_price,  version,  create_time,  sequence 
+        from option_exchange_order_tigger
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionExchangeOrderTiggerList" parameterType="OptionExchangeOrderTigger" resultMap="OptionExchangeOrderTiggerResult">
+        <include refid="selectOptionExchangeOrderTiggerVo"/>
+        <where>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "openPrice != null">
+                        and open_price  = #{openPrice}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionExchangeOrderTiggerById" parameterType="Long" resultMap="OptionExchangeOrderTiggerResult">
+        <include refid="selectOptionExchangeOrderTiggerVo"/>
+        where  order_id  = #{orderId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionExchangeOrderTigger" parameterType="OptionExchangeOrderTigger" useGeneratedKeys="true" >
+        insert into option_exchange_order_tigger
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "openPrice != null">
+                open_price,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "openPrice != null">
+                #{openPrice},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionExchangeOrderTigger" parameterType="OptionExchangeOrderTigger">
+        update option_exchange_order_tigger
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "openPrice != null">
+            open_price  = #{openPrice},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  order_id  = #{orderId} 
+    </update>
+    <delete id="deleteOptionExchangeOrderTiggerById" parameterType="Long">
+        delete from option_exchange_order_tigger where  order_id  = #{orderId} 
+    </delete>
+
+    <delete id="deleteOptionExchangeOrderTiggerByIds" parameterType="Long">
+        delete from option_exchange_order_tigger where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

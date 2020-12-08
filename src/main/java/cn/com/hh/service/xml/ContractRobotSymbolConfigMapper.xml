@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractRobotSymbolConfigMapper">
+
+    <resultMap id="ContractRobotSymbolConfigResult" type="ContractRobotSymbolConfig" >
+            <result property="symbol" column="symbol" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="fromExchangeSymbol" column="from_exchange_symbol" />
+            <result property="amountMultiple" column="amount_multiple" />
+            <result property="status" column="status" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+    </resultMap>
+
+    <sql id="selectContractRobotSymbolConfigVo">
+        select   symbol,  from_exchange_id,  from_exchange_symbol,  amount_multiple,  status,  create_time,  sequence,  version 
+        from contract_robot_symbol_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractRobotSymbolConfigList" parameterType="ContractRobotSymbolConfig" resultMap="ContractRobotSymbolConfigResult">
+        <include refid="selectContractRobotSymbolConfigVo"/>
+        <where>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "fromExchangeSymbol != null and fromExchangeSymbol != ''">
+                        and from_exchange_symbol  = #{fromExchangeSymbol}
+                    </if>
+                    <if test = "amountMultiple != null">
+                        and amount_multiple  = #{amountMultiple}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractRobotSymbolConfigById" parameterType="String" resultMap="ContractRobotSymbolConfigResult">
+        <include refid="selectContractRobotSymbolConfigVo"/>
+        where  symbol  = #{symbol} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractRobotSymbolConfig" parameterType="ContractRobotSymbolConfig" useGeneratedKeys="true" >
+        insert into contract_robot_symbol_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "fromExchangeSymbol != null">
+                from_exchange_symbol,
+            </if>
+            <if test = "amountMultiple != null">
+                amount_multiple,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "fromExchangeSymbol != null">
+                #{fromExchangeSymbol},
+            </if>
+            <if test = "amountMultiple != null">
+                #{amountMultiple},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractRobotSymbolConfig" parameterType="ContractRobotSymbolConfig">
+        update contract_robot_symbol_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "fromExchangeSymbol != null">
+            from_exchange_symbol  = #{fromExchangeSymbol},
+            </if>
+            <if test = "amountMultiple != null">
+            amount_multiple  = #{amountMultiple},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+        </trim>
+        where  symbol  = #{symbol} 
+    </update>
+    <delete id="deleteContractRobotSymbolConfigById" parameterType="String">
+        delete from contract_robot_symbol_config where  symbol  = #{symbol} 
+    </delete>
+
+    <delete id="deleteContractRobotSymbolConfigByIds" parameterType="String">
+        delete from contract_robot_symbol_config where symbol in
+        <foreach item="symbol" collection="array" open="(" separator="," close=")">
+            #{symbol}
+        </foreach>
+    </delete>
+</mapper>

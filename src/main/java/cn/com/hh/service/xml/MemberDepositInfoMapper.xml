@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberDepositInfoMapper">
+
+    <resultMap id="MemberDepositInfoResult" type="MemberDepositInfo" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="depositTypeId" column="deposit_type_id" />
+            <result property="amount" column="amount" />
+            <result property="investTime" column="invest_time" />
+            <result property="status" column="status" />
+            <result property="profit" column="profit" />
+            <result property="endTime" column="end_time" />
+            <result property="preEndTime" column="pre_end_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectMemberDepositInfoVo">
+        select   id,  member_id,  deposit_type_id,  amount,  invest_time,  status,  profit,  end_time,  pre_end_time,  sequence 
+        from member_deposit_info
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberDepositInfoList" parameterType="MemberDepositInfo" resultMap="MemberDepositInfoResult">
+        <include refid="selectMemberDepositInfoVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "depositTypeId != null">
+                        and deposit_type_id  = #{depositTypeId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "investTime != null">
+                        and invest_time  = #{investTime}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "profit != null">
+                        and profit  = #{profit}
+                    </if>
+                    <if test = "endTime != null">
+                        and end_time  = #{endTime}
+                    </if>
+                    <if test = "preEndTime != null">
+                        and pre_end_time  = #{preEndTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberDepositInfoById" parameterType="Long" resultMap="MemberDepositInfoResult">
+        <include refid="selectMemberDepositInfoVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberDepositInfo" parameterType="MemberDepositInfo" useGeneratedKeys="true" >
+        insert into member_deposit_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "depositTypeId != null">
+                deposit_type_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "investTime != null">
+                invest_time,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "profit != null">
+                profit,
+            </if>
+            <if test = "endTime != null">
+                end_time,
+            </if>
+            <if test = "preEndTime != null">
+                pre_end_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "depositTypeId != null">
+                #{depositTypeId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "investTime != null">
+                #{investTime},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "profit != null">
+                #{profit},
+            </if>
+            <if test = "endTime != null">
+                #{endTime},
+            </if>
+            <if test = "preEndTime != null">
+                #{preEndTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberDepositInfo" parameterType="MemberDepositInfo">
+        update member_deposit_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "depositTypeId != null">
+            deposit_type_id  = #{depositTypeId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "investTime != null">
+            invest_time  = #{investTime},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "profit != null">
+            profit  = #{profit},
+            </if>
+            <if test = "endTime != null">
+            end_time  = #{endTime},
+            </if>
+            <if test = "preEndTime != null">
+            pre_end_time  = #{preEndTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberDepositInfoById" parameterType="Long">
+        delete from member_deposit_info where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberDepositInfoByIds" parameterType="Long">
+        delete from member_deposit_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

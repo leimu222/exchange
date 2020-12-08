@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.TransferRecordMapper">
+
+    <resultMap id="TransferRecordResult" type="TransferRecord" >
+            <result property="id" column="id" />
+            <result property="address" column="address" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="fee" column="fee" />
+            <result property="memberId" column="member_id" />
+            <result property="orderSn" column="order_sn" />
+            <result property="remark" column="remark" />
+            <result property="coinId" column="coin_id" />
+    </resultMap>
+
+    <sql id="selectTransferRecordVo">
+        select   id,  address,  amount,  create_time,  fee,  member_id,  order_sn,  remark,  coin_id 
+        from transfer_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectTransferRecordList" parameterType="TransferRecord" resultMap="TransferRecordResult">
+        <include refid="selectTransferRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "address != null and address != ''">
+                        and address  = #{address}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "fee != null">
+                        and fee  = #{fee}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "orderSn != null and orderSn != ''">
+                        and order_sn  = #{orderSn}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectTransferRecordById" parameterType="Long" resultMap="TransferRecordResult">
+        <include refid="selectTransferRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertTransferRecord" parameterType="TransferRecord" useGeneratedKeys="true" >
+        insert into transfer_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "address != null">
+                address,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "fee != null">
+                fee,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "orderSn != null">
+                order_sn,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "address != null">
+                #{address},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "fee != null">
+                #{fee},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "orderSn != null">
+                #{orderSn},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateTransferRecord" parameterType="TransferRecord">
+        update transfer_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "address != null">
+            address  = #{address},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "fee != null">
+            fee  = #{fee},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "orderSn != null">
+            order_sn  = #{orderSn},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteTransferRecordById" parameterType="Long">
+        delete from transfer_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteTransferRecordByIds" parameterType="Long">
+        delete from transfer_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

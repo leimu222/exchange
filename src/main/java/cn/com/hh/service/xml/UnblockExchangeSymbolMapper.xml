@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockExchangeSymbolMapper">
+
+    <resultMap id="UnblockExchangeSymbolResult" type="UnblockExchangeSymbol" >
+            <result property="symbol" column="symbol" />
+            <result property="singleRoundReleaseRate" column="single_round_release_rate" />
+            <result property="dayMaxReleaseRate" column="day_max_release_rate" />
+            <result property="dayMaxReleaseAmount" column="day_max_release_amount" />
+            <result property="priceRiseRule" column="price_rise_rule" />
+            <result property="startPrice" column="start_price" />
+            <result property="roundIntervalPrice" column="round_interval_price" />
+            <result property="singleDayRoundMax" column="single_day_round_max" />
+            <result property="roundLimitKey" column="round_limit_key" />
+            <result property="roundLimitValue" column="round_limit_value" />
+            <result property="priceLimit" column="price_limit" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+            <result property="version" column="version" />
+            <result property="whitelistMemberId" column="whitelist_member_id" />
+    </resultMap>
+
+    <sql id="selectUnblockExchangeSymbolVo">
+        select   symbol,  single_round_release_rate,  day_max_release_rate,  day_max_release_amount,  price_rise_rule,  start_price,  round_interval_price,  single_day_round_max,  round_limit_key,  round_limit_value,  price_limit,  create_time,  update_time,  version,  whitelist_member_id 
+        from unblock_exchange_symbol
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockExchangeSymbolList" parameterType="UnblockExchangeSymbol" resultMap="UnblockExchangeSymbolResult">
+        <include refid="selectUnblockExchangeSymbolVo"/>
+        <where>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "singleRoundReleaseRate != null">
+                        and single_round_release_rate  = #{singleRoundReleaseRate}
+                    </if>
+                    <if test = "dayMaxReleaseRate != null">
+                        and day_max_release_rate  = #{dayMaxReleaseRate}
+                    </if>
+                    <if test = "dayMaxReleaseAmount != null">
+                        and day_max_release_amount  = #{dayMaxReleaseAmount}
+                    </if>
+                    <if test = "priceRiseRule != null">
+                        and price_rise_rule  = #{priceRiseRule}
+                    </if>
+                    <if test = "startPrice != null">
+                        and start_price  = #{startPrice}
+                    </if>
+                    <if test = "roundIntervalPrice != null">
+                        and round_interval_price  = #{roundIntervalPrice}
+                    </if>
+                    <if test = "singleDayRoundMax != null">
+                        and single_day_round_max  = #{singleDayRoundMax}
+                    </if>
+                    <if test = "roundLimitKey != null and roundLimitKey != ''">
+                        and round_limit_key  = #{roundLimitKey}
+                    </if>
+                    <if test = "roundLimitValue != null and roundLimitValue != ''">
+                        and round_limit_value  = #{roundLimitValue}
+                    </if>
+                    <if test = "priceLimit != null">
+                        and price_limit  = #{priceLimit}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "whitelistMemberId != null and whitelistMemberId != ''">
+                        and whitelist_member_id  = #{whitelistMemberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockExchangeSymbolById" parameterType="String" resultMap="UnblockExchangeSymbolResult">
+        <include refid="selectUnblockExchangeSymbolVo"/>
+        where  symbol  = #{symbol} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockExchangeSymbol" parameterType="UnblockExchangeSymbol" useGeneratedKeys="true" >
+        insert into unblock_exchange_symbol
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "singleRoundReleaseRate != null">
+                single_round_release_rate,
+            </if>
+            <if test = "dayMaxReleaseRate != null">
+                day_max_release_rate,
+            </if>
+            <if test = "dayMaxReleaseAmount != null">
+                day_max_release_amount,
+            </if>
+            <if test = "priceRiseRule != null">
+                price_rise_rule,
+            </if>
+            <if test = "startPrice != null">
+                start_price,
+            </if>
+            <if test = "roundIntervalPrice != null">
+                round_interval_price,
+            </if>
+            <if test = "singleDayRoundMax != null">
+                single_day_round_max,
+            </if>
+            <if test = "roundLimitKey != null">
+                round_limit_key,
+            </if>
+            <if test = "roundLimitValue != null">
+                round_limit_value,
+            </if>
+            <if test = "priceLimit != null">
+                price_limit,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "whitelistMemberId != null">
+                whitelist_member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "singleRoundReleaseRate != null">
+                #{singleRoundReleaseRate},
+            </if>
+            <if test = "dayMaxReleaseRate != null">
+                #{dayMaxReleaseRate},
+            </if>
+            <if test = "dayMaxReleaseAmount != null">
+                #{dayMaxReleaseAmount},
+            </if>
+            <if test = "priceRiseRule != null">
+                #{priceRiseRule},
+            </if>
+            <if test = "startPrice != null">
+                #{startPrice},
+            </if>
+            <if test = "roundIntervalPrice != null">
+                #{roundIntervalPrice},
+            </if>
+            <if test = "singleDayRoundMax != null">
+                #{singleDayRoundMax},
+            </if>
+            <if test = "roundLimitKey != null">
+                #{roundLimitKey},
+            </if>
+            <if test = "roundLimitValue != null">
+                #{roundLimitValue},
+            </if>
+            <if test = "priceLimit != null">
+                #{priceLimit},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "whitelistMemberId != null">
+                #{whitelistMemberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockExchangeSymbol" parameterType="UnblockExchangeSymbol">
+        update unblock_exchange_symbol
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "singleRoundReleaseRate != null">
+            single_round_release_rate  = #{singleRoundReleaseRate},
+            </if>
+            <if test = "dayMaxReleaseRate != null">
+            day_max_release_rate  = #{dayMaxReleaseRate},
+            </if>
+            <if test = "dayMaxReleaseAmount != null">
+            day_max_release_amount  = #{dayMaxReleaseAmount},
+            </if>
+            <if test = "priceRiseRule != null">
+            price_rise_rule  = #{priceRiseRule},
+            </if>
+            <if test = "startPrice != null">
+            start_price  = #{startPrice},
+            </if>
+            <if test = "roundIntervalPrice != null">
+            round_interval_price  = #{roundIntervalPrice},
+            </if>
+            <if test = "singleDayRoundMax != null">
+            single_day_round_max  = #{singleDayRoundMax},
+            </if>
+            <if test = "roundLimitKey != null">
+            round_limit_key  = #{roundLimitKey},
+            </if>
+            <if test = "roundLimitValue != null">
+            round_limit_value  = #{roundLimitValue},
+            </if>
+            <if test = "priceLimit != null">
+            price_limit  = #{priceLimit},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "whitelistMemberId != null">
+            whitelist_member_id  = #{whitelistMemberId},
+            </if>
+        </trim>
+        where  symbol  = #{symbol} 
+    </update>
+    <delete id="deleteUnblockExchangeSymbolById" parameterType="String">
+        delete from unblock_exchange_symbol where  symbol  = #{symbol} 
+    </delete>
+
+    <delete id="deleteUnblockExchangeSymbolByIds" parameterType="String">
+        delete from unblock_exchange_symbol where symbol in
+        <foreach item="symbol" collection="array" open="(" separator="," close=")">
+            #{symbol}
+        </foreach>
+    </delete>
+</mapper>

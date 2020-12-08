@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunityMemberMapper">
+
+    <resultMap id="CommunityMemberResult" type="CommunityMember" >
+            <result property="memberId" column="member_id" />
+            <result property="username" column="username" />
+            <result property="areaName" column="area_name" />
+            <result property="personalIntroduction" column="personal_introduction" />
+            <result property="sex" column="sex" />
+            <result property="enLabels" column="en_labels" />
+            <result property="labelIds" column="label_ids" />
+            <result property="labels" column="labels" />
+            <result property="type" column="type" />
+            <result property="status" column="status" />
+            <result property="totalProfitRate" column="total_profit_rate" />
+            <result property="threeWeekWinRate" column="three_week_win_rate" />
+            <result property="threeWeekCallbackRate" column="three_week_callback_rate" />
+            <result property="followExtractRate" column="follow_extract_rate" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+            <result property="version" column="version" />
+            <result property="actualTimeCount" column="actual_time_count" />
+            <result property="transactionDays" column="transaction_days" />
+    </resultMap>
+
+    <sql id="selectCommunityMemberVo">
+        select   member_id,  username,  area_name,  personal_introduction,  sex,  en_labels,  label_ids,  labels,  type,  status,  total_profit_rate,  three_week_win_rate,  three_week_callback_rate,  follow_extract_rate,  create_time,  sequence,  version,  actual_time_count,  transaction_days 
+        from community_member
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunityMemberList" parameterType="CommunityMember" resultMap="CommunityMemberResult">
+        <include refid="selectCommunityMemberVo"/>
+        <where>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "username != null and username != ''">
+                        and username  = #{username}
+                    </if>
+                    <if test = "areaName != null and areaName != ''">
+                        and area_name  = #{areaName}
+                    </if>
+                    <if test = "personalIntroduction != null and personalIntroduction != ''">
+                        and personal_introduction  = #{personalIntroduction}
+                    </if>
+                    <if test = "sex != null">
+                        and sex  = #{sex}
+                    </if>
+                    <if test = "enLabels != null and enLabels != ''">
+                        and en_labels  = #{enLabels}
+                    </if>
+                    <if test = "labelIds != null and labelIds != ''">
+                        and label_ids  = #{labelIds}
+                    </if>
+                    <if test = "labels != null and labels != ''">
+                        and labels  = #{labels}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "totalProfitRate != null">
+                        and total_profit_rate  = #{totalProfitRate}
+                    </if>
+                    <if test = "threeWeekWinRate != null">
+                        and three_week_win_rate  = #{threeWeekWinRate}
+                    </if>
+                    <if test = "threeWeekCallbackRate != null">
+                        and three_week_callback_rate  = #{threeWeekCallbackRate}
+                    </if>
+                    <if test = "followExtractRate != null">
+                        and follow_extract_rate  = #{followExtractRate}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "actualTimeCount != null">
+                        and actual_time_count  = #{actualTimeCount}
+                    </if>
+                    <if test = "transactionDays != null">
+                        and transaction_days  = #{transactionDays}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunityMemberById" parameterType="Long" resultMap="CommunityMemberResult">
+        <include refid="selectCommunityMemberVo"/>
+        where  member_id  = #{memberId} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunityMember" parameterType="CommunityMember" useGeneratedKeys="true" >
+        insert into community_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "username != null">
+                username,
+            </if>
+            <if test = "areaName != null">
+                area_name,
+            </if>
+            <if test = "personalIntroduction != null">
+                personal_introduction,
+            </if>
+            <if test = "sex != null">
+                sex,
+            </if>
+            <if test = "enLabels != null">
+                en_labels,
+            </if>
+            <if test = "labelIds != null">
+                label_ids,
+            </if>
+            <if test = "labels != null">
+                labels,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "totalProfitRate != null">
+                total_profit_rate,
+            </if>
+            <if test = "threeWeekWinRate != null">
+                three_week_win_rate,
+            </if>
+            <if test = "threeWeekCallbackRate != null">
+                three_week_callback_rate,
+            </if>
+            <if test = "followExtractRate != null">
+                follow_extract_rate,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "actualTimeCount != null">
+                actual_time_count,
+            </if>
+            <if test = "transactionDays != null">
+                transaction_days,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "username != null">
+                #{username},
+            </if>
+            <if test = "areaName != null">
+                #{areaName},
+            </if>
+            <if test = "personalIntroduction != null">
+                #{personalIntroduction},
+            </if>
+            <if test = "sex != null">
+                #{sex},
+            </if>
+            <if test = "enLabels != null">
+                #{enLabels},
+            </if>
+            <if test = "labelIds != null">
+                #{labelIds},
+            </if>
+            <if test = "labels != null">
+                #{labels},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "totalProfitRate != null">
+                #{totalProfitRate},
+            </if>
+            <if test = "threeWeekWinRate != null">
+                #{threeWeekWinRate},
+            </if>
+            <if test = "threeWeekCallbackRate != null">
+                #{threeWeekCallbackRate},
+            </if>
+            <if test = "followExtractRate != null">
+                #{followExtractRate},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "actualTimeCount != null">
+                #{actualTimeCount},
+            </if>
+            <if test = "transactionDays != null">
+                #{transactionDays},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunityMember" parameterType="CommunityMember">
+        update community_member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "username != null">
+            username  = #{username},
+            </if>
+            <if test = "areaName != null">
+            area_name  = #{areaName},
+            </if>
+            <if test = "personalIntroduction != null">
+            personal_introduction  = #{personalIntroduction},
+            </if>
+            <if test = "sex != null">
+            sex  = #{sex},
+            </if>
+            <if test = "enLabels != null">
+            en_labels  = #{enLabels},
+            </if>
+            <if test = "labelIds != null">
+            label_ids  = #{labelIds},
+            </if>
+            <if test = "labels != null">
+            labels  = #{labels},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "totalProfitRate != null">
+            total_profit_rate  = #{totalProfitRate},
+            </if>
+            <if test = "threeWeekWinRate != null">
+            three_week_win_rate  = #{threeWeekWinRate},
+            </if>
+            <if test = "threeWeekCallbackRate != null">
+            three_week_callback_rate  = #{threeWeekCallbackRate},
+            </if>
+            <if test = "followExtractRate != null">
+            follow_extract_rate  = #{followExtractRate},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "actualTimeCount != null">
+            actual_time_count  = #{actualTimeCount},
+            </if>
+            <if test = "transactionDays != null">
+            transaction_days  = #{transactionDays},
+            </if>
+        </trim>
+        where  member_id  = #{memberId} 
+    </update>
+    <delete id="deleteCommunityMemberById" parameterType="Long">
+        delete from community_member where  member_id  = #{memberId} 
+    </delete>
+
+    <delete id="deleteCommunityMemberByIds" parameterType="Long">
+        delete from community_member where member_id in
+        <foreach item="memberId" collection="array" open="(" separator="," close=")">
+            #{memberId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockLotteryDrawMapper">
+
+    <resultMap id="UnblockLotteryDrawResult" type="UnblockLotteryDraw" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="lotteryTransCount" column="lottery_trans_count" />
+            <result property="transCount" column="trans_count" />
+            <result property="lotteryDrawCount" column="lottery_draw_count" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectUnblockLotteryDrawVo">
+        select   id,  member_id,  lottery_trans_count,  trans_count,  lottery_draw_count,  create_time,  update_time 
+        from unblock_lottery_draw
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockLotteryDrawList" parameterType="UnblockLotteryDraw" resultMap="UnblockLotteryDrawResult">
+        <include refid="selectUnblockLotteryDrawVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "lotteryTransCount != null">
+                        and lottery_trans_count  = #{lotteryTransCount}
+                    </if>
+                    <if test = "transCount != null">
+                        and trans_count  = #{transCount}
+                    </if>
+                    <if test = "lotteryDrawCount != null">
+                        and lottery_draw_count  = #{lotteryDrawCount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockLotteryDrawById" parameterType="Long" resultMap="UnblockLotteryDrawResult">
+        <include refid="selectUnblockLotteryDrawVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockLotteryDraw" parameterType="UnblockLotteryDraw" useGeneratedKeys="true" >
+        insert into unblock_lottery_draw
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "lotteryTransCount != null">
+                lottery_trans_count,
+            </if>
+            <if test = "transCount != null">
+                trans_count,
+            </if>
+            <if test = "lotteryDrawCount != null">
+                lottery_draw_count,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "lotteryTransCount != null">
+                #{lotteryTransCount},
+            </if>
+            <if test = "transCount != null">
+                #{transCount},
+            </if>
+            <if test = "lotteryDrawCount != null">
+                #{lotteryDrawCount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockLotteryDraw" parameterType="UnblockLotteryDraw">
+        update unblock_lottery_draw
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "lotteryTransCount != null">
+            lottery_trans_count  = #{lotteryTransCount},
+            </if>
+            <if test = "transCount != null">
+            trans_count  = #{transCount},
+            </if>
+            <if test = "lotteryDrawCount != null">
+            lottery_draw_count  = #{lotteryDrawCount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockLotteryDrawById" parameterType="Long">
+        delete from unblock_lottery_draw where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockLotteryDrawByIds" parameterType="Long">
+        delete from unblock_lottery_draw where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

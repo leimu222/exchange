@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberApplicationConfigMapper">
+
+    <resultMap id="MemberApplicationConfigResult" type="MemberApplicationConfig" >
+            <result property="id" column="id" />
+            <result property="promotionOn" column="promotion_on" />
+            <result property="rechargeCoinOn" column="recharge_coin_on" />
+            <result property="transactionOn" column="transaction_on" />
+            <result property="withdrawCoinOn" column="withdraw_coin_on" />
+    </resultMap>
+
+    <sql id="selectMemberApplicationConfigVo">
+        select   id,  promotion_on,  recharge_coin_on,  transaction_on,  withdraw_coin_on 
+        from member_application_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberApplicationConfigList" parameterType="MemberApplicationConfig" resultMap="MemberApplicationConfigResult">
+        <include refid="selectMemberApplicationConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "promotionOn != null">
+                        and promotion_on  = #{promotionOn}
+                    </if>
+                    <if test = "rechargeCoinOn != null">
+                        and recharge_coin_on  = #{rechargeCoinOn}
+                    </if>
+                    <if test = "transactionOn != null">
+                        and transaction_on  = #{transactionOn}
+                    </if>
+                    <if test = "withdrawCoinOn != null">
+                        and withdraw_coin_on  = #{withdrawCoinOn}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberApplicationConfigById" parameterType="Long" resultMap="MemberApplicationConfigResult">
+        <include refid="selectMemberApplicationConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberApplicationConfig" parameterType="MemberApplicationConfig" useGeneratedKeys="true" >
+        insert into member_application_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "promotionOn != null">
+                promotion_on,
+            </if>
+            <if test = "rechargeCoinOn != null">
+                recharge_coin_on,
+            </if>
+            <if test = "transactionOn != null">
+                transaction_on,
+            </if>
+            <if test = "withdrawCoinOn != null">
+                withdraw_coin_on,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "promotionOn != null">
+                #{promotionOn},
+            </if>
+            <if test = "rechargeCoinOn != null">
+                #{rechargeCoinOn},
+            </if>
+            <if test = "transactionOn != null">
+                #{transactionOn},
+            </if>
+            <if test = "withdrawCoinOn != null">
+                #{withdrawCoinOn},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberApplicationConfig" parameterType="MemberApplicationConfig">
+        update member_application_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "promotionOn != null">
+            promotion_on  = #{promotionOn},
+            </if>
+            <if test = "rechargeCoinOn != null">
+            recharge_coin_on  = #{rechargeCoinOn},
+            </if>
+            <if test = "transactionOn != null">
+            transaction_on  = #{transactionOn},
+            </if>
+            <if test = "withdrawCoinOn != null">
+            withdraw_coin_on  = #{withdrawCoinOn},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberApplicationConfigById" parameterType="Long">
+        delete from member_application_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberApplicationConfigByIds" parameterType="Long">
+        delete from member_application_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

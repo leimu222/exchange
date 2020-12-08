@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.WalletPriceMapper">
+
+    <resultMap id="WalletPriceResult" type="WalletPrice" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="gasPrice" column="gas_price" />
+            <result property="gasLimit" column="gas_limit" />
+    </resultMap>
+
+    <sql id="selectWalletPriceVo">
+        select   id,  name,  gas_price,  gas_limit 
+        from wallet_price
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectWalletPriceList" parameterType="WalletPrice" resultMap="WalletPriceResult">
+        <include refid="selectWalletPriceVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "gasPrice != null">
+                        and gas_price  = #{gasPrice}
+                    </if>
+                    <if test = "gasLimit != null">
+                        and gas_limit  = #{gasLimit}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectWalletPriceById" parameterType="Integer" resultMap="WalletPriceResult">
+        <include refid="selectWalletPriceVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertWalletPrice" parameterType="WalletPrice" useGeneratedKeys="true" >
+        insert into wallet_price
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "gasPrice != null">
+                gas_price,
+            </if>
+            <if test = "gasLimit != null">
+                gas_limit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "gasPrice != null">
+                #{gasPrice},
+            </if>
+            <if test = "gasLimit != null">
+                #{gasLimit},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateWalletPrice" parameterType="WalletPrice">
+        update wallet_price
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "gasPrice != null">
+            gas_price  = #{gasPrice},
+            </if>
+            <if test = "gasLimit != null">
+            gas_limit  = #{gasLimit},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteWalletPriceById" parameterType="Integer">
+        delete from wallet_price where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteWalletPriceByIds" parameterType="Integer">
+        delete from wallet_price where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberBonusMapper">
+
+    <resultMap id="MemberBonusResult" type="MemberBonus" >
+            <result property="id" column="id" />
+            <result property="arriveTime" column="arrive_time" />
+            <result property="coinId" column="coin_id" />
+            <result property="haveTime" column="have_time" />
+            <result property="memBouns" column="mem_bouns" />
+            <result property="memberId" column="member_id" />
+            <result property="total" column="total" />
+    </resultMap>
+
+    <sql id="selectMemberBonusVo">
+        select   id,  arrive_time,  coin_id,  have_time,  mem_bouns,  member_id,  total 
+        from member_bonus
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberBonusList" parameterType="MemberBonus" resultMap="MemberBonusResult">
+        <include refid="selectMemberBonusVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "arriveTime != null and arriveTime != ''">
+                        and arrive_time  = #{arriveTime}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "haveTime != null and haveTime != ''">
+                        and have_time  = #{haveTime}
+                    </if>
+                    <if test = "memBouns != null">
+                        and mem_bouns  = #{memBouns}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "total != null">
+                        and total  = #{total}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberBonusById" parameterType="Long" resultMap="MemberBonusResult">
+        <include refid="selectMemberBonusVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberBonus" parameterType="MemberBonus" useGeneratedKeys="true" >
+        insert into member_bonus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "arriveTime != null">
+                arrive_time,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "haveTime != null">
+                have_time,
+            </if>
+            <if test = "memBouns != null">
+                mem_bouns,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "total != null">
+                total,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "arriveTime != null">
+                #{arriveTime},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "haveTime != null">
+                #{haveTime},
+            </if>
+            <if test = "memBouns != null">
+                #{memBouns},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "total != null">
+                #{total},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberBonus" parameterType="MemberBonus">
+        update member_bonus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "arriveTime != null">
+            arrive_time  = #{arriveTime},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "haveTime != null">
+            have_time  = #{haveTime},
+            </if>
+            <if test = "memBouns != null">
+            mem_bouns  = #{memBouns},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "total != null">
+            total  = #{total},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberBonusById" parameterType="Long">
+        delete from member_bonus where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberBonusByIds" parameterType="Long">
+        delete from member_bonus where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

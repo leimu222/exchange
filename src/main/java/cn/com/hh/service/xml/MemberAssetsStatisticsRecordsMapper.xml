@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberAssetsStatisticsRecordsMapper">
+
+    <resultMap id="MemberAssetsStatisticsRecordsResult" type="MemberAssetsStatisticsRecords" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="proxyId" column="proxy_id" />
+            <result property="nodeId" column="node_id" />
+            <result property="totalDeposit" column="total_deposit" />
+            <result property="totalWithdraw" column="total_withdraw" />
+            <result property="netDeposit" column="net_deposit" />
+            <result property="freezeMargin" column="freeze_margin" />
+            <result property="assets" column="assets" />
+            <result property="accountEquity" column="account_equity" />
+            <result property="handlingFee" column="handling_fee" />
+            <result property="handlingProfit" column="handling_profit" />
+            <result property="handlingInterest" column="handling_interest" />
+            <result property="closeProfit" column="close_profit" />
+            <result property="closeFee" column="close_fee" />
+            <result property="netProfit" column="net_profit" />
+            <result property="riskRate" column="risk_rate" />
+            <result property="closeNum" column="close_num" />
+    </resultMap>
+
+    <sql id="selectMemberAssetsStatisticsRecordsVo">
+        select   id,  member_id,  proxy_id,  node_id,  total_deposit,  total_withdraw,  net_deposit,  freeze_margin,  assets,  account_equity,  handling_fee,  handling_profit,  handling_interest,  close_profit,  close_fee,  net_profit,  risk_rate,  close_num 
+        from member_assets_statistics_records
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberAssetsStatisticsRecordsList" parameterType="MemberAssetsStatisticsRecords" resultMap="MemberAssetsStatisticsRecordsResult">
+        <include refid="selectMemberAssetsStatisticsRecordsVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "proxyId != null">
+                        and proxy_id  = #{proxyId}
+                    </if>
+                    <if test = "nodeId != null">
+                        and node_id  = #{nodeId}
+                    </if>
+                    <if test = "totalDeposit != null">
+                        and total_deposit  = #{totalDeposit}
+                    </if>
+                    <if test = "totalWithdraw != null">
+                        and total_withdraw  = #{totalWithdraw}
+                    </if>
+                    <if test = "netDeposit != null">
+                        and net_deposit  = #{netDeposit}
+                    </if>
+                    <if test = "freezeMargin != null">
+                        and freeze_margin  = #{freezeMargin}
+                    </if>
+                    <if test = "assets != null">
+                        and assets  = #{assets}
+                    </if>
+                    <if test = "accountEquity != null">
+                        and account_equity  = #{accountEquity}
+                    </if>
+                    <if test = "handlingFee != null">
+                        and handling_fee  = #{handlingFee}
+                    </if>
+                    <if test = "handlingProfit != null">
+                        and handling_profit  = #{handlingProfit}
+                    </if>
+                    <if test = "handlingInterest != null">
+                        and handling_interest  = #{handlingInterest}
+                    </if>
+                    <if test = "closeProfit != null">
+                        and close_profit  = #{closeProfit}
+                    </if>
+                    <if test = "closeFee != null">
+                        and close_fee  = #{closeFee}
+                    </if>
+                    <if test = "netProfit != null">
+                        and net_profit  = #{netProfit}
+                    </if>
+                    <if test = "riskRate != null">
+                        and risk_rate  = #{riskRate}
+                    </if>
+                    <if test = "closeNum != null">
+                        and close_num  = #{closeNum}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberAssetsStatisticsRecordsById" parameterType="Long" resultMap="MemberAssetsStatisticsRecordsResult">
+        <include refid="selectMemberAssetsStatisticsRecordsVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberAssetsStatisticsRecords" parameterType="MemberAssetsStatisticsRecords" useGeneratedKeys="true" >
+        insert into member_assets_statistics_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "proxyId != null">
+                proxy_id,
+            </if>
+            <if test = "nodeId != null">
+                node_id,
+            </if>
+            <if test = "totalDeposit != null">
+                total_deposit,
+            </if>
+            <if test = "totalWithdraw != null">
+                total_withdraw,
+            </if>
+            <if test = "netDeposit != null">
+                net_deposit,
+            </if>
+            <if test = "freezeMargin != null">
+                freeze_margin,
+            </if>
+            <if test = "assets != null">
+                assets,
+            </if>
+            <if test = "accountEquity != null">
+                account_equity,
+            </if>
+            <if test = "handlingFee != null">
+                handling_fee,
+            </if>
+            <if test = "handlingProfit != null">
+                handling_profit,
+            </if>
+            <if test = "handlingInterest != null">
+                handling_interest,
+            </if>
+            <if test = "closeProfit != null">
+                close_profit,
+            </if>
+            <if test = "closeFee != null">
+                close_fee,
+            </if>
+            <if test = "netProfit != null">
+                net_profit,
+            </if>
+            <if test = "riskRate != null">
+                risk_rate,
+            </if>
+            <if test = "closeNum != null">
+                close_num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "proxyId != null">
+                #{proxyId},
+            </if>
+            <if test = "nodeId != null">
+                #{nodeId},
+            </if>
+            <if test = "totalDeposit != null">
+                #{totalDeposit},
+            </if>
+            <if test = "totalWithdraw != null">
+                #{totalWithdraw},
+            </if>
+            <if test = "netDeposit != null">
+                #{netDeposit},
+            </if>
+            <if test = "freezeMargin != null">
+                #{freezeMargin},
+            </if>
+            <if test = "assets != null">
+                #{assets},
+            </if>
+            <if test = "accountEquity != null">
+                #{accountEquity},
+            </if>
+            <if test = "handlingFee != null">
+                #{handlingFee},
+            </if>
+            <if test = "handlingProfit != null">
+                #{handlingProfit},
+            </if>
+            <if test = "handlingInterest != null">
+                #{handlingInterest},
+            </if>
+            <if test = "closeProfit != null">
+                #{closeProfit},
+            </if>
+            <if test = "closeFee != null">
+                #{closeFee},
+            </if>
+            <if test = "netProfit != null">
+                #{netProfit},
+            </if>
+            <if test = "riskRate != null">
+                #{riskRate},
+            </if>
+            <if test = "closeNum != null">
+                #{closeNum},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberAssetsStatisticsRecords" parameterType="MemberAssetsStatisticsRecords">
+        update member_assets_statistics_records
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "proxyId != null">
+            proxy_id  = #{proxyId},
+            </if>
+            <if test = "nodeId != null">
+            node_id  = #{nodeId},
+            </if>
+            <if test = "totalDeposit != null">
+            total_deposit  = #{totalDeposit},
+            </if>
+            <if test = "totalWithdraw != null">
+            total_withdraw  = #{totalWithdraw},
+            </if>
+            <if test = "netDeposit != null">
+            net_deposit  = #{netDeposit},
+            </if>
+            <if test = "freezeMargin != null">
+            freeze_margin  = #{freezeMargin},
+            </if>
+            <if test = "assets != null">
+            assets  = #{assets},
+            </if>
+            <if test = "accountEquity != null">
+            account_equity  = #{accountEquity},
+            </if>
+            <if test = "handlingFee != null">
+            handling_fee  = #{handlingFee},
+            </if>
+            <if test = "handlingProfit != null">
+            handling_profit  = #{handlingProfit},
+            </if>
+            <if test = "handlingInterest != null">
+            handling_interest  = #{handlingInterest},
+            </if>
+            <if test = "closeProfit != null">
+            close_profit  = #{closeProfit},
+            </if>
+            <if test = "closeFee != null">
+            close_fee  = #{closeFee},
+            </if>
+            <if test = "netProfit != null">
+            net_profit  = #{netProfit},
+            </if>
+            <if test = "riskRate != null">
+            risk_rate  = #{riskRate},
+            </if>
+            <if test = "closeNum != null">
+            close_num  = #{closeNum},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberAssetsStatisticsRecordsById" parameterType="Long">
+        delete from member_assets_statistics_records where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberAssetsStatisticsRecordsByIds" parameterType="Long">
+        delete from member_assets_statistics_records where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberPromotionMapper">
+
+    <resultMap id="MemberPromotionResult" type="MemberPromotion" >
+            <result property="id" column="id" />
+            <result property="inviteesId" column="invitees_id" />
+            <result property="inviterId" column="inviter_id" />
+            <result property="level" column="level" />
+            <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <sql id="selectMemberPromotionVo">
+        select   id,  invitees_id,  inviter_id,  level,  create_time 
+        from member_promotion
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberPromotionList" parameterType="MemberPromotion" resultMap="MemberPromotionResult">
+        <include refid="selectMemberPromotionVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "inviteesId != null">
+                        and invitees_id  = #{inviteesId}
+                    </if>
+                    <if test = "inviterId != null">
+                        and inviter_id  = #{inviterId}
+                    </if>
+                    <if test = "level != null">
+                        and level  = #{level}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberPromotionById" parameterType="Long" resultMap="MemberPromotionResult">
+        <include refid="selectMemberPromotionVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberPromotion" parameterType="MemberPromotion" useGeneratedKeys="true" >
+        insert into member_promotion
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "inviteesId != null">
+                invitees_id,
+            </if>
+            <if test = "inviterId != null">
+                inviter_id,
+            </if>
+            <if test = "level != null">
+                level,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "inviteesId != null">
+                #{inviteesId},
+            </if>
+            <if test = "inviterId != null">
+                #{inviterId},
+            </if>
+            <if test = "level != null">
+                #{level},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberPromotion" parameterType="MemberPromotion">
+        update member_promotion
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "inviteesId != null">
+            invitees_id  = #{inviteesId},
+            </if>
+            <if test = "inviterId != null">
+            inviter_id  = #{inviterId},
+            </if>
+            <if test = "level != null">
+            level  = #{level},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberPromotionById" parameterType="Long">
+        delete from member_promotion where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberPromotionByIds" parameterType="Long">
+        delete from member_promotion where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

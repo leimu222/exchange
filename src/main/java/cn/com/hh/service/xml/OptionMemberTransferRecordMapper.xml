@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.OptionMemberTransferRecordMapper">
+
+    <resultMap id="OptionMemberTransferRecordResult" type="OptionMemberTransferRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="orginalProxyId" column="orginal_proxy_id" />
+            <result property="newProxyId" column="new_proxy_id" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectOptionMemberTransferRecordVo">
+        select   id,  member_id,  orginal_proxy_id,  new_proxy_id,  create_time,  sequence 
+        from option_member_transfer_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectOptionMemberTransferRecordList" parameterType="OptionMemberTransferRecord" resultMap="OptionMemberTransferRecordResult">
+        <include refid="selectOptionMemberTransferRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "orginalProxyId != null">
+                        and orginal_proxy_id  = #{orginalProxyId}
+                    </if>
+                    <if test = "newProxyId != null">
+                        and new_proxy_id  = #{newProxyId}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectOptionMemberTransferRecordById" parameterType="Long" resultMap="OptionMemberTransferRecordResult">
+        <include refid="selectOptionMemberTransferRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertOptionMemberTransferRecord" parameterType="OptionMemberTransferRecord" useGeneratedKeys="true" >
+        insert into option_member_transfer_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "orginalProxyId != null">
+                orginal_proxy_id,
+            </if>
+            <if test = "newProxyId != null">
+                new_proxy_id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "orginalProxyId != null">
+                #{orginalProxyId},
+            </if>
+            <if test = "newProxyId != null">
+                #{newProxyId},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateOptionMemberTransferRecord" parameterType="OptionMemberTransferRecord">
+        update option_member_transfer_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "orginalProxyId != null">
+            orginal_proxy_id  = #{orginalProxyId},
+            </if>
+            <if test = "newProxyId != null">
+            new_proxy_id  = #{newProxyId},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteOptionMemberTransferRecordById" parameterType="Long">
+        delete from option_member_transfer_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteOptionMemberTransferRecordByIds" parameterType="Long">
+        delete from option_member_transfer_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

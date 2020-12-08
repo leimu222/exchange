@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ExchangeFavorSymbolMapper">
+
+    <resultMap id="ExchangeFavorSymbolResult" type="ExchangeFavorSymbol" >
+            <result property="id" column="id" />
+            <result property="addTime" column="add_time" />
+            <result property="memberId" column="member_id" />
+            <result property="symbol" column="symbol" />
+    </resultMap>
+
+    <sql id="selectExchangeFavorSymbolVo">
+        select   id,  add_time,  member_id,  symbol 
+        from exchange_favor_symbol
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectExchangeFavorSymbolList" parameterType="ExchangeFavorSymbol" resultMap="ExchangeFavorSymbolResult">
+        <include refid="selectExchangeFavorSymbolVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "addTime != null and addTime != ''">
+                        and add_time  = #{addTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectExchangeFavorSymbolById" parameterType="Long" resultMap="ExchangeFavorSymbolResult">
+        <include refid="selectExchangeFavorSymbolVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertExchangeFavorSymbol" parameterType="ExchangeFavorSymbol" useGeneratedKeys="true" >
+        insert into exchange_favor_symbol
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "addTime != null">
+                add_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "addTime != null">
+                #{addTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateExchangeFavorSymbol" parameterType="ExchangeFavorSymbol">
+        update exchange_favor_symbol
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "addTime != null">
+            add_time  = #{addTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteExchangeFavorSymbolById" parameterType="Long">
+        delete from exchange_favor_symbol where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteExchangeFavorSymbolByIds" parameterType="Long">
+        delete from exchange_favor_symbol where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

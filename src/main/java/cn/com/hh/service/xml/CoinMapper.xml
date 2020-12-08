@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CoinMapper">
+
+    <resultMap id="CoinResult" type="Coin" >
+            <result property="name" column="name" />
+            <result property="canAutoWithdraw" column="can_auto_withdraw" />
+            <result property="canRecharge" column="can_recharge" />
+            <result property="canTransfer" column="can_transfer" />
+            <result property="canWithdraw" column="can_withdraw" />
+            <result property="cnyRate" column="cny_rate" />
+            <result property="coldWalletAddress" column="cold_wallet_address" />
+            <result property="enableRpc" column="enable_rpc" />
+            <result property="hasLegal" column="has_legal" />
+            <result property="isPlatformCoin" column="is_platform_coin" />
+            <result property="masterAddress" column="master_address" />
+            <result property="maxDailyWithdrawRate" column="max_daily_withdraw_rate" />
+            <result property="maxTxFee" column="max_tx_fee" />
+            <result property="maxWithdrawAmount" column="max_withdraw_amount" />
+            <result property="minRechargeAmount" column="min_recharge_amount" />
+            <result property="minTxFee" column="min_tx_fee" />
+            <result property="minWithdrawAmount" column="min_withdraw_amount" />
+            <result property="minerFee" column="miner_fee" />
+            <result property="nameCn" column="name_cn" />
+            <result property="sgdRate" column="sgd_rate" />
+            <result property="sort" column="sort" />
+            <result property="status" column="status" />
+            <result property="unit" column="unit" />
+            <result property="usdRate" column="usd_rate" />
+            <result property="withdrawScale" column="withdraw_scale" />
+            <result property="withdrawThreshold" column="withdraw_threshold" />
+            <result property="img" column="img" />
+            <result property="contractAddress" column="contract_address" />
+            <result property="chainType" column="chain_type" />
+            <result property="enablePool" column="enable_pool" />
+            <result property="coinArea" column="coin_area" />
+            <result property="dayIssuedAmount" column="day_issued_amount" />
+            <result property="minHoldBalance" column="min_hold_balance" />
+            <result property="capitalPoolAddress" column="capital_pool_address" />
+            <result property="capitalPoolPrivateKey" column="capital_pool_private_key" />
+    </resultMap>
+
+    <sql id="selectCoinVo">
+        select   name,  can_auto_withdraw,  can_recharge,  can_transfer,  can_withdraw,  cny_rate,  cold_wallet_address,  enable_rpc,  has_legal,  is_platform_coin,  master_address,  max_daily_withdraw_rate,  max_tx_fee,  max_withdraw_amount,  min_recharge_amount,  min_tx_fee,  min_withdraw_amount,  miner_fee,  name_cn,  sgd_rate,  sort,  status,  unit,  usd_rate,  withdraw_scale,  withdraw_threshold,  img,  contract_address,  chain_type,  enable_pool,  coin_area,  day_issued_amount,  min_hold_balance,  capital_pool_address,  capital_pool_private_key 
+        from coin
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCoinList" parameterType="Coin" resultMap="CoinResult">
+        <include refid="selectCoinVo"/>
+        <where>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "canAutoWithdraw != null">
+                        and can_auto_withdraw  = #{canAutoWithdraw}
+                    </if>
+                    <if test = "canRecharge != null">
+                        and can_recharge  = #{canRecharge}
+                    </if>
+                    <if test = "canTransfer != null">
+                        and can_transfer  = #{canTransfer}
+                    </if>
+                    <if test = "canWithdraw != null">
+                        and can_withdraw  = #{canWithdraw}
+                    </if>
+                    <if test = "cnyRate != null">
+                        and cny_rate  = #{cnyRate}
+                    </if>
+                    <if test = "coldWalletAddress != null and coldWalletAddress != ''">
+                        and cold_wallet_address  = #{coldWalletAddress}
+                    </if>
+                    <if test = "enableRpc != null">
+                        and enable_rpc  = #{enableRpc}
+                    </if>
+                    <if test = "hasLegal != null">
+                        and has_legal  = #{hasLegal}
+                    </if>
+                    <if test = "isPlatformCoin != null">
+                        and is_platform_coin  = #{isPlatformCoin}
+                    </if>
+                    <if test = "masterAddress != null and masterAddress != ''">
+                        and master_address  = #{masterAddress}
+                    </if>
+                    <if test = "maxDailyWithdrawRate != null">
+                        and max_daily_withdraw_rate  = #{maxDailyWithdrawRate}
+                    </if>
+                    <if test = "maxTxFee != null">
+                        and max_tx_fee  = #{maxTxFee}
+                    </if>
+                    <if test = "maxWithdrawAmount != null">
+                        and max_withdraw_amount  = #{maxWithdrawAmount}
+                    </if>
+                    <if test = "minRechargeAmount != null">
+                        and min_recharge_amount  = #{minRechargeAmount}
+                    </if>
+                    <if test = "minTxFee != null">
+                        and min_tx_fee  = #{minTxFee}
+                    </if>
+                    <if test = "minWithdrawAmount != null">
+                        and min_withdraw_amount  = #{minWithdrawAmount}
+                    </if>
+                    <if test = "minerFee != null">
+                        and miner_fee  = #{minerFee}
+                    </if>
+                    <if test = "nameCn != null and nameCn != ''">
+                        and name_cn  = #{nameCn}
+                    </if>
+                    <if test = "sgdRate != null">
+                        and sgd_rate  = #{sgdRate}
+                    </if>
+                    <if test = "sort != null">
+                        and sort  = #{sort}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "unit != null and unit != ''">
+                        and unit  = #{unit}
+                    </if>
+                    <if test = "usdRate != null">
+                        and usd_rate  = #{usdRate}
+                    </if>
+                    <if test = "withdrawScale != null">
+                        and withdraw_scale  = #{withdrawScale}
+                    </if>
+                    <if test = "withdrawThreshold != null">
+                        and withdraw_threshold  = #{withdrawThreshold}
+                    </if>
+                    <if test = "img != null and img != ''">
+                        and img  = #{img}
+                    </if>
+                    <if test = "contractAddress != null and contractAddress != ''">
+                        and contract_address  = #{contractAddress}
+                    </if>
+                    <if test = "chainType != null">
+                        and chain_type  = #{chainType}
+                    </if>
+                    <if test = "enablePool != null">
+                        and enable_pool  = #{enablePool}
+                    </if>
+                    <if test = "coinArea != null">
+                        and coin_area  = #{coinArea}
+                    </if>
+                    <if test = "dayIssuedAmount != null">
+                        and day_issued_amount  = #{dayIssuedAmount}
+                    </if>
+                    <if test = "minHoldBalance != null">
+                        and min_hold_balance  = #{minHoldBalance}
+                    </if>
+                    <if test = "capitalPoolAddress != null and capitalPoolAddress != ''">
+                        and capital_pool_address  = #{capitalPoolAddress}
+                    </if>
+                    <if test = "capitalPoolPrivateKey != null and capitalPoolPrivateKey != ''">
+                        and capital_pool_private_key  = #{capitalPoolPrivateKey}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCoinById" parameterType="String" resultMap="CoinResult">
+        <include refid="selectCoinVo"/>
+        where  name  = #{name} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCoin" parameterType="Coin" useGeneratedKeys="true" >
+        insert into coin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "canAutoWithdraw != null">
+                can_auto_withdraw,
+            </if>
+            <if test = "canRecharge != null">
+                can_recharge,
+            </if>
+            <if test = "canTransfer != null">
+                can_transfer,
+            </if>
+            <if test = "canWithdraw != null">
+                can_withdraw,
+            </if>
+            <if test = "cnyRate != null">
+                cny_rate,
+            </if>
+            <if test = "coldWalletAddress != null">
+                cold_wallet_address,
+            </if>
+            <if test = "enableRpc != null">
+                enable_rpc,
+            </if>
+            <if test = "hasLegal != null">
+                has_legal,
+            </if>
+            <if test = "isPlatformCoin != null">
+                is_platform_coin,
+            </if>
+            <if test = "masterAddress != null">
+                master_address,
+            </if>
+            <if test = "maxDailyWithdrawRate != null">
+                max_daily_withdraw_rate,
+            </if>
+            <if test = "maxTxFee != null">
+                max_tx_fee,
+            </if>
+            <if test = "maxWithdrawAmount != null">
+                max_withdraw_amount,
+            </if>
+            <if test = "minRechargeAmount != null">
+                min_recharge_amount,
+            </if>
+            <if test = "minTxFee != null">
+                min_tx_fee,
+            </if>
+            <if test = "minWithdrawAmount != null">
+                min_withdraw_amount,
+            </if>
+            <if test = "minerFee != null">
+                miner_fee,
+            </if>
+            <if test = "nameCn != null">
+                name_cn,
+            </if>
+            <if test = "sgdRate != null">
+                sgd_rate,
+            </if>
+            <if test = "sort != null">
+                sort,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "unit != null">
+                unit,
+            </if>
+            <if test = "usdRate != null">
+                usd_rate,
+            </if>
+            <if test = "withdrawScale != null">
+                withdraw_scale,
+            </if>
+            <if test = "withdrawThreshold != null">
+                withdraw_threshold,
+            </if>
+            <if test = "img != null">
+                img,
+            </if>
+            <if test = "contractAddress != null">
+                contract_address,
+            </if>
+            <if test = "chainType != null">
+                chain_type,
+            </if>
+            <if test = "enablePool != null">
+                enable_pool,
+            </if>
+            <if test = "coinArea != null">
+                coin_area,
+            </if>
+            <if test = "dayIssuedAmount != null">
+                day_issued_amount,
+            </if>
+            <if test = "minHoldBalance != null">
+                min_hold_balance,
+            </if>
+            <if test = "capitalPoolAddress != null">
+                capital_pool_address,
+            </if>
+            <if test = "capitalPoolPrivateKey != null">
+                capital_pool_private_key,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "canAutoWithdraw != null">
+                #{canAutoWithdraw},
+            </if>
+            <if test = "canRecharge != null">
+                #{canRecharge},
+            </if>
+            <if test = "canTransfer != null">
+                #{canTransfer},
+            </if>
+            <if test = "canWithdraw != null">
+                #{canWithdraw},
+            </if>
+            <if test = "cnyRate != null">
+                #{cnyRate},
+            </if>
+            <if test = "coldWalletAddress != null">
+                #{coldWalletAddress},
+            </if>
+            <if test = "enableRpc != null">
+                #{enableRpc},
+            </if>
+            <if test = "hasLegal != null">
+                #{hasLegal},
+            </if>
+            <if test = "isPlatformCoin != null">
+                #{isPlatformCoin},
+            </if>
+            <if test = "masterAddress != null">
+                #{masterAddress},
+            </if>
+            <if test = "maxDailyWithdrawRate != null">
+                #{maxDailyWithdrawRate},
+            </if>
+            <if test = "maxTxFee != null">
+                #{maxTxFee},
+            </if>
+            <if test = "maxWithdrawAmount != null">
+                #{maxWithdrawAmount},
+            </if>
+            <if test = "minRechargeAmount != null">
+                #{minRechargeAmount},
+            </if>
+            <if test = "minTxFee != null">
+                #{minTxFee},
+            </if>
+            <if test = "minWithdrawAmount != null">
+                #{minWithdrawAmount},
+            </if>
+            <if test = "minerFee != null">
+                #{minerFee},
+            </if>
+            <if test = "nameCn != null">
+                #{nameCn},
+            </if>
+            <if test = "sgdRate != null">
+                #{sgdRate},
+            </if>
+            <if test = "sort != null">
+                #{sort},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "unit != null">
+                #{unit},
+            </if>
+            <if test = "usdRate != null">
+                #{usdRate},
+            </if>
+            <if test = "withdrawScale != null">
+                #{withdrawScale},
+            </if>
+            <if test = "withdrawThreshold != null">
+                #{withdrawThreshold},
+            </if>
+            <if test = "img != null">
+                #{img},
+            </if>
+            <if test = "contractAddress != null">
+                #{contractAddress},
+            </if>
+            <if test = "chainType != null">
+                #{chainType},
+            </if>
+            <if test = "enablePool != null">
+                #{enablePool},
+            </if>
+            <if test = "coinArea != null">
+                #{coinArea},
+            </if>
+            <if test = "dayIssuedAmount != null">
+                #{dayIssuedAmount},
+            </if>
+            <if test = "minHoldBalance != null">
+                #{minHoldBalance},
+            </if>
+            <if test = "capitalPoolAddress != null">
+                #{capitalPoolAddress},
+            </if>
+            <if test = "capitalPoolPrivateKey != null">
+                #{capitalPoolPrivateKey},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCoin" parameterType="Coin">
+        update coin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "canAutoWithdraw != null">
+            can_auto_withdraw  = #{canAutoWithdraw},
+            </if>
+            <if test = "canRecharge != null">
+            can_recharge  = #{canRecharge},
+            </if>
+            <if test = "canTransfer != null">
+            can_transfer  = #{canTransfer},
+            </if>
+            <if test = "canWithdraw != null">
+            can_withdraw  = #{canWithdraw},
+            </if>
+            <if test = "cnyRate != null">
+            cny_rate  = #{cnyRate},
+            </if>
+            <if test = "coldWalletAddress != null">
+            cold_wallet_address  = #{coldWalletAddress},
+            </if>
+            <if test = "enableRpc != null">
+            enable_rpc  = #{enableRpc},
+            </if>
+            <if test = "hasLegal != null">
+            has_legal  = #{hasLegal},
+            </if>
+            <if test = "isPlatformCoin != null">
+            is_platform_coin  = #{isPlatformCoin},
+            </if>
+            <if test = "masterAddress != null">
+            master_address  = #{masterAddress},
+            </if>
+            <if test = "maxDailyWithdrawRate != null">
+            max_daily_withdraw_rate  = #{maxDailyWithdrawRate},
+            </if>
+            <if test = "maxTxFee != null">
+            max_tx_fee  = #{maxTxFee},
+            </if>
+            <if test = "maxWithdrawAmount != null">
+            max_withdraw_amount  = #{maxWithdrawAmount},
+            </if>
+            <if test = "minRechargeAmount != null">
+            min_recharge_amount  = #{minRechargeAmount},
+            </if>
+            <if test = "minTxFee != null">
+            min_tx_fee  = #{minTxFee},
+            </if>
+            <if test = "minWithdrawAmount != null">
+            min_withdraw_amount  = #{minWithdrawAmount},
+            </if>
+            <if test = "minerFee != null">
+            miner_fee  = #{minerFee},
+            </if>
+            <if test = "nameCn != null">
+            name_cn  = #{nameCn},
+            </if>
+            <if test = "sgdRate != null">
+            sgd_rate  = #{sgdRate},
+            </if>
+            <if test = "sort != null">
+            sort  = #{sort},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "unit != null">
+            unit  = #{unit},
+            </if>
+            <if test = "usdRate != null">
+            usd_rate  = #{usdRate},
+            </if>
+            <if test = "withdrawScale != null">
+            withdraw_scale  = #{withdrawScale},
+            </if>
+            <if test = "withdrawThreshold != null">
+            withdraw_threshold  = #{withdrawThreshold},
+            </if>
+            <if test = "img != null">
+            img  = #{img},
+            </if>
+            <if test = "contractAddress != null">
+            contract_address  = #{contractAddress},
+            </if>
+            <if test = "chainType != null">
+            chain_type  = #{chainType},
+            </if>
+            <if test = "enablePool != null">
+            enable_pool  = #{enablePool},
+            </if>
+            <if test = "coinArea != null">
+            coin_area  = #{coinArea},
+            </if>
+            <if test = "dayIssuedAmount != null">
+            day_issued_amount  = #{dayIssuedAmount},
+            </if>
+            <if test = "minHoldBalance != null">
+            min_hold_balance  = #{minHoldBalance},
+            </if>
+            <if test = "capitalPoolAddress != null">
+            capital_pool_address  = #{capitalPoolAddress},
+            </if>
+            <if test = "capitalPoolPrivateKey != null">
+            capital_pool_private_key  = #{capitalPoolPrivateKey},
+            </if>
+        </trim>
+        where  name  = #{name} 
+    </update>
+    <delete id="deleteCoinById" parameterType="String">
+        delete from coin where  name  = #{name} 
+    </delete>
+
+    <delete id="deleteCoinByIds" parameterType="String">
+        delete from coin where name in
+        <foreach item="name" collection="array" open="(" separator="," close=")">
+            #{name}
+        </foreach>
+    </delete>
+</mapper>

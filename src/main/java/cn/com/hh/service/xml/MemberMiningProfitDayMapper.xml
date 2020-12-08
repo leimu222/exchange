@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberMiningProfitDayMapper">
+
+    <resultMap id="MemberMiningProfitDayResult" type="MemberMiningProfitDay" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coin" column="coin" />
+            <result property="holdBalance" column="hold_balance" />
+            <result property="holdProfit" column="hold_profit" />
+            <result property="promotionProfit" column="promotion_profit" />
+            <result property="holdComputingPower" column="hold_computing_power" />
+            <result property="promotionComputingPower" column="promotion_computing_power" />
+            <result property="dayReleaseAmount" column="day_release_amount" />
+            <result property="holdReleaseRate" column="hold_release_rate" />
+            <result property="promotionReleaseRate" column="promotion_release_rate" />
+            <result property="holdSort" column="hold_sort" />
+            <result property="holdRate" column="hold_rate" />
+            <result property="ifBestHold" column="if_best_hold" />
+            <result property="createTime" column="create_time" />
+    </resultMap>
+
+    <sql id="selectMemberMiningProfitDayVo">
+        select   id,  member_id,  coin,  hold_balance,  hold_profit,  promotion_profit,  hold_computing_power,  promotion_computing_power,  day_release_amount,  hold_release_rate,  promotion_release_rate,  hold_sort,  hold_rate,  if_best_hold,  create_time 
+        from member_mining_profit_day
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberMiningProfitDayList" parameterType="MemberMiningProfitDay" resultMap="MemberMiningProfitDayResult">
+        <include refid="selectMemberMiningProfitDayVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "holdBalance != null">
+                        and hold_balance  = #{holdBalance}
+                    </if>
+                    <if test = "holdProfit != null">
+                        and hold_profit  = #{holdProfit}
+                    </if>
+                    <if test = "promotionProfit != null">
+                        and promotion_profit  = #{promotionProfit}
+                    </if>
+                    <if test = "holdComputingPower != null">
+                        and hold_computing_power  = #{holdComputingPower}
+                    </if>
+                    <if test = "promotionComputingPower != null">
+                        and promotion_computing_power  = #{promotionComputingPower}
+                    </if>
+                    <if test = "dayReleaseAmount != null">
+                        and day_release_amount  = #{dayReleaseAmount}
+                    </if>
+                    <if test = "holdReleaseRate != null">
+                        and hold_release_rate  = #{holdReleaseRate}
+                    </if>
+                    <if test = "promotionReleaseRate != null">
+                        and promotion_release_rate  = #{promotionReleaseRate}
+                    </if>
+                    <if test = "holdSort != null">
+                        and hold_sort  = #{holdSort}
+                    </if>
+                    <if test = "holdRate != null">
+                        and hold_rate  = #{holdRate}
+                    </if>
+                    <if test = "ifBestHold != null">
+                        and if_best_hold  = #{ifBestHold}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberMiningProfitDayById" parameterType="Long" resultMap="MemberMiningProfitDayResult">
+        <include refid="selectMemberMiningProfitDayVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberMiningProfitDay" parameterType="MemberMiningProfitDay" useGeneratedKeys="true" >
+        insert into member_mining_profit_day
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "holdBalance != null">
+                hold_balance,
+            </if>
+            <if test = "holdProfit != null">
+                hold_profit,
+            </if>
+            <if test = "promotionProfit != null">
+                promotion_profit,
+            </if>
+            <if test = "holdComputingPower != null">
+                hold_computing_power,
+            </if>
+            <if test = "promotionComputingPower != null">
+                promotion_computing_power,
+            </if>
+            <if test = "dayReleaseAmount != null">
+                day_release_amount,
+            </if>
+            <if test = "holdReleaseRate != null">
+                hold_release_rate,
+            </if>
+            <if test = "promotionReleaseRate != null">
+                promotion_release_rate,
+            </if>
+            <if test = "holdSort != null">
+                hold_sort,
+            </if>
+            <if test = "holdRate != null">
+                hold_rate,
+            </if>
+            <if test = "ifBestHold != null">
+                if_best_hold,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "holdBalance != null">
+                #{holdBalance},
+            </if>
+            <if test = "holdProfit != null">
+                #{holdProfit},
+            </if>
+            <if test = "promotionProfit != null">
+                #{promotionProfit},
+            </if>
+            <if test = "holdComputingPower != null">
+                #{holdComputingPower},
+            </if>
+            <if test = "promotionComputingPower != null">
+                #{promotionComputingPower},
+            </if>
+            <if test = "dayReleaseAmount != null">
+                #{dayReleaseAmount},
+            </if>
+            <if test = "holdReleaseRate != null">
+                #{holdReleaseRate},
+            </if>
+            <if test = "promotionReleaseRate != null">
+                #{promotionReleaseRate},
+            </if>
+            <if test = "holdSort != null">
+                #{holdSort},
+            </if>
+            <if test = "holdRate != null">
+                #{holdRate},
+            </if>
+            <if test = "ifBestHold != null">
+                #{ifBestHold},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberMiningProfitDay" parameterType="MemberMiningProfitDay">
+        update member_mining_profit_day
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "holdBalance != null">
+            hold_balance  = #{holdBalance},
+            </if>
+            <if test = "holdProfit != null">
+            hold_profit  = #{holdProfit},
+            </if>
+            <if test = "promotionProfit != null">
+            promotion_profit  = #{promotionProfit},
+            </if>
+            <if test = "holdComputingPower != null">
+            hold_computing_power  = #{holdComputingPower},
+            </if>
+            <if test = "promotionComputingPower != null">
+            promotion_computing_power  = #{promotionComputingPower},
+            </if>
+            <if test = "dayReleaseAmount != null">
+            day_release_amount  = #{dayReleaseAmount},
+            </if>
+            <if test = "holdReleaseRate != null">
+            hold_release_rate  = #{holdReleaseRate},
+            </if>
+            <if test = "promotionReleaseRate != null">
+            promotion_release_rate  = #{promotionReleaseRate},
+            </if>
+            <if test = "holdSort != null">
+            hold_sort  = #{holdSort},
+            </if>
+            <if test = "holdRate != null">
+            hold_rate  = #{holdRate},
+            </if>
+            <if test = "ifBestHold != null">
+            if_best_hold  = #{ifBestHold},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberMiningProfitDayById" parameterType="Long">
+        delete from member_mining_profit_day where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberMiningProfitDayByIds" parameterType="Long">
+        delete from member_mining_profit_day where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

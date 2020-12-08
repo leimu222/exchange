@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.BusinessAuthApplyMapper">
+
+    <resultMap id="BusinessAuthApplyResult" type="BusinessAuthApply" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="auditingTime" column="auditing_time" />
+            <result property="authInfo" column="auth_info" />
+            <result property="certifiedBusinessStatus" column="certified_business_status" />
+            <result property="createTime" column="create_time" />
+            <result property="depositRecordId" column="deposit_record_id" />
+            <result property="detail" column="detail" />
+            <result property="updateTime" column="update_time" />
+            <result property="businessAuthDepositId" column="business_auth_deposit_id" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectBusinessAuthApplyVo">
+        select   id,  amount,  auditing_time,  auth_info,  certified_business_status,  create_time,  deposit_record_id,  detail,  update_time,  business_auth_deposit_id,  member_id 
+        from business_auth_apply
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectBusinessAuthApplyList" parameterType="BusinessAuthApply" resultMap="BusinessAuthApplyResult">
+        <include refid="selectBusinessAuthApplyVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "auditingTime != null">
+                        and auditing_time  = #{auditingTime}
+                    </if>
+                    <if test = "authInfo != null and authInfo != ''">
+                        and auth_info  = #{authInfo}
+                    </if>
+                    <if test = "certifiedBusinessStatus != null">
+                        and certified_business_status  = #{certifiedBusinessStatus}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "depositRecordId != null and depositRecordId != ''">
+                        and deposit_record_id  = #{depositRecordId}
+                    </if>
+                    <if test = "detail != null and detail != ''">
+                        and detail  = #{detail}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "businessAuthDepositId != null">
+                        and business_auth_deposit_id  = #{businessAuthDepositId}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectBusinessAuthApplyById" parameterType="Long" resultMap="BusinessAuthApplyResult">
+        <include refid="selectBusinessAuthApplyVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertBusinessAuthApply" parameterType="BusinessAuthApply" useGeneratedKeys="true" >
+        insert into business_auth_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "auditingTime != null">
+                auditing_time,
+            </if>
+            <if test = "authInfo != null">
+                auth_info,
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+                certified_business_status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "depositRecordId != null">
+                deposit_record_id,
+            </if>
+            <if test = "detail != null">
+                detail,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "businessAuthDepositId != null">
+                business_auth_deposit_id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "auditingTime != null">
+                #{auditingTime},
+            </if>
+            <if test = "authInfo != null">
+                #{authInfo},
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+                #{certifiedBusinessStatus},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "depositRecordId != null">
+                #{depositRecordId},
+            </if>
+            <if test = "detail != null">
+                #{detail},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "businessAuthDepositId != null">
+                #{businessAuthDepositId},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateBusinessAuthApply" parameterType="BusinessAuthApply">
+        update business_auth_apply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "auditingTime != null">
+            auditing_time  = #{auditingTime},
+            </if>
+            <if test = "authInfo != null">
+            auth_info  = #{authInfo},
+            </if>
+            <if test = "certifiedBusinessStatus != null">
+            certified_business_status  = #{certifiedBusinessStatus},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "depositRecordId != null">
+            deposit_record_id  = #{depositRecordId},
+            </if>
+            <if test = "detail != null">
+            detail  = #{detail},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "businessAuthDepositId != null">
+            business_auth_deposit_id  = #{businessAuthDepositId},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteBusinessAuthApplyById" parameterType="Long">
+        delete from business_auth_apply where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteBusinessAuthApplyByIds" parameterType="Long">
+        delete from business_auth_apply where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

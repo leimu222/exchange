@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockMemberOperateRecordMapper">
+
+    <resultMap id="UnblockMemberOperateRecordResult" type="UnblockMemberOperateRecord" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="orderId" column="order_id" />
+            <result property="symbol" column="symbol" />
+            <result property="price" column="price" />
+            <result property="currentPrice" column="current_price" />
+            <result property="amount" column="amount" />
+            <result property="beforeBalance" column="before_balance" />
+            <result property="createTime" column="create_time" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectUnblockMemberOperateRecordVo">
+        select   id,  member_id,  order_id,  symbol,  price,  current_price,  amount,  before_balance,  create_time,  sequence 
+        from unblock_member_operate_record
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockMemberOperateRecordList" parameterType="UnblockMemberOperateRecord" resultMap="UnblockMemberOperateRecordResult">
+        <include refid="selectUnblockMemberOperateRecordVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "orderId != null and orderId != ''">
+                        and order_id  = #{orderId}
+                    </if>
+                    <if test = "symbol != null and symbol != ''">
+                        and symbol  = #{symbol}
+                    </if>
+                    <if test = "price != null">
+                        and price  = #{price}
+                    </if>
+                    <if test = "currentPrice != null">
+                        and current_price  = #{currentPrice}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "beforeBalance != null">
+                        and before_balance  = #{beforeBalance}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockMemberOperateRecordById" parameterType="Long" resultMap="UnblockMemberOperateRecordResult">
+        <include refid="selectUnblockMemberOperateRecordVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockMemberOperateRecord" parameterType="UnblockMemberOperateRecord" useGeneratedKeys="true" >
+        insert into unblock_member_operate_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+            <if test = "symbol != null">
+                symbol,
+            </if>
+            <if test = "price != null">
+                price,
+            </if>
+            <if test = "currentPrice != null">
+                current_price,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "beforeBalance != null">
+                before_balance,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+            <if test = "symbol != null">
+                #{symbol},
+            </if>
+            <if test = "price != null">
+                #{price},
+            </if>
+            <if test = "currentPrice != null">
+                #{currentPrice},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "beforeBalance != null">
+                #{beforeBalance},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockMemberOperateRecord" parameterType="UnblockMemberOperateRecord">
+        update unblock_member_operate_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+            <if test = "symbol != null">
+            symbol  = #{symbol},
+            </if>
+            <if test = "price != null">
+            price  = #{price},
+            </if>
+            <if test = "currentPrice != null">
+            current_price  = #{currentPrice},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "beforeBalance != null">
+            before_balance  = #{beforeBalance},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockMemberOperateRecordById" parameterType="Long">
+        delete from unblock_member_operate_record where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockMemberOperateRecordByIds" parameterType="Long">
+        delete from unblock_member_operate_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

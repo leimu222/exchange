@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.RobotFromExchageConfigMapper">
+
+    <resultMap id="RobotFromExchageConfigResult" type="RobotFromExchageConfig" >
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="nameCn" column="name_cn" />
+            <result property="host" column="host" />
+            <result property="baseUrl" column="base_url" />
+            <result property="remark" column="remark" />
+    </resultMap>
+
+    <sql id="selectRobotFromExchageConfigVo">
+        select   id,  name,  name_cn,  host,  base_url,  remark 
+        from robot_from_exchage_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectRobotFromExchageConfigList" parameterType="RobotFromExchageConfig" resultMap="RobotFromExchageConfigResult">
+        <include refid="selectRobotFromExchageConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "nameCn != null and nameCn != ''">
+                        and name_cn  = #{nameCn}
+                    </if>
+                    <if test = "host != null and host != ''">
+                        and host  = #{host}
+                    </if>
+                    <if test = "baseUrl != null and baseUrl != ''">
+                        and base_url  = #{baseUrl}
+                    </if>
+                    <if test = "remark != null and remark != ''">
+                        and remark  = #{remark}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectRobotFromExchageConfigById" parameterType="Long" resultMap="RobotFromExchageConfigResult">
+        <include refid="selectRobotFromExchageConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertRobotFromExchageConfig" parameterType="RobotFromExchageConfig" useGeneratedKeys="true" >
+        insert into robot_from_exchage_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "nameCn != null">
+                name_cn,
+            </if>
+            <if test = "host != null">
+                host,
+            </if>
+            <if test = "baseUrl != null">
+                base_url,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "nameCn != null">
+                #{nameCn},
+            </if>
+            <if test = "host != null">
+                #{host},
+            </if>
+            <if test = "baseUrl != null">
+                #{baseUrl},
+            </if>
+            <if test = "remark != null">
+                #{remark},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateRobotFromExchageConfig" parameterType="RobotFromExchageConfig">
+        update robot_from_exchage_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "nameCn != null">
+            name_cn  = #{nameCn},
+            </if>
+            <if test = "host != null">
+            host  = #{host},
+            </if>
+            <if test = "baseUrl != null">
+            base_url  = #{baseUrl},
+            </if>
+            <if test = "remark != null">
+            remark  = #{remark},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteRobotFromExchageConfigById" parameterType="Long">
+        delete from robot_from_exchage_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteRobotFromExchageConfigByIds" parameterType="Long">
+        delete from robot_from_exchage_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

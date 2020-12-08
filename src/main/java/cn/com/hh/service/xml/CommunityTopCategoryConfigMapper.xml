@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.CommunityTopCategoryConfigMapper">
+
+    <resultMap id="CommunityTopCategoryConfigResult" type="CommunityTopCategoryConfig" >
+            <result property="selectMore" column="select_more" />
+            <result property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="enName" column="en_name" />
+            <result property="orderId" column="order_id" />
+    </resultMap>
+
+    <sql id="selectCommunityTopCategoryConfigVo">
+        select   select_more,  id,  name,  en_name,  order_id 
+        from community_top_category_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectCommunityTopCategoryConfigList" parameterType="CommunityTopCategoryConfig" resultMap="CommunityTopCategoryConfigResult">
+        <include refid="selectCommunityTopCategoryConfigVo"/>
+        <where>
+                    <if test = "selectMore != null">
+                        and select_more  = #{selectMore}
+                    </if>
+                    <if test = "id != null and id != ''">
+                        and id  = #{id}
+                    </if>
+                    <if test = "name != null and name != ''">
+                        and name  = #{name}
+                    </if>
+                    <if test = "enName != null and enName != ''">
+                        and en_name  = #{enName}
+                    </if>
+                    <if test = "orderId != null">
+                        and order_id  = #{orderId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectCommunityTopCategoryConfigById" parameterType="String" resultMap="CommunityTopCategoryConfigResult">
+        <include refid="selectCommunityTopCategoryConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertCommunityTopCategoryConfig" parameterType="CommunityTopCategoryConfig" useGeneratedKeys="true" >
+        insert into community_top_category_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "selectMore != null">
+                select_more,
+            </if>
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "name != null">
+                name,
+            </if>
+            <if test = "enName != null">
+                en_name,
+            </if>
+            <if test = "orderId != null">
+                order_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "selectMore != null">
+                #{selectMore},
+            </if>
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "name != null">
+                #{name},
+            </if>
+            <if test = "enName != null">
+                #{enName},
+            </if>
+            <if test = "orderId != null">
+                #{orderId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateCommunityTopCategoryConfig" parameterType="CommunityTopCategoryConfig">
+        update community_top_category_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "selectMore != null">
+            select_more  = #{selectMore},
+            </if>
+            <if test = "name != null">
+            name  = #{name},
+            </if>
+            <if test = "enName != null">
+            en_name  = #{enName},
+            </if>
+            <if test = "orderId != null">
+            order_id  = #{orderId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteCommunityTopCategoryConfigById" parameterType="String">
+        delete from community_top_category_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteCommunityTopCategoryConfigByIds" parameterType="String">
+        delete from community_top_category_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberRechargeFromWalletMapper">
+
+    <resultMap id="MemberRechargeFromWalletResult" type="MemberRechargeFromWallet" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="amount" column="amount" />
+            <result property="afterBalance" column="after_balance" />
+            <result property="coinName" column="coin_name" />
+            <result property="fromProject" column="from_project" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+            <result property="status" column="status" />
+    </resultMap>
+
+    <sql id="selectMemberRechargeFromWalletVo">
+        select   id,  member_id,  amount,  after_balance,  coin_name,  from_project,  create_time,  update_time,  status 
+        from member_recharge_from_wallet
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberRechargeFromWalletList" parameterType="MemberRechargeFromWallet" resultMap="MemberRechargeFromWalletResult">
+        <include refid="selectMemberRechargeFromWalletVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "afterBalance != null">
+                        and after_balance  = #{afterBalance}
+                    </if>
+                    <if test = "coinName != null and coinName != ''">
+                        and coin_name  = #{coinName}
+                    </if>
+                    <if test = "fromProject != null and fromProject != ''">
+                        and from_project  = #{fromProject}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberRechargeFromWalletById" parameterType="Long" resultMap="MemberRechargeFromWalletResult">
+        <include refid="selectMemberRechargeFromWalletVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberRechargeFromWallet" parameterType="MemberRechargeFromWallet" useGeneratedKeys="true" >
+        insert into member_recharge_from_wallet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "afterBalance != null">
+                after_balance,
+            </if>
+            <if test = "coinName != null">
+                coin_name,
+            </if>
+            <if test = "fromProject != null">
+                from_project,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "afterBalance != null">
+                #{afterBalance},
+            </if>
+            <if test = "coinName != null">
+                #{coinName},
+            </if>
+            <if test = "fromProject != null">
+                #{fromProject},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberRechargeFromWallet" parameterType="MemberRechargeFromWallet">
+        update member_recharge_from_wallet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "afterBalance != null">
+            after_balance  = #{afterBalance},
+            </if>
+            <if test = "coinName != null">
+            coin_name  = #{coinName},
+            </if>
+            <if test = "fromProject != null">
+            from_project  = #{fromProject},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberRechargeFromWalletById" parameterType="Long">
+        delete from member_recharge_from_wallet where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberRechargeFromWalletByIds" parameterType="Long">
+        delete from member_recharge_from_wallet where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

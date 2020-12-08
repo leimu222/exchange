@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.BlockchainHeightMapper">
+
+    <resultMap id="BlockchainHeightResult" type="BlockchainHeight" >
+            <result property="id" column="id" />
+            <result property="coin" column="coin" />
+            <result property="lastBlockNum" column="last_block_num" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectBlockchainHeightVo">
+        select   id,  coin,  last_block_num,  update_time 
+        from blockchain_height
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectBlockchainHeightList" parameterType="BlockchainHeight" resultMap="BlockchainHeightResult">
+        <include refid="selectBlockchainHeightVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "lastBlockNum != null">
+                        and last_block_num  = #{lastBlockNum}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectBlockchainHeightById" parameterType="Long" resultMap="BlockchainHeightResult">
+        <include refid="selectBlockchainHeightVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertBlockchainHeight" parameterType="BlockchainHeight" useGeneratedKeys="true" >
+        insert into blockchain_height
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "lastBlockNum != null">
+                last_block_num,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "lastBlockNum != null">
+                #{lastBlockNum},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateBlockchainHeight" parameterType="BlockchainHeight">
+        update blockchain_height
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "lastBlockNum != null">
+            last_block_num  = #{lastBlockNum},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteBlockchainHeightById" parameterType="Long">
+        delete from blockchain_height where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteBlockchainHeightByIds" parameterType="Long">
+        delete from blockchain_height where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

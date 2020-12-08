@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.UnblockLotteryConfigMapper">
+
+    <resultMap id="UnblockLotteryConfigResult" type="UnblockLotteryConfig" >
+            <result property="id" column="id" />
+            <result property="lotteryLevel" column="lottery_level" />
+            <result property="lotteryRate" column="lottery_rate" />
+            <result property="lotteryInstruction" column="lottery_instruction" />
+            <result property="createTime" column="create_time" />
+            <result property="buyPrice" column="buy_price" />
+            <result property="lotteryRule" column="lottery_rule" />
+            <result property="coin" column="coin" />
+            <result property="amount" column="amount" />
+            <result property="insuranceRate" column="insurance_rate" />
+            <result property="dayWinnerNumLimit" column="day_winner_num_limit" />
+    </resultMap>
+
+    <sql id="selectUnblockLotteryConfigVo">
+        select   id,  lottery_level,  lottery_rate,  lottery_instruction,  create_time,  buy_price,  lottery_rule,  coin,  amount,  insurance_rate,  day_winner_num_limit 
+        from unblock_lottery_config
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectUnblockLotteryConfigList" parameterType="UnblockLotteryConfig" resultMap="UnblockLotteryConfigResult">
+        <include refid="selectUnblockLotteryConfigVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "lotteryLevel != null and lotteryLevel != ''">
+                        and lottery_level  = #{lotteryLevel}
+                    </if>
+                    <if test = "lotteryRate != null">
+                        and lottery_rate  = #{lotteryRate}
+                    </if>
+                    <if test = "lotteryInstruction != null and lotteryInstruction != ''">
+                        and lottery_instruction  = #{lotteryInstruction}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "buyPrice != null">
+                        and buy_price  = #{buyPrice}
+                    </if>
+                    <if test = "lotteryRule != null and lotteryRule != ''">
+                        and lottery_rule  = #{lotteryRule}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "insuranceRate != null">
+                        and insurance_rate  = #{insuranceRate}
+                    </if>
+                    <if test = "dayWinnerNumLimit != null">
+                        and day_winner_num_limit  = #{dayWinnerNumLimit}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectUnblockLotteryConfigById" parameterType="Long" resultMap="UnblockLotteryConfigResult">
+        <include refid="selectUnblockLotteryConfigVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertUnblockLotteryConfig" parameterType="UnblockLotteryConfig" useGeneratedKeys="true" >
+        insert into unblock_lottery_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "lotteryLevel != null">
+                lottery_level,
+            </if>
+            <if test = "lotteryRate != null">
+                lottery_rate,
+            </if>
+            <if test = "lotteryInstruction != null">
+                lottery_instruction,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "buyPrice != null">
+                buy_price,
+            </if>
+            <if test = "lotteryRule != null">
+                lottery_rule,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "insuranceRate != null">
+                insurance_rate,
+            </if>
+            <if test = "dayWinnerNumLimit != null">
+                day_winner_num_limit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "lotteryLevel != null">
+                #{lotteryLevel},
+            </if>
+            <if test = "lotteryRate != null">
+                #{lotteryRate},
+            </if>
+            <if test = "lotteryInstruction != null">
+                #{lotteryInstruction},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "buyPrice != null">
+                #{buyPrice},
+            </if>
+            <if test = "lotteryRule != null">
+                #{lotteryRule},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "insuranceRate != null">
+                #{insuranceRate},
+            </if>
+            <if test = "dayWinnerNumLimit != null">
+                #{dayWinnerNumLimit},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateUnblockLotteryConfig" parameterType="UnblockLotteryConfig">
+        update unblock_lottery_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "lotteryLevel != null">
+            lottery_level  = #{lotteryLevel},
+            </if>
+            <if test = "lotteryRate != null">
+            lottery_rate  = #{lotteryRate},
+            </if>
+            <if test = "lotteryInstruction != null">
+            lottery_instruction  = #{lotteryInstruction},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "buyPrice != null">
+            buy_price  = #{buyPrice},
+            </if>
+            <if test = "lotteryRule != null">
+            lottery_rule  = #{lotteryRule},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "insuranceRate != null">
+            insurance_rate  = #{insuranceRate},
+            </if>
+            <if test = "dayWinnerNumLimit != null">
+            day_winner_num_limit  = #{dayWinnerNumLimit},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteUnblockLotteryConfigById" parameterType="Long">
+        delete from unblock_lottery_config where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteUnblockLotteryConfigByIds" parameterType="Long">
+        delete from unblock_lottery_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

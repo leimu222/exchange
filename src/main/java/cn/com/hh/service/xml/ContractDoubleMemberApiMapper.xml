@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.ContractDoubleMemberApiMapper">
+
+    <resultMap id="ContractDoubleMemberApiResult" type="ContractDoubleMemberApi" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="fromExchangeId" column="from_exchange_id" />
+            <result property="apiKey" column="api_key" />
+            <result property="secretKey" column="secret_key" />
+            <result property="passphrase" column="passphrase" />
+            <result property="status" column="status" />
+            <result property="ifDefault" column="if_default" />
+            <result property="deleteFlag" column="delete_flag" />
+            <result property="sequence" column="sequence" />
+    </resultMap>
+
+    <sql id="selectContractDoubleMemberApiVo">
+        select   id,  member_id,  from_exchange_id,  api_key,  secret_key,  passphrase,  status,  if_default,  delete_flag,  sequence 
+        from contract_double_member_api
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectContractDoubleMemberApiList" parameterType="ContractDoubleMemberApi" resultMap="ContractDoubleMemberApiResult">
+        <include refid="selectContractDoubleMemberApiVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "fromExchangeId != null">
+                        and from_exchange_id  = #{fromExchangeId}
+                    </if>
+                    <if test = "apiKey != null and apiKey != ''">
+                        and api_key  = #{apiKey}
+                    </if>
+                    <if test = "secretKey != null and secretKey != ''">
+                        and secret_key  = #{secretKey}
+                    </if>
+                    <if test = "passphrase != null and passphrase != ''">
+                        and passphrase  = #{passphrase}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "ifDefault != null">
+                        and if_default  = #{ifDefault}
+                    </if>
+                    <if test = "deleteFlag != null">
+                        and delete_flag  = #{deleteFlag}
+                    </if>
+                    <if test = "sequence != null">
+                        and sequence  = #{sequence}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectContractDoubleMemberApiById" parameterType="Long" resultMap="ContractDoubleMemberApiResult">
+        <include refid="selectContractDoubleMemberApiVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertContractDoubleMemberApi" parameterType="ContractDoubleMemberApi" useGeneratedKeys="true" >
+        insert into contract_double_member_api
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "fromExchangeId != null">
+                from_exchange_id,
+            </if>
+            <if test = "apiKey != null">
+                api_key,
+            </if>
+            <if test = "secretKey != null">
+                secret_key,
+            </if>
+            <if test = "passphrase != null">
+                passphrase,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "ifDefault != null">
+                if_default,
+            </if>
+            <if test = "deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test = "sequence != null">
+                sequence,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+                #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+                #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+                #{secretKey},
+            </if>
+            <if test = "passphrase != null">
+                #{passphrase},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "ifDefault != null">
+                #{ifDefault},
+            </if>
+            <if test = "deleteFlag != null">
+                #{deleteFlag},
+            </if>
+            <if test = "sequence != null">
+                #{sequence},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateContractDoubleMemberApi" parameterType="ContractDoubleMemberApi">
+        update contract_double_member_api
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "fromExchangeId != null">
+            from_exchange_id  = #{fromExchangeId},
+            </if>
+            <if test = "apiKey != null">
+            api_key  = #{apiKey},
+            </if>
+            <if test = "secretKey != null">
+            secret_key  = #{secretKey},
+            </if>
+            <if test = "passphrase != null">
+            passphrase  = #{passphrase},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "ifDefault != null">
+            if_default  = #{ifDefault},
+            </if>
+            <if test = "deleteFlag != null">
+            delete_flag  = #{deleteFlag},
+            </if>
+            <if test = "sequence != null">
+            sequence  = #{sequence},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteContractDoubleMemberApiById" parameterType="Long">
+        delete from contract_double_member_api where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteContractDoubleMemberApiByIds" parameterType="Long">
+        delete from contract_double_member_api where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

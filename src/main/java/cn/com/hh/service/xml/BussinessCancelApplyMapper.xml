@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.BussinessCancelApplyMapper">
+
+    <resultMap id="BussinessCancelApplyResult" type="BussinessCancelApply" >
+            <result property="id" column="id" />
+            <result property="cancelApplyTime" column="cancel_apply_time" />
+            <result property="depositRecordId" column="deposit_record_id" />
+            <result property="detail" column="detail" />
+            <result property="handleTime" column="handle_time" />
+            <result property="reason" column="reason" />
+            <result property="status" column="status" />
+            <result property="memberId" column="member_id" />
+    </resultMap>
+
+    <sql id="selectBussinessCancelApplyVo">
+        select   id,  cancel_apply_time,  deposit_record_id,  detail,  handle_time,  reason,  status,  member_id 
+        from bussiness_cancel_apply
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectBussinessCancelApplyList" parameterType="BussinessCancelApply" resultMap="BussinessCancelApplyResult">
+        <include refid="selectBussinessCancelApplyVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "cancelApplyTime != null">
+                        and cancel_apply_time  = #{cancelApplyTime}
+                    </if>
+                    <if test = "depositRecordId != null and depositRecordId != ''">
+                        and deposit_record_id  = #{depositRecordId}
+                    </if>
+                    <if test = "detail != null and detail != ''">
+                        and detail  = #{detail}
+                    </if>
+                    <if test = "handleTime != null">
+                        and handle_time  = #{handleTime}
+                    </if>
+                    <if test = "reason != null and reason != ''">
+                        and reason  = #{reason}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectBussinessCancelApplyById" parameterType="Long" resultMap="BussinessCancelApplyResult">
+        <include refid="selectBussinessCancelApplyVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertBussinessCancelApply" parameterType="BussinessCancelApply" useGeneratedKeys="true" >
+        insert into bussiness_cancel_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "cancelApplyTime != null">
+                cancel_apply_time,
+            </if>
+            <if test = "depositRecordId != null">
+                deposit_record_id,
+            </if>
+            <if test = "detail != null">
+                detail,
+            </if>
+            <if test = "handleTime != null">
+                handle_time,
+            </if>
+            <if test = "reason != null">
+                reason,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "cancelApplyTime != null">
+                #{cancelApplyTime},
+            </if>
+            <if test = "depositRecordId != null">
+                #{depositRecordId},
+            </if>
+            <if test = "detail != null">
+                #{detail},
+            </if>
+            <if test = "handleTime != null">
+                #{handleTime},
+            </if>
+            <if test = "reason != null">
+                #{reason},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateBussinessCancelApply" parameterType="BussinessCancelApply">
+        update bussiness_cancel_apply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "cancelApplyTime != null">
+            cancel_apply_time  = #{cancelApplyTime},
+            </if>
+            <if test = "depositRecordId != null">
+            deposit_record_id  = #{depositRecordId},
+            </if>
+            <if test = "detail != null">
+            detail  = #{detail},
+            </if>
+            <if test = "handleTime != null">
+            handle_time  = #{handleTime},
+            </if>
+            <if test = "reason != null">
+            reason  = #{reason},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteBussinessCancelApplyById" parameterType="Long">
+        delete from bussiness_cancel_apply where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteBussinessCancelApplyByIds" parameterType="Long">
+        delete from bussiness_cancel_apply where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

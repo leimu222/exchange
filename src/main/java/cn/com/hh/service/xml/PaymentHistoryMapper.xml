@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PaymentHistoryMapper">
+
+    <resultMap id="PaymentHistoryResult" type="PaymentHistory" >
+            <result property="id" column="id" />
+            <result property="amount" column="amount" />
+            <result property="createTime" column="create_time" />
+            <result property="interest" column="interest" />
+            <result property="interestRate" column="interest_rate" />
+            <result property="loanRecordId" column="loan_record_id" />
+            <result property="memberId" column="member_id" />
+            <result property="paymentType" column="payment_type" />
+            <result property="principal" column="principal" />
+            <result property="status" column="status" />
+            <result property="coinId" column="coin_id" />
+            <result property="leverCoinId" column="lever_coin_id" />
+    </resultMap>
+
+    <sql id="selectPaymentHistoryVo">
+        select   id,  amount,  create_time,  interest,  interest_rate,  loan_record_id,  member_id,  payment_type,  principal,  status,  coin_id,  lever_coin_id 
+        from payment_history
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPaymentHistoryList" parameterType="PaymentHistory" resultMap="PaymentHistoryResult">
+        <include refid="selectPaymentHistoryVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "amount != null">
+                        and amount  = #{amount}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "interest != null">
+                        and interest  = #{interest}
+                    </if>
+                    <if test = "interestRate != null">
+                        and interest_rate  = #{interestRate}
+                    </if>
+                    <if test = "loanRecordId != null">
+                        and loan_record_id  = #{loanRecordId}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "paymentType != null">
+                        and payment_type  = #{paymentType}
+                    </if>
+                    <if test = "principal != null">
+                        and principal  = #{principal}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "coinId != null and coinId != ''">
+                        and coin_id  = #{coinId}
+                    </if>
+                    <if test = "leverCoinId != null">
+                        and lever_coin_id  = #{leverCoinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPaymentHistoryById" parameterType="Long" resultMap="PaymentHistoryResult">
+        <include refid="selectPaymentHistoryVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPaymentHistory" parameterType="PaymentHistory" useGeneratedKeys="true" >
+        insert into payment_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "amount != null">
+                amount,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "interest != null">
+                interest,
+            </if>
+            <if test = "interestRate != null">
+                interest_rate,
+            </if>
+            <if test = "loanRecordId != null">
+                loan_record_id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "paymentType != null">
+                payment_type,
+            </if>
+            <if test = "principal != null">
+                principal,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+            <if test = "leverCoinId != null">
+                lever_coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "amount != null">
+                #{amount},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "interest != null">
+                #{interest},
+            </if>
+            <if test = "interestRate != null">
+                #{interestRate},
+            </if>
+            <if test = "loanRecordId != null">
+                #{loanRecordId},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "paymentType != null">
+                #{paymentType},
+            </if>
+            <if test = "principal != null">
+                #{principal},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+            <if test = "leverCoinId != null">
+                #{leverCoinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePaymentHistory" parameterType="PaymentHistory">
+        update payment_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "amount != null">
+            amount  = #{amount},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "interest != null">
+            interest  = #{interest},
+            </if>
+            <if test = "interestRate != null">
+            interest_rate  = #{interestRate},
+            </if>
+            <if test = "loanRecordId != null">
+            loan_record_id  = #{loanRecordId},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "paymentType != null">
+            payment_type  = #{paymentType},
+            </if>
+            <if test = "principal != null">
+            principal  = #{principal},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+            <if test = "leverCoinId != null">
+            lever_coin_id  = #{leverCoinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePaymentHistoryById" parameterType="Long">
+        delete from payment_history where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePaymentHistoryByIds" parameterType="Long">
+        delete from payment_history where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

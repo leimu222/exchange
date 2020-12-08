@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.LossThresholdMapper">
+
+    <resultMap id="LossThresholdResult" type="LossThreshold" >
+            <result property="id" column="id" />
+            <result property="createTime" column="create_time" />
+            <result property="performActions" column="perform_actions" />
+            <result property="status" column="status" />
+            <result property="threshold" column="threshold" />
+            <result property="updateTime" column="update_time" />
+            <result property="coinId" column="coin_id" />
+    </resultMap>
+
+    <sql id="selectLossThresholdVo">
+        select   id,  create_time,  perform_actions,  status,  threshold,  update_time,  coin_id 
+        from loss_threshold
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectLossThresholdList" parameterType="LossThreshold" resultMap="LossThresholdResult">
+        <include refid="selectLossThresholdVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "performActions != null">
+                        and perform_actions  = #{performActions}
+                    </if>
+                    <if test = "status != null">
+                        and status  = #{status}
+                    </if>
+                    <if test = "threshold != null">
+                        and threshold  = #{threshold}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "coinId != null">
+                        and coin_id  = #{coinId}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectLossThresholdById" parameterType="Long" resultMap="LossThresholdResult">
+        <include refid="selectLossThresholdVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertLossThreshold" parameterType="LossThreshold" useGeneratedKeys="true" >
+        insert into loss_threshold
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "performActions != null">
+                perform_actions,
+            </if>
+            <if test = "status != null">
+                status,
+            </if>
+            <if test = "threshold != null">
+                threshold,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "coinId != null">
+                coin_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "performActions != null">
+                #{performActions},
+            </if>
+            <if test = "status != null">
+                #{status},
+            </if>
+            <if test = "threshold != null">
+                #{threshold},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "coinId != null">
+                #{coinId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateLossThreshold" parameterType="LossThreshold">
+        update loss_threshold
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "performActions != null">
+            perform_actions  = #{performActions},
+            </if>
+            <if test = "status != null">
+            status  = #{status},
+            </if>
+            <if test = "threshold != null">
+            threshold  = #{threshold},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "coinId != null">
+            coin_id  = #{coinId},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteLossThresholdById" parameterType="Long">
+        delete from loss_threshold where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteLossThresholdByIds" parameterType="Long">
+        delete from loss_threshold where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.MemberApplicationMapper">
+
+    <resultMap id="MemberApplicationResult" type="MemberApplication" >
+            <result property="id" column="id" />
+            <result property="auditStatus" column="audit_status" />
+            <result property="createTime" column="create_time" />
+            <result property="idCard" column="id_card" />
+            <result property="identityCardImgFront" column="identity_card_img_front" />
+            <result property="identityCardImgInHand" column="identity_card_img_in_hand" />
+            <result property="identityCardImgReverse" column="identity_card_img_reverse" />
+            <result property="videoUrl" column="video_url" />
+            <result property="realName" column="real_name" />
+            <result property="rejectReason" column="reject_reason" />
+            <result property="type" column="type" />
+            <result property="updateTime" column="update_time" />
+            <result property="memberId" column="member_id" />
+            <result property="kycStatus" column="kyc_status" />
+            <result property="videoRandom" column="video_random" />
+    </resultMap>
+
+    <sql id="selectMemberApplicationVo">
+        select   id,  audit_status,  create_time,  id_card,  identity_card_img_front,  identity_card_img_in_hand,  identity_card_img_reverse,  video_url,  real_name,  reject_reason,  type,  update_time,  member_id,  kyc_status,  video_random 
+        from member_application
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectMemberApplicationList" parameterType="MemberApplication" resultMap="MemberApplicationResult">
+        <include refid="selectMemberApplicationVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "auditStatus != null">
+                        and audit_status  = #{auditStatus}
+                    </if>
+                    <if test = "createTime != null">
+                        and create_time  = #{createTime}
+                    </if>
+                    <if test = "idCard != null and idCard != ''">
+                        and id_card  = #{idCard}
+                    </if>
+                    <if test = "identityCardImgFront != null and identityCardImgFront != ''">
+                        and identity_card_img_front  = #{identityCardImgFront}
+                    </if>
+                    <if test = "identityCardImgInHand != null and identityCardImgInHand != ''">
+                        and identity_card_img_in_hand  = #{identityCardImgInHand}
+                    </if>
+                    <if test = "identityCardImgReverse != null and identityCardImgReverse != ''">
+                        and identity_card_img_reverse  = #{identityCardImgReverse}
+                    </if>
+                    <if test = "videoUrl != null and videoUrl != ''">
+                        and video_url  = #{videoUrl}
+                    </if>
+                    <if test = "realName != null and realName != ''">
+                        and real_name  = #{realName}
+                    </if>
+                    <if test = "rejectReason != null and rejectReason != ''">
+                        and reject_reason  = #{rejectReason}
+                    </if>
+                    <if test = "type != null">
+                        and type  = #{type}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "kycStatus != null">
+                        and kyc_status  = #{kycStatus}
+                    </if>
+                    <if test = "videoRandom != null and videoRandom != ''">
+                        and video_random  = #{videoRandom}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectMemberApplicationById" parameterType="Long" resultMap="MemberApplicationResult">
+        <include refid="selectMemberApplicationVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertMemberApplication" parameterType="MemberApplication" useGeneratedKeys="true" >
+        insert into member_application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "auditStatus != null">
+                audit_status,
+            </if>
+            <if test = "createTime != null">
+                create_time,
+            </if>
+            <if test = "idCard != null">
+                id_card,
+            </if>
+            <if test = "identityCardImgFront != null">
+                identity_card_img_front,
+            </if>
+            <if test = "identityCardImgInHand != null">
+                identity_card_img_in_hand,
+            </if>
+            <if test = "identityCardImgReverse != null">
+                identity_card_img_reverse,
+            </if>
+            <if test = "videoUrl != null">
+                video_url,
+            </if>
+            <if test = "realName != null">
+                real_name,
+            </if>
+            <if test = "rejectReason != null">
+                reject_reason,
+            </if>
+            <if test = "type != null">
+                type,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "kycStatus != null">
+                kyc_status,
+            </if>
+            <if test = "videoRandom != null">
+                video_random,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "auditStatus != null">
+                #{auditStatus},
+            </if>
+            <if test = "createTime != null">
+                #{createTime},
+            </if>
+            <if test = "idCard != null">
+                #{idCard},
+            </if>
+            <if test = "identityCardImgFront != null">
+                #{identityCardImgFront},
+            </if>
+            <if test = "identityCardImgInHand != null">
+                #{identityCardImgInHand},
+            </if>
+            <if test = "identityCardImgReverse != null">
+                #{identityCardImgReverse},
+            </if>
+            <if test = "videoUrl != null">
+                #{videoUrl},
+            </if>
+            <if test = "realName != null">
+                #{realName},
+            </if>
+            <if test = "rejectReason != null">
+                #{rejectReason},
+            </if>
+            <if test = "type != null">
+                #{type},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "kycStatus != null">
+                #{kycStatus},
+            </if>
+            <if test = "videoRandom != null">
+                #{videoRandom},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updateMemberApplication" parameterType="MemberApplication">
+        update member_application
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "auditStatus != null">
+            audit_status  = #{auditStatus},
+            </if>
+            <if test = "createTime != null">
+            create_time  = #{createTime},
+            </if>
+            <if test = "idCard != null">
+            id_card  = #{idCard},
+            </if>
+            <if test = "identityCardImgFront != null">
+            identity_card_img_front  = #{identityCardImgFront},
+            </if>
+            <if test = "identityCardImgInHand != null">
+            identity_card_img_in_hand  = #{identityCardImgInHand},
+            </if>
+            <if test = "identityCardImgReverse != null">
+            identity_card_img_reverse  = #{identityCardImgReverse},
+            </if>
+            <if test = "videoUrl != null">
+            video_url  = #{videoUrl},
+            </if>
+            <if test = "realName != null">
+            real_name  = #{realName},
+            </if>
+            <if test = "rejectReason != null">
+            reject_reason  = #{rejectReason},
+            </if>
+            <if test = "type != null">
+            type  = #{type},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "kycStatus != null">
+            kyc_status  = #{kycStatus},
+            </if>
+            <if test = "videoRandom != null">
+            video_random  = #{videoRandom},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deleteMemberApplicationById" parameterType="Long">
+        delete from member_application where  id  = #{id} 
+    </delete>
+
+    <delete id="deleteMemberApplicationByIds" parameterType="Long">
+        delete from member_application where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

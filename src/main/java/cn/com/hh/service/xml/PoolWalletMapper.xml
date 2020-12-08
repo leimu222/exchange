@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.api.mapper.PoolWalletMapper">
+
+    <resultMap id="PoolWalletResult" type="PoolWallet" >
+            <result property="id" column="id" />
+            <result property="memberId" column="member_id" />
+            <result property="coin" column="coin" />
+            <result property="balance" column="balance" />
+            <result property="version" column="version" />
+            <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectPoolWalletVo">
+        select   id,  member_id,  coin,  balance,  version,  update_time 
+        from pool_wallet
+    </sql>
+    <!-- 查询列表 -->
+    <select id="selectPoolWalletList" parameterType="PoolWallet" resultMap="PoolWalletResult">
+        <include refid="selectPoolWalletVo"/>
+        <where>
+                    <if test = "id != null">
+                        and id  = #{id}
+                    </if>
+                    <if test = "memberId != null">
+                        and member_id  = #{memberId}
+                    </if>
+                    <if test = "coin != null and coin != ''">
+                        and coin  = #{coin}
+                    </if>
+                    <if test = "balance != null">
+                        and balance  = #{balance}
+                    </if>
+                    <if test = "version != null">
+                        and version  = #{version}
+                    </if>
+                    <if test = "updateTime != null">
+                        and update_time  = #{updateTime}
+                    </if>
+        </where>
+    </select>
+    <!-- 根据ID查询实体类 -->
+    <select id="selectPoolWalletById" parameterType="Long" resultMap="PoolWalletResult">
+        <include refid="selectPoolWalletVo"/>
+        where  id  = #{id} 
+    </select>
+    <!-- 插入实体类 -->
+    <insert id="insertPoolWallet" parameterType="PoolWallet" useGeneratedKeys="true" >
+        insert into pool_wallet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                id,
+            </if>
+            <if test = "memberId != null">
+                member_id,
+            </if>
+            <if test = "coin != null">
+                coin,
+            </if>
+            <if test = "balance != null">
+                balance,
+            </if>
+            <if test = "version != null">
+                version,
+            </if>
+            <if test = "updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test = "id != null">
+                #{id},
+            </if>
+            <if test = "memberId != null">
+                #{memberId},
+            </if>
+            <if test = "coin != null">
+                #{coin},
+            </if>
+            <if test = "balance != null">
+                #{balance},
+            </if>
+            <if test = "version != null">
+                #{version},
+            </if>
+            <if test = "updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+    <!-- 更新实体类 -->
+    <update id="updatePoolWallet" parameterType="PoolWallet">
+        update pool_wallet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test = "memberId != null">
+            member_id  = #{memberId},
+            </if>
+            <if test = "coin != null">
+            coin  = #{coin},
+            </if>
+            <if test = "balance != null">
+            balance  = #{balance},
+            </if>
+            <if test = "version != null">
+            version  = #{version},
+            </if>
+            <if test = "updateTime != null">
+            update_time  = #{updateTime},
+            </if>
+        </trim>
+        where  id  = #{id} 
+    </update>
+    <delete id="deletePoolWalletById" parameterType="Long">
+        delete from pool_wallet where  id  = #{id} 
+    </delete>
+
+    <delete id="deletePoolWalletByIds" parameterType="Long">
+        delete from pool_wallet where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
